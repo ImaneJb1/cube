@@ -6,12 +6,11 @@
 /*   By: ijoubair <ijoubair@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/01 15:11:57 by ijoubair          #+#    #+#             */
-/*   Updated: 2025/08/01 16:03:02 by ijoubair         ###   ########.fr       */
+/*   Updated: 2025/08/02 10:22:21 by ijoubair         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../header.h"
-
 
 int	check_argv(int argc, char *argv)
 {
@@ -45,6 +44,6 @@ int	check_map(char *map)
 	line = get_next_line(fd);
 	while(line)
 	{
-		
+		//checking dok l3aybat
 	}
 }
