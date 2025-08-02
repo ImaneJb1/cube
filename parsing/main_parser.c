@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parser.c                                           :+:      :+:    :+:   */
+/*   main_parser.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ijoubair <ijoubair@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/01 15:11:57 by ijoubair          #+#    #+#             */
-/*   Updated: 2025/08/02 10:22:21 by ijoubair         ###   ########.fr       */
+/*   Updated: 2025/08/02 15:07:55 by ijoubair         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,8 @@ int	check_map(char *map)
 	line = get_next_line(fd);
 	while(line)
 	{
-		//checking dok l3aybat
+		ft_strtrim(line, " \n\t"); // remove spaces from jnab
+		parse_dir(line);
+		line = get_next_line(fd);
 	}
-}
+} 

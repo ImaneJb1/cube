@@ -1,41 +1,37 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   struct_initializer.c                               :+:      :+:    :+:   */
+/*   gc_calloc.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ijoubair <ijoubair@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/08/02 10:08:40 by ijoubair          #+#    #+#             */
-/*   Updated: 2025/08/02 14:51:32 by ijoubair         ###   ########.fr       */
+/*   Created: 2025/08/02 16:01:05 by ijoubair          #+#    #+#             */
+/*   Updated: 2025/08/02 16:29:31 by ijoubair         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../header.h"
+#include "header.h"
 
-// dir_flags	*init_flags(void)
-// {
-// 	dir_flags *flags;
-	
-// 	flags = malloc(sizeof(dir_flags));
-// 	if(!flags)
-// 	{
-// 		perror("");
-// 		return(NULL);
-// 	}
-// 	ft_bzero(flags, sizeof(flags));
-// 	return(flags);
-// }
-
-textures *init_textures(void)
+void	**mem_arr(void)
 {
-	textures *text;
+	static void *mem_arr[1024];
+	return(mem_arr);
+}
 
-	text = malloc(sizeof(textures));
-	if(!text)
+void	*gc_malloc(size_t size)
+{
+	static void 	*pointer;
+	void		*tmp;
+	static int i;
+	void	*mem;
+	
+	mem = malloc(size);
+	if(!mem)
 	{
-		perror("");
-		return(NULL);
+		ft_putstr_fd("allocation faillure\n", 2);
+		return (NULL);
 	}
-	ft_bzero(text, sizeof(text));
-	return(text);
+	tmp = pointer;
+	i = i + size;
+	tmp + i = mem;
 }
