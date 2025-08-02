@@ -6,7 +6,7 @@
 /*   By: ijoubair <ijoubair@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/05 00:39:48 by ijoubair          #+#    #+#             */
-/*   Updated: 2025/01/19 18:38:16 by ijoubair         ###   ########.fr       */
+/*   Updated: 2025/08/02 10:38:30 by ijoubair         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ char	*ft_strtrim(char const *s1, char const *set)
 // {
 // 	char	*s;
 
-// 	s = ft_strtrim("cnnnnnnbghguyuygggjbbbbb", "abc");
+// 	s = ft_strtrim(" a      NO a\t lklkl", " a");
 // 	printf("%s", s);
 // 	free(s);
 // }
