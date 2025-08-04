@@ -6,7 +6,7 @@
 /*   By: ijoubair <ijoubair@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/02 16:01:05 by ijoubair          #+#    #+#             */
-/*   Updated: 2025/08/02 16:29:31 by ijoubair         ###   ########.fr       */
+/*   Updated: 2025/08/03 11:51:55 by ijoubair         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,20 +18,26 @@ void	**mem_arr(void)
 	return(mem_arr);
 }
 
+int	*mem_count(void)
+{
+	static int count;
+	return(&count);
+}
+
 void	*gc_malloc(size_t size)
 {
-	static void 	*pointer;
-	void		*tmp;
-	static int i;
-	void	*mem;
 	
+	void	*mem;
+	static void **arr;
+	int *count;
+
+	arr = mem_arr();
 	mem = malloc(size);
+	count = mem_count();
 	if(!mem)
 	{
 		ft_putstr_fd("allocation faillure\n", 2);
 		return (NULL);
 	}
-	tmp = pointer;
-	i = i + size;
-	tmp + i = mem;
+	(*mem_arr()[(*mem_count())]) = mem;
 }

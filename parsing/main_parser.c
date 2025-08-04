@@ -6,20 +6,20 @@
 /*   By: ijoubair <ijoubair@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/01 15:11:57 by ijoubair          #+#    #+#             */
-/*   Updated: 2025/08/02 15:07:55 by ijoubair         ###   ########.fr       */
+/*   Updated: 2025/08/04 14:08:42 by ijoubair         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../header.h"
 
-int	check_argv(int argc, char *argv)
+int	check_argv(int argc, char **argv)
 {
 	char	*ext;
 
 	if(argc != 2)
 		return(0);
-	ext = ft_strchr(argv, '.');
-	if (!ext || ft_strlen(argv) <= 4)
+	ext = ft_strchr(argv[1], '.');
+	if (!ext || ft_strlen(argv[1]) <= 4)
 	{
 		ft_putstr_fd("Error: No extension detected. Please use a .cub file.\n",
 			2);
@@ -31,21 +31,27 @@ int	check_argv(int argc, char *argv)
 	return (0);
 }
 
-int	check_map(char *map)
+// kan3amer les textures f struct textures
+
+int	check_textures(char *file_name)
 {
 	char *line;
 	int fd;
-	fd = open(map, O_RDONLY) < 0;
+	textures *text;
+
+	fd = open(file_name, O_RDONLY) < 0;
 	if(fd < 0)
 	{
 		perror("");
 		return(0);
 	}
+	text = init_textures();
 	line = get_next_line(fd);
 	while(line)
 	{
 		ft_strtrim(line, " \n\t"); // remove spaces from jnab
-		parse_dir(line);
+		parse_dir(line, text);
+		parse_floor_ceiling(line, text);
 		line = get_next_line(fd);
 	}
-} 
+}
