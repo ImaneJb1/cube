@@ -6,11 +6,11 @@
 /*   By: ijoubair <ijoubair@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/02 10:52:27 by ijoubair          #+#    #+#             */
-/*   Updated: 2025/08/02 14:33:51 by ijoubair         ###   ########.fr       */
+/*   Updated: 2025/08/05 17:55:56 by ijoubair         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "header.h"
+#include "../header.h"
 
 config	*init_dir_arr(textures *text)
 {
@@ -54,4 +54,5 @@ config *init_c_f_arr(textures *text)
 	arr[0].texture = &text->f;
 	arr[1].direction = "C ";
 	arr[1].texture = &text->c;
+	return(arr);
 }

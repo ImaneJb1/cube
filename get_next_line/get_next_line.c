@@ -6,7 +6,7 @@
 /*   By: ijoubair <ijoubair@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/28 11:00:48 by ijoubair          #+#    #+#             */
-/*   Updated: 2024/12/09 15:52:32 by ijoubair         ###   ########.fr       */
+/*   Updated: 2025/08/05 18:13:46 by ijoubair         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,7 +96,7 @@ char	*read_buff(int fd, char *buffer)
 		if (readed == -1)
 			return(free(buf), free(buffer), NULL); 
 		buf[readed] = 0;
-		buffer = ft_strjoin(buffer, buf);
+		buffer = gft_strjoin(buffer, buf);
 		
 		if (ft_strchr(buf, '\n'))
 			break ;
