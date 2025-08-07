@@ -6,7 +6,7 @@
 /*   By: ijoubair <ijoubair@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/04 11:45:07 by ijoubair          #+#    #+#             */
-/*   Updated: 2025/08/05 18:46:10 by ijoubair         ###   ########.fr       */
+/*   Updated: 2025/08/07 17:35:20 by ijoubair         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,18 +36,17 @@ config	*init_fc_arr(textures *text)
 	return(arr);
 }
 
-void	parse_floor_ceiling(char *line, textures *text, config *arr)
+void	parse_floor_ceiling(char *line, config *arr)
 {
-	config *arr;
 	int i;
+	char **splited;
 
 	i = 0;
-	arr = init_fc_arr(text);
 	if(arr == NULL)
 		return;
 	while(i < 2)
 	{
-		if(ft_strncmp(line, arr[i].direction, 3) == 0)
+		if(ft_strncmp(line, arr[i].direction, 2) == 0)
 		{
 			if(arr[i].flag == 1) // duplicated
 			{
@@ -55,7 +54,9 @@ void	parse_floor_ceiling(char *line, textures *text, config *arr)
 				return;
 			}
 			arr[i].flag = 1;
-			(*arr[i].texture) = ft_substr(line, 3, ft_strlen(line) - 3);
+			line =  ft_substr(line, 2, ft_strlen(line) - 2);
+			splited = ft_split(line, ' ');
+			(*arr[i].texture) = splited[0];
 		}
 		i++;
 	}

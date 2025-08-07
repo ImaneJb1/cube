@@ -6,7 +6,7 @@
 /*   By: ijoubair <ijoubair@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/01 15:11:57 by ijoubair          #+#    #+#             */
-/*   Updated: 2025/08/05 18:46:31 by ijoubair         ###   ########.fr       */
+/*   Updated: 2025/08/07 17:35:41 by ijoubair         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,30 +30,45 @@ int	check_argv(int argc, char **argv)
 	ft_putstr_fd("Error: Invalid file type. Expected a .cub file.\n", 2);
 	return (0);
 }
-
-// kan3amer les textures f struct textures
-
+	// typedef struct textures
+	// {
+	// 	char	*no;
+	// 	char	*so;
+	// 	char	*we;
+	// 	char	*ea;
+	// 	char	*f;
+	// 	char	*c;
+	// }			textures;
+textures **text_func(void)
+{
+	static textures *text;
+	return(&text);
+}
+//kan3amer les textures f struct textures
 int check_textures(char *file_name)
 {
 	char *line;
 	int fd;
-	textures *text;
-	config *arr;
-
+	textures **text;
+	config *arr_dir;
+	config *arr_fc;
+	
 	fd = open(file_name, O_RDONLY);
 	if(fd < 0)
 	{
 		perror("");
 		return(0);
 	}
-	arr = init_dir_arr(text);
-	text = init_textures();
+	text = text_func();
+	*text = init_textures();
+	arr_dir = init_dir_arr(*text);
+	arr_fc = init_fc_arr(*text);
 	line = get_next_line(fd);
 	while(line)
 	{
 		line = ft_strtrim(line, " \n\t"); // remove spaces from jnab
-		parse_dir(line, text);
-		parse_floor_ceiling(line, text);
+		parse_dir(line, arr_dir);
+		parse_floor_ceiling(line, arr_fc);
 		line = get_next_line(fd);
 	}
 	return (1);

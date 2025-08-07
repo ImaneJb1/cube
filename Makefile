@@ -24,3 +24,5 @@ $(NAME) : $(OBJ)
 clean : $(OBJ)
 	rm $(OBJ)
 	make -C ./libft-project clean
+fclean : clean
+	rm $(NAME)

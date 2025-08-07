@@ -6,7 +6,7 @@
 /*   By: ijoubair <ijoubair@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/02 10:22:42 by ijoubair          #+#    #+#             */
-/*   Updated: 2025/08/05 18:46:45 by ijoubair         ###   ########.fr       */
+/*   Updated: 2025/08/07 17:34:36 by ijoubair         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,14 +40,12 @@
 // 	return(arr);
 // }
 
-int	parse_dir(char *line, textures *text)
+int	parse_dir(char *line, config *arr)
 {
-	config *arr;
 	int i;
+	char **splited;
 
 	i = 0;
-
-	arr = init_dir_arr(text);
 	if(arr == NULL)
 		return (0);
 	while(i < 4)
@@ -60,7 +58,9 @@ int	parse_dir(char *line, textures *text)
 				return (0);
 			}
 			arr[i].flag = 1;
-			(*arr[i].texture) = ft_substr(line, 3, ft_strlen(line) - 3);
+			line =  ft_substr(line, 3, ft_strlen(line) - 3);
+			splited = ft_split(line, ' ');
+			(*arr[i].texture) = splited[0];
 			return (1);
 		}
 		i++;
