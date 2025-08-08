@@ -6,7 +6,7 @@
 /*   By: ijoubair <ijoubair@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/01 15:11:57 by ijoubair          #+#    #+#             */
-/*   Updated: 2025/08/07 17:35:41 by ijoubair         ###   ########.fr       */
+/*   Updated: 2025/08/08 15:52:59 by ijoubair         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ textures **text_func(void)
 	return(&text);
 }
 //kan3amer les textures f struct textures
-int check_textures(char *file_name)
+int fill_textures(char *file_name)
 {
 	char *line;
 	int fd;
@@ -72,4 +72,21 @@ int check_textures(char *file_name)
 		line = get_next_line(fd);
 	}
 	return (1);
+}
+
+void	check_textures(void)
+{
+	if(text_func() == NULL)
+	{
+		printf("Unvalid textures\n");
+		//free
+		exit(1);
+	}
+	if((*text_func())->no == NULL || (*text_func())->so == NULL 
+	|| (*text_func())->ea == NULL || (*text_func())->we == NULL)
+	{
+		printf("Unvalid textures\n");
+		//free
+		exit(1);
+	}
 }
