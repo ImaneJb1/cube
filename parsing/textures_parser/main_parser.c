@@ -6,11 +6,11 @@
 /*   By: ijoubair <ijoubair@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/01 15:11:57 by ijoubair          #+#    #+#             */
-/*   Updated: 2025/08/08 15:52:59 by ijoubair         ###   ########.fr       */
+/*   Updated: 2025/08/09 15:29:39 by ijoubair         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../header.h"
+#include "../../header.h"
 
 int	check_argv(int argc, char **argv)
 {
@@ -30,28 +30,27 @@ int	check_argv(int argc, char **argv)
 	ft_putstr_fd("Error: Invalid file type. Expected a .cub file.\n", 2);
 	return (0);
 }
-	// typedef struct textures
-	// {
-	// 	char	*no;
-	// 	char	*so;
-	// 	char	*we;
-	// 	char	*ea;
-	// 	char	*f;
-	// 	char	*c;
-	// }			textures;
-textures **text_func(void)
+
+int map_reached(char first_char)
 {
-	static textures *text;
-	return(&text);
+	if(first_char == '0' || first_char == '1')
+		return (1);
+	return(0);
 }
+
+void	init_arrays(textures **text, config **arr_dir, config **arr_fc)
+{	
+	*arr_dir = init_dir_arr(*text);
+	*arr_fc = init_fc_arr(*text);	
+}
+
 //kan3amer les textures f struct textures
 int fill_textures(char *file_name)
 {
 	char *line;
 	int fd;
 	textures **text;
-	config *arr_dir;
-	config *arr_fc;
+	config(*arr_dir), (*arr_fc);
 	
 	fd = open(file_name, O_RDONLY);
 	if(fd < 0)
@@ -61,12 +60,13 @@ int fill_textures(char *file_name)
 	}
 	text = text_func();
 	*text = init_textures();
-	arr_dir = init_dir_arr(*text);
-	arr_fc = init_fc_arr(*text);
+	init_arrays(text, &arr_dir, &arr_fc);
 	line = get_next_line(fd);
 	while(line)
 	{
 		line = ft_strtrim(line, " \n\t"); // remove spaces from jnab
+		if(map_reached(*line))
+			break;
 		parse_dir(line, arr_dir);
 		parse_floor_ceiling(line, arr_fc);
 		line = get_next_line(fd);

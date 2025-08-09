@@ -45,4 +45,5 @@ int			check_argv(int argc, char **argv);
 
 // global
 textures	**text_func(void);
+char ***the_map(void);
 #endif

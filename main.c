@@ -6,7 +6,7 @@
 /*   By: ijoubair <ijoubair@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/01 15:12:37 by ijoubair          #+#    #+#             */
-/*   Updated: 2025/08/08 15:58:19 by ijoubair         ###   ########.fr       */
+/*   Updated: 2025/08/08 16:17:47 by ijoubair         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ int main(int argc, char **argv)
 	if(!fill_textures(argv[1]))
 		return 0;
 	check_textures(); // this exits the program
-
+	
 	//debuging
 	// txt = (*text_func());
 	// if(txt == NULL)
