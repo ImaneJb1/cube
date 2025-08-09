@@ -1,25 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   global.c                                           :+:      :+:    :+:   */
+/*   map_collecter.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ijoubair <ijoubair@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/08/08 16:16:39 by ijoubair          #+#    #+#             */
-/*   Updated: 2025/08/09 17:44:27 by ijoubair         ###   ########.fr       */
+/*   Created: 2025/08/09 17:27:42 by ijoubair          #+#    #+#             */
+/*   Updated: 2025/08/09 18:35:16 by ijoubair         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../header.h"
+#include "../../header.h"
 
-textures **text_func(void)
+void	collect_the_map(char *line, int fd)
 {
-	static textures *text;
-	return(&text);
-}
+	char *map;
+	char *tmp;
 
-char ***the_map(void)
-{
-	static char **map;
-	return(&map);
+	map = NULL;
+	tmp = NULL;
+	while(line)
+	{
+		tmp = map;
+		map = ft_strjoin(map, line);
+		free(tmp);
+		line = get_next_line(fd);
+	}
+	create_map_arr(map);
 }

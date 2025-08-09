@@ -35,14 +35,15 @@ typedef struct textures
 void		parse_floor_ceiling(char *line, config *arr);
 int			parse_dir(char *line, config *arr);
 textures	*init_textures(void);
-int			fill_textures(char *file_name);
+int			fill_textures_map(char *file_name);
 config		*init_dir_arr(textures *text);
 config		*init_fc_arr(textures *text);
 void	check_textures(void);
 int			ft_strcmp(const char *s1, const char *s2);
-
+void create_map_arr(char *string);
 int			check_argv(int argc, char **argv);
-
+void	collect_the_map(char *line, int fd);
+void	parse_map(void);
 // global
 textures	**text_func(void);
 char ***the_map(void);

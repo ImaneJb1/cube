@@ -6,13 +6,13 @@
 /*   By: ijoubair <ijoubair@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/09 15:29:07 by ijoubair          #+#    #+#             */
-/*   Updated: 2025/08/09 17:09:41 by ijoubair         ###   ########.fr       */
+/*   Updated: 2025/08/09 18:36:10 by ijoubair         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../header.h"
 
-void ceate_map_arr(char *string)
+void create_map_arr(char *string)
 {
 	char ***map;
 
@@ -21,41 +21,40 @@ void ceate_map_arr(char *string)
 	if(!the_map())
 	{
 		printf("map is NULL\n");
-		return(NULL);
+		exit(1);
 	}
 }
 
 int is_inside_the_map(int x, int y, char **map)
 {
-	if(map[y - 1][x] == 0)
+	if(map[y + 1] == NULL)
 		return(0);
-	if(map[y + 1][x] == 0)
+	
+	if((y == 0 && x == 0) || y == 0)
+		return (0);
+	if((map[y - 1][x] == 0 || map[y - 1][x] == ' '))
 		return(0);
-	if(map[y][x - 1] == 0)
+	if(map[y + 1][x] == 0 || map[y + 1][x] == ' ')
 		return(0);
-	if(map[y][x + 1] == 0)
+	if(x > 0 && (map[y][x - 1] == 0 || map[y][x - 1] == ' '))
+		return(0);
+	if(map[y][x + 1] == 0 || map[y][x + 1] == ' ')
 		return(0);
 	return(1);
 }
 
 int	is_valid_char(char c)
 {
-	if(c != '1' && c != '0' && c != 'N' && c != 'D')
+	if(c != '1' && c != '0' && c != 'N' && c != 'D' && c != ' ') 
 		return(0);
 	return(1);
 }
 
-int	parse_map(void)
-{
-	if(!is_map_valid(*the_map()))
-		return(0);
-	return(1);
-}
 
 int	is_map_valid(char **map)
 {
 	int (y), (x);
-
+	
 	while(map[y])
 	{
 		while(map[y][x])
@@ -78,4 +77,13 @@ int	is_map_valid(char **map)
 		y++;
 	}
 	return(1);
+}
+
+void	parse_map(void)
+{
+	if(!is_map_valid(*the_map()))
+	{	
+		//free
+		exit(1);
+	}
 }

@@ -6,7 +6,7 @@
 /*   By: ijoubair <ijoubair@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/01 15:11:57 by ijoubair          #+#    #+#             */
-/*   Updated: 2025/08/09 15:29:39 by ijoubair         ###   ########.fr       */
+/*   Updated: 2025/08/09 18:34:31 by ijoubair         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ void	init_arrays(textures **text, config **arr_dir, config **arr_fc)
 }
 
 //kan3amer les textures f struct textures
-int fill_textures(char *file_name)
+int fill_textures_map(char *file_name)
 {
 	char *line;
 	int fd;
@@ -64,9 +64,9 @@ int fill_textures(char *file_name)
 	line = get_next_line(fd);
 	while(line)
 	{
-		line = ft_strtrim(line, " \n\t"); // remove spaces from jnab
 		if(map_reached(*line))
-			break;
+			collect_the_map(line, fd);
+		line = ft_strtrim(line, " \n\t"); // remove spaces from jnab
 		parse_dir(line, arr_dir);
 		parse_floor_ceiling(line, arr_fc);
 		line = get_next_line(fd);

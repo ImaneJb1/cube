@@ -9,6 +9,7 @@
                 "-g",
 
                 "${workspaceFolder}/parsing/*.c",
+                "${workspaceFolder}/parsing/*/*.c",
                 "${workspaceFolder}/get_next_line/*.c",
                 "${workspaceFolder}/libft-project/*.c",
                 "${workspaceFolder}/*.c",
