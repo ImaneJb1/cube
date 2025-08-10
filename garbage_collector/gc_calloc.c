@@ -6,16 +6,16 @@
 /*   By: ijoubair <ijoubair@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/02 16:01:05 by ijoubair          #+#    #+#             */
-/*   Updated: 2025/08/03 11:51:55 by ijoubair         ###   ########.fr       */
+/*   Updated: 2025/08/10 15:33:18 by ijoubair         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "header.h"
 
-void	**mem_arr(void)
+void	***mem_arr(void)
 {
 	static void *mem_arr[1024];
-	return(mem_arr);
+	return(&mem_arr);
 }
 
 int	*mem_count(void)
@@ -26,18 +26,26 @@ int	*mem_count(void)
 
 void	*gc_malloc(size_t size)
 {
-	
 	void	*mem;
-	static void **arr;
-	int *count;
 
-	arr = mem_arr();
 	mem = malloc(size);
-	count = mem_count();
 	if(!mem)
 	{
-		ft_putstr_fd("allocation faillure\n", 2);
+		printf("allocation faillure\n");
 		return (NULL);
 	}
-	(*mem_arr()[(*mem_count())]) = mem;
+	(*mem_arr()[(*mem_count())++]) = mem;
+}
+
+void free_all(void)
+{
+	int i;
+
+	i = 0;
+	while(i < *mem_count())
+	{
+		free(*mem_arr()[i]);
+		i++;
+	}
+	*mem_count() = 0;
 }

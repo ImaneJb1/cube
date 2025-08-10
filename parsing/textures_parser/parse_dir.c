@@ -6,39 +6,11 @@
 /*   By: ijoubair <ijoubair@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/02 10:22:42 by ijoubair          #+#    #+#             */
-/*   Updated: 2025/08/09 15:29:48 by ijoubair         ###   ########.fr       */
+/*   Updated: 2025/08/10 15:15:19 by ijoubair         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../header.h"
-
-// config	*init_dir_arr(textures *text)
-// {
-// 	config *arr;
-// 	int i;
-
-// 	arr = malloc(sizeof(config) * 4);
-// 	if(!arr)
-// 	{
-// 		perror("");
-// 		return(NULL);
-// 	}
-// 	i = 0;
-// 	while(i < 4)
-// 	{
-// 		arr[i].flag = 0;
-// 		i++;
-// 	}
-// 	arr[0].direction = "NO ";
-// 	arr[0].texture = &text->no;
-// 	arr[1].direction = "SO ";
-// 	arr[1].texture = &text->so;
-// 	arr[2].direction = "WE ";
-// 	arr[2].texture = &text->we;
-// 	arr[3].direction = "EA ";
-// 	arr[3].texture = &text->ea;
-// 	return(arr);
-// }
 
 int	parse_dir(char *line, config *arr)
 {

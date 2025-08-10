@@ -6,7 +6,7 @@
 /*   By: ijoubair <ijoubair@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/01 15:11:57 by ijoubair          #+#    #+#             */
-/*   Updated: 2025/08/09 18:34:31 by ijoubair         ###   ########.fr       */
+/*   Updated: 2025/08/10 15:23:58 by ijoubair         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,16 +52,16 @@ int fill_textures_map(char *file_name)
 	textures **text;
 	config(*arr_dir), (*arr_fc);
 	
-	fd = open(file_name, O_RDONLY);
-	if(fd < 0)
-	{
-		perror("");
-		return(0);
-	}
+	fd = open_file(file_name);
 	text = text_func();
 	*text = init_textures();
 	init_arrays(text, &arr_dir, &arr_fc);
 	line = get_next_line(fd);
+	if(!line)
+	{
+		printf("The file is empty\n");
+		return(0);
+	}
 	while(line)
 	{
 		if(map_reached(*line))

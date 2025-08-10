@@ -31,20 +31,24 @@ typedef struct textures
 	char	*c;
 }			textures;
 
-// parsing
+// *************** parsing ***************
+
 void		parse_floor_ceiling(char *line, config *arr);
 int			parse_dir(char *line, config *arr);
 textures	*init_textures(void);
 int			fill_textures_map(char *file_name);
 config		*init_dir_arr(textures *text);
 config		*init_fc_arr(textures *text);
-void	check_textures(void);
+void		check_textures(void);
 int			ft_strcmp(const char *s1, const char *s2);
-void create_map_arr(char *string);
+void		create_map_arr(char *string);
 int			check_argv(int argc, char **argv);
-void	collect_the_map(char *line, int fd);
-void	parse_map(void);
+void		collect_the_map(char *line, int fd);
+void		parse_map(void);
+void		free_and_exit(int status);
+int			open_file(char *file_name);
 // global
 textures	**text_func(void);
-char ***the_map(void);
+char		***the_map(void);
+
 #endif
