@@ -34,7 +34,7 @@ typedef struct textures
 // *************** parsing ***************
 
 void		parse_floor_ceiling(char *line, config *arr);
-int			parse_dir(char *line, config *arr);
+void		parse_dir(char *line, config *arr);
 textures	*init_textures(void);
 int			fill_textures_map(char *file_name);
 config		*init_dir_arr(textures *text);
