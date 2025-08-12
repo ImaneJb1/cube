@@ -6,7 +6,7 @@ Before touching any parsing logic:
 
 2. **Check file can be opened** ✅
 
-3. **Ensure the file is not empty** 
+3. **Ensure the file is not empty** ✅
 
    * If `read()` returns `0` before reading anything → error.
 

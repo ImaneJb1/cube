@@ -6,7 +6,7 @@
 /*   By: ijoubair <ijoubair@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/01 15:11:57 by ijoubair          #+#    #+#             */
-/*   Updated: 2025/08/10 15:23:58 by ijoubair         ###   ########.fr       */
+/*   Updated: 2025/08/12 13:49:52 by ijoubair         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,14 +79,12 @@ void	check_textures(void)
 	if(text_func() == NULL)
 	{
 		printf("Unvalid textures\n");
-		//free
-		exit(1);
+		free_and_exit(1);
 	}
 	if((*text_func())->no == NULL || (*text_func())->so == NULL 
 	|| (*text_func())->ea == NULL || (*text_func())->we == NULL)
 	{
 		printf("Unvalid textures\n");
-		//free
-		exit(1);
+		free_and_exit(1);
 	}
 }

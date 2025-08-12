@@ -6,7 +6,7 @@
 /*   By: ijoubair <ijoubair@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/03 21:03:38 by ijoubair          #+#    #+#             */
-/*   Updated: 2024/11/05 14:44:54 by ijoubair         ###   ########.fr       */
+/*   Updated: 2025/08/12 14:19:39 by ijoubair         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ char	*ft_substr(char const *s, unsigned int start, size_t len)
 		return (ft_strdup(""));
 	if (len > ft_strlen(&s[start]))
 		len = ft_strlen(&s[start]);
-	sub = malloc(len + 1);
+	sub = gc_malloc(len + 1);
 	if (!sub)
 		return (NULL);
 	while (i < len)

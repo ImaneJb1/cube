@@ -6,7 +6,7 @@
 /*   By: ijoubair <ijoubair@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/01 15:12:37 by ijoubair          #+#    #+#             */
-/*   Updated: 2025/08/09 17:43:33 by ijoubair         ###   ########.fr       */
+/*   Updated: 2025/08/12 14:20:30 by ijoubair         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,11 +18,15 @@ int main(int argc, char **argv)
 
 	if(!check_argv(argc, argv))
 		return 0;
-	if(!fill_textures_map(argv[1]))// it creates the map array
+	if(!fill_textures_map(argv[1]))
+	{
+		free_all();
 		return 0;
+	}// it creates the map array
 	check_textures(); // this exits the program in case of faillure 
 	parse_map(); // this exits the program in case of faillure
-	
+	free_all();
+	get_next_line(-1);
 	//debuging
 	// txt = (*text_func());
 	// if(txt == NULL)

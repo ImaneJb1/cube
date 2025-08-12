@@ -13,7 +13,7 @@
                 "--track-origins=yes",
                 "--show-leak-kinds=all",
                 "${workspaceFolder}/a.out",
-                "maps/empty.cub"
+                "maps/lwasakh.cub"
             ],
             "stopAtEntry": false,
             "cwd": "${workspaceFolder}",

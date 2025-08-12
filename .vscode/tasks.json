@@ -12,6 +12,7 @@
                 "${workspaceFolder}/parsing/*/*.c",
                 "${workspaceFolder}/get_next_line/*.c",
                 "${workspaceFolder}/libft-project/*.c",
+                "${workspaceFolder}/garbage_collector/*.c",
                 "${workspaceFolder}/*.c",
                 // "${workspaceFolder}/*/*/*.c",
                 // "${workspaceFolder}/tester/Unity-master/src/unity.c",
