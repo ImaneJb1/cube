@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_floor_ceiling.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ijoubair <ijoubair@student.42.fr>          +#+  +:+       +#+        */
+/*   By: imane <imane@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/04 11:45:07 by ijoubair          #+#    #+#             */
-/*   Updated: 2025/08/09 15:30:03 by ijoubair         ###   ########.fr       */
+/*   Updated: 2025/08/10 18:01:33 by imane            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ config	*init_fc_arr(textures *text)
 	config *arr;
 	int i;
 
-	arr = malloc(sizeof(config) * 2);
+	arr = gc_malloc(sizeof(config) * 2);
 	if(!arr)
 	{
 		perror("");

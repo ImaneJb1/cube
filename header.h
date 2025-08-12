@@ -50,5 +50,8 @@ int			open_file(char *file_name);
 // global
 textures	**text_func(void);
 char		***the_map(void);
-
+// garbage collector
+void 		free_all(void);
+void		*gc_calloc(size_t count, size_t size);
+void		*gc_malloc(size_t size);
 #endif
