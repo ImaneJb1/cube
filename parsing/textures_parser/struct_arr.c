@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   struct_arr.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ijoubair <ijoubair@student.42.fr>          +#+  +:+       +#+        */
+/*   By: imane <imane@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/02 10:52:27 by ijoubair          #+#    #+#             */
-/*   Updated: 2025/08/09 15:30:08 by ijoubair         ###   ########.fr       */
+/*   Updated: 2025/08/10 18:01:20 by imane            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ config	*init_dir_arr(textures *text)
 	config *arr;
 	int i;
 
-	arr = malloc(sizeof(config) * 4);
+	arr = gc_malloc(sizeof(config) * 4);
 	if(!arr)
 	{
 		perror("");

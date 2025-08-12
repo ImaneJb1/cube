@@ -6,7 +6,7 @@
 /*   By: ijoubair <ijoubair@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/02 10:08:40 by ijoubair          #+#    #+#             */
-/*   Updated: 2025/08/12 13:41:47 by ijoubair         ###   ########.fr       */
+/*   Updated: 2025/08/12 13:44:03 by ijoubair         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,12 +30,11 @@ textures *init_textures(void)
 {
 	textures *text;
 
-	text = malloc(sizeof(textures));
+	text = gc_calloc(1, sizeof(textures));
 	if(!text)
 	{
 		perror("");
 		return(NULL);
 	}
-	ft_bzero(text, sizeof(text));
 	return(text);
 }
