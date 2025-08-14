@@ -6,7 +6,7 @@
 /*   By: ijoubair <ijoubair@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/09 15:29:07 by ijoubair          #+#    #+#             */
-/*   Updated: 2025/08/09 18:36:10 by ijoubair         ###   ########.fr       */
+/*   Updated: 2025/08/14 14:29:43 by ijoubair         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,22 +55,18 @@ int	is_map_valid(char **map)
 {
 	int (y), (x);
 	
+	y = 0;
 	while(map[y])
 	{
-		while(map[y][x])
+		x = 0;
+		while(map[y][x++])
 		{
 			if(!is_valid_char(map[y][x]))
-			{
-				printf("Unvalid character in the map\n");
-				return(0);
-			}
+				return(printf("Unvalid character in the map\n"), 0);
 			if(map[y][x] == '0' || map[y][x] == 'N'|| map[y][x] == 'D')
 			{
 				if (!is_inside_the_map(x, y, map))
-				{
-					printf("The map should be surrounded by walls\n");
-					return 0;
-				}
+					return(printf("The map should be surrounded by walls\n"), 0);
 			}
 			x++;
 		}
@@ -81,9 +77,13 @@ int	is_map_valid(char **map)
 
 void	parse_map(void)
 {
-	if(!is_map_valid(*the_map()))
+	char **map;
+
+	map = *the_map();
+	printf("map[0] = %s\n", map[0]);
+	if(!is_map_valid(map))
 	{	
-		//free
+		free_all();
 		exit(1);
 	}
 }

@@ -5,16 +5,16 @@
             "name": "gcc build and debug active file",
             "type": "cppdbg",
             "request": "launch",
-            "program": "${workspaceFolder}/a.out",
-            "args": ["maps/lwasakh.cub"],
-            // "program": "/usr/bin/valgrind",
-            // "args": [
-            // // "--leak-check=full",
-            // // "--track-origins=yes",
-            //     // "--show-leak-kinds=all",
-            //     "${workspaceFolder}/a.out",
-            //     "maps/lwasakh.cub"
-            // ],
+            // "program": "${workspaceFolder}/a.out",
+            // "args": ["maps/lwasakh.cub"],
+            "program": "/usr/bin/valgrind",
+            "args": [
+                "--leak-check=full",
+                "--track-origins=yes",
+                "--show-leak-kinds=all",
+                "${workspaceFolder}/a.out",
+                "maps/lwasakh.cub"
+            ],
             "stopAtEntry": false,
             "cwd": "${workspaceFolder}",
             "environment": [],

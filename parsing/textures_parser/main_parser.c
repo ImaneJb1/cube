@@ -6,7 +6,7 @@
 /*   By: ijoubair <ijoubair@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/01 15:11:57 by ijoubair          #+#    #+#             */
-/*   Updated: 2025/08/12 13:49:52 by ijoubair         ###   ########.fr       */
+/*   Updated: 2025/08/14 14:30:24 by ijoubair         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ int fill_textures_map(char *file_name)
 	text = text_func();
 	*text = init_textures();
 	init_arrays(text, &arr_dir, &arr_fc);
-	line = get_next_line(fd);
+	line = get_next_line(fd); // memory leak
 	if(!line)
 	{
 		printf("The file is empty\n");

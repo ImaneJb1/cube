@@ -6,7 +6,7 @@
 /*   By: ijoubair <ijoubair@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/05 00:39:48 by ijoubair          #+#    #+#             */
-/*   Updated: 2025/08/02 10:38:30 by ijoubair         ###   ########.fr       */
+/*   Updated: 2025/08/14 14:19:11 by ijoubair         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ char	*ft_strtrim(char const *s1, char const *set)
 	int		arr[256];
 	char	*trim;
 
-	ft_bzero(arr, 256);
+	ft_bzero(arr, 256 * sizeof(int));
 	i = 0;
 	if (!s1 || !set)
 		return (NULL);
