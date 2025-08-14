@@ -47,6 +47,7 @@ void		collect_the_map(char *line, int fd);
 void		parse_map(void);
 void		free_and_exit(int status);
 int			open_file(char *file_name);
+int			strlen_2d(char **str);
 // global
 textures	**text_func(void);
 char		***the_map(void);

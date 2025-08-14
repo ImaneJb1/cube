@@ -6,7 +6,7 @@
 /*   By: ijoubair <ijoubair@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/04 11:45:07 by ijoubair          #+#    #+#             */
-/*   Updated: 2025/08/12 17:02:08 by ijoubair         ###   ########.fr       */
+/*   Updated: 2025/08/14 12:31:33 by ijoubair         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,10 +44,7 @@ int	strlen_2d(char **str)
 	if(!str)
 		return 0;
 	while(str[i])
-	{
-		printf("%s length is %d\n", str[i],i);
 		i++;
-	}
 	return(i);
 }
 
@@ -58,9 +55,9 @@ void	is_valid_format(char *format)
 	int num;
 	
 	i = 0;
-	printf("format = %s\n", format);
+	// printf("format = %s\n", format);
 	splited = ft_split(format, ',');
-	if(strlen_2d(splited) < 3 )
+	if(strlen_2d(splited) != 3 )
 	{
 		printf("Error: Invalid color format in F/C element (expected R,G,B)\n");	
 		free_and_exit(1);
@@ -75,6 +72,21 @@ void	is_valid_format(char *format)
 		}
 		i++;
 	}
+}
+
+char	*join_2d_arr(char **splited)
+{
+	int i;
+	char *joined;
+
+	joined = NULL;
+	i = 0;
+	while(splited[i])
+	{
+		joined = ft_strjoin(joined, splited[i]);
+		i++;
+	}
+	return(joined);
 }
 
 void	parse_floor_ceiling(char *line, config *arr)
@@ -96,13 +108,11 @@ void	parse_floor_ceiling(char *line, config *arr)
 			}
 			arr[i].flag = 1;
 			line =  ft_substr(line, 2, ft_strlen(line) - 2);
-			printf("line = %s\n", line);
 			splited = ft_split(line, ' ');//hona
-			printf("splited[0] = %s\n", splited[0]);
-			is_valid_format(splited[0]);
-			(*arr[i].texture) = splited[0];
+			line = join_2d_arr(splited);
+			is_valid_format(line);
+			(*arr[i].texture) = line;
 		}
 		i++;
 	}
 }
-//khsni nzid functin katjoini liya splited arr
