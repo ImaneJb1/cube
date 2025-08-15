@@ -35,7 +35,8 @@ typedef struct data{
 	void *mlx_win;
 	int player_x;
 	int player_y;
-	
+	int door_x;
+	int door_y;
 	t_img img;
 	char **map;
 	
