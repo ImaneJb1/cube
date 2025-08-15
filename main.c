@@ -148,9 +148,11 @@ void rander_map(t_data *data)
 
 void put_player(t_data *data)
 {
+
 	draw_circle(data, 0xFF69B4);
 
 }
+
 // void ray_casting(data)
 // {
 
