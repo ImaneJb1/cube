@@ -12,24 +12,23 @@
 
 #include "header.h"
 
+
+int is_wall(char *map[], int j, int i)
+{
+	if(i < 0 || j < 0 || !map[i] || !map[i][j] || map[i][j] == '1')
+		return(1);
+	return(0);
+}
 void	wich_key(int keysym, t_data *data)
 {
-	if (keysym == XK_Left)
+	if (keysym == XK_Left && !is_wall(data->map, (data->player_x - 10) / SQUARESIZE, (data->player_y) / SQUARESIZE))
 		data->player_x -= 10;
-	if (keysym == XK_Right)
+	if (keysym == XK_Right && !is_wall(data->map, (data->player_x + 10) / SQUARESIZE, (data->player_y) / SQUARESIZE))
 		data->player_x += 10;
-	if (keysym == XK_Up)
+	if (keysym == XK_Up && !is_wall(data->map, (data->player_x) / SQUARESIZE, (data->player_y - 10) / SQUARESIZE))
 		data->player_y -= 10;
-	if (keysym == XK_Down)
-		data->player_y += 10;
-    if (data->player_x < 0) 
-		data->player_x = 0;
-    if (data->player_y < 0) 
-		data->player_y = 0;
-    if (data->player_x >= get_width(data->map) * SQUARESIZE) 
-		data->player_x = get_width(data->map) * SQUARESIZE - 1;
-    if (data->player_y >= get_heigth(data->map) * SQUARESIZE) 
-		data->player_y = get_heigth(data->map) * SQUARESIZE - 1;
+	if (keysym == XK_Down && !is_wall(data->map, (data->player_x) / SQUARESIZE, (data->player_y + 10) / SQUARESIZE))
+		data->player_y += 10; 
 }
 
 int	press_key(int keysym, t_data *data)
@@ -42,10 +41,10 @@ int	press_key(int keysym, t_data *data)
 	{
 		wich_key(keysym,data);
 	}
-	// mlx_destroy_image(data->mlx_ptr, data->img.img_ptr);
-	// data->img.img_ptr = mlx_new_image(data->mlx_ptr,  get_width(data->map) * SQUARESIZE, get_heigth(data->map) * SQUARESIZE);
-	// data->img.img_pxl_ptr = mlx_get_data_addr(data->img.img_ptr,
-	// 		&data->img.b_p_p, &data->img.line_len, &data->img.endian);
+	mlx_destroy_image(data->mlx_ptr, data->img.img_ptr);
+	data->img.img_ptr = mlx_new_image(data->mlx_ptr,  get_width(data->map) * SQUARESIZE, get_heigth(data->map) * SQUARESIZE);
+	data->img.img_pxl_ptr = mlx_get_data_addr(data->img.img_ptr,
+			&data->img.b_p_p, &data->img.line_len, &data->img.endian);
 	randring_(data);
 	mlx_put_image_to_window(data->mlx_ptr, data->mlx_win, data->img.img_ptr, 0,
 		0);
@@ -109,10 +108,10 @@ void draw_square(t_data *data, int x, int y, int color)
 	j = 0;
 	i = 0;
 	
-	while(i < SQUARESIZE)
+	while(i < SQUARESIZE - 1)
 	{
 		j = 0;
-		while(j < SQUARESIZE)
+		while(j < SQUARESIZE - 1)
 		{
 			img_pixel_put(data, &data->img, x + j, y + i, color);
 			j++;
@@ -149,35 +148,19 @@ void rander_map(t_data *data)
 
 void put_player(t_data *data)
 {
-	// int i;
-	// int j;
-	// int color;
-	
-	// i = 0;
-	// j = 0;
-	// while(data->map[i])
-	// {
-	// 	j = 0;
-	// 	while(data->map[i][j])
-	// 	{
-			
-	// 		if(data->map[i][j] == 'P')
-	// 		{
-	// 			// data->player_x = (j * SQUARESIZE + SQUARESIZE / 2);
-	// 			// data->player_y = (i * SQUARESIZE + SQUARESIZE / 2);
-				// color = ;
-				draw_circle(data, 0xFF69B4);
-// 			}
-// 			j++;		
-// 		}
-// 		i++;
-// 	}
+	draw_circle(data, 0xFF69B4);
+
 }
+// void ray_casting(data)
+// {
+
+// }
 
 void randring_(t_data *data)
 {
 	rander_map(data);
 	put_player(data);
+	// ray_casting(data);
 }
 
 void init_player(t_data *data, char *map[])
@@ -252,8 +235,6 @@ void data_init(t_data *data)
 	if (!data->mlx_ptr)
 	exit(1);
 	data->map = map;
-	data->shift_x = 0;
-	data->shift_y = 0;
 	data->mlx_win = mlx_new_window(data->mlx_ptr, get_width(data->map) * SQUARESIZE, get_heigth(data->map) * SQUARESIZE, "noussa");
 	data->img.img_ptr = mlx_new_image(data->mlx_ptr, get_width(data->map) * SQUARESIZE, get_heigth(data->map) * SQUARESIZE);
 	data->img.img_pxl_ptr = mlx_get_data_addr(data->img.img_ptr,
@@ -280,76 +261,3 @@ int main(int argc, char **argv)
 
 	return 0;
 }
-
-// typedef struct data{
-// 	void *mlx_ptr;
-// 	void *mlx_win;
-// 	int player_x;
-// 	int player_y;
-// 	t_img img;
-// 	char **map;
-	
-// }t_data;
-
-// void	draw_square(t_data *data, int x, int y, int color)
-// {
-// 	for (int i = 0; i < SQUARESIZE; i++)
-// 	{
-// 		for (int j = 0; j < SQUARESIZE; j++)
-// 		{
-// 			mlx_pixel_put(data->mlx_ptr, data->mlx_win, x + j, y + i, color);
-// 		}
-// 	}
-// }
-// void	render_map(t_data *data)
-// {
-// 	int	i = 0, j;
-// 	while (data->map[i])
-// 	{
-// 		j = 0;
-// 		while (data->map[i][j])
-// 		{
-// 			int color;
-// 			if (data->map[i][j] == '1')
-// 				color = 0x999999; // mur gris
-// 			else
-// 				color = 0x000000; // sol noir
-// 			draw_square(data, j * SQUARESIZE, i * SQUARESIZE, color);
-// 			j++;
-// 		}
-// 		i++;
-// 	}
-// }
-
-// void	render_player(t_data *data)
-// {
-// 	int x = data->player_x * SQUARESIZE;
-// 	int y = data->player_y * SQUARESIZE;
-// 	draw_square(data, x, y, 0xFF69B4); // rose flashy
-// }
-
-
-// int main(void)
-// {
-// 	t_data data;
-// 	char *map[] = {
-//     "111111",
-//     "100001",
-//     "10N001",
-//     "100001",
-//     "111111",
-//     NULL
-// 	};
-// 	data.map = map;
-// 	data.mlx_ptr = mlx_init();
-// 	data.mlx_win = mlx_new_window(data.mlx_ptr, WIDTH, HEIGHT, "Mini Map");
-
-// 	// Position initiale du joueur
-// 	data.player_x = 2;
-// 	data.player_y = 2;
-
-// 	render_map(&data);
-// 	render_player(&data);
-
-// 	mlx_loop(data.mlx_ptr);
-// }
