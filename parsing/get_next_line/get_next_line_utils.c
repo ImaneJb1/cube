@@ -6,40 +6,40 @@
 /*   By: ijoubair <ijoubair@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/28 11:17:47 by ijoubair          #+#    #+#             */
-/*   Updated: 2024/12/09 15:50:42 by ijoubair         ###   ########.fr       */
+/*   Updated: 2025/08/05 18:13:32 by ijoubair         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 
-char	*ft_strchr(const char *s, int c)
-{
-	while (*s)
-	{
-		if (*s == (char)c)
-			return ((char *)s);
-		s++;
-	}
-	if (*s == (char)c)
-		return ((char *)s);
-	return (NULL);
-}
+// char	*ft_strchr(const char *s, int c)
+// {
+// 	while (*s)
+// 	{
+// 		if (*s == (char)c)
+// 			return ((char *)s);
+// 		s++;
+// 	}
+// 	if (*s == (char)c)
+// 		return ((char *)s);
+// 	return (NULL);
+// }
 
-size_t	ft_strlen(const char *str)
-{
-	size_t	len;
+// size_t	ft_strlen(const char *str)
+// {
+// 	size_t	len;
 
-	len = 0;
-	if (!str)
-		return (0);
-	while (str[len])
-	{
-		len++;
-	}
-	return (len);
-}
+// 	len = 0;
+// 	if (!str)
+// 		return (0);
+// 	while (str[len])
+// 	{
+// 		len++;
+// 	}
+// 	return (len);
+// }
 
-char	*ft_strjoin(char const *s1, char const *s2)
+char	*gft_strjoin(char const *s1, char const *s2)
 {
 	size_t	len;
 	char	*s3;
@@ -63,21 +63,21 @@ char	*ft_strjoin(char const *s1, char const *s2)
 	return (s3);
 }
 
-void	*ft_calloc(size_t count, size_t size)
-{
-	void	*arr;
-	char	*p;
-	size_t	i;
+// void	*ft_calloc(size_t count, size_t size)
+// {
+// 	void	*arr;
+// 	char	*p;
+// 	size_t	i;
 
-	arr = malloc(count * size);
-	if (!arr)
-		return (NULL);
-	p = (char *)arr;
-	i = 0;
-	while (i < count * size)
-	{
-		p[i] = 0;
-		i++;
-	}
-	return (arr);
-}
+// 	arr = malloc(count * size);
+// 	if (!arr)
+// 		return (NULL);
+// 	p = (char *)arr;
+// 	i = 0;
+// 	while (i < count * size)
+// 	{
+// 		p[i] = 0;
+// 		i++;
+// 	}
+// 	return (arr);
+// }

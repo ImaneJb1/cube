@@ -6,7 +6,7 @@
 /*   By: ijoubair <ijoubair@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/04 21:43:43 by ijoubair          #+#    #+#             */
-/*   Updated: 2024/11/11 22:12:28 by ijoubair         ###   ########.fr       */
+/*   Updated: 2025/08/12 13:45:55 by ijoubair         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,5 +57,8 @@ void	ft_putchar_fd(char c, int fd);
 void	ft_putendl_fd(char *s, int fd);
 void	ft_putnbr_fd(int n, int fd);
 void	ft_putstr_fd(char *s, int fd);
+
+// gc
+void		*gc_malloc(size_t size);
 
 #endif

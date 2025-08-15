@@ -6,7 +6,7 @@
 /*   By: ijoubair <ijoubair@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/05 16:01:38 by ijoubair          #+#    #+#             */
-/*   Updated: 2025/01/19 19:09:01 by ijoubair         ###   ########.fr       */
+/*   Updated: 2025/08/12 13:46:03 by ijoubair         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,7 @@ char	**ft_split(char const *s, char c)
 	i = 0;
 	j = 0;
 	word_count = word_counter(s, c);
-	arr = malloc((word_count + 1) * sizeof(char *));
+	arr = gc_malloc((word_count + 1) * sizeof(char *));
 	if (!arr || !s)
 		return (free(arr), NULL);
 	while (s[i])
