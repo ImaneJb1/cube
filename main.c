@@ -125,7 +125,7 @@ void rander_map(t_data *data)
 	int i;
 	int j;
 	int color;
-	
+
 	i = 0;
 	j = 0;
 
