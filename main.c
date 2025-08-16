@@ -170,7 +170,7 @@ void init_player(t_data *data, char *map[])
 	int i;
 	int j;
 	// int color;
-	
+	(void)map;
 	i = 0;
 	j = 0;
 	while(data->map[i])
@@ -240,7 +240,17 @@ void data_init(t_data *data)
 int main(int argc, char **argv)
 {
 	t_data data;
-	
+	// textures *txt;
+
+	if(!check_argv(argc, argv))
+		return 0;
+	if(!fill_textures_map(argv[1]))
+	{
+		free_all();
+		return 0;
+	}// it creates the map array
+	check_textures(); // this exits the program in case of faillure 
+	parse_map(); // this exits the program in case of faillure
 	data_init(&data);
 	
 	hook_init(&data);
@@ -248,6 +258,8 @@ int main(int argc, char **argv)
 	mlx_destroy_window(data.mlx_ptr, data.mlx_win);
 	mlx_destroy_display(data.mlx_ptr);
 	free(data.mlx_ptr);
-
+	
+	free_all();
+	get_next_line(-1);
 	return 0;
 }
