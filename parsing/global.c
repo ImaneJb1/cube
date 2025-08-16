@@ -1,30 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strcmp.c                                        :+:      :+:    :+:   */
+/*   global.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ijoubair <ijoubair@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/08/01 15:40:01 by ijoubair          #+#    #+#             */
-/*   Updated: 2025/08/16 16:17:49 by ijoubair         ###   ########.fr       */
+/*   Created: 2025/08/08 16:16:39 by ijoubair          #+#    #+#             */
+/*   Updated: 2025/08/12 15:05:01 by ijoubair         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../header.h"
 
-int	ft_strcmp(const char *s1, const char *s2)
+textures **text_func(void)
 {
-	unsigned char	*tmp1;
-	unsigned char	*tmp2;
+	static textures *text;
+	return(&text);
+}
 
-	tmp1 = (unsigned char *)s1;
-	tmp2 = (unsigned char *)s2;
-	while ((*tmp1 != '\0' || *tmp2 != '\0'))
-	{
-		if (*tmp1 != *tmp2)
-			return (*tmp1 - *tmp2);
-		tmp1++;
-		tmp2++;
-	}
-	return (0);
+char ***the_map(void)
+{
+	static char **map;
+	return(&map);
 }

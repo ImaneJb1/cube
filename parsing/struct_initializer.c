@@ -1,30 +1,40 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strcmp.c                                        :+:      :+:    :+:   */
+/*   struct_initializer.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ijoubair <ijoubair@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/08/01 15:40:01 by ijoubair          #+#    #+#             */
-/*   Updated: 2025/08/16 16:17:49 by ijoubair         ###   ########.fr       */
+/*   Created: 2025/08/02 10:08:40 by ijoubair          #+#    #+#             */
+/*   Updated: 2025/08/12 13:44:03 by ijoubair         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../header.h"
 
-int	ft_strcmp(const char *s1, const char *s2)
-{
-	unsigned char	*tmp1;
-	unsigned char	*tmp2;
+// dir_flags	*init_flags(void)
+// {
+// 	dir_flags *flags;
+	
+// 	flags = malloc(sizeof(dir_flags));
+// 	if(!flags)
+// 	{
+// 		perror("");
+// 		return(NULL);
+// 	}
+// 	ft_bzero(flags, sizeof(flags));
+// 	return(flags);
+// }
 
-	tmp1 = (unsigned char *)s1;
-	tmp2 = (unsigned char *)s2;
-	while ((*tmp1 != '\0' || *tmp2 != '\0'))
+textures *init_textures(void)
+{
+	textures *text;
+
+	text = gc_calloc(1, sizeof(textures));
+	if(!text)
 	{
-		if (*tmp1 != *tmp2)
-			return (*tmp1 - *tmp2);
-		tmp1++;
-		tmp2++;
+		perror("");
+		return(NULL);
 	}
-	return (0);
+	return(text);
 }

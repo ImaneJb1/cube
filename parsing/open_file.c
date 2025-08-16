@@ -1,30 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strcmp.c                                        :+:      :+:    :+:   */
+/*   open_file.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ijoubair <ijoubair@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/08/01 15:40:01 by ijoubair          #+#    #+#             */
-/*   Updated: 2025/08/16 16:17:49 by ijoubair         ###   ########.fr       */
+/*   Created: 2025/08/10 15:16:43 by ijoubair          #+#    #+#             */
+/*   Updated: 2025/08/10 15:23:12 by ijoubair         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../header.h"
 
-int	ft_strcmp(const char *s1, const char *s2)
+int	open_file(char *file_name)
 {
-	unsigned char	*tmp1;
-	unsigned char	*tmp2;
+	int	fd;
 
-	tmp1 = (unsigned char *)s1;
-	tmp2 = (unsigned char *)s2;
-	while ((*tmp1 != '\0' || *tmp2 != '\0'))
+	fd = open(file_name, O_RDONLY);
+	if(fd < 0)
 	{
-		if (*tmp1 != *tmp2)
-			return (*tmp1 - *tmp2);
-		tmp1++;
-		tmp2++;
+		perror("");
+		free_and_exit(1);
+		return(0);
 	}
-	return (0);
+	return(fd);
 }
