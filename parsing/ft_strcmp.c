@@ -6,11 +6,11 @@
 /*   By: ijoubair <ijoubair@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/01 15:40:01 by ijoubair          #+#    #+#             */
-/*   Updated: 2025/08/01 15:40:03 by ijoubair         ###   ########.fr       */
+/*   Updated: 2025/08/16 16:15:47 by ijoubair         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "header.h"
+#include "../header.h"
 
 int	ft_strcmp(const char *s1, const char *s2)
 {
