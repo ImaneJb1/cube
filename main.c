@@ -148,21 +148,20 @@ void rander_map(t_data *data)
 
 void put_player(t_data *data)
 {
-
 	draw_circle(data, 0xFF69B4);
-
 }
 
-// void ray_casting(data)
-// {
-
-// }
+void ray_casting(t_data *data)
+{
+	bresenhams(data->player_x, data->player_y, data->player_x + 10, data->player_y + 10);
+	
+}
 
 void randring_(t_data *data)
 {
 	rander_map(data);
 	put_player(data);
-	// ray_casting(data);
+	ray_casting(data);
 }
 
 void init_player(t_data *data, char *map[])
