@@ -1,12 +1,13 @@
 #ifndef HEADER_H
-#define HEADER_H
-#include "parsing/libft-project/libft.h"
-#include <fcntl.h>
+# define HEADER_H
+
+#include "parsing/libft/libft.h"
 #include "parsing/get_next_line/get_next_line.h"
 #include <math.h>
 # include <mlx.h>
 # include <X11/X.h>
 # include <X11/keysym.h>
+# include <fcntl.h>
 
 #define SQUARESIZE 32
 #define ROWS 10
@@ -48,10 +49,6 @@ int get_width(char *map[]);
 int press_x(t_data *data);
 void randring_(t_data *data);
 int	ft_strcmp(const char *s1, const char *s2);
-# define HEADER_H
-# include "get_next_line/get_next_line.h"
-# include "libft-project/libft.h"
-# include <fcntl.h>
 
 // typedef struct flags
 // {

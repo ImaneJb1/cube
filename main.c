@@ -5,13 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: nel-khad <nel-khad@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-<<<<<<< HEAD
 /*   Created: 2025/08/01 15:get_heigth(data->map):37 by ijoubair          #+#    #+#             */
 /*   Updated: 2025/08/12 12:09:19 by nel-khad         ###   ########.fr       */
-=======
-/*   Created: 2025/08/01 15:12:37 by ijoubair          #+#    #+#             */
-/*   Updated: 2025/08/12 14:20:30 by ijoubair         ###   ########.fr       */
->>>>>>> imane
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -130,7 +125,7 @@ void rander_map(t_data *data)
 	int i;
 	int j;
 	int color;
-	
+
 	i = 0;
 	j = 0;
 
@@ -174,7 +169,7 @@ void init_player(t_data *data, char *map[])
 {
 	int i;
 	int j;
-	int color;
+	// int color;
 	
 	i = 0;
 	j = 0;
@@ -223,20 +218,8 @@ int get_width(char *map[])
 
 void data_init(t_data *data)
 {
-	static char *map[] = {
-    "111111111111111111",
-    "100000000010000001",
-    "100011110001111001",
-    "10000000P000000001",
-    "101111011111011101",
-    "100000010000010001",
-    "111101111011110111",
-    "100100000000000001",
-    "101111111111110101",
-    "100000000000000001",
-    "111111111111111111",
-    NULL
-	};
+	static char **map;
+	map = *the_map();
 
 	data->mlx_ptr = mlx_init();
 	if (!data->mlx_ptr)
@@ -256,7 +239,6 @@ void data_init(t_data *data)
 
 int main(int argc, char **argv)
 {
-<<<<<<< HEAD
 	t_data data;
 	
 	data_init(&data);
@@ -267,33 +249,5 @@ int main(int argc, char **argv)
 	mlx_destroy_display(data.mlx_ptr);
 	free(data.mlx_ptr);
 
-=======
-	textures *txt;
-
-	if(!check_argv(argc, argv))
-		return 0;
-	if(!fill_textures_map(argv[1]))
-	{
-		free_all();
-		return 0;
-	}// it creates the map array
-	check_textures(); // this exits the program in case of faillure 
-	parse_map(); // this exits the program in case of faillure
-	free_all();
-	get_next_line(-1);
-	//debuging
-	// txt = (*text_func());
-	// if(txt == NULL)
-	// {
-	// 	printf("NULL\n");
-	// 	return 0;
-	// }
-	// printf("no = %s\n", txt->no);
-	// printf("so = %s\n", txt->so);
-	// printf("ea = %s\n", txt->ea);
-	// printf("we = %s\n", txt->we);
-	// printf("f = %s\n", txt->f);
-	// printf("c = %s\n", txt->c);
->>>>>>> imane
 	return 0;
 }
