@@ -254,6 +254,7 @@ int main(int argc, char **argv)
 	check_textures(); // this exits the program in case of faillure 
 	data_init(data);
 	parse_map(); // this exits the program in case of faillure
+	
 	hook_init(data);
 	mlx_loop(data->mlx_ptr);
 	mlx_destroy_window(data->mlx_ptr, data->mlx_win);
