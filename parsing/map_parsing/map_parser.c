@@ -6,7 +6,7 @@
 /*   By: ijoubair <ijoubair@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/09 15:29:07 by ijoubair          #+#    #+#             */
-/*   Updated: 2025/08/14 14:29:43 by ijoubair         ###   ########.fr       */
+/*   Updated: 2025/08/17 13:05:25 by ijoubair         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ int is_inside_the_map(int x, int y, char **map)
 
 int	is_valid_char(char c)
 {
-	if(c != '1' && c != '0' && c != 'N' && c != 'D' && c != ' ') 
+	if(c != '1' && c != '0' && c != 'N' && c != 'D' && c != ' ' && c != '\n') 
 		return(0);
 	return(1);
 }
@@ -61,7 +61,7 @@ int	is_map_valid(char **map)
 		x = 0;
 		while(map[y][x++])
 		{
-			if(!is_valid_char(map[y][x]))
+			if(map[y][x] && !is_valid_char(map[y][x]))
 				return(printf("Unvalid character in the map\n"), 0);
 			if(map[y][x] == '0' || map[y][x] == 'N'|| map[y][x] == 'D')
 			{
