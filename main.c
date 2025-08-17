@@ -239,7 +239,9 @@ void data_init(t_data *data)
 
 int main(int argc, char **argv)
 {
-	t_data data;
+	t_data *data;
+
+	data = data_func();
 	// textures *txt;
 
 	if(!check_argv(argc, argv))
@@ -250,14 +252,13 @@ int main(int argc, char **argv)
 		return 0;
 	}// it creates the map array
 	check_textures(); // this exits the program in case of faillure 
+	data_init(data);
 	parse_map(); // this exits the program in case of faillure
-	data_init(&data);
-	
-	hook_init(&data);
-	mlx_loop(data.mlx_ptr);
-	mlx_destroy_window(data.mlx_ptr, data.mlx_win);
-	mlx_destroy_display(data.mlx_ptr);
-	free(data.mlx_ptr);
+	hook_init(data);
+	mlx_loop(data->mlx_ptr);
+	mlx_destroy_window(data->mlx_ptr, data->mlx_win);
+	mlx_destroy_display(data->mlx_ptr);
+	free(data->mlx_ptr);
 	
 	free_all();
 	get_next_line(-1);
