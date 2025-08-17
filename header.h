@@ -36,6 +36,7 @@ typedef struct data{
 	void *mlx_win;
 	int player_x;
 	int player_y;
+	char p_position;
 	int door_x;
 	int door_y;
 	t_img img;
@@ -94,9 +95,11 @@ void		parse_map(void);
 void		free_and_exit(int status);
 int			open_file(char *file_name);
 int			strlen_2d(char **str);
+void	parse_player(char char_map, int x, int y);
 // global
 textures	**text_func(void);
 char		***the_map(void);
+t_data		*data_func(void);
 // garbage collector
 void 		free_all(void);
 void		*gc_calloc(size_t count, size_t size);
