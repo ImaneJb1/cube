@@ -21,7 +21,6 @@ int is_wall(char *map[], int j, int i)
 }
 void	wich_key(int keysym, t_data *data)
 {
-	printf("x = %d y = %d\n", data->player_x, data->player_y);
 	if (keysym == XK_Left && !is_wall(data->map, (data->player_x - 10) / SQUARESIZE, (data->player_y) / SQUARESIZE))
 		data->player_x -= 10;
 	if (keysym == XK_Right && !is_wall(data->map, (data->player_x + 10) / SQUARESIZE, (data->player_y) / SQUARESIZE))
@@ -129,19 +128,19 @@ void rander_map(t_data *data)
 
 	i = 0;
 	j = 0;
-
-	printf("salam %s\n",data->map[0]);
+	color = -1;
 	while(data->map[i])
 	{
 		j = 0;
 		while(data->map[i][j])
 		{
 			if(data->map[i][j] == '1')
-				color = 0x000000;
-			else
+				color = 0x1A1033;
+			else if(data->map[i][j] == '0')
 				color = 0xffffff;
-			draw_square(data, j * SQUARESIZE, i * SQUARESIZE, color);
-			j++;		
+			if(color > 0)
+				draw_square(data, j * SQUARESIZE, i * SQUARESIZE, color);
+			j++;
 		}
 		i++;
 	}
@@ -152,164 +151,133 @@ void put_player(t_data *data)
 	draw_circle(data, 0xFF69B4);
 }
 
-// int absolute_value(int value)
-// {
-// 	if(value < 0)
-// 		return(-value);
-// 	return(value);
-// }
+int absolute_value(int value)
+{
+	if(value < 0)
+		return(-value);
+	return(value);
+}
 
-// void swap_value(int *px, int *py, int *x, int *y)
-// {
-// 	int tmp;
-// 	tmp = *px;
-// 	*px = *x;
-// 	*x = tmp;
-// 	tmp = *py;
-// 	*py = *y;
-// 	*y = tmp;
-// }
-// void draw_vertic(t_data *data, int x1, int y1)
-// {
-// 	int dx;
-// 	int dy;
-// 	int direction;
-// 	int D;
-// 	int x;
-// 	int i;
+void draw_vertic(t_data *data, int x1, int y1)
+{
+	int dx;
+	int dy;
+	int move_x;
+	int move_y;
+	int D;
+	int i;
+	int x;
+	int y;
 
-// 	i = 0;
-// 	direction = 1;
-// 	// if(data->player_x > x1)
-// 	// 	swap_value(&data->player_x, &data->player_y, &x, &y);
-// 	dx = x1 - data->player_x;
-// 	dy = y1 - data->player_y;
-// 	if(dx < 0)
-// 		direction = -1;
-// 	dx *= direction;
-// 	if(dx != 0)
-// 	{
-// 		x = data->player_x;
-// 		D = 2*dy - dx;
-// 		while(i < absolute_value(dy))
-// 		{
-// 			img_pixel_put(data, &data->img, x, data->player_y + i, 0xFF69B4);
-// 			if(D >= 0)
-// 			{
-// 				x += direction;
-// 				D = D - 2*dx;
-// 			}
-// 			D = D + 2*dy;
-// 			i++;
-// 		}
-// 	}
-// 	return;
-// }
-// void draw_horiz(t_data *data, int x1, int y1)
-// {
-// 	int dx;
-// 	int dy;
-// 	int direction;
-// 	int D;
-// 	int y;
-// 	int i;
+	i = 0;
+	move_x = 1;
+	move_y = 1;
+	x = data->player_x;
+	y = data->player_y;
+	dx = absolute_value(x1 - x);
+	dy = absolute_value(y1 - y);
+	if(x1 < data->player_x)
+		move_x = -1;
+	if(y1 < data->player_y)
+		move_y = -1;
+	D = 2*dx - dy;
+	while(x != x1 || y != y1)
+	{
+		img_pixel_put(data, &data->img,x, y, 0xFF69B4);
+		if(D >= 0)
+		{
+			x += move_x;
+			D = D - 2*dy;
+		}
+		y += move_y;
+		D = D + 2*dx;
+	}
+}
+void draw_horiz(t_data *data, int x1, int y1)
+{
+	int dx;
+	int dy;
+	int move_x;
+	int move_y;
+	int D;
+	int i;
+	int x;
+	int y;
 
-// 	i = 0;
-// 	direction = 1;
-// 	// if(data->player_x > x1)
-// 	// 	swap_value(&data->player_x, &data->player_y, &x, &y);
-// 	dx = x1 - data->player_x;
-// 	dy = y1 - data->player_y;
-// 	if(dy < 0)
-// 		direction = -1;
-// 	dy *= direction;
-// 	if(dx != 0)
-// 	{
-// 		y = data->player_y;
-// 		D = 2*dy - dx;
-// 		while(i < absolute_value(dx))
-// 		{
-// 			img_pixel_put(data, &data->img, data->player_x + i, y, 0xFF69B4);
-// 			if(D >= 0)
-// 			{
-// 				y += direction;
-// 				D = D - 2*dx;
-// 			}
-// 			D = D + 2*dy;
-// 			i++;
-// 		}
-// 	}
-// }
-// void bresenhams(t_data *data, int x, int y)
-// {
-// 	int dx;
-// 	int dy;
-// 	// int stedata->player_x;
-// 	// int stedata->player_y;
-// 	// int err;
+	i = 0;
+	move_x = 1;
+	move_y = 1;
+	x = data->player_x;
+	y = data->player_y;
+	dx = absolute_value(x1 - x);
+	dy = absolute_value(y1 - y);
+	if(x1 < data->player_x)
+		move_x = -1;
+	if(y1 < data->player_y)
+		move_y = -1;
+	D = 2*dy - dx;
+	while(i <= dx)
+	{
+		img_pixel_put(data, &data->img,x, y, 0xFF69B4);
+		if(D >= 0)
+		{
+			y += move_y;
+			D = D - 2*dx;
+		}
+		x += move_x;
+		D = D + 2*dy;
+		i++;
+	}
+}
 
-// 	dx = absolute_value(x - data->player_x);
-// 	dy = absolute_value(y - data->player_y);
-// 	if(dx >= dy)
-// 	{
-// 		draw_horiz(data,x, y);
-// 	}
-// 	else
-// 		draw_vertic(data,x, y);
-// 	// if(x > data->player_x)
-// 	// 	stedata->player_x = 1;
-// 	// if(x < data->player_x)
-// 	// 	stedata->player_x = -1;
-// 	// if(y > data->player_y)
-// 	// 	stedata->player_y = 1;
-// 	// if(y < data->player_y)
-// 	// 	stedata->player_y = -1;
-// 	// err = dx - dy;
-// 	// while(1)
-// 	// {
-		
-// 	// }
-	
+void bresenhams(t_data *data, int x, int y)
+{
+	int dx;
+	int dy;
 
-// }
+	dx = absolute_value(x - data->player_x);
+	dy = absolute_value(y - data->player_y);
+	if(dx >= dy)
+	{
+		draw_horiz(data, x, y);
+	}
+	else
+		draw_vertic(data, x, y);
+}
 
-// void ray_casting(t_data *data)
-// {
-// 	bresenhams(data,data->player_x, data->player_y, data->player_x + 100, data->player_y + 100);
-// }
+void ray_casting(t_data *data)
+{
+	bresenhams(data, data->player_x + 1000, data->player_y - 100);
+}
 
 void randring_(t_data *data)
 {
 	rander_map(data);
 	put_player(data);
-	// ray_casting(data);
+	ray_casting(data);
 }
 
-void init_player(t_data *data, char *map[])
+int get_width(char *map[])
 {
 	int i;
 	int j;
-	// int color;
-	(void)map;
+	int l;
 	i = 0;
 	j = 0;
-	while(data->map[i])
+	l = 0;
+
+	while(map[j])
 	{
-		j = 0;
-		while(data->map[i][j])
+		i = 0;
+		while(map[j][i])
 		{
-			
-			if(data->map[i][j] == 'P')
-			{
-				data->player_x = (j * SQUARESIZE + SQUARESIZE / 2);
-				data->player_y = (i * SQUARESIZE + SQUARESIZE / 2);
-				// data->map[i][j] = '0';//distroy img
-				return;
-			}
-			j++;
+			i++;
 		}
-		i++;
+		if(i > l)
+			l = i;
+		j++;
 	}
+	return(l);
 }
 
 int get_heigth(char *map[])
@@ -324,16 +292,9 @@ int get_heigth(char *map[])
 	return(i);
 }
 
-int get_width(char *map[])
+void init_player(t_data *data)
 {
-	int i;
-	i = 0;
-	
-	while(map[0][i])
-	{
-		i++;
-	}
-	return(i);
+	data->player.
 }
 
 void data_init(t_data *data)
@@ -345,11 +306,11 @@ void data_init(t_data *data)
 	if (!data->mlx_ptr)
 	exit(1);
 	data->map = map;
-	data->mlx_win = mlx_new_window(data->mlx_ptr, get_width(data->map) * SQUARESIZE, get_heigth(data->map) * SQUARESIZE, "noussa");
+	data->mlx_win = mlx_new_window(data->mlx_ptr, get_width(data->map) * SQUARESIZE, get_heigth(data->map) * SQUARESIZE, "cub3d");
 	data->img.img_ptr = mlx_new_image(data->mlx_ptr, get_width(data->map) * SQUARESIZE, get_heigth(data->map) * SQUARESIZE);
 	data->img.img_pxl_ptr = mlx_get_data_addr(data->img.img_ptr,
 		&data->img.b_p_p, &data->img.line_len, &data->img.endian);
-	// init_player(data, map);
+	init_player(data, map);
 	randring_(data);
 	mlx_put_image_to_window(data->mlx_ptr, data->mlx_win, data->img.img_ptr, 0,
 		0);
@@ -374,7 +335,7 @@ int main(int argc, char **argv)
 	check_textures(); // this exits the program in case of faillure 
 	parse_map(); // this exits the program in case of faillure
 	data_init(data);
-	
+	randring(data);
 	hook_init(data);
 	mlx_loop(data->mlx_ptr);
 	mlx_destroy_window(data->mlx_ptr, data->mlx_win);

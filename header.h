@@ -31,12 +31,24 @@ typedef struct s_img
 }			t_img;
 
 
+typedef struct player{
+	int player_x;
+	int player_y;
+	char direction;
+	int turn_dir;
+	int move dir;
+	int rot_angle;
+	int move_speed;
+	int rot_speed;
+}t_player;
+
 typedef struct data{
 	void *mlx_ptr;
 	void *mlx_win;
-	int player_x;
-	int player_y;
-	char p_position;
+	t_player player;
+	// int player_x;
+	// int player_y;
+	// char p_position;
 	int door_x;
 	int door_y;
 	t_img img;
