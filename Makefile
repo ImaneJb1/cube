@@ -34,7 +34,7 @@
 NAME = cub
 CC = cc
 # FLAGS = -Wall -Wextra -Werror
-MLX = -lmlx -lXext -lX11
+MLX = -lmlx -lXext -lX11 -lm
 
 LIB = parsing/libft/libft.a
 

@@ -21,14 +21,17 @@ int is_wall(char *map[], int j, int i)
 }
 void	wich_key(int keysym, t_data *data)
 {
-	if (keysym == XK_Left && !is_wall(data->map, (data->player_x - 10) / SQUARESIZE, (data->player_y) / SQUARESIZE))
-		data->player_x -= 10;
-	if (keysym == XK_Right && !is_wall(data->map, (data->player_x + 10) / SQUARESIZE, (data->player_y) / SQUARESIZE))
-		data->player_x += 10;
-	if (keysym == XK_Up && !is_wall(data->map, (data->player_x) / SQUARESIZE, (data->player_y - 10) / SQUARESIZE))
-		data->player_y -= 10;
-	if (keysym == XK_Down && !is_wall(data->map, (data->player_x) / SQUARESIZE, (data->player_y + 10) / SQUARESIZE))
-		data->player_y += 10; 
+	printf("1 -- %f\n",data->player.vew_angle);
+	if (keysym == XK_Left)
+		data->player.vew_angle += -(data->player.rot_speed);
+	if (keysym == XK_Right)
+		data->player.vew_angle += (data->player.rot_speed);
+	if (keysym == XK_Up && !is_wall(data->map, (data->player.player_x) / SQUARESIZE, (data->player.player_y - 2) / SQUARESIZE))
+		data->player.player_y -= 1;
+	if (keysym == XK_Down && !is_wall(data->map, (data->player.player_x) / SQUARESIZE, (data->player.player_y + 2) / SQUARESIZE))
+		data->player.player_y += 1;
+	printf("2 -- %f\n",data->player.vew_angle);
+	printf("3 -- %f\n",data->player.rot_speed);
 }
 
 int	press_key(int keysym, t_data *data)
@@ -84,14 +87,14 @@ void draw_circle(t_data *data, int color)
 	int dy;
 	radius = 4;
 	
-	int y = data->player_y - radius;
-	while (y <= data->player_y + radius)
+	int y = data->player.player_y - radius;
+	while (y <= data->player.player_y + radius)
 	{
-		int x = data->player_x - radius;
-		while (x <= data->player_x + radius)
+		int x = data->player.player_x - radius;
+		while (x <= data->player.player_x + radius)
 		{
-			dx = x - data->player_x;
-			dy = y - data->player_y;
+			dx = x - data->player.player_x;
+			dy = y - data->player.player_y;
 			if (dx*dx + dy*dy <= radius*radius)//chack if the point inside
 				img_pixel_put(data, &data->img, x, y, color);
 			x++; 
@@ -172,13 +175,13 @@ void draw_vertic(t_data *data, int x1, int y1)
 	i = 0;
 	move_x = 1;
 	move_y = 1;
-	x = data->player_x;
-	y = data->player_y;
+	x = data->player.player_x;
+	y = data->player.player_y;
 	dx = absolute_value(x1 - x);
 	dy = absolute_value(y1 - y);
-	if(x1 < data->player_x)
+	if(x1 < data->player.player_x)
 		move_x = -1;
-	if(y1 < data->player_y)
+	if(y1 < data->player.player_y)
 		move_y = -1;
 	D = 2*dx - dy;
 	while(x != x1 || y != y1)
@@ -207,13 +210,13 @@ void draw_horiz(t_data *data, int x1, int y1)
 	i = 0;
 	move_x = 1;
 	move_y = 1;
-	x = data->player_x;
-	y = data->player_y;
+	x = data->player.player_x;
+	y = data->player.player_y;
 	dx = absolute_value(x1 - x);
 	dy = absolute_value(y1 - y);
-	if(x1 < data->player_x)
+	if(x1 < data->player.player_x)
 		move_x = -1;
-	if(y1 < data->player_y)
+	if(y1 < data->player.player_y)
 		move_y = -1;
 	D = 2*dy - dx;
 	while(i <= dx)
@@ -235,8 +238,8 @@ void bresenhams(t_data *data, int x, int y)
 	int dx;
 	int dy;
 
-	dx = absolute_value(x - data->player_x);
-	dy = absolute_value(y - data->player_y);
+	dx = absolute_value(x - data->player.player_x);
+	dy = absolute_value(y - data->player.player_y);
 	if(dx >= dy)
 	{
 		draw_horiz(data, x, y);
@@ -247,7 +250,12 @@ void bresenhams(t_data *data, int x, int y)
 
 void ray_casting(t_data *data)
 {
-	bresenhams(data, data->player_x + 1000, data->player_y - 100);
+	int x;
+	int y;
+
+	x = data->player.player_x;
+	y = data->player.player_y;
+	bresenhams(data, x + cos(data->player.vew_angle) * 100, y + sin(data->player.vew_angle) * 100);
 }
 
 void randring_(t_data *data)
@@ -255,6 +263,8 @@ void randring_(t_data *data)
 	rander_map(data);
 	put_player(data);
 	ray_casting(data);
+	mlx_put_image_to_window(data->mlx_ptr, data->mlx_win, data->img.img_ptr, 0,
+		0);
 }
 
 int get_width(char *map[])
@@ -291,10 +301,18 @@ int get_heigth(char *map[])
 	}
 	return(i);
 }
-
 void init_player(t_data *data)
 {
-	data->player.
+	data->player.move_speed = 4;
+	data->player.rot_speed = 3 * (M_PI / 180);//3 degres every rotation
+	if(data->player.direction == 'N')
+		data->player.vew_angle = 270 * (M_PI / 180);
+	if(data->player.direction == 'E')
+		data->player.vew_angle = 0;
+	if(data->player.direction == 'S')
+		data->player.vew_angle = 90 * (M_PI / 180);
+	if(data->player.direction == 'W')
+		data->player.vew_angle = 180 * (M_PI / 180);
 }
 
 void data_init(t_data *data)
@@ -304,16 +322,14 @@ void data_init(t_data *data)
 
 	data->mlx_ptr = mlx_init();
 	if (!data->mlx_ptr)
-	exit(1);
+		exit(1);
 	data->map = map;
 	data->mlx_win = mlx_new_window(data->mlx_ptr, get_width(data->map) * SQUARESIZE, get_heigth(data->map) * SQUARESIZE, "cub3d");
 	data->img.img_ptr = mlx_new_image(data->mlx_ptr, get_width(data->map) * SQUARESIZE, get_heigth(data->map) * SQUARESIZE);
 	data->img.img_pxl_ptr = mlx_get_data_addr(data->img.img_ptr,
 		&data->img.b_p_p, &data->img.line_len, &data->img.endian);
-	init_player(data, map);
-	randring_(data);
-	mlx_put_image_to_window(data->mlx_ptr, data->mlx_win, data->img.img_ptr, 0,
-		0);
+	init_player(data);
+
 }
 
 
@@ -325,6 +341,7 @@ int main(int argc, char **argv)
 	data = data_func();
 	// textures *txt;
 
+	printf("wassssaaaaaaaaaaaaalaaaaaaaaaam\n");
 	if(!check_argv(argc, argv))
 		return 0;
 	if(!fill_textures_map(argv[1]))
@@ -335,7 +352,7 @@ int main(int argc, char **argv)
 	check_textures(); // this exits the program in case of faillure 
 	parse_map(); // this exits the program in case of faillure
 	data_init(data);
-	randring(data);
+	randring_(data);
 	hook_init(data);
 	mlx_loop(data->mlx_ptr);
 	mlx_destroy_window(data->mlx_ptr, data->mlx_win);

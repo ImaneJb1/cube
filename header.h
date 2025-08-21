@@ -35,11 +35,11 @@ typedef struct player{
 	int player_x;
 	int player_y;
 	char direction;
-	int turn_dir;
-	int move dir;
-	int rot_angle;
+	double vew_angle;
+	int move_dir;
+	// int rot_angle;
 	int move_speed;
-	int rot_speed;
+	double rot_speed;
 }t_player;
 
 typedef struct data{
