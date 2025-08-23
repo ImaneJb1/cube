@@ -16,9 +16,9 @@
 #define WIDTH ROWS * SQUARESIZE
 #define HEIGHT COLMS * SQUARESIZE
 
-#define FOV 60 * (math.p / 180)
+#define FOV 80 * (M_PI / 180)
 
-#define RES 4
+#define RES 2
 #define NUM_RAYS WIDTH / RES
 
 typedef struct s_img
@@ -31,24 +31,29 @@ typedef struct s_img
 }			t_img;
 
 
+
 typedef struct player{
-	int player_x;
-	int player_y;
+	int p_x;
+	int p_y;
 	char direction;
 	double vew_angle;
 	int move_dir;
-	// int rot_angle;
+	int rot_dir;
 	int move_speed;
 	double rot_speed;
 }t_player;
 
+typedef struct ray{
+	int id;
+	double angle;
+	int distance;//player wall
+}t_ray;
+
 typedef struct data{
 	void *mlx_ptr;
 	void *mlx_win;
-	t_player player;
-	// int player_x;
-	// int player_y;
-	// char p_position;
+	t_player p;
+	t_ray ray;
 	int door_x;
 	int door_y;
 	t_img img;

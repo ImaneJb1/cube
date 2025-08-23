@@ -12,26 +12,79 @@
 
 #include "header.h"
 
-
 int is_wall(char *map[], int j, int i)
 {
 	if(i < 0 || j < 0 || !map[i] || !map[i][j] || map[i][j] == '1')
 		return(1);
 	return(0);
 }
+
+double normlizing(double angle)
+{
+	while(angle < 0)
+	{
+		angle += (2 * M_PI);
+	}
+	while(angle > (2 * M_PI))
+	{
+		angle -= (2 * M_PI);
+	}
+	return(angle); 
+}
+
+void update_player(t_data *data)
+{
+	int move_step;
+	int next_x;
+	int next_y;
+
+	next_x = data->p.p_x + cos(data->p.vew_angle) * data->p.move_dir * data->p.move_speed * 2;
+	next_y = data->p.p_y + sin(data->p.vew_angle) * data->p.move_dir * data->p.move_speed * 2;
+	move_step = data->p.move_dir * data->p.move_speed;
+	data->p.vew_angle += data->p.rot_dir * data->p.rot_speed;
+	data->p.vew_angle = normlizing(data->p.vew_angle);
+	if(!is_wall(data->map, next_x / SQUARESIZE , next_y / SQUARESIZE)) //calculate distance between wall and player 
+	{
+		data->p.p_y += sin(data->p.vew_angle) * data->p.move_dir * data->p.move_speed;
+		data->p.p_x += cos(data->p.vew_angle) * data->p.move_dir * data->p.move_speed;
+	}
+}
+
+void reset(t_data *data)
+{
+	data->p.move_dir = 0;
+	data->p.rot_dir = 0;
+}
 void	wich_key(int keysym, t_data *data)
 {
-	printf("1 -- %f\n",data->player.vew_angle);
-	if (keysym == XK_Left)
-		data->player.vew_angle += -(data->player.rot_speed);
-	if (keysym == XK_Right)
-		data->player.vew_angle += (data->player.rot_speed);
-	if (keysym == XK_Up && !is_wall(data->map, (data->player.player_x) / SQUARESIZE, (data->player.player_y - 2) / SQUARESIZE))
-		data->player.player_y -= 1;
-	if (keysym == XK_Down && !is_wall(data->map, (data->player.player_x) / SQUARESIZE, (data->player.player_y + 2) / SQUARESIZE))
-		data->player.player_y += 1;
-	printf("2 -- %f\n",data->player.vew_angle);
-	printf("3 -- %f\n",data->player.rot_speed);
+	printf("1 -- %f\n",data->p.vew_angle);
+
+	if(keysym == XK_Right)
+		data->p.rot_dir = 1;
+	if(keysym == XK_Left)
+		data->p.rot_dir = -1;
+	if(keysym == XK_Up)
+		data->p.move_dir = 1;
+	if(keysym == XK_Down)
+		data->p.move_dir = -1;
+	update_player(data);
+	reset(data);
+	// if (keysym == XK_Left)
+	// 	data->p.vew_angle -= data->p.rot_speed;
+	// if (keysym == XK_Right)
+	// 	data->p.vew_angle += data->p.rot_speed;
+	// if (keysym == XK_Up && !is_wall(data->map, (data->p.p_x) / SQUARESIZE, (data->p.p_y - 2) / SQUARESIZE))
+	// {
+	// 	data->p.p_y += sin(data->p.vew_angle) * data->p.move_speed;
+	// 	data->p.p_x += cos(data->p.vew_angle) * data->p.move_speed;
+	// }
+	// if (keysym == XK_Down && !is_wall(data->map, (data->p.p_x) / SQUARESIZE, (data->p.p_y + 2) / SQUARESIZE))
+	// {
+	// 	data->p.p_y -= sin(data->p.vew_angle) * data->p.move_speed;
+	// 	data->p.p_x -= cos(data->p.vew_angle) * data->p.move_speed;
+	// }
+	printf("2 -- %f\n",data->p.vew_angle);
+	printf("3 -- %f\n",data->p.rot_speed);
 }
 
 int	press_key(int keysym, t_data *data)
@@ -87,14 +140,14 @@ void draw_circle(t_data *data, int color)
 	int dy;
 	radius = 4;
 	
-	int y = data->player.player_y - radius;
-	while (y <= data->player.player_y + radius)
+	int y = data->p.p_y - radius;
+	while (y <= data->p.p_y + radius)
 	{
-		int x = data->player.player_x - radius;
-		while (x <= data->player.player_x + radius)
+		int x = data->p.p_x - radius;
+		while (x <= data->p.p_x + radius)
 		{
-			dx = x - data->player.player_x;
-			dy = y - data->player.player_y;
+			dx = x - data->p.p_x;
+			dy = y - data->p.p_y;
 			if (dx*dx + dy*dy <= radius*radius)//chack if the point inside
 				img_pixel_put(data, &data->img, x, y, color);
 			x++; 
@@ -175,13 +228,13 @@ void draw_vertic(t_data *data, int x1, int y1)
 	i = 0;
 	move_x = 1;
 	move_y = 1;
-	x = data->player.player_x;
-	y = data->player.player_y;
+	x = data->p.p_x;
+	y = data->p.p_y;
 	dx = absolute_value(x1 - x);
 	dy = absolute_value(y1 - y);
-	if(x1 < data->player.player_x)
+	if(x1 < data->p.p_x)
 		move_x = -1;
-	if(y1 < data->player.player_y)
+	if(y1 < data->p.p_y)
 		move_y = -1;
 	D = 2*dx - dy;
 	while(x != x1 || y != y1)
@@ -210,13 +263,13 @@ void draw_horiz(t_data *data, int x1, int y1)
 	i = 0;
 	move_x = 1;
 	move_y = 1;
-	x = data->player.player_x;
-	y = data->player.player_y;
+	x = data->p.p_x;
+	y = data->p.p_y;
 	dx = absolute_value(x1 - x);
 	dy = absolute_value(y1 - y);
-	if(x1 < data->player.player_x)
+	if(x1 < data->p.p_x)
 		move_x = -1;
-	if(y1 < data->player.player_y)
+	if(y1 < data->p.p_y)
 		move_y = -1;
 	D = 2*dy - dx;
 	while(i <= dx)
@@ -238,8 +291,8 @@ void bresenhams(t_data *data, int x, int y)
 	int dx;
 	int dy;
 
-	dx = absolute_value(x - data->player.player_x);
-	dy = absolute_value(y - data->player.player_y);
+	dx = absolute_value(x - data->p.p_x);
+	dy = absolute_value(y - data->p.p_y);
 	if(dx >= dy)
 	{
 		draw_horiz(data, x, y);
@@ -247,22 +300,41 @@ void bresenhams(t_data *data, int x, int y)
 	else
 		draw_vertic(data, x, y);
 }
+void cast_allrays(t_data *data)
+{
+	double rayangle;
+	int i;
+	int x;
+	int y;
 
+	i = 0;
+	x = data->p.p_x;
+	y = data->p.p_y;
+	printf("num of rays = %d\n", NUM_RAYS);
+	rayangle = data->p.vew_angle - FOV / 2;
+		bresenhams(data, cos(rayangle) * 100,sin(rayangle) * 100);
+	while(i < NUM_RAYS)
+	{
+		rayangle += FOV / NUM_RAYS;
+		bresenhams(data, cos(rayangle) * 100, sin(rayangle) * 100);
+		i++;
+	}
+}
 void ray_casting(t_data *data)
 {
 	int x;
 	int y;
 
-	x = data->player.player_x;
-	y = data->player.player_y;
-	bresenhams(data, x + cos(data->player.vew_angle) * 100, y + sin(data->player.vew_angle) * 100);
+	x = data->p.p_x;
+	y = data->p.p_y;
+
 }
 
 void randring_(t_data *data)
 {
 	rander_map(data);
 	put_player(data);
-	ray_casting(data);
+	cast_allrays(data);
 	mlx_put_image_to_window(data->mlx_ptr, data->mlx_win, data->img.img_ptr, 0,
 		0);
 }
@@ -303,16 +375,18 @@ int get_heigth(char *map[])
 }
 void init_player(t_data *data)
 {
-	data->player.move_speed = 4;
-	data->player.rot_speed = 3 * (M_PI / 180);//3 degres every rotation
-	if(data->player.direction == 'N')
-		data->player.vew_angle = 270 * (M_PI / 180);
-	if(data->player.direction == 'E')
-		data->player.vew_angle = 0;
-	if(data->player.direction == 'S')
-		data->player.vew_angle = 90 * (M_PI / 180);
-	if(data->player.direction == 'W')
-		data->player.vew_angle = 180 * (M_PI / 180);
+	data->p.move_speed = 4;
+	data->p.move_dir = 0;
+	data->p.rot_dir = 0;
+	data->p.rot_speed = 10 * (M_PI / 180);//3 degres every rotation
+	if(data->p.direction == 'N')
+		data->p.vew_angle = 270 * (M_PI / 180);
+	if(data->p.direction == 'E')
+		data->p.vew_angle = 0;
+	if(data->p.direction == 'S')
+		data->p.vew_angle = 90 * (M_PI / 180);
+	if(data->p.direction == 'W')
+		data->p.vew_angle = 180 * (M_PI / 180);
 }
 
 void data_init(t_data *data)
