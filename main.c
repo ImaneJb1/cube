@@ -14,6 +14,8 @@
 
 int is_wall(char *map[], int j, int i)
 {
+	j = j / SQUARESIZE;
+	i = i / SQUARESIZE;
 	if(i < 0 || j < 0 || !map[i] || !map[i][j] || map[i][j] == '1')
 		return(1);
 	return(0);
@@ -43,7 +45,7 @@ void update_player(t_data *data)
 	move_step = data->p.move_dir * data->p.move_speed;
 	data->p.vew_angle += data->p.rot_dir * data->p.rot_speed;
 	data->p.vew_angle = normlizing(data->p.vew_angle);
-	if(!is_wall(data->map, next_x / SQUARESIZE , next_y / SQUARESIZE)) //calculate distance between wall and player 
+	if(!is_wall(data->map, next_x , next_y)) //calculate distance between wall and player 
 	{
 		data->p.p_y += sin(data->p.vew_angle) * data->p.move_dir * data->p.move_speed;
 		data->p.p_x += cos(data->p.vew_angle) * data->p.move_dir * data->p.move_speed;
@@ -87,6 +89,11 @@ void	wich_key(int keysym, t_data *data)
 	printf("3 -- %f\n",data->p.rot_speed);
 }
 
+void	clear(t_img *img)
+{
+	ft_bzero(img->img_pxl_ptr, HEIGHT * img->line_len);
+}
+
 int	press_key(int keysym, t_data *data)
 {
 	if (keysym == XK_Escape)
@@ -97,13 +104,11 @@ int	press_key(int keysym, t_data *data)
 	{
 		wich_key(keysym,data);
 	}
-	mlx_destroy_image(data->mlx_ptr, data->img.img_ptr);
-	data->img.img_ptr = mlx_new_image(data->mlx_ptr,  get_width(data->map) * SQUARESIZE, get_heigth(data->map) * SQUARESIZE);
-	data->img.img_pxl_ptr = mlx_get_data_addr(data->img.img_ptr,
-			&data->img.b_p_p, &data->img.line_len, &data->img.endian);
+	// mlx_destroy_image(data->mlx_ptr, data->img.img_ptr);
+	// data->img.img_ptr = mlx_new_image(data->mlx_ptr,  data->width * SQUARESIZE, data->heigth * SQUARESIZE);
+	// data->img.img_pxl_ptr = mlx_get_data_addr(data->img.img_ptr,
+	// 		&data->img.b_p_p, &data->img.line_len, &data->img.endian);
 	randring_(data);
-	mlx_put_image_to_window(data->mlx_ptr, data->mlx_win, data->img.img_ptr, 0,
-		0);
 	return (0);
 }
 
@@ -163,13 +168,16 @@ void draw_square(t_data *data, int x, int y, int color)
 	int j;
 	j = 0;
 	i = 0;
-	
-	while(i < SQUARESIZE - 1)
+
+	while(i < SQUARESIZE)
 	{
 		j = 0;
-		while(j < SQUARESIZE - 1)
+		while(j < SQUARESIZE)
 		{
-			img_pixel_put(data, &data->img, x + j, y + i, color);
+			if(j == SQUARESIZE - 1 || i == SQUARESIZE -1 || i == 0 || j == 0)
+				img_pixel_put(data, &data->img, x + j, y + i, 0x000000);
+			else
+				img_pixel_put(data, &data->img, x + j, y + i, color);
 			j++;
 		}
 		i++;
@@ -300,6 +308,12 @@ void bresenhams(t_data *data, int x, int y)
 	else
 		draw_vertic(data, x, y);
 }
+
+void cast_ray(t_data *data, double rayangle)
+{
+	bresenhams(data, data->p.p_x + cos(rayangle) * 50,data->p.p_y + sin(rayangle) * 50);
+}
+
 void cast_allrays(t_data *data)
 {
 	double rayangle;
@@ -311,12 +325,11 @@ void cast_allrays(t_data *data)
 	x = data->p.p_x;
 	y = data->p.p_y;
 	printf("num of rays = %d\n", NUM_RAYS);
-	rayangle = data->p.vew_angle - FOV / 2;
-		bresenhams(data, cos(rayangle) * 100,sin(rayangle) * 100);
+	rayangle = data->p.vew_angle - (FOV / 2);
 	while(i < NUM_RAYS)
 	{
+		cast_ray(data, rayangle);
 		rayangle += FOV / NUM_RAYS;
-		bresenhams(data, cos(rayangle) * 100, sin(rayangle) * 100);
 		i++;
 	}
 }
@@ -330,8 +343,30 @@ void ray_casting(t_data *data)
 
 }
 
+void clear_img(t_data *data, int color)
+{
+	int j;
+	int i;
+	int *pixels;
+	int total;
+	
+	i = 0;
+	j = 0;
+	while(data->map[i])
+	{
+		j = 0;
+		while(data->map[i][j])
+		{
+			img_pixel_put(data, &data->img, j * SQUARESIZE, i * SQUARESIZE, 0x000000);
+			j++;
+		}
+		i++;
+	}
+}
+
 void randring_(t_data *data)
 {
+	// mlx_clear_window(data->mlx_ptr, data->mlx_win);
 	rander_map(data);
 	put_player(data);
 	cast_allrays(data);
@@ -398,15 +433,15 @@ void data_init(t_data *data)
 	if (!data->mlx_ptr)
 		exit(1);
 	data->map = map;
-	data->mlx_win = mlx_new_window(data->mlx_ptr, get_width(data->map) * SQUARESIZE, get_heigth(data->map) * SQUARESIZE, "cub3d");
-	data->img.img_ptr = mlx_new_image(data->mlx_ptr, get_width(data->map) * SQUARESIZE, get_heigth(data->map) * SQUARESIZE);
+	data->width = get_width(data->map);
+	data->heigth = get_heigth(data->map);
+	data->mlx_win = mlx_new_window(data->mlx_ptr, data->width * SQUARESIZE, data->heigth * SQUARESIZE, "cub3d");
+	data->img.img_ptr = mlx_new_image(data->mlx_ptr, data->width * SQUARESIZE, data->heigth * SQUARESIZE);
 	data->img.img_pxl_ptr = mlx_get_data_addr(data->img.img_ptr,
 		&data->img.b_p_p, &data->img.line_len, &data->img.endian);
 	init_player(data);
 
 }
-
-
 
 int main(int argc, char **argv)
 {
