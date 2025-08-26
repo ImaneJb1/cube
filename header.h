@@ -35,7 +35,7 @@ typedef struct player{
 	int p_x;
 	int p_y;
 	char direction;
-	double vew_angle;
+	double view_angle;
 	int move_dir;
 	int rot_dir;
 	int move_speed;
@@ -53,6 +53,7 @@ typedef struct ray{
 	int is_left;
 	int is_right;
 	int hit_vertical;
+	int hit_horiz;
 	int wall_content;
 }t_ray;
 
@@ -60,7 +61,7 @@ typedef struct data{
 	void *mlx_ptr;
 	void *mlx_win;
 	t_player p;
-	t_ray *ray;
+	t_ray ray;
 	int door_x;
 	int door_y;
 	t_img img;
@@ -70,11 +71,11 @@ typedef struct data{
 	
 }t_data;
 
-
+void init_ray(t_data *data);
 int get_heigth(char *map[]);
 int get_width(char *map[]);
 int press_x(t_data *data);
-void randring_(t_data *data);
+void rendring_(t_data *data);
 int	ft_strcmp(const char *s1, const char *s2);
 
 // typedef struct flags

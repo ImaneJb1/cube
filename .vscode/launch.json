@@ -7,7 +7,7 @@
             "request": "launch",
             // "program": "${workspaceFolder}/a.out",
             // "args": ["maps/lwasakh.cub"],
-            "program": "cub",
+            "program": "${workspaceFolder}/cub",
             "args": [
                 // "--leak-check=full",
                 // "--track-origins=yes",
