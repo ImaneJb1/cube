@@ -46,8 +46,10 @@ typedef struct ray{
 	int id;
 	int distance;
 	double rayangle;
-	double walhit_x;
-	double walhit_y;
+	double ver_walhit_x;
+	double ver_walhit_y;
+	double hor_walhit_x;
+	double hor_walhit_y;
 	int is_up;
 	int is_down;
 	int is_left;
@@ -77,7 +79,7 @@ int get_width(char *map[]);
 int press_x(t_data *data);
 void rendring_(t_data *data);
 int	ft_strcmp(const char *s1, const char *s2);
-
+void rendring_(t_data *data);
 // typedef struct flags
 // {
 // 	int no;
