@@ -8,12 +8,13 @@
 # include <X11/X.h>
 # include <X11/keysym.h>
 # include <fcntl.h>
+# include <limits.h>
 
 #define SQUARESIZE 32
 #define ROWS 10
 #define COLMS 10
 
-#define WIDTH 100
+#define WIDTH 800
 #define HEIGHT 600
 #define FOV 60 * (M_PI / 180)
 
@@ -50,6 +51,8 @@ typedef struct ray{
 	double ver_walhit_y;
 	double hor_walhit_x;
 	double hor_walhit_y;
+	double walhit_y;
+	double walhit_x;
 	int is_up;
 	int is_down;
 	int is_left;
