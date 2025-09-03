@@ -23,22 +23,24 @@ int is_wall(t_data *data, char *map[], double x, double y)
 		x -= 1;
 	grid_x = floor(x / SQUARESIZE);
 	grid_y = floor(y / SQUARESIZE);
-	if(grid_x < 0 || grid_y < 0 || grid_x >= data->width || grid_y >= data->heigth || map[grid_y][grid_x] == '1')
+	if(grid_x < 0 || grid_y < 0 || grid_x >= data->width || grid_y >= data->heigth)
+		return(1);
+	if(map[grid_y][grid_x] == '1')
 		return(1);
 	return(0);
 }
 
 double normlizing(double angle)
 {
-	angle = remainder(angle, 2 * M_PI);
+	// angle = remainder(angle, 2 * M_PI);
 	while(angle <= 0)
 	{
 		angle += (2 * M_PI);
 	}
-	// while(angle > (2 * M_PI))
-	// {
-	// 	angle -= (2 * M_PI);
-	// }
+	while(angle > (2 * M_PI))
+	{
+		angle -= (2 * M_PI);
+	}
 	return(angle); 
 }
 
@@ -214,16 +216,16 @@ int absolute_value(int value)
 	return(value);
 }
 
-void draw_vertic(t_data *data, int x1, int y1)
+void draw_vertic(t_data *data, double x1, double y1)
 {
-	int dx;
-	int dy;
-	int move_x;
-	int move_y;
-	int D;
-	int i;
-	int x;
-	int y;
+	double dx;
+	double dy;
+	double move_x;
+	double move_y;
+	double D;
+	double i;
+	double x;
+	double y;
 
 	i = 0;
 	move_x = 1;
@@ -249,16 +251,16 @@ void draw_vertic(t_data *data, int x1, int y1)
 		D = D + 2*dx;
 	}
 }
-void draw_horiz(t_data *data, int x1, int y1)
+void draw_horiz(t_data *data, double x1, double y1)
 {
-	int dx;
-	int dy;
-	int move_x;
-	int move_y;
-	int D;
-	int i;
-	int x;
-	int y;
+	double dx;
+	double dy;
+	double move_x;
+	double move_y;
+	double D;
+	double i;
+	double x;
+	double y;
 
 	i = 0;
 	move_x = 1;
@@ -303,7 +305,7 @@ void bresenhams(t_data *data, double x, double y)
 
 void cast_ray(t_data *data, double rayangle)
 {
-	printf(" playerangle %f, rayangle %f\n",data->p.view_angle, rayangle);
+	// printf(" playerangle %f, rayangle %f\n",data->p.view_angle, rayangle);
 	// if(data->ray.hit_vertical)
 	// 	bresenhams(data, floor(data->ray.ver_walhit_x), floor(data->ray.ver_walhit_y));
 	// else
@@ -501,9 +503,9 @@ double find_hor_inter(t_data *data, double rayangle)
 	double xa;
 	double next_x;
 	double next_y;
+	double x_check;
+	double y_check;
 
-	// if (fabs(cos(rayangle)) < 1e-6)
-	// 	return INT_MAX;
 	if(data->ray.is_down)
 		first_int_y = floor(data->p.p_y / SQUARESIZE) * SQUARESIZE + SQUARESIZE;
 	else if(data->ray.is_up)
@@ -522,8 +524,12 @@ double find_hor_inter(t_data *data, double rayangle)
 		xa *= -1;
 	if(data->ray.is_right && xa < 0)
 		xa *= -1;
+	// if(fabs(xa) > 80)
+	// 	xa = xa / 4;
 	while(next_x <= data->width * SQUARESIZE && next_x >= 0 && next_y <= data->heigth * SQUARESIZE && next_y >= 0)
 	{
+		// if(data->ray.is_up)
+		// 	next_y -= 1;
 		if (is_wall(data, data->map, next_x, next_y))
 		{
 			data->ray.hit_horiz = 1;
@@ -531,13 +537,17 @@ double find_hor_inter(t_data *data, double rayangle)
 			data->ray.hor_walhit_y = next_y;
 			break;
 		}
+		// if(data->ray.is_up)
+		// 	next_y += 1;
 		else
 		{
 			next_x += xa;
 			next_y += ya;
 		}
 	}
-	return(calculate_distance(data, data->ray.hor_walhit_x, data->ray.hor_walhit_y));
+	if(data->ray.hit_horiz)
+		return(calculate_distance(data, data->ray.hor_walhit_x, data->ray.hor_walhit_y));
+	return(INT_MAX);
 }
 
 double find_ver_inter(t_data *data, double rayangle)
@@ -569,29 +579,35 @@ double find_ver_inter(t_data *data, double rayangle)
 		ya *= -1;
 	while(next_x <= data->width * SQUARESIZE && next_x >= 0 && next_y <= data->heigth * SQUARESIZE && next_y >= 0)
 	{
+		// if(data->ray.is_left)
+		// 	next_x -= 1;
 		if (is_wall(data, data->map, next_x, next_y))
 		{
 			data->ray.hit_vertical = 1;
 			data->ray.ver_walhit_x = next_x;
 			data->ray.ver_walhit_y = next_y;
-			printf("ver wall x  = %f, y = %f", data->ray.ver_walhit_x, data->ray.ver_walhit_y);
+			// printf("ver wall x  = %f, y = %f", data->ray.ver_walhit_x, data->ray.ver_walhit_y);
 			break;
 		}
+		// if(data->ray.is_left)
+		// 	next_x += 1;
 		else
 		{
 			next_x += xa;
 			next_y += ya;
 		}
 	}
-	return(calculate_distance(data, data->ray.ver_walhit_x, data->ray.ver_walhit_y));
+	if(data->ray.hit_vertical)
+		return(calculate_distance(data, data->ray.ver_walhit_x, data->ray.ver_walhit_y));
+	return(INT_MAX);
 }
 
 
 void cast_allrays(t_data *data)
 {
 	double rayangle;
-	int hor_distance;
-	int ver_distance;
+	double hor_distance;
+	double ver_distance;
 	int i;
 
 	i = 0;
@@ -601,24 +617,28 @@ void cast_allrays(t_data *data)
 	while(i < NUM_RAYS)
 	{
 		ray_direction(data, rayangle);
-		printf("is down %d is up %d is left %d is right %d\n", data->ray.is_down,data->ray.is_up, data->ray.is_left, data->ray.is_right);
+		// printf("is down %d is up %d is left %d is right %d\n", data->ray.is_down,data->ray.is_up, data->ray.is_left, data->ray.is_right);
 		hor_distance = find_hor_inter(data, rayangle);
 		ver_distance = find_ver_inter(data, rayangle);
 		if(hor_distance > ver_distance)
 		{
+			// printf("hor > ver\n");
 			data->ray.walhit_x = data->ray.ver_walhit_x;
 			data->ray.walhit_y = data->ray.ver_walhit_y;
 		}
-		else if(hor_distance < ver_distance)
+		else if(hor_distance <= ver_distance)
 		{
+			// printf("  hor == %f <= ver ==   %f  \n", hor_distance, ver_distance);
 			data->ray.walhit_x = data->ray.hor_walhit_x;
 			data->ray.walhit_y = data->ray.hor_walhit_y;
 		}
 		else{
-			data->ray.walhit_x = data->p.p_x;
-			data->ray.walhit_y = data->p.p_y;
+			// printf("MOCHKILA F WALHIT POINTS \n");
+			data->ray.walhit_x = 0;
+			data->ray.walhit_y = 0;
 		}
-		printf("wallhit x = %f, wallhit y = %f", data->ray.walhit_x, data->ray.walhit_y);
+		// printf("vertical hit %d   hor_hit %d  \n", data->ray.hit_vertical, data->ray.hit_horiz);
+		// printf("wallhit x = %f, wallhit y = %f", data->ray.walhit_x, data->ray.walhit_y);
 		cast_ray(data, rayangle);
 		init_ray(data);
 		rayangle = normlizing(rayangle + (FOV / NUM_RAYS));
@@ -675,7 +695,7 @@ void init_player(t_data *data)
 	data->p.move_speed = 4;
 	data->p.move_dir = 0;
 	data->p.rot_dir = 0;
-	data->p.rot_speed = 3 * (M_PI / 180);//3 degres every rotation
+	data->p.rot_speed = 5 * (M_PI / 180);//3 degres every rotation
 	if(data->p.direction == 'N')
 		data->p.view_angle = 270 * (M_PI / 180);
 	if(data->p.direction == 'E')
