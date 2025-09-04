@@ -53,9 +53,10 @@ void update_player(t_data *data)
 	move_step = data->p.move_dir * data->p.move_speed;
 	data->p.view_angle += data->p.rot_dir * data->p.rot_speed;
 	data->p.view_angle = normlizing(data->p.view_angle);
-	next_x = data->p.p_x + cos(data->p.view_angle) * data->p.move_dir * data->p.move_speed;
-	next_y = data->p.p_y + sin(data->p.view_angle) * data->p.move_dir * data->p.move_speed;
-	if(!is_wall(data, data->map, next_x, next_y)) //naxt_x *1.5 
+
+	next_x = data->p.p_x + cos(data->p.view_angle) * data->p.move_dir * data->p.move_speed + data->p.step_x;
+	next_y = data->p.p_y + sin(data->p.view_angle) * data->p.move_dir * data->p.move_speed + data->p.step_y;
+	if(!is_wall(data, data->map, next_x, next_y)) //next_x *1.5 
 	{
 		data->p.p_y = next_y;
 		data->p.p_x = next_x;
@@ -67,24 +68,34 @@ void reset(t_data *data)
 	data->p.move_dir = 0;
 	data->p.rot_dir = 0;
 }
-void	which_key(int keysym, t_data *data)
+void	which_key(int keysem, t_data *data)
 {
-	if(keysym == XK_Right)
+	if(keysem == XK_Right)
 		data->p.rot_dir = 1;
-	if(keysym == XK_Left)
+	if(keysem == XK_Left)
 		data->p.rot_dir = -1;
-	if(keysym == XK_Up)
+	if(keysem == XK_Up || keysem == XK_w)
 		data->p.move_dir = 1;
-	if(keysym == XK_Down)
+	if(keysem == XK_Down || keysem == XK_s)
 		data->p.move_dir = -1;
+	if(keysem == XK_d)
+	{
+		data->p.step_x = cos(data->p.view_angle + M_PI / 2) * data->p.move_speed;
+		data->p.step_y = sin(data->p.view_angle + M_PI / 2) * data->p.move_speed;
+	}
+	if(keysem == XK_a)
+	{
+		data->p.step_x = cos(data->p.view_angle - M_PI / 2) * data->p.move_speed;
+		data->p.step_y = sin(data->p.view_angle - M_PI / 2) * data->p.move_speed;
+	}
 }
 
-int	press_key(int keysym, t_data *data)
+int	press_key(int keysem, t_data *data)
 {
-	if (keysym == XK_Escape)
+	if (keysem == XK_Escape)
 		press_x(data);
 	else
-		which_key(keysym,data);
+		which_key(keysem,data);
 	return (0);
 }
 
@@ -100,10 +111,15 @@ int press_x(t_data *data)
 
 int release_key(int keysem, t_data *data)
 {
-	if(keysem == XK_Up || keysem == XK_Down)
+	if(keysem == XK_Up || keysem == XK_Down || keysem == XK_s || keysem == XK_w)
 		data->p.move_dir = 0;
 	if(keysem == XK_Right || keysem == XK_Left)
 		data->p.rot_dir = 0;
+	if(keysem == XK_d || keysem == XK_a)
+	{
+		data->p.step_x = 0;
+		data->p.step_y = 0;
+	}
 	return(0);
 }
 
@@ -216,74 +232,61 @@ int absolute_value(int value)
 	return(value);
 }
 
+void init_line(t_line *line,t_data *data, double y1, double x1)
+{
+	line->move_x = 1;
+	line->move_y = 1;
+	line->x = data->p.p_x;
+	line->y = data->p.p_y;
+	line->dx = absolute_value(x1 - line->x);
+	line->dy = absolute_value(y1 - line->y);
+	if(x1 < data->p.p_x)
+		line->move_x = -1;
+	if(y1 < data->p.p_y)
+		line->move_y = -1;
+}
+
 void draw_vertic(t_data *data, double x1, double y1)
 {
-	double dx;
-	double dy;
-	double move_x;
-	double move_y;
+	t_line line;
 	double D;
-	double i;
-	double x;
-	double y;
+	int i;
 
 	i = 0;
-	move_x = 1;
-	move_y = 1;
-	x = data->p.p_x;
-	y = data->p.p_y;
-	dx = absolute_value(x1 - x);
-	dy = absolute_value(y1 - y);
-	if(x1 < data->p.p_x)
-		move_x = -1;
-	if(y1 < data->p.p_y)
-		move_y = -1;
-	D = 2*dx - dy;
-	while(x != x1 || y != y1)
+	init_line(&line, data, y1, x1);
+	D = 2*line.dx - line.dy;
+	while(line.x != x1 || line.y != y1)
 	{
-		img_pixel_put(data, &data->img,x, y, 0xFF69B4);
+		img_pixel_put(data, &data->img,line.x, line.y, 0xFF69B4);
 		if(D >= 0)
 		{
-			x += move_x;
-			D = D - 2*dy;
+			line.x += line.move_x;
+			D = D - 2*line.dy;
 		}
-		y += move_y;
-		D = D + 2*dx;
+		line.y += line.move_y;
+		D = D + 2*line.dx;
 	}
 }
+
 void draw_horiz(t_data *data, double x1, double y1)
 {
-	double dx;
-	double dy;
-	double move_x;
-	double move_y;
+	t_line line;
 	double D;
-	double i;
-	double x;
-	double y;
+	int i;
 
 	i = 0;
-	move_x = 1;
-	move_y = 1;
-	x = data->p.p_x;
-	y = data->p.p_y;
-	dx = absolute_value(x1 - x);
-	dy = absolute_value(y1 - y);
-	if(x1 < data->p.p_x)
-		move_x = -1;
-	if(y1 < data->p.p_y)
-		move_y = -1;
-	D = 2*dy - dx;
-	while(i <= dx)
+	init_line(&line, data, y1, x1);
+	D = 2*line.dy - line.dx;
+	while(i <= line.dx)
 	{
-		img_pixel_put(data, &data->img,x, y, 0xFF69B4);
+		img_pixel_put(data, &data->img,line.x, line.y, 0xFF69B4);
 		if(D >= 0)
 		{
-			y += move_y;
-			D = D - 2*dx;
+			line.y += line.move_y;
+			D = D - 2*line.dx;
 		}
-		x += move_x;
-		D = D + 2*dy;
+		line.x += line.move_x;
+		D = D + 2*line.dy;
 		i++;
 	}
 }
@@ -305,131 +308,8 @@ void bresenhams(t_data *data, double x, double y)
 
 void cast_ray(t_data *data, double rayangle)
 {
-	// printf(" playerangle %f, rayangle %f\n",data->p.view_angle, rayangle);
-	// if(data->ray.hit_vertical)
-	// 	bresenhams(data, floor(data->ray.ver_walhit_x), floor(data->ray.ver_walhit_y));
-	// else
-	// 	bresenhams(data, floor(data->ray.hor_walhit_x), floor(data->ray.hor_walhit_y));
-	// bresenhams(data, data->p.p_x + cos(rayangle) * 50, data->p.p_y + sin(rayangle) * 50);
 	bresenhams(data, floor(data->ray.walhit_x), floor(data->ray.walhit_y));
 }
-
-// void find_vertic_inters(t_data *data, double angle)
-// {
-// 	double first_inters_x;
-// 	double first_inters_y;
-// 	double ya;
-// 	double xa;
-
-// 	angle = tan(angle);
-// 	if(data->ray.is_up)
-// 		first_inters_y = floor(data->p.p_y / SQUARESIZE) * SQUARESIZE - 1;
-// 	else if(data->ray.is_down)
-// 		first_inters_y = floor(data->p.p_y / SQUARESIZE) * SQUARESIZE + SQUARESIZE;
-// 	else
-// 		return;
-// 	if(fabs(angle) <= 1e-6)
-// 		return;
-// 	first_inters_x = ((first_inters_y - data->p.p_y) / angle + data->p.p_x);
-// 	data->ray.ver_walhit_x = first_inters_x;
-// 	data->ray.ver_walhit_y = first_inters_y;
-// 	// finding Ya and Xa
-// 	if(data->ray.is_up)
-// 		ya = -SQUARESIZE;
-// 	if(data->ray.is_down)
-// 		ya = SQUARESIZE;
-// 	xa = ya / angle;
-// 	while(data->ray.ver_walhit_x <= data->width * SQUARESIZE && data->ray.ver_walhit_x >= 0 && data->ray.ver_walhit_y <= data->heigth * SQUARESIZE && data->ray.ver_walhit_y >= 0)
-// 	{
-// 		if(is_wall(data, data->map, data->ray.ver_walhit_x, data->ray.ver_walhit_y))
-// 		{
-// 			data->ray.hit_vertical = 1;
-// 			break;
-// 		}
-// 		else
-// 		{
-// 			data->ray.ver_walhit_x += xa;
-// 			data->ray.ver_walhit_y += ya;
-// 			// printf("xa = %f ya = %f\n", xa,ya);
-// 		}
-// 	}
-// }
-
-// int find_inters(double first_x, double first_y, double tan_angle)
-// {
-// 	double xa;
-// 	double ya;
-// 	t_data *data;
-
-// 	data = data_func();
-// 	printf("left = %d   right = %d \n", data->ray.is_left,data->ray.is_right);
-// 	if(data->ray.is_left)
-// 		xa = -SQUARESIZE;
-// 	else if(data->ray.is_right)
-// 		xa = SQUARESIZE;
-// 	else 
-// 		return(1);
-// 	if (fabs(cos(data->ray.rayangle)) < 1e-6)
-//     	return(1);	
-// 	ya = xa * tan_angle;
-// 	while(data->ray.hor_walhit_x <= data->width * SQUARESIZE && data->ray.hor_walhit_x >= 0 && data->ray.hor_walhit_y <= data->heigth * SQUARESIZE && data->ray.hor_walhit_y >= 0)
-// 	{
-// 		if(is_wall(data, data->map, data->ray.hor_walhit_x, data->ray.hor_walhit_y))
-// 		{
-// 			data->ray.hit_horiz = 1;
-// 			break;
-// 		}
-// 		else
-// 		{
-// 			data->ray.hor_walhit_x += xa;
-// 			data->ray.hor_walhit_y += ya;
-// 			// printf("xa = %f ya = %f\n", xa,ya);
-// 		}
-// 	}
-// 	return(0);
-// }
-
-
-
-// int find_hor_inter(t_data *data, double rayangle)
-// {
-// 	int first_int_x;
-// 	int first_int_y;
-// 	int ya;
-// 	int xa;
-// 	int next_x;
-// 	int next_y;
-
-
-// 	if(fabs(cos(rayangle)) == 0)
-// 		return 0;
-// 	if(data->ray.is_down)
-// 		first_int_y = floor(data->p.p_y / SQUARESIZE) * SQUARESIZE + SQUARESIZE;
-// 	else if(data->ray.is_up)
-// 		first_int_y = floor(data->p.p_y / SQUARESIZE) * SQUARESIZE - 1;
-// 	first_int_x = (first_int_y - data->p.p_y) * tan(rayangle) + data->p.p_x;
-// 	next_x = first_int_x;
-// 	next_y = first_int_y;
-// 	if(data->ray.is_down)
-// 		ya = SQUARESIZE;
-// 	else if(data->ray.is_up)
-// 		ya = -SQUARESIZE;
-// 	xa = ya / tan(rayangle);
-// 	while(next_x <= data->width * SQUARESIZE && next_x >= 0 && next_y <= data->heigth * SQUARESIZE && next_y >= 0)
-// 	{
-// 		if (is_wall(data, data->map, next_x, next_y))
-// 		{
-// 			data->ray.hit_horiz = 1;
-// 			data->ray.hor_walhit_x = next_x;
-// 			data->ray.hor_walhit_y = next_y;
-// 			break;
-// 		}
-// 		else
-// 			next_x += xa;
-// 			next_y += ya;
-// 	}
-// 	return(0);
-// }
 
 double calculate_distance(t_data *data, int x_d , int y_d)
 {
@@ -439,50 +319,8 @@ double calculate_distance(t_data *data, int x_d , int y_d)
 	dx = x_d - data->p.p_x;
 	dy = y_d - data->p.p_y;
 	return(sqrt(dx * dx + dy * dy));
+
 }
-
-// void get_distance(t_data *data)
-// {
-// 	int hor_distance;
-// 	int ver_distance;
-
-// 	if(data->ray.hit_horiz)
-// 		hor_distance = calculate_distance(data, data->ray.hor_walhit_x, data->ray.hor_walhit_y);
-// 	else if(data->ray.hit_vertical)
-// 		ver_distance = calculate_distance(data, data->ray.ver_walhit_x, data->ray.ver_walhit_y);
-// 	data->ray.distance = ver_distance;
-// 	if(ver_distance > hor_distance)
-// 		data->ray.distance = hor_distance;
-// }
-
-// void cast_allrays(t_data *data)
-// {
-// 	double rayangle;
-// 	int i;
-
-
-// 	i = 0;
-// 	rayangle = normlizing(data->p.view_angle - (FOV / 2));
-// 	while(i < NUM_RAYS)
-// 	{
-// 		data->ray.rayangle = rayangle;
-// 		if(rayangle >= 0 && rayangle <= M_PI)
-// 			data->ray.is_down = 1;
-// 		data->ray.is_up = !data->ray.is_down;
-// 		if(rayangle < 0.5 * M_PI || rayangle > M_PI * 1.5)
-// 			data->ray.is_right = 1;
-// 		data->ray.is_left = !data->ray.is_right;
-// 		printf("up %d down %d\n", data->ray.is_up, data->ray.distance);
-// 		find_vertic_inters(data, rayangle);
-// 		// find_hor_inter(data, rayangle);
-// 		cast_ray(data, rayangle);
-// 		get_distance(data);
-// 		init_ray(data);
-// 		rayangle += (FOV / NUM_RAYS);
-// 		rayangle = normlizing(rayangle);
-// 		i++;
-// 	}
-// }
 
 void ray_direction(t_data *data, double rayangle)
 {
@@ -495,113 +333,125 @@ void ray_direction(t_data *data, double rayangle)
 	data->ray.is_left = !data->ray.is_right;
 }
 
-double find_hor_inter(t_data *data, double rayangle)
+void calcul_first_inter_H(t_intrsc *inter, t_data *data, double rayangle)
 {
-	double first_int_x;
-	double first_int_y;
-	double ya;
-	double xa;
-	double next_x;
-	double next_y;
-	double x_check;
-	double y_check;
+	if(data->ray.is_down)
+		inter->first_int_y = floor(data->p.p_y / SQUARESIZE) * SQUARESIZE + SQUARESIZE;
+	else if(data->ray.is_up)
+		inter->first_int_y = floor(data->p.p_y / SQUARESIZE) * SQUARESIZE;
+	inter->first_int_x = data->p.p_x + (inter->first_int_y - data->p.p_y) / tan(rayangle);
+	inter->next_x = inter->first_int_x;
+	inter->next_y = inter->first_int_y;
+	data->ray.hor_walhit_x = inter->first_int_x;
+	data->ray.hor_walhit_y = inter->first_int_y;
+}
 
+void calcul_step_H(t_data *data, double *xa, double *ya, double rayangle)
+{
 	if(data->ray.is_down)
-		first_int_y = floor(data->p.p_y / SQUARESIZE) * SQUARESIZE + SQUARESIZE;
+		*ya = SQUARESIZE;
 	else if(data->ray.is_up)
-		first_int_y = floor(data->p.p_y / SQUARESIZE) * SQUARESIZE;
-	first_int_x = data->p.p_x + (first_int_y - data->p.p_y) / tan(rayangle);
-	next_x = first_int_x;
-	next_y = first_int_y;
-	data->ray.hor_walhit_x = first_int_x;
-	data->ray.hor_walhit_y = first_int_y;
-	if(data->ray.is_down)
-		ya = SQUARESIZE;
-	else if(data->ray.is_up)
-		ya = -SQUARESIZE;
-	xa = SQUARESIZE / tan(rayangle);
-	if(data->ray.is_left && xa > 0)
-		xa *= -1;
-	if(data->ray.is_right && xa < 0)
-		xa *= -1;
-	// if(fabs(xa) > 80)
-	// 	xa = xa / 4;
-	while(next_x <= data->width * SQUARESIZE && next_x >= 0 && next_y <= data->heigth * SQUARESIZE && next_y >= 0)
+		*ya = -SQUARESIZE;
+	*xa = SQUARESIZE / tan(rayangle);
+	if(data->ray.is_left && *xa > 0)
+		*xa *= -1;
+	if(data->ray.is_right && *xa < 0)
+		*xa *= -1;
+}
+
+void calcul_inter_H(t_data *data, double xa, double ya, t_intrsc *inter)
+{
+	while(inter->next_x <= data->width * SQUARESIZE && inter->next_x >= 0 && inter->next_y <= data->heigth * SQUARESIZE && inter->next_y >= 0)
 	{
-		// if(data->ray.is_up)
-		// 	next_y -= 1;
-		if (is_wall(data, data->map, next_x, next_y))
+		if (is_wall(data, data->map, inter->next_x, inter->next_y))
 		{
 			data->ray.hit_horiz = 1;
-			data->ray.hor_walhit_x = next_x;
-			data->ray.hor_walhit_y = next_y;
+			data->ray.hor_walhit_x = inter->next_x;
+			data->ray.hor_walhit_y = inter->next_y;
 			break;
 		}
-		// if(data->ray.is_up)
-		// 	next_y += 1;
 		else
 		{
-			next_x += xa;
-			next_y += ya;
+			inter->next_x += xa;
+			inter->next_y += ya;
 		}
 	}
+}
+
+double find_hor_inter(t_data *data, double rayangle)
+{
+	t_intrsc inter;
+	double ya;
+	double xa;
+
+	calcul_first_inter_H(&inter, data, rayangle);
+	calcul_step_H(data, &xa, &ya, rayangle);
+	calcul_inter_H(data, xa, ya, &inter);
 	if(data->ray.hit_horiz)
 		return(calculate_distance(data, data->ray.hor_walhit_x, data->ray.hor_walhit_y));
-	return(INT_MAX);
+	else 
+		return(INT_MAX);
+}
+
+void calcul_first_inter_V(t_intrsc *inter, t_data *data, double rayangle)
+{
+	if(data->ray.is_right)
+		inter->first_int_x = floor(data->p.p_x / SQUARESIZE) * SQUARESIZE + SQUARESIZE;
+	else if(data->ray.is_left)
+		inter->first_int_x = floor(data->p.p_x / SQUARESIZE) * SQUARESIZE;
+	inter->first_int_y = data->p.p_y + (inter->first_int_x - data->p.p_x) * tan(rayangle);
+	inter->next_x = inter->first_int_x;
+	inter->next_y = inter->first_int_y;
+	// data->ray.ver_walhit_x = inter->first_int_x;
+	// data->ray.ver_walhit_y = inter->first_int_y;
+}
+
+void calcul_step_V(t_data *data, double *xa, double *ya, double rayangle)
+{
+	if(data->ray.is_right)
+		*xa = SQUARESIZE;
+	else if(data->ray.is_left)
+		*xa = -SQUARESIZE;
+	*ya = SQUARESIZE * tan(rayangle);
+	if(data->ray.is_up && *ya > 0)
+		*ya *= -1;
+	if(data->ray.is_down && *ya < 0)
+		*ya *= -1;
+}
+
+void calcul_inter_V(t_data *data, double xa, double ya, t_intrsc *inter)
+{
+	while(inter->next_x <= data->width * SQUARESIZE && inter->next_x >= 0 && inter->next_y <= data->heigth * SQUARESIZE && inter->next_y >= 0)
+	{
+		if (is_wall(data, data->map, inter->next_x, inter->next_y))
+		{
+			data->ray.hit_vertical = 1;
+			data->ray.ver_walhit_x = inter->next_x;
+			data->ray.ver_walhit_y = inter->next_y;
+			break;
+		}
+		else
+		{
+			inter->next_x += xa;
+			inter->next_y += ya;
+		}
+	}
 }
 
 double find_ver_inter(t_data *data, double rayangle)
 {
-	double first_int_x;
-	double first_int_y;
+	t_intrsc inter;
 	double ya;
 	double xa;
-	double next_x;
-	double next_y;
 
-	// if (fabs(sin(rayangle)) < 1e-6)
-	// 	return INT_MAX;
-	if(data->ray.is_right)
-		first_int_x = floor(data->p.p_x / SQUARESIZE) * SQUARESIZE + SQUARESIZE;
-	else if(data->ray.is_left)
-		first_int_x = floor(data->p.p_x / SQUARESIZE) * SQUARESIZE;
-	first_int_y = data->p.p_y + (first_int_x - data->p.p_x) * tan(rayangle);
-	next_x = first_int_x;
-	next_y = first_int_y;
-	if(data->ray.is_right)
-		xa = SQUARESIZE;
-	else if(data->ray.is_left)
-		xa = -SQUARESIZE;
-	ya = SQUARESIZE * tan(rayangle);
-	if(data->ray.is_up && ya > 0)
-		ya *= -1;
-	if(data->ray.is_down && ya < 0)
-		ya *= -1;
-	while(next_x <= data->width * SQUARESIZE && next_x >= 0 && next_y <= data->heigth * SQUARESIZE && next_y >= 0)
-	{
-		// if(data->ray.is_left)
-		// 	next_x -= 1;
-		if (is_wall(data, data->map, next_x, next_y))
-		{
-			data->ray.hit_vertical = 1;
-			data->ray.ver_walhit_x = next_x;
-			data->ray.ver_walhit_y = next_y;
-			// printf("ver wall x  = %f, y = %f", data->ray.ver_walhit_x, data->ray.ver_walhit_y);
-			break;
-		}
-		// if(data->ray.is_left)
-		// 	next_x += 1;
-		else
-		{
-			next_x += xa;
-			next_y += ya;
-		}
-	}
+	calcul_first_inter_V(&inter, data, rayangle);
+	calcul_step_V(data, &xa, &ya, rayangle);
+	calcul_inter_V(data, xa, ya, &inter);
 	if(data->ray.hit_vertical)
 		return(calculate_distance(data, data->ray.ver_walhit_x, data->ray.ver_walhit_y));
-	return(INT_MAX);
+	else 
+		return(INT_MAX);
 }
-
 
 void cast_allrays(t_data *data)
 {
@@ -612,33 +462,21 @@ void cast_allrays(t_data *data)
 
 	i = 0;
 	rayangle = normlizing(data->p.view_angle - (FOV / 2));
-	hor_distance = INT_MAX;
-	ver_distance = INT_MAX;
 	while(i < NUM_RAYS)
 	{
 		ray_direction(data, rayangle);
-		// printf("is down %d is up %d is left %d is right %d\n", data->ray.is_down,data->ray.is_up, data->ray.is_left, data->ray.is_right);
 		hor_distance = find_hor_inter(data, rayangle);
 		ver_distance = find_ver_inter(data, rayangle);
 		if(hor_distance > ver_distance)
 		{
-			// printf("hor > ver\n");
 			data->ray.walhit_x = data->ray.ver_walhit_x;
 			data->ray.walhit_y = data->ray.ver_walhit_y;
 		}
 		else if(hor_distance <= ver_distance)
 		{
-			// printf("  hor == %f <= ver ==   %f  \n", hor_distance, ver_distance);
 			data->ray.walhit_x = data->ray.hor_walhit_x;
 			data->ray.walhit_y = data->ray.hor_walhit_y;
 		}
-		else{
-			// printf("MOCHKILA F WALHIT POINTS \n");
-			data->ray.walhit_x = 0;
-			data->ray.walhit_y = 0;
-		}
-		// printf("vertical hit %d   hor_hit %d  \n", data->ray.hit_vertical, data->ray.hit_horiz);
-		// printf("wallhit x = %f, wallhit y = %f", data->ray.walhit_x, data->ray.walhit_y);
 		cast_ray(data, rayangle);
 		init_ray(data);
 		rayangle = normlizing(rayangle + (FOV / NUM_RAYS));
@@ -690,11 +528,14 @@ int get_heigth(char *map[])
 	}
 	return(i);
 }
+
 void init_player(t_data *data)
 {
 	data->p.move_speed = 4;
 	data->p.move_dir = 0;
 	data->p.rot_dir = 0;
+	data->p.step_x = 0;
+	data->p.step_y = 0;
 	data->p.rot_speed = 5 * (M_PI / 180);//3 degres every rotation
 	if(data->p.direction == 'N')
 		data->p.view_angle = 270 * (M_PI / 180);
@@ -750,9 +591,7 @@ int main(int argc, char **argv)
 	t_data *data;
 
 	data = data_func();
-	// textures *txt;
 
-	// printf("wassssaaaaaaaaaaaaalaaaaaaaaaam\n");
 	if(!check_argv(argc, argv))
 		return 0;
 	if(!fill_textures_map(argv[1]))

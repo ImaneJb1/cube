@@ -21,6 +21,26 @@
 #define RES 4
 #define NUM_RAYS WIDTH
 
+typedef struct s_line
+{
+	double dx;
+	double dy;
+	double move_x;
+	double move_y;
+	double D;
+	double x;
+	double y;
+	int i;
+}t_line;
+
+typedef struct s_intrsc
+{
+	double first_int_x;
+	double first_int_y;
+	double next_x;
+	double next_y;
+}t_intrsc;
+
 typedef struct s_img
 {
 	void	*img_ptr;
@@ -29,8 +49,6 @@ typedef struct s_img
 	int		endian;
 	int		line_len;
 }			t_img;
-
-
 
 typedef struct player{
 	int p_x;
@@ -41,6 +59,8 @@ typedef struct player{
 	int rot_dir;
 	int move_speed;
 	double rot_speed;
+	double step_x;
+	double step_y;
 }t_player;
 
 typedef struct ray{
