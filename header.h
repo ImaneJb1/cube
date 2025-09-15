@@ -14,8 +14,8 @@
 #define ROWS 10
 #define COLMS 10
 
-#define WIDTH 800
-#define HEIGHT 600
+#define WIDTH 1500
+#define HEIGHT 900
 #define FOV 60 * (M_PI / 180)
 
 #define RES 4
@@ -51,8 +51,8 @@ typedef struct s_img
 }			t_img;
 
 typedef struct player{
-	int p_x;
-	int p_y;
+	double p_x;
+	double p_y;
 	char direction;
 	double view_angle;
 	int move_dir;
@@ -65,7 +65,7 @@ typedef struct player{
 
 typedef struct ray{
 	int id;
-	int distance;
+	double distance;
 	double rayangle;
 	double ver_walhit_x;
 	double ver_walhit_y;
@@ -79,7 +79,7 @@ typedef struct ray{
 	int is_right;
 	int hit_vertical;
 	int hit_horiz;
-	int wall_content;
+	char content;
 }t_ray;
 
 typedef struct data{
@@ -103,6 +103,7 @@ int press_x(t_data *data);
 void rendring_(t_data *data);
 int	ft_strcmp(const char *s1, const char *s2);
 void rendring_(t_data *data);
+
 // typedef struct flags
 // {
 // 	int no;
