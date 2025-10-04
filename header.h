@@ -4,7 +4,7 @@
 #include "parsing/libft/libft.h"
 #include "parsing/get_next_line/get_next_line.h"
 #include <math.h>
-# include <mlx.h>
+#include <mlx.h>
 # include <X11/X.h>
 # include <X11/keysym.h>
 # include <fcntl.h>

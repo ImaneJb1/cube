@@ -36,7 +36,7 @@ int is_wall(t_data *data, char *map[], double x, double y, char c)
 double normlizing(double angle)
 {
 	// angle = fmod(angle, 2 * M_PI);
-	while(angle <= 0)
+	while(angle < 0)
 	{
 		angle += (2 * M_PI);
 	}
@@ -57,8 +57,8 @@ void update_player(t_data *data)
 	data->p.view_angle += data->p.rot_dir * data->p.rot_speed;
 	data->p.view_angle = normlizing(data->p.view_angle);
 
-	next_x = data->p.p_x + cos(data->p.view_angle) * data->p.move_dir * data->p.move_speed + data->p.step_x;
-	next_y = data->p.p_y + sin(data->p.view_angle) * data->p.move_dir * data->p.move_speed + data->p.step_y;
+	next_x = data->p.p_x + (cos(data->p.view_angle) * data->p.move_dir * data->p.move_speed) + data->p.step_x;
+	next_y = data->p.p_y + (sin(data->p.view_angle) * data->p.move_dir * data->p.move_speed) + data->p.step_y;
 	if(!is_wall(data, data->map, next_x, next_y, 'n')) //next_x *1.5 
 	{
 		data->p.p_y = next_y;
@@ -341,9 +341,10 @@ void bresenhams(t_data *data, double x, double y)
 
 void cast_ray(t_data *data, double rayangle)
 {
-	printf("wall hit x = %f y = %f\n", data->ray.walhit_x, data->ray.walhit_y);
+	// printf("wall hit x = %f y = %f\n", data->ray.walhit_x, data->ray.walhit_y);
 	// draw_line(data,data->p.p_x, data->p.p_y, floor(data->ray.walhit_x), floor(data->ray.walhit_y), 0x000000);
 	// bresenhams(data, data->ray.walhit_x, data->ray.walhit_y);
+	
 	img_pixel_put(data, &data->img, data->ray.walhit_x, data->ray.walhit_y, 0x00ff00);
 }
 
@@ -378,8 +379,6 @@ void calcul_first_inter_H(t_intrsc *inter, t_data *data, double rayangle)
 	inter->first_int_x = data->p.p_x + ((inter->first_int_y - data->p.p_y) / tan(rayangle));
 	inter->next_x = inter->first_int_x;
 	inter->next_y = inter->first_int_y;
-	// data->ray.hor_walhit_x = inter->first_int_x;
-	// data->ray.hor_walhit_y = inter->first_int_y;
 }
 
 void calcul_step_H(t_data *data, double *xa, double *ya, double rayangle)
@@ -404,7 +403,7 @@ void calcul_inter_H(t_data *data, double xa, double ya, t_intrsc *inter)
 			data->ray.hit_horiz = 1;
 			data->ray.hor_walhit_x = inter->next_x;
 			data->ray.hor_walhit_y = inter->next_y;
-			// data->ray.content = data->map[(int) inter->next_y * SQUARESIZE][(int) inter->next_x * SQUARESIZE];
+			data->ray.content = data->map[(int) inter->next_y / SQUARESIZE][(int) inter->next_x / SQUARESIZE];
 			break;
 		}
 		else
@@ -439,8 +438,6 @@ void calcul_first_inter_V(t_intrsc *inter, t_data *data, double rayangle)
 	inter->first_int_y = data->p.p_y + ((inter->first_int_x - data->p.p_x) * tan(rayangle));
 	inter->next_x = inter->first_int_x;
 	inter->next_y = inter->first_int_y;
-	// data->ray.ver_walhit_x = inter->first_int_x;
-	// data->ray.ver_walhit_y = inter->first_int_y;
 }
 
 void calcul_step_V(t_data *data, double *xa, double *ya, double rayangle)
@@ -465,7 +462,7 @@ void calcul_inter_V(t_data *data, double xa, double ya, t_intrsc *inter)
 			data->ray.hit_vertical = 1;
 			data->ray.ver_walhit_x = inter->next_x;
 			data->ray.ver_walhit_y = inter->next_y;
-			// data->ray.content = data->map[(int) inter->next_y * SQUARESIZE][(int) inter->next_x * SQUARESIZE];
+			data->ray.content = data->map[(int) inter->next_y / SQUARESIZE][(int) inter->next_x / SQUARESIZE];
 			break;
 		}
 		else
@@ -555,10 +552,10 @@ void render_3d(t_data *data)
 
 	y = 0;
 	distance_proj_plane = (WIDTH / 2) / tan(FOV / 2);
-	printf("distance project plane = %f   %d\n", data->ray.distance, data->ray.id);
-	printf("ray id = %d\n", data->ray.id);
-	wall_height = ((SQUARESIZE ) * distance_proj_plane / data->ray.distance);
-	printf("wall height = %f \n", wall_height);
+	// printf("distance project plane = %f   %d\n", data->ray.distance, data->ray.id);
+	// printf("ray id   = %d\n", data->ray.id);
+	wall_height = ((SQUARESIZE ) / data->ray.distance) * distance_proj_plane;
+	// printf("wall height = %f \n", wall_height);
 	top_wall = (HEIGHT / 2) - (wall_height / 2);
 	if(top_wall < 0)
 		top_wall = 0;
@@ -577,6 +574,24 @@ void render_3d(t_data *data)
 	}
 }
 
+void set_ray_val(double hor_distance, double ver_distance, t_data *data)
+{
+	if(hor_distance > ver_distance)
+	{
+		// printf("VER IS SMALLER = %f\n", ver_distance);
+		data->ray.walhit_x = data->ray.ver_walhit_x;
+		data->ray.walhit_y = data->ray.ver_walhit_y;
+		data->ray.distance = ver_distance * cos(normlizing((data->p.view_angle) - rayangle));
+	}
+	else if(hor_distance <= ver_distance)
+	{
+		// printf("HOR IS SMALLER = %f\n", hor_distance);
+		data->ray.walhit_x = data->ray.hor_walhit_x;
+		data->ray.walhit_y = data->ray.hor_walhit_y;
+		data->ray.distance = hor_distance * cos(normlizing((data->p.view_angle )- rayangle));
+	}
+}
+
 void cast_allrays(t_data *data)
 {
 	double rayangle;
@@ -590,38 +605,24 @@ void cast_allrays(t_data *data)
 	{
 		rayangle = normlizing(rayangle);
 		ray_direction(data, rayangle);
-		printf("%d rayangle = %f\n", i, rayangle);
+		// printf("%d rayangle = %f\n", i, rayangle);
 		data->ray.id = i;
 		hor_distance = find_hor_inter(data, rayangle);
 		ver_distance = find_ver_inter(data, rayangle);
-		if(hor_distance > ver_distance)
-		{
-			printf("VER IS SMALLER = %f\n", ver_distance);
-			data->ray.walhit_x = data->ray.ver_walhit_x;
-			data->ray.walhit_y = data->ray.ver_walhit_y;
-			data->ray.distance = ver_distance * cos(normlizing((data->p.view_angle) - rayangle));
-		}
-		else if(hor_distance <= ver_distance)
-		{
-			printf("HOR IS SMALLER = %f\n", hor_distance);
-			data->ray.walhit_x = data->ray.hor_walhit_x;
-			data->ray.walhit_y = data->ray.hor_walhit_y;
-			data->ray.distance = hor_distance * cos(normlizing((data->p.view_angle )- rayangle));
-		}
-		cast_ray(data, rayangle);
-
-		printf("ray %d distance = %f  ver_dis %f\n", data->ray.id, data->ray.distance, ver_distance);
-		// render_3d(data);
+		set_ray_val(hor_distance, ver_distance, data);
+		// cast_ray(data, rayangle);
+		// printf("ray %d distance = %f  ver_dis %f\n", data->ray.id, data->ray.distance, ver_distance);
+		render_3d(data); 
 		init_ray(data);
-		rayangle += FOV / NUM_RAYS;
+		rayangle += (double)FOV / (double)NUM_RAYS;
 		i++;
 	}
 }
 
 void rendring_(t_data *data)
 {
-	render_map(data);
-	put_player(data);
+	// render_map(data);
+	// put_player(data);
 	cast_allrays(data);
 	mlx_put_image_to_window(data->mlx_ptr, data->mlx_win, data->img.img_ptr, 0,
 		0);
@@ -670,7 +671,7 @@ void init_player(t_data *data)
 	data->p.rot_dir = 0;
 	data->p.step_x = 0;
 	data->p.step_y = 0;
-	data->p.rot_speed = 1 * (M_PI / 180);//3 degres every rotation
+	data->p.rot_speed = 1 * (M_PI / 180);
 	if(data->p.direction == 'N')
 		data->p.view_angle = 270 * (M_PI / 180);
 	if(data->p.direction == 'E')
