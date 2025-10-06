@@ -9,7 +9,7 @@ LIB     = parsing/libft/libft.a
 # Collect all sources
 SRCS = $(shell find . -name "*.c")
 OBJ  = $(SRCS:%.c=$(OBJ_D)/%.o)
-DEP  = $(OBJ:.o=.d)
+# DEP  = $(OBJ:.o=.d)
 
 HEADER = header.h
 
@@ -40,6 +40,6 @@ re: fclean all
 .PHONY: all clean fclean re
 
 # Include auto-generated dependencies
--include $(DEP)
+# -include $(DEP)
 
 .SECONDARY: $(OBJ)
