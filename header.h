@@ -166,5 +166,5 @@ void 		free_all(void);
 void		*gc_calloc(size_t count, size_t size);
 void		*gc_malloc(size_t size);
 //textures
-void	load_textures(t_data *data);
+void load_all_textures(t_data *data);
 #endif

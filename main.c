@@ -718,6 +718,7 @@ void data_init(t_data *data)
 	data->img.img_pxl_ptr = mlx_get_data_addr(data->img.img_ptr,
 		&data->img.b_p_p, &data->img.line_len, &data->img.endian);
 	init_player(data);
+	load_all_textures(data);
 	init_ray(data);
 	init_img(data);
 	rendring_(data);
