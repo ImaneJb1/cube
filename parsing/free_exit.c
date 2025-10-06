@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   free_exit.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: imane <imane@student.42.fr>                +#+  +:+       +#+        */
+/*   By: ijoubair <ijoubair@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/10 15:18:05 by ijoubair          #+#    #+#             */
-/*   Updated: 2025/08/10 17:52:08 by imane            ###   ########.fr       */
+/*   Updated: 2025/10/04 17:11:23 by ijoubair         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../header.h"
+#include "header.h"
 
 void	free_and_exit(int status)
 {

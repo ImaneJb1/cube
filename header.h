@@ -4,7 +4,7 @@
 #include "parsing/libft/libft.h"
 #include "parsing/get_next_line/get_next_line.h"
 #include <math.h>
-# include <mlx.h>
+# include "mlx.h"
 # include <X11/X.h>
 # include <X11/keysym.h>
 # include <fcntl.h>
@@ -45,6 +45,9 @@ typedef struct s_img
 {
 	void	*img_ptr;
 	char	*img_pxl_ptr;
+	void	*floor;
+	void	*wall;
+	void	*sky;
 	int		b_p_p;
 	int		endian;
 	int		line_len;
@@ -93,6 +96,10 @@ typedef struct data{
 	char **map;
 	int width;
 	int heigth;
+	//textures
+	unsigned int **textures[6]; // 0=N, 1=S, 2=E, 3=W
+    int textures_w[6];
+    int textures_h[6];
 	
 }t_data;
 
@@ -131,6 +138,7 @@ typedef struct textures
 	char	*c;
 }			textures;
 
+void	init_img(t_data *data);
 // *************** parsing ***************
 
 void		parse_floor_ceiling(char *line, config *arr);
@@ -157,4 +165,6 @@ t_data		*data_func(void);
 void 		free_all(void);
 void		*gc_calloc(size_t count, size_t size);
 void		*gc_malloc(size_t size);
+//textures
+void	load_textures(t_data *data);
 #endif

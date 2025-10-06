@@ -510,40 +510,42 @@ void draw_3d_map(t_data *data)
 	}
 }
 
-void draw_ceiling(t_data *data, double top_wall)
-{
-	int y;
+// void draw_ceiling(t_data *data, double top_wall)
+// {
+// 	int y;
 	
-	y = 0;
-	while(y < top_wall)
-	{
-		img_pixel_put(data, &data->img, data->ray.id, y, 0x0000ff);
-		y++;
-	}
-}
-void draw_floor(t_data *data, double bottom_wall)
-{
-	int y;
+// 	y = 0;
+// 	while(y < top_wall)
+// 	{
+// 		img_pixel_put(data, &data->img, data->ray.id, y, 0x0000ff);
+// 		y++;
+// 	}
+// }
+// void draw_floor(t_data *data, double bottom_wall)
+// {
+// 	int y;
 	
-	y = HEIGHT;
-	while(y > bottom_wall)
-	{
-		img_pixel_put(data, &data->img, data->ray.id, y, 0x00ff00);
-		y--;
-	}
-}
+// 	y = HEIGHT;
+// 	while(y > bottom_wall)
+// 	{
+// 		img_pixel_put(data, &data->img, data->ray.id, y, 0x00ff00);
+// 		y--;
+// 	}
+// }
 
-void draw_wall(t_data *data, double top_wall, double bottom_wall)
-{
-	int y;
+// void draw_wall(t_data *data, double top_wall, double bottom_wall)
+// {
+// 	int y;
 	
-	y = top_wall;
-	while(y < bottom_wall)
-	{
-		img_pixel_put(data, &data->img, data->ray.id, y, 0xffffff);
-		y++;
-	}
-}
+// 	y = top_wall;
+	
+// 	while(y < bottom_wall)
+// 	{
+// 		// img_pixel_put(data, &data->img, data->ray.id, y, 0xffffff);
+		
+// 		y++;
+// 	}
+// }
 
 void render_3d(t_data *data)
 {
@@ -608,10 +610,10 @@ void cast_allrays(t_data *data)
 			data->ray.walhit_y = data->ray.hor_walhit_y;
 			data->ray.distance = hor_distance * cos(normlizing((data->p.view_angle )- rayangle));
 		}
-		cast_ray(data, rayangle);
+		// cast_ray(data, rayangle);
 
 		printf("ray %d distance = %f  ver_dis %f\n", data->ray.id, data->ray.distance, ver_distance);
-		// render_3d(data);
+		render_3d(data);
 		init_ray(data);
 		rayangle += FOV / NUM_RAYS;
 		i++;
@@ -620,8 +622,8 @@ void cast_allrays(t_data *data)
 
 void rendring_(t_data *data)
 {
-	render_map(data);
-	put_player(data);
+	// render_map(data);
+	// put_player(data);
 	cast_allrays(data);
 	mlx_put_image_to_window(data->mlx_ptr, data->mlx_win, data->img.img_ptr, 0,
 		0);
@@ -717,6 +719,7 @@ void data_init(t_data *data)
 		&data->img.b_p_p, &data->img.line_len, &data->img.endian);
 	init_player(data);
 	init_ray(data);
+	init_img(data);
 	rendring_(data);
 }
 
