@@ -14,6 +14,11 @@
 #define ROWS 10
 #define COLMS 10
 
+#define NORTH 0
+#define SOUTH 1
+#define WEST  2
+#define EAST  3
+
 #define WIDTH 1500
 #define HEIGHT 900
 #define FOV 60 * (M_PI / 180)
@@ -82,6 +87,7 @@ typedef struct ray{
 	int is_right;
 	int hit_vertical;
 	int hit_horiz;
+	int wall_dir;
 	char content;
 }t_ray;
 
@@ -97,9 +103,11 @@ typedef struct data{
 	int width;
 	int heigth;
 	//textures
-	unsigned int **textures[6]; // 0=N, 1=S, 2=E, 3=W
-    int textures_w[6];
-    int textures_h[6];
+	unsigned int **textures[4]; // 0=N, 1=S, 2=E, 3=W
+    int textures_w[4];
+    int textures_h[4];
+	int floor_color;
+	int	ceiling_color;
 	
 }t_data;
 
@@ -138,7 +146,6 @@ typedef struct textures
 	char	*c;
 }			textures;
 
-void	init_img(t_data *data);
 // *************** parsing ***************
 
 void		parse_floor_ceiling(char *line, config *arr);

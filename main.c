@@ -19,7 +19,7 @@ int is_wall(t_data *data, char *map[], double x, double y, char c)
 
 	if(c == 'h' && data->ray.is_up )//set on lhafa dyal square wich is wall   mataaaaaalan : y = 64 and tilesize = 32 -> grid_y = 2 -> map[2] ou ana bagha map[1]
 		y -= 1;
-	if(c == 'v' && data->ray.is_left )
+	if(c == 'v' && data->ray.is_left)
 		x -= 1;
 	grid_x = floor(x / SQUARESIZE);
 	grid_y = floor(y / SQUARESIZE);
@@ -547,37 +547,89 @@ void draw_3d_map(t_data *data)
 // 	}
 // }
 
+	int get_texture_color(int **texture, int tex_w, int tex_h, int tx, int ty)
+{
+    if (!texture)
+        return (0); // fallback black if missing
+    if (tx < 0) tx = 0;
+    if (tx >= tex_w) tx = tex_w - 1;
+    if (ty < 0) ty = 0;
+    if (ty >= tex_h) ty = tex_h - 1;
+    return (texture[ty][tx]);
+}
+
 void render_3d(t_data *data)
 {
-	double distance_proj_plane;
-	double wall_height;
-	double top_wall;
-	double bottom_wall;
-	int y;
+    double distance_proj_plane;
+    double wall_height;
+    double top_wall;
+    double bottom_wall;
+    int y;
 
-	y = 0;
-	distance_proj_plane = (WIDTH / 2) / tan(FOV / 2);
-	printf("distance project plane = %f   %d\n", data->ray.distance, data->ray.id);
-	printf("ray id = %d\n", data->ray.id);
-	wall_height = ((SQUARESIZE ) * distance_proj_plane / data->ray.distance);
-	printf("wall height = %f \n", wall_height);
-	top_wall = (HEIGHT / 2) - (wall_height / 2);
-	if(top_wall < 0)
-		top_wall = 0;
-	bottom_wall = (HEIGHT / 2) + (wall_height / 2);
-	if(bottom_wall > HEIGHT)
-		bottom_wall = HEIGHT;
-	while(y < HEIGHT)
-	{
-		if(y < top_wall)
-			img_pixel_put(data, &data->img, data->ray.id, y, 0x0000ff);
-		else if(y >= top_wall && y <= bottom_wall)
-			img_pixel_put(data, &data->img, data->ray.id, y, 0xffffff);
-		else if(y > bottom_wall)
-			img_pixel_put(data, &data->img, data->ray.id, y, 0x000000);
-		y++;
-	}
+    /* projection */
+    distance_proj_plane = (WIDTH / 2.0) / tan(FOV / 2.0);
+    if (data->ray.distance <= 0.0001)
+        data->ray.distance = 0.0001;
+
+    wall_height = (SQUARESIZE * distance_proj_plane) / data->ray.distance;
+
+    top_wall = (HEIGHT / 2.0) - (wall_height / 2.0);
+    if (top_wall < 0)
+        top_wall = 0;
+    bottom_wall = (HEIGHT / 2.0) + (wall_height / 2.0);
+    if (bottom_wall > HEIGHT)
+        bottom_wall = HEIGHT;
+
+    /* choose texture */
+    int tex_id = data->ray.wall_dir; // NORTH=0,SOUTH=1,WEST=2,EAST=3
+    int **texture = data->textures[tex_id];
+    int tex_w = data->textures_w[tex_id];
+    int tex_h = data->textures_h[tex_id];
+
+    /* compute texture_x (which column of the texture to sample) */
+    double hit_x = data->ray.walhit_x;
+    double hit_y = data->ray.walhit_y;
+    double wall_x; // offset inside the tile
+    if (data->ray.hit_vertical)   // vertical wall => use y coordinate to find offset
+        wall_x = fmod(hit_y, (double)SQUARESIZE);
+    else                           // horizontal wall => use x coordinate
+        wall_x = fmod(hit_x, (double)SQUARESIZE);
+    if (wall_x < 0) wall_x += SQUARESIZE;
+
+    int tex_x = (int)((wall_x / (double)SQUARESIZE) * (double)tex_w);
+    // sometimes need to flip texture orientation for looks:
+    if (data->ray.hit_vertical && data->ray.is_left)
+        tex_x = tex_w - tex_x - 1;
+    if (data->ray.hit_horiz && data->ray.is_up)
+        tex_x = tex_w - tex_x - 1;
+
+    /* draw vertical stripe */
+    y = 0;
+    while (y < HEIGHT)
+    {
+        if (y < (int)top_wall)
+        {
+            /* ceiling: use ceiling_color if present, otherwise fallback */
+            img_pixel_put(data, &data->img, data->ray.id, y, data->ceiling_color);
+        }
+        else if (y >= (int)top_wall && y <= (int)bottom_wall)
+        {
+            int dist_from_top = y - (int)top_wall;
+            int wall_strip_height = (int)(bottom_wall - top_wall);
+            if (wall_strip_height == 0) wall_strip_height = 1;
+            int tex_y = (int)(((double)dist_from_top / (double)wall_strip_height) * (double)tex_h);
+            int color = get_texture_color(texture, tex_w, tex_h, tex_x, tex_y);
+            img_pixel_put(data, &data->img, data->ray.id, y, color);
+        }
+        else
+        {
+            /* floor */
+            img_pixel_put(data, &data->img, data->ray.id, y, data->floor_color);
+        }
+        y++;
+    }
 }
+
 
 void cast_allrays(t_data *data)
 {
@@ -598,17 +650,30 @@ void cast_allrays(t_data *data)
 		ver_distance = find_ver_inter(data, rayangle);
 		if(hor_distance > ver_distance)
 		{
-			printf("VER IS SMALLER = %f\n", ver_distance);
-			data->ray.walhit_x = data->ray.ver_walhit_x;
-			data->ray.walhit_y = data->ray.ver_walhit_y;
-			data->ray.distance = ver_distance * cos(normlizing((data->p.view_angle) - rayangle));
+            data->ray.walhit_x = data->ray.ver_walhit_x;
+            data->ray.walhit_y = data->ray.ver_walhit_y;
+            data->ray.distance = ver_distance * cos(normlizing((data->p.view_angle) - rayangle));
+            data->ray.hit_vertical = 1;
+            data->ray.hit_horiz = 0;
+            // If vertical hit: the wall orientation depends on ray horizontal direction
+            if (data->ray.is_left)
+                data->ray.wall_dir = WEST;
+            else
+                data->ray.wall_dir = EAST;
 		}
 		else if(hor_distance <= ver_distance)
 		{
-			printf("HOR IS SMALLER = %f\n", hor_distance);
-			data->ray.walhit_x = data->ray.hor_walhit_x;
-			data->ray.walhit_y = data->ray.hor_walhit_y;
-			data->ray.distance = hor_distance * cos(normlizing((data->p.view_angle )- rayangle));
+            // horizontal hit chosen
+            data->ray.walhit_x = data->ray.hor_walhit_x;
+            data->ray.walhit_y = data->ray.hor_walhit_y;
+            data->ray.distance = hor_distance * cos(normlizing((data->p.view_angle) - rayangle));
+            data->ray.hit_horiz = 1;
+            data->ray.hit_vertical = 0;
+            // If horizontal hit: orientation depends on ray vertical direction
+            if (data->ray.is_up)
+                data->ray.wall_dir = NORTH;
+            else
+                data->ray.wall_dir = SOUTH;
 		}
 		// cast_ray(data, rayangle);
 
@@ -720,7 +785,7 @@ void data_init(t_data *data)
 	init_player(data);
 	load_all_textures(data);
 	init_ray(data);
-	init_img(data);
+	// init_img(data);
 	rendring_(data);
 }
 
