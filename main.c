@@ -510,42 +510,6 @@ void draw_3d_map(t_data *data)
 	}
 }
 
-// void draw_ceiling(t_data *data, double top_wall)
-// {
-// 	int y;
-	
-// 	y = 0;
-// 	while(y < top_wall)
-// 	{
-// 		img_pixel_put(data, &data->img, data->ray.id, y, 0x0000ff);
-// 		y++;
-// 	}
-// }
-// void draw_floor(t_data *data, double bottom_wall)
-// {
-// 	int y;
-	
-// 	y = HEIGHT;
-// 	while(y > bottom_wall)
-// 	{
-// 		img_pixel_put(data, &data->img, data->ray.id, y, 0x00ff00);
-// 		y--;
-// 	}
-// }
-
-// void draw_wall(t_data *data, double top_wall, double bottom_wall)
-// {
-// 	int y;
-	
-// 	y = top_wall;
-	
-// 	while(y < bottom_wall)
-// 	{
-// 		// img_pixel_put(data, &data->img, data->ray.id, y, 0xffffff);
-		
-// 		y++;
-// 	}
-// }
 
 	int get_texture_color(int **texture, int tex_w, int tex_h, int tx, int ty)
 {
@@ -558,77 +522,77 @@ void draw_3d_map(t_data *data)
     return (texture[ty][tx]);
 }
 
-void render_3d(t_data *data)
-{
-    double distance_proj_plane;
-    double wall_height;
-    double top_wall;
-    double bottom_wall;
-    int y;
+// void render_3d(t_data *data)
+// {
+//     double distance_proj_plane;
+//     double wall_height;
+//     double top_wall;
+//     double bottom_wall;
+//     int y;
 
-    /* projection */
-    distance_proj_plane = (WIDTH / 2.0) / tan(FOV / 2.0);
-    if (data->ray.distance <= 0.0001)
-        data->ray.distance = 0.0001;
+//     /* projection */
+//     distance_proj_plane = (WIDTH / 2.0) / tan(FOV / 2.0);
+//     if (data->ray.distance <= 0.0001)
+//         data->ray.distance = 0.0001;
 
-    wall_height = (SQUARESIZE * distance_proj_plane) / data->ray.distance;
+//     wall_height = (SQUARESIZE * distance_proj_plane) / data->ray.distance;
 
-    top_wall = (HEIGHT / 2.0) - (wall_height / 2.0);
-    if (top_wall < 0)
-        top_wall = 0;
-    bottom_wall = (HEIGHT / 2.0) + (wall_height / 2.0);
-    if (bottom_wall > HEIGHT)
-        bottom_wall = HEIGHT;
+//     top_wall = (HEIGHT / 2.0) - (wall_height / 2.0);
+//     if (top_wall < 0)
+//         top_wall = 0;
+//     bottom_wall = (HEIGHT / 2.0) + (wall_height / 2.0);
+//     if (bottom_wall > HEIGHT)
+//         bottom_wall = HEIGHT;
 
-    /* choose texture */
-    int tex_id = data->ray.wall_dir; // NORTH=0,SOUTH=1,WEST=2,EAST=3
-    int **texture = data->textures[tex_id];
-    int tex_w = data->textures_w[tex_id];
-    int tex_h = data->textures_h[tex_id];
+//     /* choose texture */
+//     int tex_id = data->ray.wall_dir; // NORTH=0,SOUTH=1,WEST=2,EAST=3
+//     int **texture = data->textures[tex_id];
+//     int tex_w = data->textures_w[tex_id];
+//     int tex_h = data->textures_h[tex_id];
 
-    /* compute texture_x (which column of the texture to sample) */
-    double hit_x = data->ray.walhit_x;
-    double hit_y = data->ray.walhit_y;
-    double wall_x; // offset inside the tile
-    if (data->ray.hit_vertical)   // vertical wall => use y coordinate to find offset
-        wall_x = fmod(hit_y, (double)SQUARESIZE);
-    else                           // horizontal wall => use x coordinate
-        wall_x = fmod(hit_x, (double)SQUARESIZE);
-    if (wall_x < 0) wall_x += SQUARESIZE;
+//     /* compute texture_x (which column of the texture to sample) */
+//     double hit_x = data->ray.walhit_x;
+//     double hit_y = data->ray.walhit_y;
+//     double wall_x; // offset inside the tile
+//     if (data->ray.hit_vertical)   // vertical wall => use y coordinate to find offset
+//         wall_x = fmod(hit_y, (double)SQUARESIZE);
+//     else                           // horizontal wall => use x coordinate
+//         wall_x = fmod(hit_x, (double)SQUARESIZE);
+//     if (wall_x < 0) wall_x += SQUARESIZE;
 
-    int tex_x = (int)((wall_x / (double)SQUARESIZE) * (double)tex_w);
-    // sometimes need to flip texture orientation for looks:
-    if (data->ray.hit_vertical && data->ray.is_left)
-        tex_x = tex_w - tex_x - 1;
-    if (data->ray.hit_horiz && data->ray.is_up)
-        tex_x = tex_w - tex_x - 1;
+//     int tex_x = (int)((wall_x / (double)SQUARESIZE) * (double)tex_w);
+//     // sometimes need to flip texture orientation for looks:
+//     if (data->ray.hit_vertical && data->ray.is_left)
+//         tex_x = tex_w - tex_x - 1;
+//     if (data->ray.hit_horiz && data->ray.is_up)
+//         tex_x = tex_w - tex_x - 1;
 
-    /* draw vertical stripe */
-    y = 0;
-    while (y < HEIGHT)
-    {
-        if (y < (int)top_wall)
-        {
-            /* ceiling: use ceiling_color if present, otherwise fallback */
-            img_pixel_put(data, &data->img, data->ray.id, y, data->ceiling_color);
-        }
-        else if (y >= (int)top_wall && y <= (int)bottom_wall)
-        {
-            int dist_from_top = y - (int)top_wall;
-            int wall_strip_height = (int)(bottom_wall - top_wall);
-            if (wall_strip_height == 0) wall_strip_height = 1;
-            int tex_y = (int)(((double)dist_from_top / (double)wall_strip_height) * (double)tex_h);
-            int color = get_texture_color(texture, tex_w, tex_h, tex_x, tex_y);
-            img_pixel_put(data, &data->img, data->ray.id, y, color);
-        }
-        else
-        {
-            /* floor */
-            img_pixel_put(data, &data->img, data->ray.id, y, data->floor_color);
-        }
-        y++;
-    }
-}
+//     /* draw vertical stripe */
+//     y = 0;
+//     while (y < HEIGHT)
+//     {
+//         if (y < (int)top_wall)
+//         {
+//             /* ceiling: use ceiling_color if present, otherwise fallback */
+//             img_pixel_put(data, &data->img, data->ray.id, y, data->ceiling_color);
+//         }
+//         else if (y >= (int)top_wall && y <= (int)bottom_wall)
+//         {
+//             int dist_from_top = y - (int)top_wall;
+//             int wall_strip_height = (int)(bottom_wall - top_wall);
+//             if (wall_strip_height == 0) wall_strip_height = 1;
+//             int tex_y = (int)(((double)dist_from_top / (double)wall_strip_height) * (double)tex_h);
+//             int color = get_texture_color(texture, tex_w, tex_h, tex_x, tex_y);
+//             img_pixel_put(data, &data->img, data->ray.id, y, color);
+//         }
+//         else
+//         {
+//             /* floor */
+//             img_pixel_put(data, &data->img, data->ray.id, y, data->floor_color);
+//         }
+//         y++;
+//     }
+// }
 
 
 void cast_allrays(t_data *data)

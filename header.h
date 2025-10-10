@@ -117,6 +117,7 @@ int get_width(char *map[]);
 int press_x(t_data *data);
 void rendring_(t_data *data);
 int	ft_strcmp(const char *s1, const char *s2);
+void render_3d(t_data *data);
 void rendring_(t_data *data);
 
 // typedef struct flags
