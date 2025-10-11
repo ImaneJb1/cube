@@ -57,10 +57,7 @@ void load_texture_from_path(t_data *data, int index, char *path)
         exit(1);
     }
 
-    tmp_img.img_pxl_ptr = mlx_get_data_addr(tmp_img.img_ptr,
-                                            &tmp_img.b_p_p,
-                                            &tmp_img.line_len,
-                                            &tmp_img.endian);
+    tmp_img.img_pxl_ptr = mlx_get_data_addr(tmp_img.img_ptr, &tmp_img.b_p_p,&tmp_img.line_len, &tmp_img.endian); //textel buffer
 
     data->textures[index] = allocate_textures(width, height);
     if (!data->textures[index])
