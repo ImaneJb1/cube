@@ -6,11 +6,52 @@
 /*   By: ijoubair <ijoubair@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/11 20:21:30 by ijoubair          #+#    #+#             */
-/*   Updated: 2025/10/11 20:57:56 by ijoubair         ###   ########.fr       */
+/*   Updated: 2025/10/12 16:45:31 by ijoubair         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "header.h"
+
+int	**allocate_textures(int width, int height)
+{
+	int **textures;
+	int i;
+	
+	textures = malloc(sizeof(int *) * height);
+	if(!textures)
+		return(NULL);
+	i = 0;
+	while(i < height)
+	{
+		textures[i] = malloc(sizeof(int) * width);		
+		if(!textures[i])
+			return(NULL);
+		i++;
+	}
+	return(textures);
+}
+
+void	fill_textures(int **textures, t_img *img, int width, int height);
+{
+	int y;
+	int x;
+	char *pixel;
+	int color;
+
+	y = 0;
+	while(textures[y])
+	{
+		x = 0;
+		while(textures[y][x])
+		{												//offset
+			pixel = img->img_pxl_ptr + (y * img->line_len + x * (img->b_p_p / 8));	
+			color = *(int)pixel;
+			textures[y][x] = color;			
+			x++;
+		}
+		y++;
+	}
+}
 
 void	load_all_textures(t_data *data)
 {
@@ -33,7 +74,14 @@ void	load_all_textures(t_data *data)
 			exit(1);	
 		}
 		tmp_img.img_pxl_ptr = mlx_get_data_addr(tmp_img.img_ptr, &tmp_img.b_p_p, &tmp_img.line_len, &tmp_img.endian);
-		q
+		data->textures[i] = allocate_textures(width, height);
+		if(!data->textures[i])
+		{
+			printf("Memory allocation failed for texture: %s\n", path[i]);
+			exit(1);
+		}		
+		fill_textures(data->textures[i], tmp_img.img_pxl_ptr, width, height);
 		i++;
 	}
 }
+
