@@ -14,10 +14,10 @@
 #define ROWS 10
 #define COLMS 10
 
-#define NORTH 0
-#define SOUTH 1
-#define WEST  2
-#define EAST  3
+// #define NORTH 0
+// #define SOUTH 1
+// #define WEST  2
+// #define EAST  3
 
 #define WIDTH 1500
 #define HEIGHT 900
@@ -91,6 +91,26 @@ typedef struct ray{
 	char content;
 }t_ray;
 
+typedef struct image
+{
+    enum
+    {
+        NORTH,
+        SOUTH,
+        EAST,
+        WEST,
+    }type;
+    
+	void *img_pxl_ptr;
+    void *img_ptr;
+    char *path;
+    int height;
+    int width;
+    int b_p_p;
+	int endian;
+	int line_len;
+}image;
+
 typedef struct data{
 	void *mlx_ptr;
 	void *mlx_win;
@@ -103,9 +123,7 @@ typedef struct data{
 	int width;
 	int heigth;
 	//textures
-	unsigned int **textures[4]; // 0=N, 1=S, 2=E, 3=W
-    int textures_w[4];
-    int textures_h[4];
+	image *arr;
 	int floor_color;
 	int	ceiling_color;
 	int vertical_hit;
@@ -120,60 +138,61 @@ void rendring_(t_data *data);
 int	ft_strcmp(const char *s1, const char *s2);
 void render_3d(t_data *data);
 void rendring_(t_data *data);
-
 // typedef struct flags
 // {
-// 	int no;
-// 	int so;
-// 	int we;
-// 	int ea;
-// 	int f;
-// 	int c;
-// }dir_flags;
-
-typedef struct config
-{
-	char	*direction;
-	int		flag;
-	char	**texture;
-}			config;
-
-typedef struct textures
-{
-	char	*no;
-	char	*so;
-	char	*we;
-	char	*ea;
-	char	*f;
-	char	*c;
-}			textures;
-
-// *************** parsing ***************
-
-void		parse_floor_ceiling(char *line, config *arr);
-void		parse_dir(char *line, config *arr);
-textures	*init_textures(void);
-int			fill_textures_map(char *file_name);
-config		*init_dir_arr(textures *text);
-config		*init_fc_arr(textures *text);
-void		check_textures(void);
-int			ft_strcmp(const char *s1, const char *s2);
-void		create_map_arr(char *string);
-int			check_argv(int argc, char **argv);
-void		collect_the_map(char *line, int fd);
-void		parse_map(void);
-void		free_and_exit(int status);
-int			open_file(char *file_name);
-int			strlen_2d(char **str);
-void	parse_player(char char_map, int x, int y);
-// global
-textures	**text_func(void);
-char		***the_map(void);
-t_data		*data_func(void);
-// garbage collector
-void 		free_all(void);
-void		*gc_calloc(size_t count, size_t size);
-void		*gc_malloc(size_t size);
-//textures
-void load_all_textures(t_data *data);
-#endif
+	// 	int no;
+	// 	int so;
+	// 	int we;
+	// 	int ea;
+	// 	int f;
+	// 	int c;
+	// }dir_flags;
+	
+	typedef struct config
+	{
+		char	*direction;
+		int		flag;
+		char	**texture;
+	}			config;
+	
+	typedef struct textures
+	{
+		char	*no;
+		char	*so;
+		char	*we;
+		char	*ea;
+		char	*f;
+		char	*c;
+	}			textures;
+	
+	// *************** parsing ***************
+	
+	void		parse_floor_ceiling(char *line, config *arr);
+	void		parse_dir(char *line, config *arr);
+	textures	*init_textures(void);
+	int			fill_textures_map(char *file_name);
+	config		*init_dir_arr(textures *text);
+	config		*init_fc_arr(textures *text);
+	void		check_textures(void);
+	int			ft_strcmp(const char *s1, const char *s2);
+	void		create_map_arr(char *string);
+	int			check_argv(int argc, char **argv);
+	void		collect_the_map(char *line, int fd);
+	void		parse_map(void);
+	void		free_and_exit(int status);
+	int			open_file(char *file_name);
+	int			strlen_2d(char **str);
+	void	parse_player(char char_map, int x, int y);
+	// global
+	textures	**text_func(void);
+	char		***the_map(void);
+	t_data		*data_func(void);
+	// garbage collector
+	void 		free_all(void);
+	void		*gc_calloc(size_t count, size_t size);
+	void		*gc_malloc(size_t size);
+	//textures
+	void    fill_image_arr(void *mlx_ptr, image **arr);
+	image    *init_text_arr(void *mlx_ptr, image **arr, int size);
+	// void load_all_textures(t_data *data);
+	#endif

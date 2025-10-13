@@ -6,11 +6,11 @@
 /*   By: ijoubair <ijoubair@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/10 15:16:43 by ijoubair          #+#    #+#             */
-/*   Updated: 2025/10/04 17:59:01 by ijoubair         ###   ########.fr       */
+/*   Updated: 2025/10/13 16:50:00 by ijoubair         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "header.h"
+#include "../header.h"
 
 int	open_file(char *file_name)
 {
