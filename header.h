@@ -108,6 +108,7 @@ typedef struct data{
     int textures_h[4];
 	int floor_color;
 	int	ceiling_color;
+	int vertical_hit;
 	
 }t_data;
 
