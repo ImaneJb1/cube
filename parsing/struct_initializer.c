@@ -6,35 +6,27 @@
 /*   By: ijoubair <ijoubair@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/02 10:08:40 by ijoubair          #+#    #+#             */
-/*   Updated: 2025/08/12 13:44:03 by ijoubair         ###   ########.fr       */
+/*   Updated: 2025/10/15 14:38:13 by ijoubair         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../header.h"
 
-// dir_flags	*init_flags(void)
-// {
-// 	dir_flags *flags;
-	
-// 	flags = malloc(sizeof(dir_flags));
-// 	if(!flags)
-// 	{
-// 		perror("");
-// 		return(NULL);
-// 	}
-// 	ft_bzero(flags, sizeof(flags));
-// 	return(flags);
-// }
+textures **global_tex(void)
+{
+	static textures *text;
+	return(&text);
+}
 
 textures *init_textures(void)
 {
-	textures *text;
-
-	text = gc_calloc(1, sizeof(textures));
-	if(!text)
+	textures **text;
+	text = global_tex();
+	*text = gc_calloc(1, sizeof(textures));
+	if(!*global_tex())
 	{
 		perror("");
 		return(NULL);
 	}
-	return(text);
+	return(*text);
 }

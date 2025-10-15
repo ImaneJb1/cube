@@ -560,6 +560,7 @@ void render_3d(t_data *data)
 	wall_height = ((SQUARESIZE ) / data->ray.distance) * distance_proj_plane;
 	// printf("wall height = %f \n", wall_height);
 	top_wall = (HEIGHT / 2) - (wall_height / 2);
+	data->ray.top_wall = abs(top_wall);
 	if(top_wall < 0)
 		top_wall = 0;
 	bottom_wall = (HEIGHT / 2) + (wall_height / 2);
@@ -570,13 +571,14 @@ void render_3d(t_data *data)
 		if(y < top_wall)
 			img_pixel_put(data, &data->img, data->ray.id, y, 0x0000ff);
 		else if(y >= top_wall && y <= bottom_wall)
-			img_pixel_put(data, &data->img, data->ray.id, y, 0xff00fff);
+			 //render_walls
 		else if(y > bottom_wall)
-			img_pixel_put(data, &data->img, data->ray.id, y, 0x000000);
+		img_pixel_put(data, &data->img, data->ray.id, y, 0x000000);
 		y++;
-	}
+	}q
 }
-
+		// img_pixel_put(data, &data->img, data->ray.id, y, 0xff00fff); //
+		
 void set_ray_val(double hor_distance, double ver_distance, t_data *data)
 {
 	if(hor_distance > ver_distance)

@@ -14,10 +14,10 @@
 #define ROWS 10
 #define COLMS 10
 
-// #define NORTH 0
-// #define SOUTH 1
-// #define WEST  2
-// #define EAST  3
+#define NORTH 0
+#define SOUTH 1
+#define WEST  2
+#define EAST  3
 
 #define WIDTH 1500
 #define HEIGHT 900
@@ -89,17 +89,13 @@ typedef struct ray{
 	int hit_horiz;
 	int wall_dir;
 	char content;
+	double top_wall;
+	int tex_x; //fin ghanbda nrsem textures dyal lwall
 }t_ray;
 
 typedef struct image
 {
-    enum
-    {
-        NORTH,
-        SOUTH,
-        EAST,
-        WEST,
-    }type;
+    int type;
     
 	void *img_pxl_ptr;
     void *img_ptr;
@@ -109,6 +105,8 @@ typedef struct image
     int b_p_p;
 	int endian;
 	int line_len;
+	double step;
+	double tex_pos;
 }image;
 
 typedef struct data{
@@ -123,6 +121,7 @@ typedef struct data{
 	int width;
 	int heigth;
 	//textures
+	double tex_x;
 	image *arr;
 	int floor_color;
 	int	ceiling_color;
