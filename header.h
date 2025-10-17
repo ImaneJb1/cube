@@ -121,7 +121,7 @@ typedef struct data{
 	int width;
 	int heigth;
 	//textures
-	double tex_x;
+	int tex_x;
 	image *arr;
 	int floor_color;
 	int	ceiling_color;
@@ -194,4 +194,7 @@ void rendring_(t_data *data);
 	void    fill_image_arr(void *mlx_ptr, image **arr);
 	image    *init_text_arr(void *mlx_ptr, image **arr, int size);
 	// void load_all_textures(t_data *data);
+	void    draw_textured_wall(t_data *data, image *texture, double top_wall, double bottom_wall);
+void img_pixel_put(t_data *data, t_img *img, int x, int y, int color);
+image    *init_text_arr(void *mlx_ptr, image **arr, int size);
 	#endif

@@ -545,38 +545,35 @@ void draw_wall(t_data *data, double top_wall, double bottom_wall)
 
 
 
-void render_3d(t_data *data)
-{
-	double distance_proj_plane;
-	double wall_height;
-	double top_wall;
-	double bottom_wall;
-	int y;
+// void render_3d(t_data *data)
+// {
+// 	double distance_proj_plane;
+// 	double wall_height;
+// 	double top_wall;
+// 	double bottom_wall;
+// 	int y;
 
-	y = 0;
-	distance_proj_plane = (WIDTH / 2) / tan(FOV / 2);
-	// printf("distance project plane = %f   %d\n", data->ray.distance, data->ray.id);
-	// printf("ray id   = %d\n", data->ray.id);
-	wall_height = ((SQUARESIZE ) / data->ray.distance) * distance_proj_plane;
-	// printf("wall height = %f \n", wall_height);
-	top_wall = (HEIGHT / 2) - (wall_height / 2);
-	data->ray.top_wall = abs(top_wall);
-	if(top_wall < 0)
-		top_wall = 0;
-	bottom_wall = (HEIGHT / 2) + (wall_height / 2);
-	if(bottom_wall > HEIGHT)
-		bottom_wall = HEIGHT;
-	while(y < HEIGHT)
-	{
-		if(y < top_wall)
-			img_pixel_put(data, &data->img, data->ray.id, y, 0x0000ff);
-		else if(y >= top_wall && y <= bottom_wall)
-			 //render_walls
-		else if(y > bottom_wall)
-		img_pixel_put(data, &data->img, data->ray.id, y, 0x000000);
-		y++;
-	}q
-}
+// 	y = 0;
+// 	distance_proj_plane = (WIDTH / 2) / tan(FOV / 2);
+// 	wall_height = ((SQUARESIZE ) / data->ray.distance) * distance_proj_plane;
+// 	top_wall = (HEIGHT / 2) - (wall_height / 2);
+// 	data->ray.top_wall = abs(top_wall);
+// 	if(top_wall < 0)
+// 		top_wall = 0;
+// 	bottom_wall = (HEIGHT / 2) + (wall_height / 2);
+// 	if(bottom_wall > HEIGHT)
+// 		bottom_wall = HEIGHT;
+// 	while(y < HEIGHT)
+// 	{
+// 		if(y < top_wall)
+// 			img_pixel_put(data, &data->img, data->ray.id, y, 0x0000ff);
+// 		else if(y >= top_wall && y <= bottom_wall)
+// 			img_pixel_put(data, &data->img, data->ray.id, y, 0xFF0000);
+// 		else if(y > bottom_wall)
+// 			img_pixel_put(data, &data->img, data->ray.id, y, 0x000000);
+// 		y++;
+// 	}
+// }
 		// img_pixel_put(data, &data->img, data->ray.id, y, 0xff00fff); //
 		
 void set_ray_val(double hor_distance, double ver_distance, t_data *data)
@@ -725,18 +722,17 @@ void data_init(t_data *data)
 		&data->img.b_p_p, &data->img.line_len, &data->img.endian);
 	init_player(data);
 	init_ray(data);
-	rendring_(data);
 	data->arr = init_text_arr(data->mlx_ptr, &data->arr, 4);
 }
 
 int main(int argc, char **argv)
 {
 	t_data *data;
-
+	
 	data = data_func();
-
+	
 	if(!check_argv(argc, argv))
-		return 0;
+	return 0;
 	if(!fill_textures_map(argv[1]))
 	{
 		free_all();
@@ -745,6 +741,7 @@ int main(int argc, char **argv)
 	check_textures(); // this exits the program in case of faillure 
 	parse_map(); // this exits the program in case of faillure
 	data_init(data);
+	rendring_(data);
 	hook_init(data);
 	mlx_loop(data->mlx_ptr);
 	mlx_destroy_window(data->mlx_ptr, data->mlx_win);
