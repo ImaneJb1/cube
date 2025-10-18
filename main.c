@@ -23,7 +23,7 @@ int is_wall(t_data *data, char *map[], double x, double y, char c)
 		x -= 1;
 	grid_x = floor(x / SQUARESIZE);
 	grid_y = floor(y / SQUARESIZE);
-	printf("%c\n", map[grid_y][grid_x]);
+	// printf("%c\n", map[grid_y][grid_x]);
 	if(grid_x < 0 || grid_y < 0 || grid_x >= data->width || grid_y >= data->heigth)
 		return(1);
 	if(map[grid_y][grid_x] == '1')
@@ -219,7 +219,7 @@ void render_map(t_data *data)
 		{
 			if(data->map[i][j] == '1')
 				color = 0x1A1033;
-			else if(data->map[i][j] == '0')
+			else if(data->map[i][j] == '0' || ft_strchr("SNWE",data->map[i][j]))
 				color = 0x808080;
 			if(color > 0)
 				draw_square(data, j * SQUARESIZE, i * SQUARESIZE, color);
@@ -392,7 +392,7 @@ void calcul_step_H(t_data *data, double *xa, double *ya, double rayangle)
 		*ya = SQUARESIZE;
 	else if(data->ray.is_up)
 		*ya = -SQUARESIZE;
-	*xa = *ya / tan(rayangle);
+	*xa = (int)*ya / tan(rayangle);
 	if(data->ray.is_left && *xa > 0)
 		*xa *= -1;
 	if(data->ray.is_right && *xa < 0)
@@ -451,7 +451,7 @@ void calcul_step_V(t_data *data, double *xa, double *ya, double rayangle)
 		*xa = SQUARESIZE;
 	else if(data->ray.is_left)
 		*xa = -SQUARESIZE;
-	*ya = SQUARESIZE * tan(rayangle);
+	*ya =  (int)SQUARESIZE * tan(rayangle);
 	if(data->ray.is_up && *ya > 0)
 		*ya *= -1;
 	if(data->ray.is_down && *ya < 0)
@@ -718,6 +718,7 @@ void data_init(t_data *data)
 	if (!data->mlx_ptr)
 		exit(1);
 	data->map = map;
+	data->vertical_hit = 0;
 	data->width = get_width(data->map);
 	data->heigth = get_heigth(data->map);
 	data->mlx_win = mlx_new_window(data->mlx_ptr, WIDTH, HEIGHT, "cub3d");

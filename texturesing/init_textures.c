@@ -56,18 +56,18 @@ void set_tex_x(t_data *data, int type)
 {
     double wall_x;
 
-    if (data->ray.hit_vertical)
+    printf ("walhitx=%d, walhity=%d\n", data->ray.walhit_x, data->ray.walhit_y);
+    if(data->vertical_hit == 0)
+    {
+        // printf("horizental\n");                                                                                                                                    
+        wall_x = fmod(data->ray.walhit_x , SQUARESIZE);
+    }
+    else
     {
         // printf("vertical\n");
-        wall_x = fmod(data->ray.walhit_y , SQUARESIZE);
-
+        wall_x = fmod(data->ray.walhit_y, SQUARESIZE);
     }
-    else if(data->ray.hit_horiz)
-    {
-        // printf("horizental\n");                                                                                                                                                      
-        wall_x = fmod(data->ray.walhit_x, SQUARESIZE);
-    }
-
+        
     // Convert wall_x from map space (0→SQUARESIZE) to texture space (0→texture width)
     data->tex_x = (wall_x / SQUARESIZE) * data->arr[type].width;
 
