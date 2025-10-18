@@ -46,9 +46,9 @@ int    get_textures_type(t_data *data)
     else
     {
         if(data->p.p_y > data->ray.walhit_y)
-            return(SOUTH);
-        else
             return(NORTH);
+        else
+            return(SOUTH);
     }
 }
 
@@ -57,17 +57,24 @@ void set_tex_x(t_data *data, int type)
     double wall_x;
 
     if (data->ray.hit_vertical)
-        wall_x = fmod(data->ray.walhit_y, SQUARESIZE);
-    else
+    {
+        // printf("vertical\n");
+        wall_x = fmod(data->ray.walhit_y , SQUARESIZE);
+
+    }
+    else if(data->ray.hit_horiz)
+    {
+        // printf("horizental\n");                                                                                                                                                      
         wall_x = fmod(data->ray.walhit_x, SQUARESIZE);
+    }
 
     // Convert wall_x from map space (0→SQUARESIZE) to texture space (0→texture width)
     data->tex_x = (wall_x / SQUARESIZE) * data->arr[type].width;
 
     // Flip horizontally depending on which side was hit
-    if ((data->ray.hit_vertical && data->ray.walhit_x < data->p.p_x) ||
-        (!data->ray.hit_vertical && data->ray.walhit_y > data->p.p_y))
-        data->tex_x = data->arr[type].width - data->tex_x - 1;
+//     if ((data->ray.hit_vertical && data->ray.walhit_x < data->p.p_x) ||
+//         (!data->ray.hit_vertical && data->ray.walhit_y > data->p.p_y))
+//         data->tex_x = data->arr[type].width - data->tex_x - 1;
 }
 
 
@@ -107,7 +114,7 @@ void    render_3d( t_data *data)
     distance_proj_plane = (WIDTH / 2) / tan(FOV / 2);
 	wall_height = ((SQUARESIZE ) / data->ray.distance) * distance_proj_plane;
 	top_wall = (HEIGHT / 2) - (wall_height / 2);
-	data->ray.top_wall = abs(top_wall);
+	data->ray.top_wall = top_wall;
 	if(top_wall < 0)
         top_wall = 0;
 	bottom_wall = (HEIGHT / 2) + (wall_height / 2);
@@ -119,14 +126,13 @@ void    render_3d( t_data *data)
     set_tex_x(data, type);
     set_step(wall_height, &data->arr[type]);
     y = 0;
-
     while (y < HEIGHT)
     {
         if (y < top_wall)
-            img_pixel_put(data, &data->img, data->ray.id, y, 0xFFFFFF);
+            img_pixel_put(data, &data->img, data->ray.id, y, 0xF00FFF);
         else if (y >= top_wall && y <= bottom_wall)
         {
-            draw_textured_wall(data, &data->arr[type],top_wall,bottom_wall);
+            draw_textured_wall(data, &data->arr[type],data->ray.top_wall ,bottom_wall);
             y = bottom_wall + 1;
             continue;
         }
@@ -155,6 +161,8 @@ void draw_textured_wall(t_data *data, image *texture, double top_wall, double bo
     int color;
 
     set_tex_pos(top_wall, texture);
+    if(top_wall < 0)
+        top_wall = 0;
     for (y = (int)top_wall; y <= (int)bottom_wall; y++)
     {
         tex_y = (int)texture->tex_pos;
@@ -163,7 +171,6 @@ void draw_textured_wall(t_data *data, image *texture, double top_wall, double bo
 
         color = *(int *)(texture->img_pxl_ptr + tex_y * texture->line_len + data->tex_x * (texture->b_p_p / 8));
         img_pixel_put(data, &data->img, data->ray.id, y, color);
-
         texture->tex_pos += texture->step;
     }
 }

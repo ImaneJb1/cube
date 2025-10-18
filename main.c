@@ -23,6 +23,7 @@ int is_wall(t_data *data, char *map[], double x, double y, char c)
 		x -= 1;
 	grid_x = floor(x / SQUARESIZE);
 	grid_y = floor(y / SQUARESIZE);
+	printf("%c\n", map[grid_y][grid_x]);
 	if(grid_x < 0 || grid_y < 0 || grid_x >= data->width || grid_y >= data->heigth)
 		return(1);
 	if(map[grid_y][grid_x] == '1')
@@ -59,6 +60,9 @@ void update_player(t_data *data)
 
 	next_x = data->p.p_x + (cos(data->p.view_angle) * data->p.move_dir * data->p.move_speed) + data->p.step_x;
 	next_y = data->p.p_y + (sin(data->p.view_angle) * data->p.move_dir * data->p.move_speed) + data->p.step_y;
+	int grid_x = floor(next_x / SQUARESIZE);
+	int grid_y = floor(next_y / SQUARESIZE);
+	printf("%c\n", data->map[grid_y][grid_x]);
 	if(!is_wall(data, data->map, next_x, next_y, 'n')) //next_x *1.5 
 	{
 		data->p.p_y = next_y;
@@ -578,18 +582,18 @@ void draw_wall(t_data *data, double top_wall, double bottom_wall)
 		
 void set_ray_val(double hor_distance, double ver_distance, t_data *data)
 {
-	if(hor_distance > ver_distance)
+	if(hor_distance >= ver_distance)
 	{
 		// printf("VER IS SMALLER = %f\n", ver_distance);
-		data->vertical_hit = 0;
+		data->vertical_hit = 1;
 		data->ray.walhit_x = data->ray.ver_walhit_x;
 		data->ray.walhit_y = data->ray.ver_walhit_y;
 		data->ray.distance = ver_distance * cos(normlizing((data->p.view_angle) - data->ray.rayangle));
 	}
-	else if(hor_distance <= ver_distance)
+	else if(hor_distance < ver_distance)
 	{
 		// printf("HOR IS SMALLER = %f\n", hor_distance);
-		data->vertical_hit = 1;
+		data->vertical_hit = 0;
 		data->ray.walhit_x = data->ray.hor_walhit_x;
 		data->ray.walhit_y = data->ray.hor_walhit_y;
 		data->ray.distance = hor_distance * cos(normlizing((data->p.view_angle )- data->ray.rayangle));
@@ -616,7 +620,7 @@ void cast_allrays(t_data *data)
 		set_ray_val(hor_distance, ver_distance, data);
 		// cast_ray(data, rayangle);
 		// printf("ray %d distance = %f  ver_dis %f\n", data->ray.id, data->ray.distance, ver_distance);
-		render_3d(data); 
+		// render_3d(data); 
 		init_ray(data);
 		rayangle += (double)FOV / (double)NUM_RAYS;
 		i++;
@@ -625,8 +629,8 @@ void cast_allrays(t_data *data)
 
 void rendring_(t_data *data)
 {
-	// render_map(data);
-	// put_player(data);
+	render_map(data);
+	put_player(data);
 	cast_allrays(data);
 	mlx_put_image_to_window(data->mlx_ptr, data->mlx_win, data->img.img_ptr, 0,
 		0);
