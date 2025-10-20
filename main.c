@@ -581,14 +581,14 @@ void set_ray_val(double hor_distance, double ver_distance, t_data *data)
 		// printf("VER IS SMALLER = %f\n", ver_distance);
 		data->ray.walhit_x = data->ray.ver_walhit_x;
 		data->ray.walhit_y = data->ray.ver_walhit_y;
-		data->ray.distance = ver_distance * cos(normlizing((data->p.view_angle) - rayangle));
+		data->ray.distance = ver_distance * cos(normlizing((data->p.view_angle) - data->ray.rayangle));
 	}
 	else if(hor_distance <= ver_distance)
 	{
 		// printf("HOR IS SMALLER = %f\n", hor_distance);
 		data->ray.walhit_x = data->ray.hor_walhit_x;
 		data->ray.walhit_y = data->ray.hor_walhit_y;
-		data->ray.distance = hor_distance * cos(normlizing((data->p.view_angle )- rayangle));
+		data->ray.distance = hor_distance * cos(normlizing((data->p.view_angle )- data->ray.rayangle));
 	}
 }
 
