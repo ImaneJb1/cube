@@ -56,7 +56,6 @@ void set_tex_x(t_data *data, int type)
 {
     double wall_x;
 
-    printf ("walhitx=%d, walhity=%d\n", data->ray.walhit_x, data->ray.walhit_y);
     if(data->vertical_hit == 0)
     {
         // printf("horizental\n");                                                                                                                                    

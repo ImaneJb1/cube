@@ -10,7 +10,7 @@
 # include <fcntl.h>
 # include <limits.h>
 
-#define SQUARESIZE 32
+#define SQUARESIZE 10
 #define ROWS 10
 #define COLMS 10
 
@@ -65,7 +65,7 @@ typedef struct player{
 	double view_angle;
 	int move_dir;
 	int rot_dir;
-	int move_speed;
+	double move_speed;
 	double rot_speed;
 	double step_x;
 	double step_y;

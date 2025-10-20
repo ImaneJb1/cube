@@ -221,6 +221,8 @@ void render_map(t_data *data)
 				color = 0x1A1033;
 			else if(data->map[i][j] == '0' || ft_strchr("SNWE",data->map[i][j]))
 				color = 0x808080;
+			else if(data->map[i][j] == 'D')
+				color = 0xFFF000;
 			if(color > 0)
 				draw_square(data, j * SQUARESIZE, i * SQUARESIZE, color);
 			j++;
@@ -620,7 +622,7 @@ void cast_allrays(t_data *data)
 		set_ray_val(hor_distance, ver_distance, data);
 		// cast_ray(data, rayangle);
 		// printf("ray %d distance = %f  ver_dis %f\n", data->ray.id, data->ray.distance, ver_distance);
-		// render_3d(data); 
+		render_3d(data); 
 		init_ray(data);
 		rayangle += (double)FOV / (double)NUM_RAYS;
 		i++;
@@ -629,8 +631,8 @@ void cast_allrays(t_data *data)
 
 void rendring_(t_data *data)
 {
-	render_map(data);
-	put_player(data);
+	// render_map(data);
+	// put_player(data);
 	cast_allrays(data);
 	mlx_put_image_to_window(data->mlx_ptr, data->mlx_win, data->img.img_ptr, 0,
 		0);
@@ -674,7 +676,7 @@ int get_heigth(char *map[])
 
 void init_player(t_data *data)
 {
-	data->p.move_speed = 2;
+	data->p.move_speed = 0.5;
 	data->p.move_dir = 0;
 	data->p.rot_dir = 0;
 	data->p.step_x = 0;
