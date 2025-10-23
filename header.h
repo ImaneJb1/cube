@@ -126,6 +126,8 @@ typedef struct data{
 	int floor_color;
 	int	ceiling_color;
 	int vertical_hit;
+	int floor_rgb[3];
+	int ceiling_rgb[3];
 	
 }t_data;
 
