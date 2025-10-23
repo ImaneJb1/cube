@@ -154,6 +154,7 @@ void rendring_(t_data *data);
 		char	*direction;
 		int		flag;
 		char	**texture;
+		int		*color;
 	}			config;
 	
 	typedef struct textures
@@ -168,12 +169,12 @@ void rendring_(t_data *data);
 	
 	// *************** parsing ***************
 	
-	void		parse_floor_ceiling(char *line, config *arr);
+	void		parse_floor_ceiling(char *line, config *arr, t_data *data);
 	void		parse_dir(char *line, config *arr);
 	textures	*init_textures(void);
-	int			fill_textures_map(char *file_name);
+	int			fill_textures_map(char *file_name, t_data *data);
 	config		*init_dir_arr(textures *text);
-	config		*init_fc_arr(textures *text);
+	config		*init_fc_arr(textures *text, t_data *data);
 	void		check_textures(void);
 	int			ft_strcmp(const char *s1, const char *s2);
 	void		create_map_arr(char *string);
@@ -183,7 +184,9 @@ void rendring_(t_data *data);
 	void		free_and_exit(int status);
 	int			open_file(char *file_name);
 	int			strlen_2d(char **str);
-	void	parse_player(char char_map, int x, int y);
+	void		parse_player(char char_map, int x, int y);
+	int			get_hex_color(char *rgb);
+	
 	// global
 	textures	**text_func(void);
 	char		***the_map(void);

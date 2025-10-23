@@ -1,5 +1,5 @@
-C 226,30,0
-F 220,100,0
+C 0,255,255
+F 76,153,0
 SO textures/p1.xpm
 NO textures/p2.xpm
 WE textures/p3.xpm

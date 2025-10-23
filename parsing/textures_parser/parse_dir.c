@@ -6,7 +6,7 @@
 /*   By: ijoubair <ijoubair@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/02 10:22:42 by ijoubair          #+#    #+#             */
-/*   Updated: 2025/08/14 12:37:37 by ijoubair         ###   ########.fr       */
+/*   Updated: 2025/10/23 14:30:54 by ijoubair         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ void	parse_dir(char *line, config *arr)
 		{
 			if(arr[i].flag == 1) // duplicated
 			{
-				printf("finawa ghaadii\n");
+				printf("textures are dubplicated\n");
 				free_and_exit(1);
 			}
 			arr[i].flag = 1;

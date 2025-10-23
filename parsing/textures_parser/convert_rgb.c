@@ -6,28 +6,28 @@
 /*   By: ijoubair <ijoubair@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/22 15:50:41 by ijoubair          #+#    #+#             */
-/*   Updated: 2025/10/23 13:50:50 by ijoubair         ###   ########.fr       */
+/*   Updated: 2025/10/23 14:26:33 by ijoubair         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../header.h"
+#include "header.h"
 
 int	rgb_to_hex(int r, int g, int b)
 {
 	return (r << 16 | g << 8 | b);
 }
 
-void	split_rgb(char *rgb, int *rgb_arr[3])
+int	get_hex_color(char *rgb)
 {
 	char *r;
 	char *g;
 	char *b;
+	int hex_color;
 	
 	r = (ft_split(rgb, ','))[0];
 	g = (ft_split(rgb, ','))[1];
 	b = (ft_split(rgb, ','))[2];
-	rgb_arr[0] = ft_atoi(r);
-	rgb_arr[1] = ft_atoi(g);
-	rgb_arr[3] = ft_atoi(b);
+	hex_color = rgb_to_hex(ft_atoi(r), ft_atoi(g), ft_atoi(b));
+	return(hex_color);
 }
 

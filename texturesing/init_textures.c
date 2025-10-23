@@ -5,11 +5,8 @@ image    *init_text_arr(void *mlx_ptr, image **arr, int size)
     int i;
 
     i = 0;
-    printf("text\n");
     *arr = malloc(sizeof(image) * size);
     fill_image_arr(mlx_ptr, arr);
-    for(int i=0; i < 4; i++)
-        printf(" jjjjjjjjjjj %d\n", (*arr)[i].height);
     return(*arr);
 }
 
@@ -128,7 +125,7 @@ void    render_3d( t_data *data)
     while (y < HEIGHT)
     {
         if (y < top_wall)
-            img_pixel_put(data, &data->img, data->ray.id, y, 0xF00FFF);
+            img_pixel_put(data, &data->img, data->ray.id, y, data->ceiling_color);
         else if (y >= top_wall && y <= bottom_wall)
         {
             draw_textured_wall(data, &data->arr[type],data->ray.top_wall ,bottom_wall);
@@ -138,7 +135,7 @@ void    render_3d( t_data *data)
         else if(y > bottom_wall)
         {
             // floor
-            img_pixel_put(data, &data->img, data->ray.id, y, 0xFFFFFF);
+            img_pixel_put(data, &data->img, data->ray.id, y, data->floor_color);
         }
 
         y++;
