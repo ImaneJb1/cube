@@ -45,7 +45,8 @@ SRCS = $(wildcard *.c) \
        $(wildcard parsing/*.c) \
        $(wildcard parsing/get_next_line/*.c) \
        $(wildcard parsing/map_parsing/*.c) \
-       $(wildcard parsing/textures_parser/*.c)
+       $(wildcard parsing/textures_parser/*.c)\
+       $(wildcard raycasting/*/*.c)
 
 OBJ = $(SRCS:.c=.o)
 
