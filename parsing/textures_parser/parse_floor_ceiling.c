@@ -6,13 +6,13 @@
 /*   By: ijoubair <ijoubair@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/04 11:45:07 by ijoubair          #+#    #+#             */
-/*   Updated: 2025/08/14 12:31:33 by ijoubair         ###   ########.fr       */
+/*   Updated: 2025/10/23 14:22:58 by ijoubair         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../header.h"
 
-config	*init_fc_arr(textures *text)
+config	*init_fc_arr(textures *text, t_data *data)
 {
 	config *arr;
 	int i;
@@ -31,7 +31,9 @@ config	*init_fc_arr(textures *text)
 	}
 	arr[0].direction = "F ";
 	arr[0].texture = &text->f;
+	arr[0].color = &data->floor_color;
 	arr[1].direction = "C ";
+	arr[1].color = &data->ceiling_color;
 	arr[1].texture = &text->c;
 	return(arr);
 }
@@ -89,7 +91,7 @@ char	*join_2d_arr(char **splited)
 	return(joined);
 }
 
-void	parse_floor_ceiling(char *line, config *arr)
+void	parse_floor_ceiling(char *line, config *arr, t_data *data)
 {
 	int i;
 	char **splited;
@@ -112,6 +114,7 @@ void	parse_floor_ceiling(char *line, config *arr)
 			line = join_2d_arr(splited);
 			is_valid_format(line);
 			(*arr[i].texture) = line;
+			(*arr[i].color) = get_hex_color(line);
 		}
 		i++;
 	}

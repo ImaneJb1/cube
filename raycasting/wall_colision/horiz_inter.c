@@ -9,7 +9,7 @@ int is_wall(t_data *data, char *map[], double x, double y, char c)
 		y -= 1;
 	if(c == 'v' && data->ray.is_left )
 		x -= 1;
-	grid_x = floor(x / SQUARESIZE);
+	grid_x = floor(x  / SQUARESIZE);
 	grid_y = floor(y / SQUARESIZE);
 	if(grid_x < 0 || grid_y < 0 || grid_x >= data->width || grid_y >= data->heigth)
 		return(1);

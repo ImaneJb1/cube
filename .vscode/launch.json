@@ -6,12 +6,7 @@
         "type": "cppdbg",
         "request": "launch",
         "program": "${workspaceFolder}/a.out",
-        "args": [
-          // "--leak-check=full",
-          // "--track-origins=yes",
-          // "--show-leak-kinds=all",
-          // "${workspaceFolder}/a.out"
-          "maps/lwasakh.cub"
+        "args": ["map.cub"
         ],
         "stopAtEntry": false,
         "cwd": "${workspaceFolder}",

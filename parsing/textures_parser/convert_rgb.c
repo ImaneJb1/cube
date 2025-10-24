@@ -1,27 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   open_file.c                                        :+:      :+:    :+:   */
+/*   convert_rgb.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ijoubair <ijoubair@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/08/10 15:16:43 by ijoubair          #+#    #+#             */
-/*   Updated: 2025/10/13 16:50:00 by ijoubair         ###   ########.fr       */
+/*   Created: 2025/10/22 15:50:41 by ijoubair          #+#    #+#             */
+/*   Updated: 2025/10/23 14:26:33 by ijoubair         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../header.h"
+#include "header.h"
 
-int	open_file(char *file_name)
+int	rgb_to_hex(int r, int g, int b)
 {
-	int	fd;
-
-	fd = open(file_name, O_RDONLY);
-	if(fd < 0)
-	{
-		perror("");
-		free_and_exit(1);
-		return(0);
-	}  
-	return(fd);
+	return (r << 16 | g << 8 | b);
 }
+
+int	get_hex_color(char *rgb)
+{
+	char *r;
+	char *g;
+	char *b;
+	int hex_color;
+	
+	r = (ft_split(rgb, ','))[0];
+	g = (ft_split(rgb, ','))[1];
+	b = (ft_split(rgb, ','))[2];
+	hex_color = rgb_to_hex(ft_atoi(r), ft_atoi(g), ft_atoi(b));
+	return(hex_color);
+}
+

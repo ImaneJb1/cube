@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   map_parser.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nel-khad <nel-khad@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ijoubair <ijoubair@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/09 15:29:07 by ijoubair          #+#    #+#             */
-/*   Updated: 2025/08/26 13:06:13 by nel-khad         ###   ########.fr       */
+/*   Updated: 2025/10/20 16:04:32 by ijoubair         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ int is_inside_the_map(int x, int y, char **map)
 
 int	is_valid_char(char c)
 {
-	if(c != '1' && c != '0' && c != 'N' && c != 'D' && c != ' ' && c != '\n'
+	if(c != '1' && c != '0' && c != 'N' && c != ' ' && c != '\n'
 	&& c != 'E' && c != 'W' && c != 'S') 
 		return(0);
 	return(1);
