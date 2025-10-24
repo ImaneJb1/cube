@@ -6,7 +6,7 @@
 /*   By: ijoubair <ijoubair@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/01 15:11:57 by ijoubair          #+#    #+#             */
-/*   Updated: 2025/10/23 14:25:13 by ijoubair         ###   ########.fr       */
+/*   Updated: 2025/10/24 15:12:01 by ijoubair         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,7 @@ int fill_textures_map(char *file_name, t_data *data)
 			collect_the_map(line, fd);
 		line = ft_strtrim(line, " \n\t"); // remove spaces from jnab
 		parse_dir(line, arr_dir);
-		parse_floor_ceiling(line, arr_fc);
+		parse_floor_ceiling(line, arr_fc, data);
 		line = get_next_line(fd);
 	}
 	return (1);

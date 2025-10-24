@@ -6,11 +6,11 @@
 /*   By: ijoubair <ijoubair@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/22 15:50:41 by ijoubair          #+#    #+#             */
-/*   Updated: 2025/10/23 14:26:33 by ijoubair         ###   ########.fr       */
+/*   Updated: 2025/10/24 15:13:09 by ijoubair         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "header.h"
+#include "../../header.h"
 
 int	rgb_to_hex(int r, int g, int b)
 {

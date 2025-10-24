@@ -1,6 +1,6 @@
 NAME    = cub
 CC      = cc
-CFLAGS  = -I./ -MMD -MP 
+CFLAGS  = 
 MLX     = -lmlx -lXext -lX11 -lm
 
 OBJ_D   = obj
