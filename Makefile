@@ -30,7 +30,7 @@ $(OBJ_D)/%.o : %.c
 	@mkdir -p $(dir $@)
 	$(CC) $(CFLAGS) -c $< -o $@
 
-$(NAME): $(OBJ) $(LIB)
+$(NAME): $(OBJ) $(LIB) $(HEADER)
 	$(CC) $(OBJ) $(LIB) $(MLX) -o $(NAME)
 	@echo "✅ Build completed successfully!"
 

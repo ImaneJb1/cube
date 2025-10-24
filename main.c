@@ -145,14 +145,7 @@
 // 	mlx_loop_hook(data->mlx_ptr, moves_loop, data);
 // }
 
-// void img_pixel_put(t_data *data, t_img *img, int x, int y, int color)
-// {
-// 	int offset;
-// 	if (x < 0 || y < 0 || x >= WIDTH|| y >= HEIGHT)
-//         return;
-// 	offset = (img->line_len * y) + (x * (img->b_p_p / 8));
-// 	*((unsigned int *)(img->img_pxl_ptr + offset)) = color;
-// }
+
 
 // void draw_circle(t_data *data, int color)
 // {
@@ -172,7 +165,7 @@
 // 			dx = x - data->p.p_x;
 // 			dy = y - data->p.p_y;
 // 			if (dx*dx + dy*dy <= radius*radius)//chack if the point inside
-// 				img_pixel_put(data, &data->img, x, y, color);
+// 				my_img_pixel_put(data, &data->img, x, y, color);
 // 			x++; 
 // 		}
 // 		y++;
@@ -193,9 +186,9 @@
 // 		while(j < SQUARESIZE)
 // 		{
 // 			// if(j == SQUARESIZE - 1 || i == SQUARESIZE -1 || i == 0 || j == 0)
-// 			// 	img_pixel_put(data, &data->img, x + j, y + i, 0x000000);
+// 			// 	my_img_pixel_put(data, &data->img, x + j, y + i, 0x000000);
 // 			// else
-// 				img_pixel_put(data, &data->img, x + j, y + i, color);
+// 				my_img_pixel_put(data, &data->img, x + j, y + i, color);
 // 			j++;
 // 		}
 // 		i++;
@@ -267,7 +260,7 @@
 // 	D = 2*line.dx - line.dy;
 // 	while(i <= line.dy)
 // 	{
-// 		img_pixel_put(data, &data->img,floor(line.x), floor(line.y), 0x00ff00);
+// 		my_img_pixel_put(data, &data->img,floor(line.x), floor(line.y), 0x00ff00);
 // 		if(D >= 0)
 // 		{  
 // 			line.x += line.move_x;
@@ -290,7 +283,7 @@
 // 	D = 2*line.dy - line.dx;
 // 	while(i <= line.dx)
 // 	{
-// 		img_pixel_put(data, &data->img,floor(line.x), floor(line.y), 0x00ff00);
+// 		my_img_pixel_put(data, &data->img,floor(line.x), floor(line.y), 0x00ff00);
 // 		if(D >= 0)
 // 		{
 // 			line.y += line.move_y;
@@ -322,7 +315,7 @@
 
 //     for (int i = 0; i <= steps; i++)
 //     {
-//         img_pixel_put(data, &data->img, (int)x, (int)y, color);
+//         my_img_pixel_put(data, &data->img, (int)x, (int)y, color);
 //         x += x_inc;
 //         y += y_inc;
 //     }
@@ -336,7 +329,7 @@
 
 // 	dx = fabs(x - data->p.p_x);
 // 	dy = fabs(y - data->p.p_y);
-// 	img_pixel_put(data, &data->img,x, y, 0xFF69B4);
+// 	my_img_pixel_put(data, &data->img,x, y, 0xFF69B4);
 // 	// if(dx >= dy)
 // 	// {
 // 	// 	draw_horiz(data, x, y);
@@ -351,7 +344,7 @@
 // 	// draw_line(data,data->p.p_x, data->p.p_y, floor(data->ray.walhit_x), floor(data->ray.walhit_y), 0x000000);
 // 	// bresenhams(data, data->ray.walhit_x, data->ray.walhit_y);
 	
-// 	img_pixel_put(data, &data->img, data->ray.walhit_x, data->ray.walhit_y, 0x00ff00);
+// 	my_img_pixel_put(data, &data->img, data->ray.walhit_x, data->ray.walhit_y, 0x00ff00);
 // }
 
 // double calculate_distance(t_data *data, double x_d , double y_d)
@@ -506,7 +499,7 @@
 // 		x = 0;
 // 		while(x < WIDTH)
 // 		{
-// 			img_pixel_put(data, &data->img, x, y, 0xff0000);
+// 			my_img_pixel_put(data, &data->img, x, y, 0xff0000);
 // 			x++;
 // 		}
 // 		y++;
@@ -520,7 +513,7 @@
 // 	y = 0;
 // 	while(y < top_wall)
 // 	{
-// 		img_pixel_put(data, &data->img, data->ray.id, y, 0x0000ff);
+// 		my_img_pixel_put(data, &data->img, data->ray.id, y, 0x0000ff);
 // 		y++;
 // 	}
 // }
@@ -531,7 +524,7 @@
 // 	y = HEIGHT;
 // 	while(y > bottom_wall)
 // 	{
-// 		img_pixel_put(data, &data->img, data->ray.id, y, 0x00ff00);
+// 		my_img_pixel_put(data, &data->img, data->ray.id, y, 0x00ff00);
 // 		y--;
 // 	}
 // }
@@ -543,7 +536,7 @@
 // 	y = top_wall;
 // 	while(y < bottom_wall)
 // 	{
-// 		img_pixel_put(data, &data->img, data->ray.id, y, 0xffffff);
+// 		my_img_pixel_put(data, &data->img, data->ray.id, y, 0xffffff);
 // 		y++;
 // 	}
 // }
@@ -571,15 +564,15 @@
 // // 	while(y < HEIGHT)
 // // 	{
 // // 		if(y < top_wall)
-// // 			img_pixel_put(data, &data->img, data->ray.id, y, 0x0000ff);
+// // 			my_img_pixel_put(data, &data->img, data->ray.id, y, 0x0000ff);
 // // 		else if(y >= top_wall && y <= bottom_wall)
-// // 			img_pixel_put(data, &data->img, data->ray.id, y, 0xFF0000);
+// // 			my_img_pixel_put(data, &data->img, data->ray.id, y, 0xFF0000);
 // // 		else if(y > bottom_wall)
-// // 			img_pixel_put(data, &data->img, data->ray.id, y, 0x000000);
+// // 			my_img_pixel_put(data, &data->img, data->ray.id, y, 0x000000);
 // // 		y++;
 // // 	}
 // // }
-// 		// img_pixel_put(data, &data->img, data->ray.id, y, 0xff00fff); //
+// 		// my_img_pixel_put(data, &data->img, data->ray.id, y, 0xff00fff); //
 		
 // void set_ray_val(double hor_distance, double ver_distance, t_data *data)
 // {

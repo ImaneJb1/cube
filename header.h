@@ -110,6 +110,18 @@ typedef struct image
 	double tex_pos;
 }image;
 
+
+typedef struct weapon
+{
+	void *img_ptr;
+	void *pxl_ptr;
+	int height;
+	int width;
+	int b_p_p;
+	int endian;
+	int line_len;
+}t_weapon;
+
 typedef struct data{
 	void *mlx_ptr;
 	void *mlx_win;
@@ -129,6 +141,7 @@ typedef struct data{
 	int vertical_hit;
 	int floor_rgb[3];
 	int ceiling_rgb[3];
+	t_weapon weapon;
 	
 }t_data;
 
@@ -138,7 +151,7 @@ void reset(t_data *data);
 int press_x(t_data *data);
 int	press_key(int keysem, t_data *data);
 int release_key(int keysem, t_data *data);
-void img_pixel_put(t_data *data, t_img *img, int x, int y, int color);
+// void img_pixel_put(t_data *data, t_img *img, int x, int y, int color);
 void	hook_init(t_data *data);
 
 //**********randring******** */
@@ -237,6 +250,12 @@ void rendring_(t_data *data);
 	image    *init_text_arr(void *mlx_ptr, image **arr, int size);
 	// void load_all_textures(t_data *data);
 	void    draw_textured_wall(t_data *data, image *texture, double top_wall, double bottom_wall);
-void img_pixel_put(t_data *data, t_img *img, int x, int y, int color);
-image    *init_text_arr(void *mlx_ptr, image **arr, int size);
-	#endif
+	void my_img_pixel_put(t_data *data, t_img *img, int x, int y, int color);
+	image    *init_text_arr(void *mlx_ptr, image **arr, int size);
+	//weapon
+	void	init_weapon(t_data *data);
+	void	put_weapon(t_data *data);
+
+#endif
+
+

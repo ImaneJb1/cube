@@ -8,7 +8,7 @@ void draw_ceiling(t_data *data, double top_wall)
 	y = 0;
 	while(y < top_wall)
 	{
-		img_pixel_put(data, &data->img, data->ray.id, y, 0x0000ff);
+		my_img_pixel_put(data, &data->img, data->ray.id, y, 0x0000ff);
 		y++;
 	}
 }
@@ -20,7 +20,7 @@ void draw_floor(t_data *data, double bottom_wall)
 	y = HEIGHT;
 	while(y > bottom_wall)
 	{
-		img_pixel_put(data, &data->img, data->ray.id, y, 0x00ff00);
+		my_img_pixel_put(data, &data->img, data->ray.id, y, 0x00ff00);
 		y--;
 	}
 }
@@ -32,7 +32,7 @@ void draw_wall(t_data *data, double top_wall, double bottom_wall)
 	y = top_wall;
 	while(y < bottom_wall)
 	{
-		img_pixel_put(data, &data->img, data->ray.id, y, 0xffffff);
+		my_img_pixel_put(data, &data->img, data->ray.id, y, 0xffffff);
 		y++;
 	}
 }

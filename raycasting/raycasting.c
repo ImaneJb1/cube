@@ -3,7 +3,7 @@
 void cast_ray(t_data *data, double rayangle)
 {
 	// draw_line(data,data->p.p_x, data->p.p_y, floor(data->ray.walhit_x), floor(data->ray.walhit_y), 0x000000);
-	img_pixel_put(data, &data->img, data->ray.walhit_x, data->ray.walhit_y, 0x00ff00);
+	my_img_pixel_put(data, &data->img, data->ray.walhit_x, data->ray.walhit_y, 0x00ff00);
 }
 
 double calculate_distance(t_data *data, double x_d , double y_d)

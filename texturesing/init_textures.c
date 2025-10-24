@@ -125,7 +125,7 @@ void    render_3d( t_data *data)
     while (y < HEIGHT)
     {
         if (y < top_wall)
-            img_pixel_put(data, &data->img, data->ray.id, y, data->ceiling_color);
+            my_img_pixel_put(data, &data->img, data->ray.id, y, data->ceiling_color);
         else if (y >= top_wall && y <= bottom_wall)
         {
             draw_textured_wall(data, &data->arr[type],data->ray.top_wall ,bottom_wall);
@@ -135,19 +135,20 @@ void    render_3d( t_data *data)
         else if(y > bottom_wall)
         {
             // floor
-            img_pixel_put(data, &data->img, data->ray.id, y, data->floor_color);
+            my_img_pixel_put(data, &data->img, data->ray.id, y, data->floor_color);
         }
 
         y++;
     } 
 
 }
-void my_mlx_pixel_put(t_img img, int x, int y, int color)
+void my_img_pixel_put(t_data *data, t_img *img, int x, int y, int color)
 {
-    char *dst;
-
-    dst = img.img_pxl_ptr + (y * img.line_len + x * (img.b_p_p / 8));
-    *(unsigned int *)dst = color;
+	int offset;
+	if (x < 0 || y < 0 || x >= WIDTH|| y >= HEIGHT)
+        return;
+	offset = (img->line_len * y) + (x * (img->b_p_p / 8));
+	*((unsigned int *)(img->img_pxl_ptr + offset)) = color;
 }
 
 void draw_textured_wall(t_data *data, image *texture, double top_wall, double bottom_wall)
@@ -166,7 +167,7 @@ void draw_textured_wall(t_data *data, image *texture, double top_wall, double bo
             tex_y = texture->height - 1;
 
         color = *(int *)(texture->img_pxl_ptr + tex_y * texture->line_len + data->tex_x * (texture->b_p_p / 8));
-        img_pixel_put(data, &data->img, data->ray.id, y, color);
+        my_img_pixel_put(data, &data->img, data->ray.id, y, color);
         texture->tex_pos += texture->step;
     }
 }
