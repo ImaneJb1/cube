@@ -25,6 +25,7 @@
 
 #define RES 4
 #define NUM_RAYS WIDTH
+#define COLISION_MARG 2
 
 typedef struct s_line
 {
@@ -131,11 +132,47 @@ typedef struct data{
 	
 }t_data;
 
-void init_ray(t_data *data);
-int get_heigth(char *map[]);
-int get_width(char *map[]);
+
+//*******mlx***** */
+void reset(t_data *data);
 int press_x(t_data *data);
+int	press_key(int keysem, t_data *data);
+int release_key(int keysem, t_data *data);
+void img_pixel_put(t_data *data, t_img *img, int x, int y, int color);
+void	hook_init(t_data *data);
+
+//**********randring******** */
+void draw_circle(t_data *data, int color);
+void draw_square(t_data *data, double x, double y, int color);
+void put_player(t_data *data);
+void render_map(t_data *data);
 void rendring_(t_data *data);
+void draw_ceiling(t_data *data, double top_wall);
+void draw_floor(t_data *data, double bottom_wall);
+void draw_wall(t_data *data, double top_wall, double bottom_wall);
+
+//**********colising***********/
+int is_wall(t_data *data, char *map[], double x, double y, char c);
+double find_hor_inter(t_data *data, double rayangle);
+double find_ver_inter(t_data *data, double rayangle);
+
+//***********initialisation******* */
+void init_player(t_data *data);
+int get_width(char *map[]);
+int get_heigth(char *map[]);
+void init_ray(t_data *data);
+void data_init(t_data *data);
+
+//***********moves**********/
+int moves_loop(t_data *data);
+double normlizing(double angle);
+
+//***********rays*******/
+void cast_ray(t_data *data, double rayangle);
+double calculate_distance(t_data *data, double x_d , double y_d);
+void cast_allrays(t_data *data);
+
+
 int	ft_strcmp(const char *s1, const char *s2);
 void render_3d(t_data *data);
 void rendring_(t_data *data);

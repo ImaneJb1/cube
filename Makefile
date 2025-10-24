@@ -7,6 +7,13 @@ OBJ_D   = obj
 LIB     = parsing/libft/libft.a
 
 # Collect all sources
+# SRCS = $(wildcard garbage_collector/*.c) \
+#        $(wildcard raycasting/*.c) \
+#        $(wildcard parsing/*.c) \
+#        $(wildcard parsing/get_next_line/*.c) \
+#        $(wildcard parsing/map_parsing/*.c) \
+#        $(wildcard parsing/textures_parser/*.c)\
+#        $(wildcard raycasting/*/*.c)
 SRCS = $(shell find . -name "*.c")
 OBJ  = $(SRCS:%.c=$(OBJ_D)/%.o)
 # DEP  = $(OBJ:.o=.d)
