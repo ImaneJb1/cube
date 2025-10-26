@@ -63,14 +63,7 @@ void set_tex_x(t_data *data, int type)
         // printf("vertical\n");
         wall_x = fmod(data->ray.walhit_y, SQUARESIZE);
     }
-        
-    // Convert wall_x from map space (0→SQUARESIZE) to texture space (0→texture width)
     data->tex_x = (wall_x / SQUARESIZE) * data->arr[type].width;
-
-    // Flip horizontally depending on which side was hit
-//     if ((data->ray.hit_vertical && data->ray.walhit_x < data->p.p_x) ||
-//         (!data->ray.hit_vertical && data->ray.walhit_y > data->p.p_y))
-//         data->tex_x = data->arr[type].width - data->tex_x - 1;
 }
 
 
@@ -91,21 +84,8 @@ void set_tex_pos(double top_wall, image *texture)
 
 void    render_3d( t_data *data)
 {
-    int     type;
-    double  distance_proj_plane;
-	double  wall_height;
-	double  top_wall;
-	double  bottom_wall;
-	int y;
-        // after fill_image_arr
-    // for (int i = 0; i < 4; ++i) {
-    //     printf("tex[%d] path=%s ptr=%p w=%d h=%d bpp=%d line_len=%d\n",
-    //         i, data->arr[i].path, (void*)data->arr[i].img_ptr,
-    //         data->arr[i].width, data->arr[i].height, data->arr[i].b_p_p, data->arr[i].line_len);
-    // }
-
-    // before drawing a wall (inside render_3d, after type/set_step)
-    // printf("type=%d tex_w=%d tex_h=%d step=%f\n", type, data->arr[type].width, data->arr[type].height, data->arr[type].step);
+    int     (type), (y);
+    double  (distance_proj_plane), (wall_height), (top_wall), (bottom_wall);
 
     distance_proj_plane = (WIDTH / 2) / tan(FOV / 2);
 	wall_height = ((SQUARESIZE ) / data->ray.distance) * distance_proj_plane;
@@ -133,15 +113,12 @@ void    render_3d( t_data *data)
             continue;
         }
         else if(y > bottom_wall)
-        {
-            // floor
             my_img_pixel_put(data, &data->img, data->ray.id, y, data->floor_color);
-        }
 
         y++;
     } 
-
 }
+
 void my_img_pixel_put(t_data *data, t_img *img, int x, int y, int color)
 {
 	int offset;

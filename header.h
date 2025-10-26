@@ -111,7 +111,7 @@ typedef struct image
 }image;
 
 
-typedef struct weapon
+typedef struct frame
 {
 	void *img_ptr;
 	void *pxl_ptr;
@@ -120,6 +120,14 @@ typedef struct weapon
 	int b_p_p;
 	int endian;
 	int line_len;
+}t_frame;
+
+
+typedef struct weapon
+{
+	t_frame intro[20];
+	t_frame walking[];
+	t_frame shooting[];
 }t_weapon;
 
 typedef struct data{
