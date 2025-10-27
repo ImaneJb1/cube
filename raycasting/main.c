@@ -35,7 +35,7 @@ int main(int argc, char **argv)
 	mlx_destroy_window(data->mlx_ptr, data->mlx_win);
 	mlx_destroy_display(data->mlx_ptr);
 	free(data->mlx_ptr);
-	
+	init_first_person(data);
 	free_all();
 	get_next_line(-1);
 	return 0;

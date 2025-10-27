@@ -6,7 +6,7 @@
 /*   By: ijoubair <ijoubair@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/20 17:14:58 by nel-khad          #+#    #+#             */
-/*   Updated: 2025/10/24 17:33:36 by ijoubair         ###   ########.fr       */
+/*   Updated: 2025/10/27 15:05:42 by ijoubair         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,6 +102,6 @@ void data_init(t_data *data)
 		&data->img.b_p_p, &data->img.line_len, &data->img.endian);
 	init_player(data);
 	init_ray(data);
-	init_weapon(data);
+	init_first_person(data);
 	data->arr = init_text_arr(data->mlx_ptr, &data->arr, 4);
 }

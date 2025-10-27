@@ -126,8 +126,8 @@ typedef struct frame
 typedef struct weapon
 {
 	t_frame intro[20];
-	t_frame walking[];
-	t_frame shooting[];
+	t_frame walking[20];
+	t_frame shooting[11];
 }t_weapon;
 
 typedef struct data{
@@ -261,8 +261,11 @@ void rendring_(t_data *data);
 	void my_img_pixel_put(t_data *data, t_img *img, int x, int y, int color);
 	image    *init_text_arr(void *mlx_ptr, image **arr, int size);
 	//weapon
-	void	init_weapon(t_data *data);
-	void	put_weapon(t_data *data);
+	void	draw_first_person(t_data *data, t_frame *frames, int size);
+	void	init_weapon_intro(t_data *data);
+	void init_weapon_walking(t_data *data);
+	void init_weapon_shooting(t_data *data);
+	void	init_first_person(t_data *data);
 
 #endif
 

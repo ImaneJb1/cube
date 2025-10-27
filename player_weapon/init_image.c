@@ -6,7 +6,7 @@
 /*   By: ijoubair <ijoubair@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/24 16:25:43 by ijoubair          #+#    #+#             */
-/*   Updated: 2025/10/26 19:24:57 by ijoubair         ###   ########.fr       */
+/*   Updated: 2025/10/27 15:16:04 by ijoubair         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,36 +58,34 @@ void	init_weapon_intro(t_data *data)
 	"textures/intro_xpm/gun19.xpm",
 	"textures/intro_xpm/gun20.xpm"
     };
-	init_weapon(intro_textures, 20, &data->weapon.intro, data);
+	init_intro(intro_textures, 20, &data->weapon.intro, data);
 }
 
 void init_weapon_walking(t_data *data)
 {
-    static char *walking_textures[22] = {
-        "textures/intro_xpm/gun24.xpm",
-        "textures/intro_xpm/gun25.xpm",
-        "textures/intro_xpm/gun26.xpm",
-        "textures/intro_xpm/gun27.xpm",
-        "textures/intro_xpm/gun28.xpm",
-        "textures/intro_xpm/gun29.xpm",
-        "textures/intro_xpm/gun30.xpm",
-        "textures/intro_xpm/gun31.xpm",
-        "textures/intro_xpm/gun32.xpm",
-        "textures/intro_xpm/gun33.xpm",
-        "textures/intro_xpm/gun34.xpm",
-        "textures/intro_xpm/gun35.xpm",
-        "textures/intro_xpm/gun36.xpm",
-        "textures/intro_xpm/gun37.xpm",
-        "textures/intro_xpm/gun38.xpm",
-        "textures/intro_xpm/gun39.xpm",
-        "textures/intro_xpm/gun40.xpm",
-        "textures/intro_xpm/gun41.xpm",
-        "textures/intro_xpm/gun42.xpm",
-        "textures/intro_xpm/gun43.xpm",
-        "textures/intro_xpm/gun44.xpm",
-        "textures/intro_xpm/gun45.xpm"
+    static char *walking_textures[20] = {
+        "textures/walking_xpm/gun24.xpm",
+        "textures/walking_xpm/gun25.xpm",
+        "textures/walking_xpm/gun26.xpm",
+        "textures/walking_xpm/gun27.xpm",
+        "textures/walking_xpm/gun28.xpm",
+        "textures/walking_xpm/gun29.xpm",
+        "textures/walking_xpm/gun30.xpm",
+        "textures/walking_xpm/gun31.xpm",
+        "textures/walking_xpm/gun32.xpm",
+        "textures/walking_xpm/gun33.xpm",
+        "textures/walking_xpm/gun34.xpm",
+        "textures/walking_xpm/gun35.xpm",
+        "textures/walking_xpm/gun36.xpm",
+        "textures/walking_xpm/gun37.xpm",
+        "textures/walking_xpm/gun38.xpm",
+        "textures/walking_xpm/gun39.xpm",
+        "textures/walking_xpm/gun40.xpm",
+        "textures/walking_xpm/gun41.xpm",
+        "textures/walking_xpm/gun42.xpm",
+        "textures/walking_xpm/gun43.xpm"
     };
-	init_walking(walking_textures, 22, &data->weapon.walking, data);
+	init_walking(walking_textures, 20, &data->weapon.walking, data);
 }
 
 void init_weapon_shooting(t_data *data)
@@ -105,8 +103,8 @@ void init_weapon_shooting(t_data *data)
         "textures/shooting_xpm/shooting10.xpm",
         "textures/shooting_xpm/shooting11.xpm"
     };
-
     int i = 0;
+	
     while (i < 11)
     {
         data->weapon.shooting[i].img_ptr = mlx_xpm_file_to_image(data->mlx_ptr,textures[i],&data->weapon.shooting[i].width,&data->weapon.shooting[i].height);
@@ -117,29 +115,3 @@ void init_weapon_shooting(t_data *data)
 }
 
 
-void	put_weapon(t_data *data)
-{
-	int (x), (y);
-	int (img_x), (img_y);
-	int x_img_end, color;
-
-	x_img_end = WIDTH / 2 + data->weapon.width / 2;
-	x = WIDTH / 2 -	data->weapon.width / 2;
-	img_x = 0;
-	while(x < x_img_end)
-	{
-		// printf("x= %d, x_img_end= %d\n",x, x_img_end);
-		img_y = 0;
-		y = HEIGHT - data->weapon.height;
-		while(y != HEIGHT)
-		{
-			color = *(int *)(data->weapon.pxl_ptr + (img_y * data->weapon.line_len) + (img_x * (data->weapon.b_p_p / 8)));
-			if((color & 0x00FFFFFF) != 0x000000)
-				my_img_pixel_put(data, &data->img, x, y, color);						
-			y++;
-			img_y++;
-		}
-		x++;
-		img_x++;
-	}
-}

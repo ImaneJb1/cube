@@ -86,7 +86,8 @@ void rendring_(t_data *data)
 	// render_map(data);
 	// put_player(data);
 	cast_allrays(data);
-	put_weapon(data);
+	printf("ff\n");
+	draw_first_person(data, data->weapon.intro, 20);
 	mlx_put_image_to_window(data->mlx_ptr, data->mlx_win, data->img.img_ptr, 0,
 		0);
 	mlx_do_sync(data->mlx_ptr);
