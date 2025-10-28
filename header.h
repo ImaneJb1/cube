@@ -99,7 +99,7 @@ typedef struct image
     int type;
     
 	void *img_pxl_ptr;
-    void *img_ptr;
+    char *img_ptr;
     char *path;
     int height;
     int width;
@@ -150,6 +150,7 @@ typedef struct data{
 	int floor_rgb[3];
 	int ceiling_rgb[3];
 	t_weapon weapon;
+	int moving;
 	
 }t_data;
 
@@ -167,7 +168,6 @@ void draw_circle(t_data *data, int color);
 void draw_square(t_data *data, double x, double y, int color);
 void put_player(t_data *data);
 void render_map(t_data *data);
-void rendring_(t_data *data);
 void draw_ceiling(t_data *data, double top_wall);
 void draw_floor(t_data *data, double bottom_wall);
 void draw_wall(t_data *data, double top_wall, double bottom_wall);
@@ -261,11 +261,12 @@ void rendring_(t_data *data);
 	void my_img_pixel_put(t_data *data, t_img *img, int x, int y, int color);
 	image    *init_text_arr(void *mlx_ptr, image **arr, int size);
 	//weapon
-	void	draw_first_person(t_data *data, t_frame *frames, int size);
+	void	draw_first_person_intro(t_data *data, t_frame *frames, int size);
 	void	init_weapon_intro(t_data *data);
 	void init_weapon_walking(t_data *data);
 	void init_weapon_shooting(t_data *data);
 	void	init_first_person(t_data *data);
+void	draw_first_person_walking(t_data *data, t_frame *frames, int size);
 
 #endif
 

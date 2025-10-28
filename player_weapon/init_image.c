@@ -6,37 +6,37 @@
 /*   By: ijoubair <ijoubair@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/24 16:25:43 by ijoubair          #+#    #+#             */
-/*   Updated: 2025/10/27 15:16:04 by ijoubair         ###   ########.fr       */
+/*   Updated: 2025/10/28 11:53:25 by ijoubair         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../header.h"
 
-void	init_walking(char *textures[], int size,t_frame (*frame)[22], t_data *data)
+void	init_walking(char *textures[], int size,t_frame *frame, t_data *data)
 {
 	int i = 0;
 	while(i < size)
 	{
-		(*frame)[i].img_ptr = mlx_xpm_file_to_image(data->mlx_ptr, textures[i], &(*frame)[i].width, &(*frame)[i].height);
-		(*frame)[i].pxl_ptr = mlx_get_data_addr((*frame)[i].img_ptr, &(*frame)[i].b_p_p, &(*frame)[i].line_len, &(*frame)[i].endian);
+		frame[i].img_ptr = mlx_xpm_file_to_image(data->mlx_ptr, textures[i], &frame[i].width, &frame[i].height);
+		frame[i].pxl_ptr = mlx_get_data_addr(frame[i].img_ptr, &frame[i].b_p_p, &frame[i].line_len, &frame[i].endian);
 		i++;
 	}
 }
 
-void	init_intro(char *textures[], int size,t_frame (*frame)[20], t_data *data)
+void	init_intro(char *textures[], int size,t_frame *frame, t_data *data)
 {
 	int i = 0;
 	while(i < size)
 	{
-		(*frame)[i].img_ptr = mlx_xpm_file_to_image(data->mlx_ptr, textures[i], &(*frame)[i].width, &(*frame)[i].height);
-		(*frame)[i].pxl_ptr = mlx_get_data_addr((*frame)[i].img_ptr, &(*frame)[i].b_p_p, &(*frame)[i].line_len, &(*frame)[i].endian);
+		frame[i].img_ptr = mlx_xpm_file_to_image(data->mlx_ptr, textures[i], &frame[i].width, &frame[i].height);
+		frame[i].pxl_ptr = mlx_get_data_addr(frame[i].img_ptr, &frame[i].b_p_p, &frame[i].line_len, &frame[i].endian);
 		i++;
 	}
 }
 
 void	init_weapon_intro(t_data *data)
 {
-	static char *intro_textures[20] = {
+	static char *textures[20] = {
 	"textures/intro_xpm/gun1.xpm",
 	"textures/intro_xpm/gun2.xpm",
 	"textures/intro_xpm/gun3.xpm",
@@ -58,12 +58,23 @@ void	init_weapon_intro(t_data *data)
 	"textures/intro_xpm/gun19.xpm",
 	"textures/intro_xpm/gun20.xpm"
     };
-	init_intro(intro_textures, 20, &data->weapon.intro, data);
+       int i = 0;
+	
+    while (i < 20)
+    {
+        data->weapon.intro[i].img_ptr = mlx_xpm_file_to_image(data->mlx_ptr,textures[i],&data->weapon.intro[i].width,&data->weapon.intro[i].height);
+        if(data->weapon.intro[i].img_ptr == NULL)
+            printf("intro frame %d img_ptr failed\n", i);
+        data->weapon.intro[i].pxl_ptr = mlx_get_data_addr(data->weapon.intro[i].img_ptr,
+			&data->weapon.intro[i].b_p_p,&data->weapon.intro[i].line_len,&data->weapon.intro[i].endian);
+        i++;
+    }
+	// init_intro(intro_textures, 20, data->weapon.intro, data);
 }
 
 void init_weapon_walking(t_data *data)
 {
-    static char *walking_textures[20] = {
+    static char *textures[20] = {
         "textures/walking_xpm/gun24.xpm",
         "textures/walking_xpm/gun25.xpm",
         "textures/walking_xpm/gun26.xpm",
@@ -85,7 +96,19 @@ void init_weapon_walking(t_data *data)
         "textures/walking_xpm/gun42.xpm",
         "textures/walking_xpm/gun43.xpm"
     };
-	init_walking(walking_textures, 20, &data->weapon.walking, data);
+
+       int i = 0;
+	
+    while (i < 20)
+    {
+        data->weapon.walking[i].img_ptr = mlx_xpm_file_to_image(data->mlx_ptr,textures[i],&data->weapon.walking[i].width,&data->weapon.walking[i].height);
+        if(data->weapon.walking[i].img_ptr == NULL)
+            printf("walking frame %d img_ptr failed\n", i);
+        data->weapon.walking[i].pxl_ptr = mlx_get_data_addr(data->weapon.walking[i].img_ptr,
+		&data->weapon.walking[i].b_p_p,&data->weapon.walking[i].line_len,&data->weapon.walking[i].endian);
+        i++;
+    }
+	// init_walking(walking_textures, 20, data->weapon.walking, data);
 }
 
 void init_weapon_shooting(t_data *data)
@@ -108,6 +131,8 @@ void init_weapon_shooting(t_data *data)
     while (i < 11)
     {
         data->weapon.shooting[i].img_ptr = mlx_xpm_file_to_image(data->mlx_ptr,textures[i],&data->weapon.shooting[i].width,&data->weapon.shooting[i].height);
+        if(data->weapon.shooting[i].img_ptr == NULL)
+            printf("shooting frame %d img_ptr failed\n", i);
 		data->weapon.shooting[i].pxl_ptr = mlx_get_data_addr(data->weapon.shooting[i].img_ptr,
 			&data->weapon.shooting[i].b_p_p,&data->weapon.shooting[i].line_len,&data->weapon.shooting[i].endian);
         i++;

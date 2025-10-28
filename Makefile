@@ -1,7 +1,8 @@
 NAME    = cub
 CC      = cc
 CFLAGS  = 
-MLX     = -lmlx -lXext -lX11 -lm
+
+MLX     = -lmlx -lXext -lX11 -lm -g #-fsanitize=address 
 
 OBJ_D   = obj
 LIB     = parsing/libft/libft.a

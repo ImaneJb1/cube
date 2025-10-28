@@ -27,6 +27,7 @@ static void update_player(t_data *data)
 int moves_loop(t_data *data)
 {
 	update_player(data);
+	// draw_first_person_walking(data, data->weapon.walking, 20);
 	rendring_(data);
 	return(0);
 }

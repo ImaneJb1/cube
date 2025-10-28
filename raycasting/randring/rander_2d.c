@@ -85,9 +85,14 @@ void rendring_(t_data *data)
 {
 	// render_map(data);
 	// put_player(data);
+	int moving;
+	moving = 0;
 	cast_allrays(data);
-	printf("ff\n");
-	draw_first_person(data, data->weapon.intro, 20);
+	
+	if(data->p.move_dir == 1 || data->p.move_dir == -1 || data->moving == 1)
+		draw_first_person_walking(data, data->weapon.walking, 20);
+	else
+		draw_first_person_intro(data, data->weapon.intro, 20);
 	mlx_put_image_to_window(data->mlx_ptr, data->mlx_win, data->img.img_ptr, 0,
 		0);
 	mlx_do_sync(data->mlx_ptr);

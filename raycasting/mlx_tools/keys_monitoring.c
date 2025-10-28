@@ -5,6 +5,7 @@ void reset(t_data *data)
 {
 	data->p.move_dir = 0;
 	data->p.rot_dir = 0;
+	data->moving = 0;
 }
 static void	which_key(int keysem, t_data *data)
 {
@@ -18,11 +19,13 @@ static void	which_key(int keysem, t_data *data)
 		data->p.move_dir = -1;
 	if(keysem == XK_d)
 	{
+		data->moving = 1;
 		data->p.step_x = cos(data->p.view_angle + M_PI / 2) * data->p.move_speed;
 		data->p.step_y = sin(data->p.view_angle + M_PI / 2) * data->p.move_speed;
 	}
 	if(keysem == XK_a)
 	{
+		data->moving = 1;
 		data->p.step_x = cos(data->p.view_angle - M_PI / 2) * data->p.move_speed;
 		data->p.step_y = sin(data->p.view_angle - M_PI / 2) * data->p.move_speed;
 	}
@@ -56,6 +59,7 @@ int release_key(int keysem, t_data *data)
 	{
 		data->p.step_x = 0;
 		data->p.step_y = 0;
+		data->moving = 0;
 	}
 	return(0);
 }
