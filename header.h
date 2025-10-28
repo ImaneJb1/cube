@@ -18,6 +18,7 @@
 #define SOUTH 1
 #define WEST  2
 #define EAST  3
+#define DOOR  4
 
 #define WIDTH 1500
 #define HEIGHT 900
@@ -135,8 +136,8 @@ typedef struct data{
 	void *mlx_win;
 	t_player p;
 	t_ray ray;
-	int door_x;
-	int door_y;
+	double door_x;
+	double door_y;
 	t_img img;
 	char **map;
 	int width;
@@ -244,7 +245,8 @@ void rendring_(t_data *data);
 	int			strlen_2d(char **str);
 	void		parse_player(char char_map, int x, int y);
 	int			get_hex_color(char *rgb);
-	
+	void	get_door(t_data *data);
+
 	// global
 	textures	**text_func(void);
 	char		***the_map(void);

@@ -6,7 +6,7 @@
 /*   By: ijoubair <ijoubair@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/09 15:29:07 by ijoubair          #+#    #+#             */
-/*   Updated: 2025/10/20 16:04:32 by ijoubair         ###   ########.fr       */
+/*   Updated: 2025/10/28 21:41:34 by ijoubair         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,8 @@ int is_inside_the_map(int x, int y, char **map)
 	if(map[y + 1] == NULL)
 		return(0);
 	
+	if(map[y][x] == 'D')
+			
 	if((y == 0 && x == 0) || y == 0)
 		return (0);
 	if((map[y - 1][x] == 0 || map[y - 1][x] == ' '))
@@ -46,7 +48,7 @@ int is_inside_the_map(int x, int y, char **map)
 int	is_valid_char(char c)
 {
 	if(c != '1' && c != '0' && c != 'N' && c != ' ' && c != '\n'
-	&& c != 'E' && c != 'W' && c != 'S') 
+	&& c != 'E' && c != 'W' && c != 'S' && c != 'D') 
 		return(0);
 	return(1);
 }

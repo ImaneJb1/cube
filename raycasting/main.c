@@ -27,7 +27,7 @@ int main(int argc, char **argv)
 		return 0;
 	}// it creates the map array
 	check_textures(); // this exits the program in case of faillure 
-	parse_map(); // this exits the program in case of faillure
+	parse_map();
 	data_init(data);
 	rendring_(data);
 	hook_init(data);
@@ -40,3 +40,4 @@ int main(int argc, char **argv)
 	get_next_line(-1);
 	return 0;
 }
+// i should parse when there is no playeer

@@ -6,7 +6,7 @@
 /*   By: ijoubair <ijoubair@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/20 17:14:58 by nel-khad          #+#    #+#             */
-/*   Updated: 2025/10/28 11:19:57 by ijoubair         ###   ########.fr       */
+/*   Updated: 2025/10/28 22:58:12 by ijoubair         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,6 +93,7 @@ void data_init(t_data *data)
 	if (!data->mlx_ptr)
 		exit(1);
 	data->map = map;
+	get_door(data);
 	data->vertical_hit = 0;
 	data->width = get_width(data->map);
 	data->heigth = get_heigth(data->map);
@@ -103,5 +104,5 @@ void data_init(t_data *data)
 	init_player(data);
 	init_ray(data);
 	init_first_person(data);
-	data->arr = init_text_arr(data->mlx_ptr, &data->arr, 4);
+	data->arr = init_text_arr(data->mlx_ptr, &data->arr, 5);
 }

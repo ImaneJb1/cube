@@ -13,17 +13,23 @@ image    *init_text_arr(void *mlx_ptr, image **arr, int size)
 void    fill_image_arr(void *mlx_ptr, image **arr)
 {
     int i;
-    char *path[4];
+    char *path[5];
 
     path[0] = (*text_func())->no;
     path[1] = (*text_func())->so;
     path[2] = (*text_func())->we;
     path[3] = (*text_func())->ea;
+    path[4] = "textures/door.xpm";
     i = 0;
-    while(i < 4)
+    while(i < 5)
     {
         (*arr)[i].type = i;
         (*arr)[i].path = path[i];
+        if(access(path[i], O_RDONLY) < 0)
+        {
+            printf("error\n");
+            break;
+        }
         (*arr)[i].img_ptr = mlx_xpm_file_to_image(mlx_ptr, path[i], &(*arr)[i].width, &(*arr)[i].height);
         (*arr)[i].img_pxl_ptr = mlx_get_data_addr((*arr)[i].img_ptr, &(*arr)[i].b_p_p,&(*arr)[i].line_len, &(*arr)[i].endian);
         i++;
@@ -33,7 +39,23 @@ void    fill_image_arr(void *mlx_ptr, image **arr)
 
 int    get_textures_type(t_data *data)
 {
-    if(data->vertical_hit)
+    // printf("wallhit_x = %d wallhit_y = %d\n ",data->ray.walhit_x, data->ray.walhit_y);
+    // printf("door_x = %d door_y = %d\n ",data->door_x, data->door_y);
+
+    // if(data->ray.walhit_x == data->door_x && data->ray.walhit_y == data->door_y)
+    // {
+    //     printf("kl\n");
+    //     return(NORTH);
+    // }
+    double eps = 0.1;
+    if (fabs(data->ray.walhit_x - data->door_x) < eps &&
+        fabs(data->ray.walhit_y - data->door_y) < eps)
+    {
+        printf("dooor\n");
+        return (DOOR);
+    }
+
+    else if(data->vertical_hit)
     {
         if(data->p.p_x > data->ray.walhit_x)
             return(EAST);
@@ -99,6 +121,7 @@ void    render_3d( t_data *data)
     if(bottom_wall < top_wall)
         bottom_wall = top_wall;
     type = get_textures_type(data);
+    // printf("type = %d\n", type);
     set_tex_x(data, type);
     set_step(wall_height, &data->arr[type]);
     y = 0;
@@ -114,7 +137,6 @@ void    render_3d( t_data *data)
         }
         else if(y > bottom_wall)
             my_img_pixel_put(data, &data->img, data->ray.id, y, data->floor_color);
-
         y++;
     } 
 }
@@ -135,6 +157,7 @@ void draw_textured_wall(t_data *data, image *texture, double top_wall, double bo
     int color;
 
     set_tex_pos(top_wall, texture);
+    // printf("path =%s\n", texture->path);
     if(top_wall < 0)
         top_wall = 0;
     for (y = (int)top_wall; y <= (int)bottom_wall; y++)
