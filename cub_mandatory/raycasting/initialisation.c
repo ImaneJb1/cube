@@ -6,7 +6,7 @@
 /*   By: nel-khad <nel-khad@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/20 17:14:58 by nel-khad          #+#    #+#             */
-/*   Updated: 2025/10/27 16:05:24 by nel-khad         ###   ########.fr       */
+/*   Updated: 2025/10/29 15:52:15 by nel-khad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void init_player(t_data *data)
 {
-	data->p.move_speed = 0.5;
+	data->p.move_speed = 2;
 	data->p.move_dir = 0;
 	data->p.rot_dir = 0;
 	data->p.right_x = 0;

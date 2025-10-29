@@ -66,7 +66,7 @@ void cast_allrays(t_data *data)
 		set_ray_val(hor_distance, ver_distance, data);
 		// cast_ray(data, rayangle);
 		// printf("ray %d distance = %f  ver_dis %f\n", data->ray.id, data->ray.distance, ver_distance);
-		// render_3d(data); 
+		render_3d(data); 
 		init_ray(data);
 		rayangle += (double)FOV / (double)NUM_RAYS;
 		i++;

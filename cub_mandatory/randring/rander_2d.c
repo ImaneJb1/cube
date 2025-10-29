@@ -95,8 +95,8 @@ void render_map(t_data *data)
 
 void rendring_(t_data *data)
 {
-	render_map(data);
-	put_player(data);
+	// render_map(data);
+	// put_player(data);
 	cast_allrays(data);
 	mlx_put_image_to_window(data->mlx_ptr, data->mlx_win, data->img.img_ptr, 0,
 		0);
