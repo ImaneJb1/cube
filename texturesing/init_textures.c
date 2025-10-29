@@ -19,7 +19,7 @@ void    fill_image_arr(void *mlx_ptr, image **arr)
     path[1] = (*text_func())->so;
     path[2] = (*text_func())->we;
     path[3] = (*text_func())->ea;
-    path[4] = "textures/door.xpm";
+    path[4] = "textures/door2.xpm";
     i = 0;
     while(i < 5)
     {
@@ -35,6 +35,28 @@ void    fill_image_arr(void *mlx_ptr, image **arr)
         i++;
     }
     
+}
+
+int render_door(t_data *data, double x, double y, char c)
+{
+    int grid_x;
+    int grid_y;
+    
+    grid_x = floor(x  / SQUARESIZE);
+	grid_y = floor(y / SQUARESIZE);
+    if( c == 'h')
+    {
+        if(data->map[grid_y][grid_x] == 'D' || data->map[grid_y - 1][grid_x] == 'D')
+        return(1);
+    }
+    else if( c == 'v')
+    {
+        if(data->map[grid_y][grid_x] == 'D' || data->map[grid_y][grid_x - 1] == 'D')
+        return(1);
+    }
+    // if(data->map[grid_y][grid_x] == 'P')
+    //     return(1); 
+    return(0);
 }
 
 int    get_textures_type(t_data *data)
@@ -53,7 +75,7 @@ int    get_textures_type(t_data *data)
 
     if(data->vertical_hit)
     {
-        if(((data->ray.walhit_y - SQUARESIZE) <= data->door_y && data->ray.walhit_y >= data->door_y) && data->ray.ver_walhit_x == data->door_x)
+        if(render_door(data, data->ray.walhit_x, data->ray.ver_walhit_y, 'v'))
             return(DOOR);
         if(data->p.p_x > data->ray.walhit_x)
             return(EAST);
@@ -62,7 +84,7 @@ int    get_textures_type(t_data *data)
     }
     else
     {
-        if(((data->ray.walhit_x - SQUARESIZE) <= data->door_x && data->ray.walhit_x >= data->door_x) && data->ray.hor_walhit_y == data->door_y)
+        if(render_door(data, data->ray.walhit_x, data->ray.hor_walhit_y, 'h'))
             return(DOOR);
         if(data->p.p_y > data->ray.walhit_y)
             return(NORTH);

@@ -1,5 +1,15 @@
 #include "../header.h"
 
+void is_door(t_data *data, char *map[], double x, double y)
+{
+	int grid_x;
+	int grid_y;
+
+	grid_x = floor(x  / SQUARESIZE);
+	grid_y = floor(y / SQUARESIZE);
+	if(map[grid_y][grid_x] == 'D')
+		map[grid_y][grid_x] = 'P';
+}
 static void update_player(t_data *data)
 {
 	int move_step;
@@ -13,6 +23,7 @@ static void update_player(t_data *data)
 	next_y = data->p.p_y + (sin(data->p.view_angle) * data->p.move_dir * (data->p.move_speed)) + data->p.step_y;
 	// int grid_x = floor(next_x / SQUARESIZE);
 	// int grid_y = floor(next_y / SQUARESIZE);
+	is_door(data, data->map, next_x, next_y);
 	if(!is_wall(data, data->map, next_x, next_y, 'n')) //next_x *1.5 
 	{
 		data->p.p_y = next_y;

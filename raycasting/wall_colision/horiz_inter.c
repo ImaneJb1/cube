@@ -13,7 +13,7 @@ int is_wall(t_data *data, char *map[], double x, double y, char c)
 	grid_y = floor(y / SQUARESIZE);
 	if(grid_x < 0 || grid_y < 0 || grid_x >= data->width || grid_y >= data->heigth)
 		return(1);
-	if(map[grid_y][grid_x] == '1')
+	if(map[grid_y][grid_x] == '1' || map[grid_y][grid_x] == 'D')
 		return(1);
 	return(0);
 }

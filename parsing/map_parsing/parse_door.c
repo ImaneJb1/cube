@@ -6,7 +6,7 @@
 /*   By: ijoubair <ijoubair@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/28 21:29:44 by ijoubair          #+#    #+#             */
-/*   Updated: 2025/10/28 22:47:36 by ijoubair         ###   ########.fr       */
+/*   Updated: 2025/10/29 17:15:56 by ijoubair         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,11 +26,8 @@ void	get_door(t_data *data)
 			if(data->map[y][x] == 'D')
 			{
 				flag = 1;
-				data->map[y][x] = '1';
-				printf("x1 = %d, ddy1 = %d\n", x, y);
 				data->door_x = x * SQUARESIZE;
 				data->door_y = y * SQUARESIZE;
-				printf("x1 = %f, ddy2 = %f\n", data->door_x, data->door_y);
 			}
 			x++;
 		}
