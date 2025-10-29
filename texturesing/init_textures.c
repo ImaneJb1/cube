@@ -42,21 +42,19 @@ int    get_textures_type(t_data *data)
     // printf("wallhit_x = %d wallhit_y = %d\n ",data->ray.walhit_x, data->ray.walhit_y);
     // printf("door_x = %d door_y = %d\n ",data->door_x, data->door_y);
 
-    // if(data->ray.walhit_x == data->door_x && data->ray.walhit_y == data->door_y)
-    // {
-    //     printf("kl\n");
-    //     return(NORTH);
-    // }
-    double eps = 0.1;
-    if (fabs(data->ray.walhit_x - data->door_x) < eps &&
-        fabs(data->ray.walhit_y - data->door_y) < eps)
-    {
-        printf("dooor\n");
-        return (DOOR);
-    }
 
-    else if(data->vertical_hit)
+    // double eps = 0.1;
+    // if (fabs(data->ray.walhit_x - data->door_x) < eps &&
+    //     fabs(data->ray.walhit_y - data->door_y) < eps)
+    // {
+    //     printf("dooor\n");
+    //     return (DOOR);
+    // }
+
+    if(data->vertical_hit)
     {
+        if(((data->ray.walhit_y - SQUARESIZE) <= data->door_y && data->ray.walhit_y >= data->door_y) && data->ray.ver_walhit_x == data->door_x)
+            return(DOOR);
         if(data->p.p_x > data->ray.walhit_x)
             return(EAST);
         else
@@ -64,6 +62,8 @@ int    get_textures_type(t_data *data)
     }
     else
     {
+        if(((data->ray.walhit_x - SQUARESIZE) <= data->door_x && data->ray.walhit_x >= data->door_x) && data->ray.hor_walhit_y == data->door_y)
+            return(DOOR);
         if(data->p.p_y > data->ray.walhit_y)
             return(NORTH);
         else

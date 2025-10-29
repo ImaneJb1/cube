@@ -6,7 +6,7 @@
 /*   By: ijoubair <ijoubair@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/09 15:29:07 by ijoubair          #+#    #+#             */
-/*   Updated: 2025/10/28 21:41:34 by ijoubair         ###   ########.fr       */
+/*   Updated: 2025/10/29 13:55:01 by ijoubair         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,10 @@ int is_inside_the_map(int x, int y, char **map)
 		return(0);
 	
 	if(map[y][x] == 'D')
-			
+	{
+		if(map[y][x + 1] != '1' ||  map[y][x - 1] != '1')
+			return(0);
+	}
 	if((y == 0 && x == 0) || y == 0)
 		return (0);
 	if((map[y - 1][x] == 0 || map[y - 1][x] == ' '))
@@ -70,7 +73,7 @@ int	is_map_valid(char **map)
 				map[y][x] == 'E' || map[y][x] == 'W' || map[y][x] == 'S')
 			{
 				if (!is_inside_the_map(x, y, map))
-					return(printf("The map should be surrounded by walls\n"), 0);
+					return(printf("Unvalid map\n"), 0);
 				parse_player(map[y][x], x, y);
 			}
 			x++;
