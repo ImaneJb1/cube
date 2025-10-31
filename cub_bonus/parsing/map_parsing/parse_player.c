@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   parse_player.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ijoubair <ijoubair@student.42.fr>          +#+  +:+       +#+        */
+/*   By: nel-khad <nel-khad@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/17 13:18:02 by ijoubair          #+#    #+#             */
-/*   Updated: 2025/10/20 14:55:10 by ijoubair         ###   ########.fr       */
+/*   Updated: 2025/10/31 21:40:11 by nel-khad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../header.h"
+#include "../../header_bonus.h"
 
 void	parse_player(char char_map, int x, int y)
 {

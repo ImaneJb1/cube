@@ -6,11 +6,11 @@
 /*   By: nel-khad <nel-khad@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/20 17:14:58 by nel-khad          #+#    #+#             */
-/*   Updated: 2025/10/30 13:24:10 by nel-khad         ###   ########.fr       */
+/*   Updated: 2025/10/31 21:43:10 by nel-khad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../header.h"
+#include "../header_bonus.h"
 
 void	init_player(t_data *data)
 {

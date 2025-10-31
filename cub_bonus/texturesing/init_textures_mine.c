@@ -6,11 +6,11 @@
 /*   By: nel-khad <nel-khad@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/11 20:21:30 by ijoubair          #+#    #+#             */
-/*   Updated: 2025/10/30 16:07:39 by nel-khad         ###   ########.fr       */
+/*   Updated: 2025/10/31 21:43:50 by nel-khad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-// #include "header.h"
+// #include "header_bonus.h"
 
 // int	**allocate_textures(int width, int height)
 // {

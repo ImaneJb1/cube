@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   struct_arr.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: imane <imane@student.42.fr>                +#+  +:+       +#+        */
+/*   By: nel-khad <nel-khad@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/02 10:52:27 by ijoubair          #+#    #+#             */
-/*   Updated: 2025/08/10 18:01:20 by imane            ###   ########.fr       */
+/*   Updated: 2025/10/31 21:40:48 by nel-khad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../header.h"
+#include "../../header_bonus.h"
 
 config	*init_dir_arr(textures *text)
 {

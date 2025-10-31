@@ -1,7 +1,7 @@
 #ifndef HEADER_H
 # define HEADER_H
 
-#include "parsing/libft/libft.h"
+#include "../libft/libft.h"
 #include "parsing/get_next_line/get_next_line.h"
 #include <math.h>
 # include "mlx.h"

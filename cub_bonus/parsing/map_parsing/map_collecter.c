@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   map_collecter.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: imane <imane@student.42.fr>                +#+  +:+       +#+        */
+/*   By: nel-khad <nel-khad@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/09 17:27:42 by ijoubair          #+#    #+#             */
-/*   Updated: 2025/08/10 18:02:28 by imane            ###   ########.fr       */
+/*   Updated: 2025/10/31 21:39:58 by nel-khad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../header.h"
+#include "../../header_bonus.h"
 
 void	collect_the_map(char *line, int fd)
 {

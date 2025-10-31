@@ -1,4 +1,16 @@
-#include "../../header.h"
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ver_intr.c                                         :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: nel-khad <nel-khad@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/10/31 21:43:00 by nel-khad          #+#    #+#             */
+/*   Updated: 2025/10/31 21:43:04 by nel-khad         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "../../header_bonus.h"
 
 static void calcul_first_inter_V(t_intrsc *inter, t_data *data, double rayangle)
 {

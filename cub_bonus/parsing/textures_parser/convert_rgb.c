@@ -6,11 +6,11 @@
 /*   By: nel-khad <nel-khad@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/22 15:50:41 by ijoubair          #+#    #+#             */
-/*   Updated: 2025/10/31 20:30:17 by nel-khad         ###   ########.fr       */
+/*   Updated: 2025/10/31 21:40:18 by nel-khad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../header.h"
+#include "../header_bonus.h"
 
 int	rgb_to_hex(int r, int g, int b)
 {
