@@ -224,6 +224,7 @@ void rendring_(t_data *data);
 		char	*ea;
 		char	*f;
 		char	*c;
+		char	*door;
 	}			textures;
 	
 	// *************** parsing ***************

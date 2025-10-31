@@ -19,7 +19,7 @@ void    fill_image_arr(void *mlx_ptr, image **arr)
     path[1] = (*text_func())->so;
     path[2] = (*text_func())->we;
     path[3] = (*text_func())->ea;
-    path[4] = "textures/door2.xpm";
+    path[4] = "textures/iron-door2.xpm";
     i = 0;
     while(i < 5)
     {

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   struct_arr.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: imane <imane@student.42.fr>                +#+  +:+       +#+        */
+/*   By: ijoubair <ijoubair@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/02 10:52:27 by ijoubair          #+#    #+#             */
-/*   Updated: 2025/08/10 18:01:20 by imane            ###   ########.fr       */
+/*   Updated: 2025/10/31 18:53:05 by ijoubair         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,14 +17,14 @@ config	*init_dir_arr(textures *text)
 	config *arr;
 	int i;
 
-	arr = gc_malloc(sizeof(config) * 4);
+	arr = gc_malloc(sizeof(config) * 5);
 	if(!arr)
 	{
 		perror("");
 		return(NULL);
 	}
 	i = 0;
-	while(i < 4)
+	while(i < 5)
 	{
 		arr[i].flag = 0;
 		i++;
@@ -37,6 +37,8 @@ config	*init_dir_arr(textures *text)
 	arr[2].texture = &text->we;
 	arr[3].direction = "EA ";
 	arr[3].texture = &text->ea;
+	arr[4].direction = "DO ";
+	arr[4].texture = &text->door;
 	return(arr);
 }
 
