@@ -6,7 +6,7 @@
 /*   By: ijoubair <ijoubair@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/27 14:21:28 by ijoubair          #+#    #+#             */
-/*   Updated: 2025/11/01 18:52:50 by ijoubair         ###   ########.fr       */
+/*   Updated: 2025/11/01 20:33:37 by ijoubair         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,8 @@
 void	init_first_person(t_data *data)
 {
 	init_weapon_intro(data);
+	init_weapon_walking(data);
+	init_weapon_shooting(data);
 }
 
 int get_color(int x, int y, t_frame *frame)
@@ -69,7 +71,7 @@ void	draw_first_person_intro(t_data *data, t_frame *frames, int size)
 		put_frame(data, &frames[19]);
 		return;
 	}
-	// usleep(1000);
+	usleep(2000);
 	if (frames == NULL)
 		return;
 	put_frame(data, &frames[i]);
@@ -81,7 +83,7 @@ void	draw_first_person_walking(t_data *data, t_frame *frames, int size)
 	static int i = 0; 
 	if(i >= size || i < 0)
 		i = 0;
-	usleep(2000);
+	usleep(10000);
 	if (frames == NULL)
 		return;
 	put_frame(data, &frames[i]);

@@ -6,7 +6,7 @@
 /*   By: ijoubair <ijoubair@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/24 16:25:43 by ijoubair          #+#    #+#             */
-/*   Updated: 2025/11/01 18:49:22 by ijoubair         ###   ########.fr       */
+/*   Updated: 2025/11/01 20:17:02 by ijoubair         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,12 @@ void	init_frames(char *textures[], int size,t_frame *frame, t_data *data)
 	while(i < size)
 	{
 		frame[i].img_ptr = mlx_xpm_file_to_image(data->mlx_ptr, textures[i], &frame[i].width, &frame[i].height);
+        if(!frame[i].img_ptr)
+        {
+            printf("loading texture %s failed\n", textures[i]);
+            free_all();
+            exit(1);
+        }
 		frame[i].pxl_ptr = mlx_get_data_addr(frame[i].img_ptr, &frame[i].b_p_p, &frame[i].line_len, &frame[i].endian);
 		i++;
 	}

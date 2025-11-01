@@ -6,7 +6,7 @@
 /*   By: ijoubair <ijoubair@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/31 21:41:29 by nel-khad          #+#    #+#             */
-/*   Updated: 2025/11/01 19:04:49 by ijoubair         ###   ########.fr       */
+/*   Updated: 2025/11/01 20:13:40 by ijoubair         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -277,8 +277,6 @@ void rendring_(t_data *data)
 {
 	// render_map(data);
 	// put_player(data);
-	int moving;
-	moving = 0;
 	cast_allrays(data);
 	if(data->shooting)
 		draw_shooting(data);

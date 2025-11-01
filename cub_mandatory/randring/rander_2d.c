@@ -21,7 +21,7 @@ void draw_circle(t_data *data, int color)
 			dy = y - data->p.p_y;
 
 			if (dx*dx + dy*dy <= radius*radius)//check if the point inside
-				img_pixel_put(data, &data->img, x, y, color);
+				my_img_pixel_put(data, &data->img, x, y, color);
 			x++; 
 		}
 		y++;
@@ -42,9 +42,9 @@ void draw_square(t_data *data, double x, double y, int color)
 		while(j < SQUARESIZE)
 		{
 			if(j == SQUARESIZE - 1 || i == SQUARESIZE -1 || i == 0 || j == 0)
-				img_pixel_put(data, &data->img, x + j, y + i, 0x000000);
+				my_img_pixel_put(data, &data->img, x + j, y + i, 0x000000);
 			else
-				img_pixel_put(data, &data->img, x + j, y + i, color);
+				my_img_pixel_put(data, &data->img, x + j, y + i, color);
 			j++;
 		}
 		i++;

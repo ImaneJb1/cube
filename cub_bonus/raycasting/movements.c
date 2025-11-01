@@ -6,7 +6,7 @@
 /*   By: ijoubair <ijoubair@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/01 15:23:44 by ijoubair          #+#    #+#             */
-/*   Updated: 2025/11/01 15:28:30 by ijoubair         ###   ########.fr       */
+/*   Updated: 2025/11/01 20:47:09 by ijoubair         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@ void is_door(t_data *data, char *map[], double x, double y)
 	if(map[grid_y][grid_x] == 'D')
 		map[grid_y][grid_x] = 'P';
 }
+
 static void	update_player(t_data *data)
 {
 	int		move_step;
@@ -35,7 +36,7 @@ static void	update_player(t_data *data)
 			+ data->p.right_x) * data->p.move_speed;
 	next_y = data->p.p_y + (sin(data->p.view_angle) * data->p.move_dir
 			+ data->p.left_y) * data->p.move_speed;
-	is_door(data, data->map, next_x, next_y);
+	// is_door(data, data->map, next_x, next_y);
 	if (!is_player_wall(data, data->map, next_x, next_y)) // next_x *1.5
 	{
 		data->p.p_y = next_y;

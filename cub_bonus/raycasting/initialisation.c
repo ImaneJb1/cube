@@ -6,7 +6,7 @@
 /*   By: ijoubair <ijoubair@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/01 15:20:08 by ijoubair          #+#    #+#             */
-/*   Updated: 2025/11/01 18:05:13 by ijoubair         ###   ########.fr       */
+/*   Updated: 2025/11/01 20:51:29 by ijoubair         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,12 +16,12 @@
 
 void	init_player(t_data *data)
 {
-	data->p.move_speed = 3;
+	data->p.move_speed = 2;
 	data->p.move_dir = 0;
 	data->p.rot_dir = 0;
 	data->p.right_x = 0;
 	data->p.left_y = 0;
-	data->p.rot_speed = 1 * (M_PI / 180);
+	data->p.rot_speed = 2 * (M_PI / 180);
 	if(data->p.direction == 'N')
 		data->p.view_angle = 270 * (M_PI / 180);
 	if(data->p.direction == 'E')
