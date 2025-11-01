@@ -19,7 +19,7 @@ void    fill_image_arr(void *mlx_ptr, image **arr)
     path[1] = (*text_func())->so;
     path[2] = (*text_func())->we;
     path[3] = (*text_func())->ea;
-    path[4] = "textures/iron-door2.xpm";
+    path[4] = (*text_func())->door;
     i = 0;
     while(i < 5)
     {
@@ -27,7 +27,7 @@ void    fill_image_arr(void *mlx_ptr, image **arr)
         (*arr)[i].path = path[i];
         if(access(path[i], O_RDONLY) < 0)
         {
-            printf("error\n");
+            printf("error11\n");
             break;
         }
         (*arr)[i].img_ptr = mlx_xpm_file_to_image(mlx_ptr, path[i], &(*arr)[i].width, &(*arr)[i].height);

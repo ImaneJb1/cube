@@ -6,7 +6,7 @@
 /*   By: ijoubair <ijoubair@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/27 14:21:28 by ijoubair          #+#    #+#             */
-/*   Updated: 2025/10/31 21:50:17 by ijoubair         ###   ########.fr       */
+/*   Updated: 2025/11/01 15:01:12 by ijoubair         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 void	init_first_person(t_data *data)
 {
 	init_weapon_intro(data);
-	printf("mn bra w= %d h= %d\n", data->weapon.intro[0].width, data->weapon.intro[0].height);
+	// printf("mn bra w= %d h= %d\n", data->weapon.intro[0].width, data->weapon.intro[0].height);
 	init_weapon_walking(data);
 	init_weapon_shooting(data);
 }

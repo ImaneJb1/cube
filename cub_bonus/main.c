@@ -29,13 +29,13 @@ int main(int argc, char **argv)
 	check_textures(); // this exits the program in case of faillure 
 	parse_map();
 	data_init(data);
+	init_first_person(data);
 	rendring_(data);
 	hook_init(data);
 	mlx_loop(data->mlx_ptr);
 	mlx_destroy_window(data->mlx_ptr, data->mlx_win);
 	mlx_destroy_display(data->mlx_ptr);
 	free(data->mlx_ptr);
-	init_first_person(data);
 	free_all();
 	get_next_line(-1);
 	return 0;
