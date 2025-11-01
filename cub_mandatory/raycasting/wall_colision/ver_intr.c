@@ -1,4 +1,4 @@
-#include "../../header_bonus.h"
+#include "../../header.h"
 
 static void calcul_first_inter_V(t_intrsc *inter, t_data *data, double rayangle)
 {

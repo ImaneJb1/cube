@@ -10,12 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-<<<<<<<< HEAD:cub_bonus/main.c
-#include "header_bonus.h"
-========
 #include "header.h"
->>>>>>>> origin/nouss:cub_mandatory/main.c
-
 
 int main(int argc, char **argv)
 {
@@ -33,7 +28,6 @@ int main(int argc, char **argv)
 	check_textures(); // this exits the program in case of faillure 
 	parse_map();
 	data_init(data);
-	init_first_person(data);
 	rendring_(data);
 	hook_init(data);
 	mlx_loop(data->mlx_ptr);
@@ -44,7 +38,3 @@ int main(int argc, char **argv)
 	get_next_line(-1);
 	return 0;
 }
-<<<<<<<< HEAD:cub_bonus/main.c
-// i should parse when there is no playeer
-========
->>>>>>>> origin/nouss:cub_mandatory/main.c

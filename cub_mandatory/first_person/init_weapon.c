@@ -1,24 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   put_weapon.c                                       :+:      :+:    :+:   */
+/*   init_weapon.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ijoubair <ijoubair@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/10/27 14:21:28 by ijoubair          #+#    #+#             */
-/*   Updated: 2025/11/01 18:52:50 by ijoubair         ###   ########.fr       */
+/*   Created: 2025/11/01 18:54:21 by ijoubair          #+#    #+#             */
+/*   Updated: 2025/11/01 19:22:54 by ijoubair         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../header_bonus.h"
+#include "../header.h"
 
-
-void	init_first_person(t_data *data)
+void	init_weapon(t_data *data)
 {
-	init_weapon_intro(data);
+	data->weapon.img_ptr = mlx_xpm_file_to_image(data->mlx_ptr,
+			"cub_mandatory/textures/gun24.xpm", &data->weapon.width,
+			&data->weapon.height);
+	if (!data->weapon.img_ptr)
+	{
+		printf("Gun texture failed\n");
+		free_all();
+		exit(1);
+	}
+	data->weapon.pxl_ptr = mlx_get_data_addr(data->weapon.img_ptr, &data->weapon.b_p_p,
+			&data->weapon.line_len, &data->weapon.endian);
 }
 
-int get_color(int x, int y, t_frame *frame)
+int get_color(int x, int y, t_weapon *frame)
 {
 	if (!frame->pxl_ptr)
     {
@@ -33,24 +42,24 @@ int get_color(int x, int y, t_frame *frame)
     return *(int *)(frame->pxl_ptr + (y * frame->line_len) + (x * (frame->b_p_p / 8)));
 }
 
-void	put_frame(t_data *data, t_frame *frame)
+void	put_weapon(t_data *data, t_weapon *weapon)
 {
 	int (x), (y);
 	int (img_x), (img_y);
 	int x_img_end, color;
 
-	x_img_end = WIDTH / 2 + frame->width / 2;
-	x = WIDTH / 2 -	frame->width / 2;
+	x_img_end = WIDTH / 2 + weapon->width / 2;
+	x = WIDTH / 2 -	weapon->width / 2;
 	img_x = 0;
 	while(x < x_img_end)
 	{
 		img_y = 0;
-		y = HEIGHT - frame->height;
+		y = HEIGHT - weapon->height;
 		while(y < HEIGHT)
 		{
-			if (img_x >= frame->width || img_y >= frame->height)
+			if (img_x >= weapon->width || img_y >= weapon->height)
     			break;
-			color = get_color(img_x, img_y, frame);
+			color = get_color(img_x, img_y, weapon);
 			if (color != 0xFF000000 && color != 0x00000000)  // skip transparent (pure black)
 					my_img_pixel_put(data, &data->img, x, y, color);
 			y++;
@@ -59,31 +68,4 @@ void	put_frame(t_data *data, t_frame *frame)
 		x++;
 		img_x++;
 	}
-}
-
-void	draw_first_person_intro(t_data *data, t_frame *frames, int size)
-{
-	static int i = 0; 
-	if(i >= size || i < 0)
-	{
-		put_frame(data, &frames[19]);
-		return;
-	}
-	// usleep(1000);
-	if (frames == NULL)
-		return;
-	put_frame(data, &frames[i]);
-	i++;
-}
-
-void	draw_first_person_walking(t_data *data, t_frame *frames, int size)
-{
-	static int i = 0; 
-	if(i >= size || i < 0)
-		i = 0;
-	usleep(2000);
-	if (frames == NULL)
-		return;
-	put_frame(data, &frames[i]);
-	i++;
 }

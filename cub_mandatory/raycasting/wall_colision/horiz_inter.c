@@ -1,4 +1,4 @@
-#include "../../header_bonus.h"
+#include "../../header.h"
 
 int is_wall(t_data *data, char *map[], double x, double y, char c)
 {

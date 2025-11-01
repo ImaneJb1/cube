@@ -1,4 +1,4 @@
-#include "../header_bonus.h"
+#include "../header.h"
 
 void cast_ray(t_data *data, double rayangle)
 {
@@ -64,12 +64,7 @@ void cast_allrays(t_data *data)
 		ver_distance = find_ver_inter(data, rayangle);
 		set_ray_val(hor_distance, ver_distance, data);
 		// cast_ray(data, rayangle);
-<<<<<<<< HEAD:cub_bonus/raycasting/raycasting.c
-		// printf("ray %d distance = %f  ver_dis %f\n", data->ray.id, data->ray.distance, ver_distance);
-		render_3d(data);
-========
 		render_3d(data); 
->>>>>>>> origin/nouss:cub_mandatory/raycasting/raycasting.c
 		init_ray(data);
 		rayangle += (double)FOV / (double)NUM_RAYS;
 		i++;

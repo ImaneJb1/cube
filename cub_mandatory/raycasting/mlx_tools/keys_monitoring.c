@@ -1,6 +1,16 @@
-#include "../../header_bonus.h"
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   keys_monitoring.c                                  :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ijoubair <ijoubair@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/11/01 19:14:05 by ijoubair          #+#    #+#             */
+/*   Updated: 2025/11/01 19:14:36 by ijoubair         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
-
+#include "../../header.h"
 
 void reset(t_data *data)
 {
@@ -20,17 +30,6 @@ static void	which_key(int keysem, t_data *data)
 		data->p.move_dir = -1;
 	if(keysem == XK_d)
 	{
-<<<<<<<< HEAD:cub_bonus/raycasting/mlx_tools/keys_monitoring.c
-		data->moving = 1;
-		data->p.step_x = cos(data->p.view_angle + M_PI / 2) * data->p.move_speed;
-		data->p.step_y = sin(data->p.view_angle + M_PI / 2) * data->p.move_speed;
-	}
-	if(keysem == XK_a)
-	{
-		data->moving = 1;
-		data->p.step_x = cos(data->p.view_angle - M_PI / 2) * data->p.move_speed;
-		data->p.step_y = sin(data->p.view_angle - M_PI / 2) * data->p.move_speed;
-========
 		data->p.right_x = cos(data->p.view_angle + M_PI / 2);
 		data->p.left_y = sin(data->p.view_angle + M_PI / 2);
 	}
@@ -38,7 +37,6 @@ static void	which_key(int keysem, t_data *data)
 	{
 		data->p.right_x = cos(data->p.view_angle - M_PI / 2);
 		data->p.left_y = sin(data->p.view_angle - M_PI / 2);
->>>>>>>> origin/nouss:cub_mandatory/raycasting/mlx_tools/keys_monitoring.c
 	}
 }
 
@@ -68,14 +66,8 @@ int release_key(int keysem, t_data *data)
 		data->p.rot_dir = 0;
 	if(keysem == XK_d || keysem == XK_a)
 	{
-<<<<<<<< HEAD:cub_bonus/raycasting/mlx_tools/keys_monitoring.c
-		data->p.step_x = 0;
-		data->p.step_y = 0;
-		data->moving = 0;
-========
 		data->p.right_x = 0;
 		data->p.left_y = 0;
->>>>>>>> origin/nouss:cub_mandatory/raycasting/mlx_tools/keys_monitoring.c
 	}
 	return(0);
 }

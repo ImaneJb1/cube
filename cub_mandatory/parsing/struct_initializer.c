@@ -6,11 +6,11 @@
 /*   By: ijoubair <ijoubair@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/02 10:08:40 by ijoubair          #+#    #+#             */
-/*   Updated: 2025/10/31 21:50:09 by ijoubair         ###   ########.fr       */
+/*   Updated: 2025/11/01 19:10:50 by ijoubair         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../header_bonus.h"
+#include "../header.h"
 
 textures **global_tex(void)
 {

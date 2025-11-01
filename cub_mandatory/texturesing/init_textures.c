@@ -1,4 +1,16 @@
-#include "../header_bonus.h"
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   init_textures.c                                    :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ijoubair <ijoubair@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/11/01 19:15:58 by ijoubair          #+#    #+#             */
+/*   Updated: 2025/11/01 19:17:19 by ijoubair         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "../header.h"
 
 image    *init_text_arr(void *mlx_ptr, image **arr, int size)
 {
@@ -61,22 +73,9 @@ int render_door(t_data *data, double x, double y, char c)
 
 int    get_textures_type(t_data *data)
 {
-    // printf("wallhit_x = %d wallhit_y = %d\n ",data->ray.walhit_x, data->ray.walhit_y);
-    // printf("door_x = %d door_y = %d\n ",data->door_x, data->door_y);
-
-
-    // double eps = 0.1;
-    // if (fabs(data->ray.walhit_x - data->door_x) < eps &&
-    //     fabs(data->ray.walhit_y - data->door_y) < eps)
-    // {
-    //     printf("dooor\n");
-    //     return (DOOR);
-    // }
 
     if(data->vertical_hit)
     {
-        if(render_door(data, data->ray.walhit_x, data->ray.ver_walhit_y, 'v'))
-            return(DOOR);
         if(data->p.p_x > data->ray.walhit_x)
             return(EAST);
         else
@@ -84,8 +83,6 @@ int    get_textures_type(t_data *data)
     }
     else
     {
-        if(render_door(data, data->ray.walhit_x, data->ray.hor_walhit_y, 'h'))
-            return(DOOR);
         if(data->p.p_y > data->ray.walhit_y)
             return(NORTH);
         else
@@ -98,13 +95,11 @@ void set_tex_x(t_data *data, int type)
     double wall_x;
 
     if(data->vertical_hit == 0)
-    {
-        // printf("horizental\n");                                                                                                                                    
+    {                                                                                                                                
         wall_x = fmod(data->ray.walhit_x , SQUARESIZE);
     }
     else
     {
-        // printf("vertical\n");
         wall_x = fmod(data->ray.walhit_y, SQUARESIZE);
     }
     data->tex_x = (wall_x / SQUARESIZE) * data->arr[type].width;
@@ -143,7 +138,6 @@ void    render_3d( t_data *data)
     if(bottom_wall < top_wall)
         bottom_wall = top_wall;
     type = get_textures_type(data);
-    // printf("type = %d\n", type);
     set_tex_x(data, type);
     set_step(wall_height, &data->arr[type]);
     y = 0;
@@ -179,7 +173,6 @@ void draw_textured_wall(t_data *data, image *texture, double top_wall, double bo
     int color;
 
     set_tex_pos(top_wall, texture);
-    // printf("path =%s\n", texture->path);
     if(top_wall < 0)
         top_wall = 0;
     for (y = (int)top_wall; y <= (int)bottom_wall; y++)

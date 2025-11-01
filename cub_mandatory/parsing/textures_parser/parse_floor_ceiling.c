@@ -6,11 +6,11 @@
 /*   By: ijoubair <ijoubair@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/04 11:45:07 by ijoubair          #+#    #+#             */
-/*   Updated: 2025/10/31 21:49:46 by ijoubair         ###   ########.fr       */
+/*   Updated: 2025/11/01 19:11:36 by ijoubair         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../header_bonus.h"
+#include "../../header.h"
 
 
 config	*init_fc_arr(textures *text, t_data *data)

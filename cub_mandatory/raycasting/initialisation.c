@@ -5,34 +5,21 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: ijoubair <ijoubair@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/10/20 17:14:58 by nel-khad          #+#    #+#             */
-<<<<<<<< HEAD:cub_bonus/raycasting/initialisation.c
-/*   Updated: 2025/10/31 21:51:18 by ijoubair         ###   ########.fr       */
-========
-/*   Updated: 2025/10/29 15:52:15 by nel-khad         ###   ########.fr       */
->>>>>>>> origin/nouss:cub_mandatory/raycasting/initialisation.c
+/*   Created: 2025/11/01 19:12:27 by ijoubair          #+#    #+#             */
+/*   Updated: 2025/11/01 19:24:05 by ijoubair         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../header_bonus.h"
+#include "../header.h"
 
 void init_player(t_data *data)
 {
-<<<<<<<< HEAD:cub_bonus/raycasting/initialisation.c
-	data->p.move_speed = 0.8;
-	data->p.move_dir = 0;
-	data->p.rot_dir = 0;
-	data->p.step_x = 0;
-	data->p.step_y = 0;
-	data->p.rot_speed = 2 * (M_PI / 180);
-========
-	data->p.move_speed = 2;
+	data->p.move_speed = 4;
 	data->p.move_dir = 0;
 	data->p.rot_dir = 0;
 	data->p.right_x = 0;
 	data->p.left_y = 0;
-	data->p.rot_speed = 1 * (M_PI / 180);
->>>>>>>> origin/nouss:cub_mandatory/raycasting/initialisation.c
+	data->p.rot_speed = 10 * (M_PI / 180);
 	if(data->p.direction == 'N')
 		data->p.view_angle = 270 * (M_PI / 180);
 	if(data->p.direction == 'E')
@@ -106,7 +93,6 @@ void data_init(t_data *data)
 	if (!data->mlx_ptr)
 		exit(1);
 	data->map = map;
-	get_door(data);
 	data->vertical_hit = 0;
 	data->width = get_width(data->map);
 	data->heigth = get_heigth(data->map);
@@ -116,6 +102,6 @@ void data_init(t_data *data)
 		&data->img.b_p_p, &data->img.line_len, &data->img.endian);
 	init_player(data);
 	init_ray(data);
-	init_first_person(data);
+	init_weapon(data);
 	data->arr = init_text_arr(data->mlx_ptr, &data->arr, 5);
 }

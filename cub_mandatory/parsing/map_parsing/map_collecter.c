@@ -6,11 +6,11 @@
 /*   By: ijoubair <ijoubair@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/09 17:27:42 by ijoubair          #+#    #+#             */
-/*   Updated: 2025/10/31 21:56:45 by ijoubair         ###   ########.fr       */
+/*   Updated: 2025/11/01 19:10:34 by ijoubair         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../header_bonus.h"
+#include "../../header.h"
 
 void	collect_the_map(char *line, int fd)
 {

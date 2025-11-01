@@ -6,11 +6,11 @@
 /*   By: ijoubair <ijoubair@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/01 15:11:57 by ijoubair          #+#    #+#             */
-/*   Updated: 2025/10/31 21:57:16 by ijoubair         ###   ########.fr       */
+/*   Updated: 2025/11/01 19:11:30 by ijoubair         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../header_bonus.h"
+#include "../../header.h"
 
 int	check_argv(int argc, char **argv)
 {

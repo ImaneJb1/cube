@@ -1,9 +1,6 @@
-<<<<<<<< HEAD:cub_bonus/raycasting/randring/rander_2d.c
-#include "../../header_bonus.h"
 
-========
 #include "../header.h"
->>>>>>>> origin/nouss:cub_mandatory/randring/rander_2d.c
+
 
 void draw_circle(t_data *data, int color)
 {
@@ -22,13 +19,9 @@ void draw_circle(t_data *data, int color)
 		{
 			dx = x - data->p.p_x;
 			dy = y - data->p.p_y;
-<<<<<<<< HEAD:cub_bonus/raycasting/randring/rander_2d.c
-			if (dx*dx + dy*dy <= radius*radius)//chack if the point inside
-				my_img_pixel_put(data, &data->img, x, y, color);
-========
+
 			if (dx*dx + dy*dy <= radius*radius)//check if the point inside
 				img_pixel_put(data, &data->img, x, y, color);
->>>>>>>> origin/nouss:cub_mandatory/randring/rander_2d.c
 			x++; 
 		}
 		y++;
@@ -48,17 +41,10 @@ void draw_square(t_data *data, double x, double y, int color)
 		j = 0;
 		while(j < SQUARESIZE)
 		{
-<<<<<<<< HEAD:cub_bonus/raycasting/randring/rander_2d.c
-			// if(j == SQUARESIZE - 1 || i == SQUARESIZE -1 || i == 0 || j == 0)
-			// 	img_pixel_put(data, &data->img, x + j, y + i, 0x000000);
-			// else
-				my_img_pixel_put(data, &data->img, x + j, y + i, color);
-========
 			if(j == SQUARESIZE - 1 || i == SQUARESIZE -1 || i == 0 || j == 0)
 				img_pixel_put(data, &data->img, x + j, y + i, 0x000000);
 			else
 				img_pixel_put(data, &data->img, x + j, y + i, color);
->>>>>>>> origin/nouss:cub_mandatory/randring/rander_2d.c
 			j++;
 		}
 		i++;
@@ -114,14 +100,9 @@ void rendring_(t_data *data)
 {
 	// render_map(data);
 	// put_player(data);
-	int moving;
-	moving = 0;
 	cast_allrays(data);
 	
-	if(data->p.move_dir == 1 || data->p.move_dir == -1 || data->moving == 1)
-		draw_first_person_walking(data, data->weapon.walking, 20);
-	else
-		draw_first_person_intro(data, data->weapon.intro, 20);
+	put_weapon(data, &data->weapon);
 	mlx_put_image_to_window(data->mlx_ptr, data->mlx_win, data->img.img_ptr, 0,
 		0);
 	mlx_do_sync(data->mlx_ptr);

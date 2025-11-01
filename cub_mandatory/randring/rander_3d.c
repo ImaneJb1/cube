@@ -1,10 +1,16 @@
-<<<<<<<< HEAD:cub_bonus/raycasting/randring/rander_3d.c
-#include "../../header_bonus.h"
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   rander_3d.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ijoubair <ijoubair@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/11/01 19:11:47 by ijoubair          #+#    #+#             */
+/*   Updated: 2025/11/01 19:12:14 by ijoubair         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
-
-========
 #include "../header.h"
->>>>>>>> origin/nouss:cub_mandatory/randring/rander_3d.c
 
 void draw_ceiling(t_data *data, double top_wall)
 {

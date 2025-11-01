@@ -6,11 +6,11 @@
 /*   By: ijoubair <ijoubair@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/02 10:22:42 by ijoubair          #+#    #+#             */
-/*   Updated: 2025/10/31 21:49:43 by ijoubair         ###   ########.fr       */
+/*   Updated: 2025/11/01 19:11:33 by ijoubair         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../header_bonus.h"
+#include "../../header.h"
 
 void	is_path_valid(char *path, char *conf)
 {

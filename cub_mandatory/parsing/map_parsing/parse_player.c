@@ -6,11 +6,11 @@
 /*   By: ijoubair <ijoubair@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/17 13:18:02 by ijoubair          #+#    #+#             */
-/*   Updated: 2025/10/31 21:57:03 by ijoubair         ###   ########.fr       */
+/*   Updated: 2025/11/01 19:10:42 by ijoubair         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../header_bonus.h"
+#include "../../header.h"
 
 void	parse_player(char char_map, int x, int y)
 {

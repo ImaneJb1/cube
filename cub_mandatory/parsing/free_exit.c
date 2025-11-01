@@ -6,11 +6,11 @@
 /*   By: ijoubair <ijoubair@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/10 15:18:05 by ijoubair          #+#    #+#             */
-/*   Updated: 2025/10/31 21:49:56 by ijoubair         ###   ########.fr       */
+/*   Updated: 2025/11/01 19:10:09 by ijoubair         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../header_bonus.h"
+#include "../header.h"
 
 
 void	free_and_exit(int status)
