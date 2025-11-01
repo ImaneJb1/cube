@@ -6,7 +6,7 @@
 /*   By: ijoubair <ijoubair@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/17 13:18:02 by ijoubair          #+#    #+#             */
-/*   Updated: 2025/10/31 21:57:03 by ijoubair         ###   ########.fr       */
+/*   Updated: 2025/11/01 15:14:27 by ijoubair         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,6 @@ void	parse_player(char char_map, int x, int y)
 			{
 				printf("unvalid map\n");
 				free_and_exit(1);
-
 			}
 		}
 		i++;

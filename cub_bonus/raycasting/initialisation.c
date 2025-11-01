@@ -5,21 +5,23 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: ijoubair <ijoubair@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/10/20 17:14:58 by nel-khad          #+#    #+#             */
-/*   Updated: 2025/10/31 21:51:18 by ijoubair         ###   ########.fr       */
+/*   Created: 2025/11/01 15:20:08 by ijoubair          #+#    #+#             */
+/*   Updated: 2025/11/01 15:23:14 by ijoubair         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+
 #include "../header_bonus.h"
 
-void init_player(t_data *data)
+
+void	init_player(t_data *data)
 {
-	data->p.move_speed = 0.8;
+	data->p.move_speed = 3;
 	data->p.move_dir = 0;
 	data->p.rot_dir = 0;
-	data->p.step_x = 0;
-	data->p.step_y = 0;
-	data->p.rot_speed = 2 * (M_PI / 180);
+	data->p.right_x = 0;
+	data->p.left_y = 0;
+	data->p.rot_speed = 1 * (M_PI / 180);
 	if(data->p.direction == 'N')
 		data->p.view_angle = 270 * (M_PI / 180);
 	if(data->p.direction == 'E')
@@ -67,6 +69,53 @@ int get_heigth(char *map[])
 
 void init_ray(t_data *data)
 {
+	if (data->p.direction == 'N')
+		data->p.view_angle = 270 * (M_PI / 180);
+	if (data->p.direction == 'E')
+		data->p.view_angle = 0;
+	if (data->p.direction == 'S')
+		data->p.view_angle = 90 * (M_PI / 180);
+	if (data->p.direction == 'W')
+		data->p.view_angle = 180 * (M_PI / 180);
+}
+
+int	get_width(char *map[])
+{
+	int	i;
+	int	j;
+	int	l;
+
+	i = 0;
+	j = 0;
+	l = 0;
+	while (map[j])
+	{
+		i = 0;
+		while (map[j][i])
+		{
+			i++;
+		}
+		if (i > l)
+			l = i;
+		j++;
+	}
+	return (l);
+}
+
+int	get_heigth(char *map[])
+{
+	int	i;
+
+	i = 0;
+	while (map[i])
+	{
+		i++;
+	}
+	return (i);
+}
+
+void	init_ray(t_data *data)
+{
 	data->ray.distance = INT_MAX;
 	data->ray.is_down = 0;
 	data->ray.is_up = 0;
@@ -81,14 +130,13 @@ void init_ray(t_data *data)
 	data->ray.hit_vertical = 0;
 	data->ray.hit_horiz = 0;
 	data->ray.content = 0;
-
 }
 
-void data_init(t_data *data)
+void	data_init(t_data *data)
 {
-	static char **map;
-	map = *the_map();
+	static char	**map;
 
+	map = *the_map();
 	data->mlx_ptr = mlx_init();
 	if (!data->mlx_ptr)
 		exit(1);

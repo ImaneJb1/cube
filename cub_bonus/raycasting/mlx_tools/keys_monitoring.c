@@ -1,5 +1,17 @@
-#include "../../header_bonus.h"
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   keys_monitoring.c                                  :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ijoubair <ijoubair@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/10/31 21:42:13 by nel-khad          #+#    #+#             */
+/*   Updated: 2025/11/01 15:16:52 by ijoubair         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
+
+#include "../../header_bonus.h"
 
 
 void reset(t_data *data)
@@ -21,14 +33,15 @@ static void	which_key(int keysem, t_data *data)
 	if(keysem == XK_d)
 	{
 		data->moving = 1;
-		data->p.step_x = cos(data->p.view_angle + M_PI / 2) * data->p.move_speed;
-		data->p.step_y = sin(data->p.view_angle + M_PI / 2) * data->p.move_speed;
+		data->p.step_x = cos(data->p.view_angle + M_PI / 2);
+		data->p.step_y = sin(data->p.view_angle + M_PI / 2);
 	}
 	if(keysem == XK_a)
 	{
 		data->moving = 1;
-		data->p.step_x = cos(data->p.view_angle - M_PI / 2) * data->p.move_speed;
-		data->p.step_y = sin(data->p.view_angle - M_PI / 2) * data->p.move_speed;
+		data->p.step_x = cos(data->p.view_angle - M_PI / 2);
+		data->p.step_y = sin(data->p.view_angle - M_PI / 2);
+
 	}
 }
 
@@ -58,9 +71,9 @@ int release_key(int keysem, t_data *data)
 		data->p.rot_dir = 0;
 	if(keysem == XK_d || keysem == XK_a)
 	{
-		data->p.step_x = 0;
-		data->p.step_y = 0;
 		data->moving = 0;
+		data->p.right_x = 0;
+		data->p.left_y = 0;
 	}
 	return(0);
 }

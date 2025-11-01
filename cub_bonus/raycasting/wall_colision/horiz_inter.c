@@ -1,3 +1,16 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   horiz_inter.c                                      :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ijoubair <ijoubair@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/10/31 21:42:46 by nel-khad          #+#    #+#             */
+/*   Updated: 2025/11/01 15:30:18 by ijoubair         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+
 #include "../../header_bonus.h"
 
 int is_wall(t_data *data, char *map[], double x, double y, char c)
@@ -15,6 +28,33 @@ int is_wall(t_data *data, char *map[], double x, double y, char c)
 		return(1);
 	if(map[grid_y][grid_x] == '1' || map[grid_y][grid_x] == 'D')
 		return(1);
+	return(0);
+}
+int is_player_wall(t_data *data, char *map[], double x, double y)
+{
+	int grid_x;
+	int grid_y;
+	double dx;
+	double dy;
+	double marge;
+
+	marge = 6.0;
+	dx = -marge;
+	while(dx <= marge)
+	{
+		dy = -marge;
+		while(dy <= marge)
+		{
+			grid_x = floor((x + dx)  / SQUARESIZE);
+			grid_y = floor((y + dy) / SQUARESIZE);
+			if(grid_x < 0 || grid_y < 0 || grid_x >= data->width || grid_y >= data->heigth)
+				return(1);
+			if(map[grid_y][grid_x] == '1' /*|| map[grid_y][grid_x] == 'D'*/)
+				return(1);
+			dy += marge;
+		}
+		dx += marge;
+	}
 	return(0);
 }
 

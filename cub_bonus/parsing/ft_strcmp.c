@@ -6,12 +6,11 @@
 /*   By: ijoubair <ijoubair@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/01 15:40:01 by ijoubair          #+#    #+#             */
-/*   Updated: 2025/10/31 21:49:59 by ijoubair         ###   ########.fr       */
+/*   Updated: 2025/11/01 15:13:06 by ijoubair         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../header_bonus.h"
-
 
 int	ft_strcmp(const char *s1, const char *s2)
 {

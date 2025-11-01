@@ -10,15 +10,22 @@
 # include <fcntl.h>
 # include <limits.h>
 
-#define SQUARESIZE 10
+#define SQUARESIZE 32
 #define ROWS 10
 #define COLMS 10
+<<<<<<< HEAD
+=======
+#define MINISCAL 0.2
+>>>>>>> origin/nouss
 
 #define NORTH 0
 #define SOUTH 1
 #define WEST  2
 #define EAST  3
+<<<<<<< HEAD
 #define DOOR  4
+=======
+>>>>>>> origin/nouss
 
 #define WIDTH 1500
 #define HEIGHT 900
@@ -69,8 +76,8 @@ typedef struct player{
 	int rot_dir;
 	double move_speed;
 	double rot_speed;
-	double step_x;
-	double step_y;
+	double right_x;
+	double left_y;
 }t_player;
 
 typedef struct ray{
@@ -100,7 +107,11 @@ typedef struct image
     int type;
     
 	void *img_pxl_ptr;
+<<<<<<< HEAD
     char *img_ptr;
+=======
+    void *img_ptr;
+>>>>>>> origin/nouss
     char *path;
     int height;
     int width;
@@ -111,6 +122,7 @@ typedef struct image
 	double tex_pos;
 }image;
 
+<<<<<<< HEAD
 
 typedef struct frame
 {
@@ -131,13 +143,20 @@ typedef struct weapon
 	t_frame shooting[11];
 }t_weapon;
 
+=======
+>>>>>>> origin/nouss
 typedef struct data{
 	void *mlx_ptr;
 	void *mlx_win;
 	t_player p;
 	t_ray ray;
+<<<<<<< HEAD
 	double door_x;
 	double door_y;
+=======
+	int door_x;
+	int door_y;
+>>>>>>> origin/nouss
 	t_img img;
 	char **map;
 	int width;
@@ -150,8 +169,11 @@ typedef struct data{
 	int vertical_hit;
 	int floor_rgb[3];
 	int ceiling_rgb[3];
+<<<<<<< HEAD
 	t_weapon weapon;
 	int moving;
+=======
+>>>>>>> origin/nouss
 	
 }t_data;
 
@@ -169,11 +191,21 @@ void draw_circle(t_data *data, int color);
 void draw_square(t_data *data, double x, double y, int color);
 void put_player(t_data *data);
 void render_map(t_data *data);
+void img_pixel_put(t_data *data, t_img *img, int x, int y, int color);
+void	hook_init(t_data *data);
+
+//**********randring******** */
+void draw_circle(t_data *data);
+void draw_square(t_data *data, double x, double y, int color);
+void put_player(t_data *data);
+void render_map(t_data *data);
+void rendring_(t_data *data);
 void draw_ceiling(t_data *data, double top_wall);
 void draw_floor(t_data *data, double bottom_wall);
 void draw_wall(t_data *data, double top_wall, double bottom_wall);
 
 //**********colising***********/
+int is_player_wall(t_data *data, char *map[], double x, double y);
 int is_wall(t_data *data, char *map[], double x, double y, char c);
 double find_hor_inter(t_data *data, double rayangle);
 double find_ver_inter(t_data *data, double rayangle);
@@ -247,7 +279,7 @@ void rendring_(t_data *data);
 	void		parse_player(char char_map, int x, int y);
 	int			get_hex_color(char *rgb);
 	void	get_door(t_data *data);
-
+	
 	// global
 	textures	**text_func(void);
 	char		***the_map(void);

@@ -6,7 +6,7 @@
 /*   By: ijoubair <ijoubair@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/09 15:29:07 by ijoubair          #+#    #+#             */
-/*   Updated: 2025/10/31 21:56:51 by ijoubair         ###   ########.fr       */
+/*   Updated: 2025/11/01 15:14:16 by ijoubair         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,7 +73,11 @@ int	is_map_valid(char **map)
 				map[y][x] == 'E' || map[y][x] == 'W' || map[y][x] == 'S')
 			{
 				if (!is_inside_the_map(x, y, map))
+<<<<<<< HEAD
 					return(printf("Unvalid map\n"), 0);
+=======
+					return(printf("The map should be surrounded by walls\n"), 0);
+>>>>>>> origin/nouss
 				parse_player(map[y][x], x, y);
 			}
 			x++;

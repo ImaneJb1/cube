@@ -1,0 +1,14 @@
+{
+    "files.associations": {
+        "array": "c",
+        "string": "c",
+        "string_view": "c",
+        "span": "c",
+        "cmath": "c",
+        "header.h": "c",
+        "get_next_line.h": "c",
+        "libft.h": "c",
+        "map": "c",
+        "format": "c"
+    }
+}
