@@ -6,7 +6,7 @@
 /*   By: ijoubair <ijoubair@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/31 21:42:13 by nel-khad          #+#    #+#             */
-/*   Updated: 2025/11/01 15:16:52 by ijoubair         ###   ########.fr       */
+/*   Updated: 2025/11/01 15:47:51 by ijoubair         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,14 +33,14 @@ static void	which_key(int keysem, t_data *data)
 	if(keysem == XK_d)
 	{
 		data->moving = 1;
-		data->p.step_x = cos(data->p.view_angle + M_PI / 2);
-		data->p.step_y = sin(data->p.view_angle + M_PI / 2);
+		data->p.right_x = cos(data->p.view_angle + M_PI / 2);
+		data->p.left_y = sin(data->p.view_angle + M_PI / 2);
 	}
 	if(keysem == XK_a)
 	{
 		data->moving = 1;
-		data->p.step_x = cos(data->p.view_angle - M_PI / 2);
-		data->p.step_y = sin(data->p.view_angle - M_PI / 2);
+		data->p.right_x = cos(data->p.view_angle - M_PI / 2);
+		data->p.left_y = sin(data->p.view_angle - M_PI / 2);
 
 	}
 }

@@ -2,7 +2,7 @@
 # define HEADER_H
 
 #include "../libft/libft.h"
-#include "parsing/get_next_line/get_next_line.h"
+#include "get_next_line/get_next_line.h"
 #include <math.h>
 # include "mlx.h"
 # include <X11/X.h>
@@ -13,19 +13,13 @@
 #define SQUARESIZE 32
 #define ROWS 10
 #define COLMS 10
-<<<<<<< HEAD
-=======
 #define MINISCAL 0.2
->>>>>>> origin/nouss
 
 #define NORTH 0
 #define SOUTH 1
 #define WEST  2
 #define EAST  3
-<<<<<<< HEAD
 #define DOOR  4
-=======
->>>>>>> origin/nouss
 
 #define WIDTH 1500
 #define HEIGHT 900
@@ -107,11 +101,7 @@ typedef struct image
     int type;
     
 	void *img_pxl_ptr;
-<<<<<<< HEAD
-    char *img_ptr;
-=======
     void *img_ptr;
->>>>>>> origin/nouss
     char *path;
     int height;
     int width;
@@ -122,7 +112,6 @@ typedef struct image
 	double tex_pos;
 }image;
 
-<<<<<<< HEAD
 
 typedef struct frame
 {
@@ -140,23 +129,16 @@ typedef struct weapon
 {
 	t_frame intro[20];
 	t_frame walking[20];
-	t_frame shooting[11];
+	t_frame shooting[5];
 }t_weapon;
 
-=======
->>>>>>> origin/nouss
 typedef struct data{
 	void *mlx_ptr;
 	void *mlx_win;
 	t_player p;
 	t_ray ray;
-<<<<<<< HEAD
 	double door_x;
 	double door_y;
-=======
-	int door_x;
-	int door_y;
->>>>>>> origin/nouss
 	t_img img;
 	char **map;
 	int width;
@@ -169,11 +151,9 @@ typedef struct data{
 	int vertical_hit;
 	int floor_rgb[3];
 	int ceiling_rgb[3];
-<<<<<<< HEAD
 	t_weapon weapon;
 	int moving;
-=======
->>>>>>> origin/nouss
+	int shooting;
 	
 }t_data;
 
@@ -187,7 +167,7 @@ int release_key(int keysem, t_data *data);
 void	hook_init(t_data *data);
 
 //**********randring******** */
-void draw_circle(t_data *data, int color);
+void draw_circle(t_data *data);
 void draw_square(t_data *data, double x, double y, int color);
 void put_player(t_data *data);
 void render_map(t_data *data);
@@ -195,7 +175,7 @@ void img_pixel_put(t_data *data, t_img *img, int x, int y, int color);
 void	hook_init(t_data *data);
 
 //**********randring******** */
-void draw_circle(t_data *data);
+
 void draw_square(t_data *data, double x, double y, int color);
 void put_player(t_data *data);
 void render_map(t_data *data);
@@ -301,7 +281,11 @@ void rendring_(t_data *data);
 	void init_weapon_walking(t_data *data);
 	void init_weapon_shooting(t_data *data);
 	void	init_first_person(t_data *data);
-void	draw_first_person_walking(t_data *data, t_frame *frames, int size);
+	void	draw_first_person_walking(t_data *data, t_frame *frames, int size);
+	void	put_frame(t_data *data, t_frame *frame);
+	void	shooting(int button, int x, int y, void *param);
+	void	draw_shooting(t_data *data);
+
 
 #endif
 

@@ -6,7 +6,7 @@
 /*   By: ijoubair <ijoubair@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/31 21:42:29 by nel-khad          #+#    #+#             */
-/*   Updated: 2025/11/01 15:17:37 by ijoubair         ###   ########.fr       */
+/*   Updated: 2025/11/01 18:29:42 by ijoubair         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,8 +27,10 @@ void	hook_init(t_data *data)
 {
 	mlx_hook(data->mlx_win, KeyPress, KeyPressMask, press_key, data);
 	// mlx_hook(data->mlx_win, ButtonPress, ButtonPressMask, press_mouse, data);
+	mlx_hook(data->mlx_win, ButtonPress, ButtonPressMask, shooting, data);
 	mlx_hook(data->mlx_win, DestroyNotify, 0, press_x, data);
 	mlx_hook(data->mlx_win, MotionNotify, PointerMotionMask, mouse_move, data);
+
 	mlx_hook(data->mlx_win, KeyRelease, KeyReleaseMask, release_key, data);
 	mlx_mouse_hide(data->mlx_ptr, data->mlx_win);
 	mlx_loop_hook(data->mlx_ptr, moves_loop, data);

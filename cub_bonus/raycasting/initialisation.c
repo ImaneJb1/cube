@@ -6,7 +6,7 @@
 /*   By: ijoubair <ijoubair@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/01 15:20:08 by ijoubair          #+#    #+#             */
-/*   Updated: 2025/11/01 15:23:14 by ijoubair         ###   ########.fr       */
+/*   Updated: 2025/11/01 18:05:13 by ijoubair         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,53 +29,6 @@ void	init_player(t_data *data)
 	if(data->p.direction == 'S')
 		data->p.view_angle = 90 * (M_PI / 180);
 	if(data->p.direction == 'W')
-		data->p.view_angle = 180 * (M_PI / 180);
-}
-
-int get_width(char *map[])
-{
-	int i;
-	int j;
-	int l;
-	i = 0;
-	j = 0;
-	l = 0;
-
-	while(map[j])
-	{
-		i = 0;
-		while(map[j][i])
-		{
-			i++;
-		}
-		if(i > l)
-			l = i;
-		j++;
-	}
-	return(l);
-}
-
-int get_heigth(char *map[])
-{
-	int i;
-	i = 0;
-	
-	while(map[i])
-	{
-		i++;
-	}
-	return(i);
-}
-
-void init_ray(t_data *data)
-{
-	if (data->p.direction == 'N')
-		data->p.view_angle = 270 * (M_PI / 180);
-	if (data->p.direction == 'E')
-		data->p.view_angle = 0;
-	if (data->p.direction == 'S')
-		data->p.view_angle = 90 * (M_PI / 180);
-	if (data->p.direction == 'W')
 		data->p.view_angle = 180 * (M_PI / 180);
 }
 
@@ -152,5 +105,6 @@ void	data_init(t_data *data)
 	init_player(data);
 	init_ray(data);
 	init_first_person(data);
+	data->shooting = 0;
 	data->arr = init_text_arr(data->mlx_ptr, &data->arr, 5);
 }

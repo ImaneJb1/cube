@@ -17,9 +17,9 @@ LIB     = libft/libft.a
 #        $(wildcard parsing/map_parsing/*.c) \
 #        $(wildcard parsing/textures_parser/*.c)\
 #        $(wildcard raycasting/*/*.c)
+GNL = get_next_line/*.c
 SRCS = $(shell find ./cub_mandatory -name "*.c")
 SRCS_BONUS = $(shell find ./cub_bonus -name "*.c")
-
 OBJ	 = $(SRCS:%.c=$(OBJ_D)/%.o)
 OBJ_BONUS = $(SRCS_BONUS:%.c=$(OBJ_D_BONUS)/%.o)
 # DEP  = $(OBJ:.o=.d)

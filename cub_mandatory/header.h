@@ -2,7 +2,7 @@
 # define HEADER_H
 
 #include "../libft/libft.h"
-#include "parsing/get_next_line/get_next_line.h"
+#include "get_next_line/get_next_line.h"
 #include <math.h>
 # include "mlx.h"
 # include <X11/X.h>
