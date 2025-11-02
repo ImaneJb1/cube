@@ -1,0 +1,30 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_strcmp.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ijoubair <ijoubair@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/08/01 15:40:01 by ijoubair          #+#    #+#             */
+/*   Updated: 2025/11/01 15:13:06 by ijoubair         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "../header_bonus.h"
+
+int	ft_strcmp(const char *s1, const char *s2)
+{
+	unsigned char	*tmp1;
+	unsigned char	*tmp2;
+
+	tmp1 = (unsigned char *)s1;
+	tmp2 = (unsigned char *)s2;
+	while ((*tmp1 != '\0' || *tmp2 != '\0'))
+	{
+		if (*tmp1 != *tmp2)
+			return (*tmp1 - *tmp2);
+		tmp1++;
+		tmp2++;
+	}
+	return (0);
+}
