@@ -6,7 +6,7 @@
 /*   By: ijoubair <ijoubair@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/02 16:01:05 by ijoubair          #+#    #+#             */
-/*   Updated: 2025/11/01 18:51:14 by ijoubair         ###   ########.fr       */
+/*   Updated: 2025/11/02 23:01:31 by ijoubair         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,14 +14,16 @@
 
 void	**mem_arr(void)
 {
-	static void *mem_arr[1024];
-	return(mem_arr);
+	static void	*mem_arr[1024];
+
+	return (mem_arr);
 }
 
 int	*mem_count(void)
 {
-	static int count;
-	return(&count);
+	static int	count;
+
+	return (&count);
 }
 
 void	*gc_malloc(size_t size)
@@ -29,13 +31,13 @@ void	*gc_malloc(size_t size)
 	void	*mem;
 
 	mem = malloc(size);
-	if(!mem)
+	if (!mem)
 	{
 		printf("allocation faillure\n");
 		return (NULL);
 	}
 	(mem_arr()[(*mem_count())++]) = mem;
-	return(mem);
+	return (mem);
 }
 
 void	*gc_calloc(size_t count, size_t size)
@@ -43,25 +45,25 @@ void	*gc_calloc(size_t count, size_t size)
 	void	*mem;
 
 	mem = calloc(count, size);
-	if(!mem)
+	if (!mem)
 	{
 		printf("allocation faillure\n");
 		return (NULL);
 	}
 	(mem_arr()[(*mem_count())++]) = mem;
-	return(mem);
+	return (mem);
 }
 
-void free_all(void)
+void	free_all(void)
 {
-	int i;
+	int	i;
 
 	i = 0;
-	while(i < *mem_count())
-	{
-		free(mem_arr()[i]);
-		i++;
-	}
+	// while (i < *mem_count())
+	// {
+	// 	free(mem_arr()[i]);
+	// 	i++;
+	// }
 	*mem_count() = 0;
+	destroy_all();
 }
-

@@ -6,7 +6,7 @@
 /*   By: ijoubair <ijoubair@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/01 19:12:27 by ijoubair          #+#    #+#             */
-/*   Updated: 2025/11/01 19:24:05 by ijoubair         ###   ########.fr       */
+/*   Updated: 2025/11/02 16:04:24 by ijoubair         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,5 +103,5 @@ void data_init(t_data *data)
 	init_player(data);
 	init_ray(data);
 	init_weapon(data);
-	data->arr = init_text_arr(data->mlx_ptr, &data->arr, 5);
+	data->arr = init_text_arr(data->mlx_ptr, &data->arr, 4);
 }

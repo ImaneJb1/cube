@@ -1,16 +1,15 @@
 
 #include "../header.h"
 
-
-void draw_circle(t_data *data, int color)
+void	draw_circle(t_data *data, int color)
 {
-	int radius;
-	double dx;
-	double dy;
+	int		radius;
+	double	dx;
+	double	dy;
+	double	y;
+	double	x;
+
 	radius = 5;
-	
-	double y;
-	double x;
 	y = data->p.p_y - radius;
 	while (y <= data->p.p_y + radius)
 	{
@@ -19,75 +18,74 @@ void draw_circle(t_data *data, int color)
 		{
 			dx = x - data->p.p_x;
 			dy = y - data->p.p_y;
-
-			if (dx*dx + dy*dy <= radius*radius)//check if the point inside
-				my_img_pixel_put(data, &data->img, x, y, color);
-			x++; 
+			if (dx * dx + dy * dy <= radius * radius)
+				// check if the point inside
+				my_img_pixel_put(data, x, y, color);
+			x++;
 		}
 		y++;
 	}
-
 }
 
-void draw_square(t_data *data, double x, double y, int color)
+void	draw_square(t_data *data, double x, double y, int color)
 {
-	int i;
-	int j;
+	int	i;
+	int	j;
+
 	j = 0;
 	i = 0;
-
-	while(i < SQUARESIZE)
+	while (i < SQUARESIZE)
 	{
 		j = 0;
-		while(j < SQUARESIZE)
+		while (j < SQUARESIZE)
 		{
-			if(j == SQUARESIZE - 1 || i == SQUARESIZE -1 || i == 0 || j == 0)
-				my_img_pixel_put(data, &data->img, x + j, y + i, 0x000000);
+			if (j == SQUARESIZE - 1 || i == SQUARESIZE - 1 || i == 0 || j == 0)
+				my_img_pixel_put(data, x + j, y + i, 0x000000);
 			else
-				my_img_pixel_put(data, &data->img, x + j, y + i, color);
+				my_img_pixel_put(data, x + j, y + i, color);
 			j++;
 		}
 		i++;
 	}
 }
 
-void put_player(t_data *data)
+void	put_player(t_data *data)
 {
 	draw_circle(data, 0xFF69B4);
 }
 
-int inside_circle(int radius, double x, double y, t_data *data)
+int	inside_circle(int radius, double x, double y, t_data *data)
 {
-	double dx;
-	double dy;
+	double	dx;
+	double	dy;
 
 	dx = x - data->p.p_x;
 	dy = y - data->p.p_y;
-	if (dx*dx + dy*dy <= radius*radius)//check if the point inside
-		return(1);
-	return(0);
+	if (dx * dx + dy * dy <= radius * radius) // check if the point inside
+		return (1);
+	return (0);
 }
 
-void render_map(t_data *data)
+void	render_map(t_data *data)
 {
-	
-	int i;
-	int j;
-	int color;
+	int	i;
+	int	j;
+	int	color;
 
 	i = 0;
 	j = 0;
 	color = -1;
-	while(data->map[i])
+	while (data->map[i])
 	{
 		j = 0;
-		while(data->map[i][j])
+		while (data->map[i][j])
 		{
-			if(data->map[i][j] == '1')
+			if (data->map[i][j] == '1')
 				color = 0xffffff;
-			else if(data->map[i][j] == '0' || ft_strchr("SNWE",data->map[i][j]))
+			else if (data->map[i][j] == '0' || ft_strchr("SNWE",
+					data->map[i][j]))
 				color = 0x87CEEB;
-			if(color > 0)
+			if (color > 0)
 				draw_square(data, j * SQUARESIZE, i * SQUARESIZE, color);
 			color = -1;
 			j++;
@@ -96,12 +94,12 @@ void render_map(t_data *data)
 	}
 }
 
-void rendring_(t_data *data)
+void	rendring_(t_data *data)
 {
 	// render_map(data);
 	// put_player(data);
 	cast_allrays(data);
-	
+
 	put_weapon(data, &data->weapon);
 	mlx_put_image_to_window(data->mlx_ptr, data->mlx_win, data->img.img_ptr, 0,
 		0);

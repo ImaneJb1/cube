@@ -22,7 +22,7 @@ int main(int argc, char **argv)
 	return 0;
 	if(!fill_textures_map(argv[1], data))
 	{
-		free_all();
+		// free_all();
 		return 0;
 	}// it creates the map array
 	check_textures(); // this exits the program in case of faillure 
@@ -34,7 +34,7 @@ int main(int argc, char **argv)
 	mlx_destroy_window(data->mlx_ptr, data->mlx_win);
 	mlx_destroy_display(data->mlx_ptr);
 	free(data->mlx_ptr);
-	free_all();
+	// free_all();
 	get_next_line(-1);
 	return 0;
 }

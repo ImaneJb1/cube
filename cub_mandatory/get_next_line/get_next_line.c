@@ -6,7 +6,7 @@
 /*   By: ijoubair <ijoubair@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/28 11:00:48 by ijoubair          #+#    #+#             */
-/*   Updated: 2025/08/12 14:20:05 by ijoubair         ###   ########.fr       */
+/*   Updated: 2025/11/02 23:05:29 by ijoubair         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -110,7 +110,7 @@ char	*get_next_line(int fd)
 	char		*line;
 
 	if (fd < 0 || BUFFER_SIZE < 0)
-		return (NULL);
+		return (free(buffer), NULL);
 	buffer = read_buff(fd, buffer);
 	if (!buffer)
 		return (NULL);
@@ -122,7 +122,7 @@ char	*get_next_line(int fd)
 	}
 	line = extract_line(buffer);
 	if(!line)
-			{
+	{
 		free(buffer);
 		buffer = NULL;
 		return (NULL);
