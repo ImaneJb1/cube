@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   initialisation.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ijoubair <ijoubair@student.42.fr>          +#+  +:+       +#+        */
+/*   By: nel-khad <nel-khad@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/01 15:20:08 by ijoubair          #+#    #+#             */
-/*   Updated: 2025/11/01 20:51:29 by ijoubair         ###   ########.fr       */
+/*   Updated: 2025/11/03 16:35:45 by nel-khad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,6 +95,8 @@ void	data_init(t_data *data)
 		exit(1);
 	data->map = map;
 	get_door(data);
+	data->door_x = 0;
+	data->door_y = 0;
 	data->vertical_hit = 0;
 	data->width = get_width(data->map);
 	data->heigth = get_heigth(data->map);

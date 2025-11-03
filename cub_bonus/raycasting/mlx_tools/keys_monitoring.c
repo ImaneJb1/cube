@@ -6,7 +6,7 @@
 /*   By: ijoubair <ijoubair@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/31 21:42:13 by nel-khad          #+#    #+#             */
-/*   Updated: 2025/11/01 20:37:16 by ijoubair         ###   ########.fr       */
+/*   Updated: 2025/11/03 15:49:45 by ijoubair         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,10 +47,6 @@ static void	which_key(int keysem, t_data *data)
 
 int press_x(t_data *data)
 {
-    mlx_destroy_image(data->mlx_ptr, data->img.img_ptr);
-    mlx_destroy_window(data->mlx_ptr, data->mlx_win);
-    mlx_destroy_display(data->mlx_ptr);
-    free(data->mlx_ptr);
 	free_and_exit(0);
     return(0);
 }

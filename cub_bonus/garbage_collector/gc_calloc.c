@@ -6,7 +6,7 @@
 /*   By: ijoubair <ijoubair@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/02 16:01:05 by ijoubair          #+#    #+#             */
-/*   Updated: 2025/11/02 16:45:19 by ijoubair         ###   ########.fr       */
+/*   Updated: 2025/11/03 15:29:17 by ijoubair         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,13 +56,6 @@ void	*gc_calloc(size_t count, size_t size)
 
 void	free_all(void)
 {
-	int	i;
-
-	i = 0;
-	while (i < *mem_count())
-	{
-		free(mem_arr()[i]);
-		i++;
-	}
 	*mem_count() = 0;
+	destroy_all();
 }
