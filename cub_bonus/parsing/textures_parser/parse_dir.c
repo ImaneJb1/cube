@@ -6,11 +6,26 @@
 /*   By: ijoubair <ijoubair@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/02 10:22:42 by ijoubair          #+#    #+#             */
-/*   Updated: 2025/11/01 15:12:13 by ijoubair         ###   ########.fr       */
+/*   Updated: 2025/11/03 15:25:24 by ijoubair         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../header_bonus.h"
+
+void	check_textures(void)
+{
+	if(text_func() == NULL)
+	{
+		printf("Unvalid textures\n");
+		free_and_exit(1);
+	}
+	if((*text_func())->no == NULL || (*text_func())->so == NULL 
+	|| (*text_func())->ea == NULL || (*text_func())->we == NULL)
+	{
+		printf("Unvalid textures\n");
+		free_and_exit(1);
+	}
+}
 
 void	is_path_valid(char *path, char *conf)
 {

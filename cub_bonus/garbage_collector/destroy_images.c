@@ -3,25 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   destroy_images.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nel-khad <nel-khad@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ijoubair <ijoubair@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/02 15:51:00 by ijoubair          #+#    #+#             */
-/*   Updated: 2025/11/03 00:47:58 by nel-khad         ###   ########.fr       */
+/*   Updated: 2025/11/03 15:28:57 by ijoubair         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../header.h"
+#include "../header_bonus.h"
 
-void	destroy_weapon(t_data *data)
-{
-	if (!data)
-	{
-		printf("destroy weapon: data is null\n");
-		return ;
-	}
-	if (data->mlx_ptr && data->weapon.img_ptr)
-		mlx_destroy_image(data->mlx_ptr, data->weapon.img_ptr);
-}
 
 void	destroy_textures(t_data *data)
 {

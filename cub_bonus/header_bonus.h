@@ -250,7 +250,7 @@ typedef struct textures
 void			parse_floor_ceiling(char *line, config *arr, t_data *data);
 void			parse_dir(char *line, config *arr);
 textures		*init_textures(void);
-int				fill_textures_map(char *file_name, t_data *data);
+int				fill_textures_map(char *file_name, t_data *data, int fd, textures **text);
 config			*init_dir_arr(textures *text);
 config			*init_fc_arr(textures *text, t_data *data);
 void			check_textures(void);
@@ -274,6 +274,7 @@ t_data			*data_func(void);
 void			free_all(void);
 void			*gc_calloc(size_t count, size_t size);
 void			*gc_malloc(size_t size);
+void			destroy_weapon(t_data *data);
 // textures
 void			set_tex_x(t_data *data, int type);
 void			set_step(double wall_height, t_texture *texture);
