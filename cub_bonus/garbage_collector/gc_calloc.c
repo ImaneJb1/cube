@@ -6,11 +6,11 @@
 /*   By: ijoubair <ijoubair@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/02 16:01:05 by ijoubair          #+#    #+#             */
-/*   Updated: 2025/11/02 16:45:19 by ijoubair         ###   ########.fr       */
+/*   Updated: 2025/11/02 23:01:31 by ijoubair         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../header_bonus.h"
+#include "../header.h"
 
 void	**mem_arr(void)
 {
@@ -59,10 +59,11 @@ void	free_all(void)
 	int	i;
 
 	i = 0;
-	while (i < *mem_count())
-	{
-		free(mem_arr()[i]);
-		i++;
-	}
+	// while (i < *mem_count())
+	// {
+	// 	free(mem_arr()[i]);
+	// 	i++;
+	// }
 	*mem_count() = 0;
+	destroy_all();
 }
