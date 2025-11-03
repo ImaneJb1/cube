@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   destroy_images.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ijoubair <ijoubair@student.42.fr>          +#+  +:+       +#+        */
+/*   By: nel-khad <nel-khad@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/02 15:51:00 by ijoubair          #+#    #+#             */
-/*   Updated: 2025/11/02 23:00:47 by ijoubair         ###   ########.fr       */
+/*   Updated: 2025/11/03 00:47:58 by nel-khad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,9 +27,9 @@ void	destroy_textures(t_data *data)
 {
 	int	i;
 
-	if (!data)
+	if (!data || !data->arr)
 	{
-		printf("destroy weapon: data is null\n");
+		// printf("destroy weapon: data is null\n");
 		return ;
 	}
 	i = 0;
@@ -46,7 +46,7 @@ void	free_map(char **map)
 	int	i;
 	if(!map || !map[0])
 	{
-		printf("nuuuuuull\n");
+		// printf("nuuuuuull\n");
 		return;
 	}
 	i = 0;
@@ -68,8 +68,11 @@ void	destroy_all(void)
 	free_map(data->map);
 	destroy_weapon(data);
 	destroy_textures(data);
-	mlx_destroy_image(data->mlx_ptr, data->img.img_ptr);
-	mlx_destroy_window(data->mlx_ptr, data->mlx_win);
-	mlx_destroy_display(data->mlx_ptr);
-	free(data->mlx_ptr);
+	if(data && data->mlx_ptr && data->img.img_ptr && data->mlx_win)
+	{
+		mlx_destroy_image(data->mlx_ptr, data->img.img_ptr);
+		mlx_destroy_window(data->mlx_ptr, data->mlx_win);
+		mlx_destroy_display(data->mlx_ptr);
+		free(data->mlx_ptr);
+	}
 }

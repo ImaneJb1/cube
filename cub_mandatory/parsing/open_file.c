@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   open_file.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ijoubair <ijoubair@student.42.fr>          +#+  +:+       +#+        */
+/*   By: nel-khad <nel-khad@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/10 15:16:43 by ijoubair          #+#    #+#             */
-/*   Updated: 2025/11/01 19:10:47 by ijoubair         ###   ########.fr       */
+/*   Updated: 2025/11/02 23:54:54 by nel-khad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,8 +21,7 @@ int	open_file(char *file_name)
 	if(fd < 0)
 	{
 		perror("");
-		free_and_exit(1);
-		return(0);
+		return(-1);
 	}  
 	return(fd);
 }

@@ -28,7 +28,7 @@ static void calcul_inter_V(t_data *data, double xa, double ya, t_intrsc *inter)
 {
 	while(inter->next_x <= data->width * SQUARESIZE && inter->next_x >= 0 && inter->next_y <= data->heigth * SQUARESIZE && inter->next_y >= 0)
 	{
-		if (is_wall(data, data->map, inter->next_x, inter->next_y, 'v'))
+		if (is_wall(data, inter->next_x, inter->next_y, 'v'))
 		{
 			data->ray.hit_vertical = 1;
 			data->ray.ver_walhit_x = inter->next_x;

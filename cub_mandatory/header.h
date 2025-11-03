@@ -174,7 +174,7 @@ void			draw_wall(t_data *data, double top_wall, double bottom_wall);
 
 //**********colising***********/
 int				is_player_wall(t_data *data, char *map[], double x, double y);
-int				is_wall(t_data *data, char *map[], double x, double y, char c);
+int				is_wall(t_data *data, double x, double y, char c);
 double			find_hor_inter(t_data *data, double rayangle);
 double			find_ver_inter(t_data *data, double rayangle);
 
@@ -231,7 +231,7 @@ typedef struct textures
 void			parse_floor_ceiling(char *line, config *arr, t_data *data);
 void			parse_dir(char *line, config *arr);
 textures		*init_textures(void);
-int				fill_textures_map(char *file_name, t_data *data);
+int	fill_textures_map(char *file_name, t_data *data, int fd, textures	**text);
 config			*init_dir_arr(textures *text);
 config			*init_fc_arr(textures *text, t_data *data);
 void			check_textures(void);
@@ -246,6 +246,8 @@ int				strlen_2d(char **str);
 void			parse_player(char char_map, int x, int y);
 int				get_hex_color(char *rgb);
 void			get_door(t_data *data);
+int				parse_map_file(char *file_name, t_data *data);
+
 
 // global
 textures		**text_func(void);
@@ -269,6 +271,7 @@ void			set_tex_x(t_data *data, int type);
 void			set_step(double wall_height, t_texture *texture);
 void			set_tex_pos(double top_wall, t_texture *texture);
 // weapon
+void			init_weapon(t_data *data);
 void			put_weapon(t_data *data, t_weapon *weapon);
 
 #endif

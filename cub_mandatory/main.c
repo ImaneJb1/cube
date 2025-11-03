@@ -20,7 +20,7 @@ int main(int argc, char **argv)
 	
 	if(!check_argv(argc, argv))
 	return 0;
-	if(!fill_textures_map(argv[1], data))
+	if(!parse_map_file(argv[1], data))
 	{
 		// free_all();
 		return 0;

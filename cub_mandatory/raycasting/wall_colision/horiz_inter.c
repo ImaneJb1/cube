@@ -1,6 +1,6 @@
 #include "../../header.h"
 
-int is_wall(t_data *data, char *map[], double x, double y, char c)
+int is_wall(t_data *data, double x, double y, char c)
 {
 	int grid_x;
 	int grid_y;
@@ -13,35 +13,8 @@ int is_wall(t_data *data, char *map[], double x, double y, char c)
 	grid_y = floor(y / SQUARESIZE);
 	if(grid_x < 0 || grid_y < 0 || grid_x >= data->width || grid_y >= data->heigth)
 		return(1);
-	if(map[grid_y][grid_x] == '1' || map[grid_y][grid_x] == 'D')
+	if(data->map[grid_y][grid_x] == '1' || data->map[grid_y][grid_x] == 'D')
 		return(1);
-	return(0);
-}
-int is_player_wall(t_data *data, char *map[], double x, double y)
-{
-	int grid_x;
-	int grid_y;
-	double dx;
-	double dy;
-	double marge;
-
-	marge = 6;
-	dx = -marge;
-	while(dx <= marge)
-	{
-		dy = -marge;
-		while(dy <= marge)
-		{
-			grid_x = floor((x + dx)  / SQUARESIZE);
-			grid_y = floor((y + dy) / SQUARESIZE);
-			if(grid_x < 0 || grid_y < 0 || grid_x >= data->width || grid_y >= data->heigth)
-				return(1);
-			if(map[grid_y][grid_x] == '1')
-				return(1);
-			dy += marge;
-		}
-		dx += marge;
-	}
 	return(0);
 }
 
@@ -73,7 +46,7 @@ static void calcul_inter_H(t_data *data, double xa, double ya, t_intrsc *inter)
 {
 	while(inter->next_x < data->width * SQUARESIZE && inter->next_x >= 0 && inter->next_y < data->heigth * SQUARESIZE && inter->next_y >= 0)
 	{
-		if (is_wall(data, data->map, inter->next_x, inter->next_y, 'h'))
+		if (is_wall(data, inter->next_x, inter->next_y, 'h'))
 		{
 			data->ray.hit_horiz = 1;
 			data->ray.hor_walhit_x = inter->next_x;

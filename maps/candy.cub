@@ -1,9 +1,8 @@
-C 0,255,255
-F 76,153,0
-SO textures/p1.xpm
-NO textures/p2.xpm
-WE textures/p3.xpm
-EA textures/p4.xpm
+C 202,250,249
+F 191,250,112
+SO textures/candy.xpm
+NO textures/candy.xpm
+WE textures/candy.xpm
 1111111111111111111111111
 1000000000110000000000001
 1011000001110000000000001

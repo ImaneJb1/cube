@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main_parser.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ijoubair <ijoubair@student.42.fr>          +#+  +:+       +#+        */
+/*   By: nel-khad <nel-khad@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/01 15:11:57 by ijoubair          #+#    #+#             */
-/*   Updated: 2025/11/01 15:11:59 by ijoubair         ###   ########.fr       */
+/*   Updated: 2025/11/03 01:05:16 by nel-khad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,8 +82,7 @@ void	check_textures(void)
 		free_and_exit(1);
 	}
 	if((*text_func())->no == NULL || (*text_func())->so == NULL 
-	|| (*text_func())->ea == NULL || (*text_func())->we == NULL
-	|| (*text_func())->door == NULL)
+	|| (*text_func())->ea == NULL || (*text_func())->we == NULL)
 	{
 		printf("Unvalid textures\n");
 		free_and_exit(1);

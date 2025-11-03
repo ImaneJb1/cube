@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   keys_monitoring.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ijoubair <ijoubair@student.42.fr>          +#+  +:+       +#+        */
+/*   By: nel-khad <nel-khad@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/01 19:14:05 by ijoubair          #+#    #+#             */
-/*   Updated: 2025/11/02 16:47:34 by ijoubair         ###   ########.fr       */
+/*   Updated: 2025/11/02 23:46:18 by nel-khad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,11 +42,6 @@ static void	which_key(int keysem, t_data *data)
 
 int	press_x(t_data *data)
 {
-	// mlx_destroy_image(data->mlx_ptr, data->img.img_ptr);
-	// mlx_destroy_window(data->mlx_ptr, data->mlx_win);
-	// mlx_destroy_display(data->mlx_ptr);
-	// free(data->mlx_ptr);
-	// exit(0);
 	free_and_exit(0);
 	return (0);
 }

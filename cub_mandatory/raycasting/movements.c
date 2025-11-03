@@ -10,6 +10,35 @@ void is_door(t_data *data, char *map[], double x, double y)
 	if(map[grid_y][grid_x] == 'D')
 		map[grid_y][grid_x] = 'P';
 }
+
+int is_player_wall(t_data *data, char *map[], double x, double y)
+{
+	int grid_x;
+	int grid_y;
+	double dx;
+	double dy;
+	double marge;
+
+	marge = 6;
+	dx = -marge;
+	while(dx <= marge)
+	{
+		dy = -marge;
+		while(dy <= marge)
+		{
+			grid_x = floor((x + dx)  / SQUARESIZE);
+			grid_y = floor((y + dy) / SQUARESIZE);
+			if(grid_x < 0 || grid_y < 0 || grid_x >= data->width || grid_y >= data->heigth)
+				return(1);
+			if(map[grid_y][grid_x] == '1')
+				return(1);
+			dy += marge;
+		}
+		dx += marge;
+	}
+	return(0);
+}
+
 static void update_player(t_data *data)
 {
 	int move_step;
@@ -26,10 +55,6 @@ static void update_player(t_data *data)
 		data->p.p_y = next_y;
 		data->p.p_x = next_x;
 	}
-	else if(!is_player_wall(data, data->map, data->p.p_x, next_y))
-		data->p.p_y = next_y;
-	else if(!is_player_wall(data, data->map, next_x, data->p.p_y))
-		data->p.p_x = next_x;
 }
 
 int moves_loop(t_data *data)

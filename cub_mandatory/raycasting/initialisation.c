@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   initialisation.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ijoubair <ijoubair@student.42.fr>          +#+  +:+       +#+        */
+/*   By: nel-khad <nel-khad@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/01 19:12:27 by ijoubair          #+#    #+#             */
-/*   Updated: 2025/11/02 16:04:24 by ijoubair         ###   ########.fr       */
+/*   Updated: 2025/11/03 00:19:45 by nel-khad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,12 +14,12 @@
 
 void init_player(t_data *data)
 {
-	data->p.move_speed = 4;
+	data->p.move_speed = 2;
 	data->p.move_dir = 0;
 	data->p.rot_dir = 0;
 	data->p.right_x = 0;
 	data->p.left_y = 0;
-	data->p.rot_speed = 10 * (M_PI / 180);
+	data->p.rot_speed = 4 * (M_PI / 180);
 	if(data->p.direction == 'N')
 		data->p.view_angle = 270 * (M_PI / 180);
 	if(data->p.direction == 'E')

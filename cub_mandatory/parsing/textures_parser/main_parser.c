@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main_parser.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ijoubair <ijoubair@student.42.fr>          +#+  +:+       +#+        */
+/*   By: nel-khad <nel-khad@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/01 15:11:57 by ijoubair          #+#    #+#             */
-/*   Updated: 2025/11/02 23:18:04 by ijoubair         ###   ########.fr       */
+/*   Updated: 2025/11/03 00:48:18 by nel-khad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,26 +45,37 @@ void	init_arrays(textures **text, config **arr_dir, config **arr_fc,
 	*arr_fc = init_fc_arr(*text, data);
 }
 
-// kan3amer les textures f struct textures
-int	fill_textures_map(char *file_name, t_data *data)
+int	parse_map_file(char *file_name, t_data *data)
 {
-	char		*line;
 	int			fd;
 	textures	**text;
 
-	config(*arr_dir), (*arr_fc);
 	fd = open_file(file_name);
 	if(fd < 0)
-		return 0;
+		return (0);
 	text = text_func();
 	*text = init_textures();
+	if(!fill_textures_map(file_name, data, fd, text))
+		return(0);
+	return(1);
+}
+// kan3amer les textures f struct textures
+int	fill_textures_map(char *file_name, t_data *data, int fd, textures	**text)
+{
+	char		*line;
+	// int			fd;
+	// textures	**text;
+
+	config(*arr_dir), (*arr_fc);
+	// fd = open_file(file_name);
+	// if(fd < 0)
+	// 	return (0);
+	// text = text_func();
+	// *text = init_textures();
 	init_arrays(text, &arr_dir, &arr_fc, data);
 	line = get_next_line(fd);
 	if (!line)
-	{
-		printf("The file is empty\n");
-		return (0);
-	}
+		return (printf("The file is empty\n"), 0);
 	while (line)
 	{
 		if (map_reached(*line))
@@ -78,8 +89,7 @@ int	fill_textures_map(char *file_name, t_data *data)
 		}
 		line = get_next_line(fd);
 	}
-	free(line);
-	return (1);
+	return (free(line),1);
 }
 
 void	check_textures(void)
@@ -90,8 +100,7 @@ void	check_textures(void)
 		free_and_exit(1);
 	}
 	if ((*text_func())->no == NULL || (*text_func())->so == NULL
-		|| (*text_func())->ea == NULL || (*text_func())->we == NULL
-		|| (*text_func())->door == NULL)
+		|| (*text_func())->ea == NULL || (*text_func())->we == NULL)
 	{
 		printf("Unvalid textures\n");
 		free_and_exit(1);
