@@ -279,7 +279,7 @@ void			destroy_weapon(t_data *data);
 void			set_tex_x(t_data *data, int type);
 void			set_step(double wall_height, t_texture *texture);
 void			set_tex_pos(double top_wall, t_texture *texture);
-void			fill_image_arr(void *mlx_ptr, t_texture **arr);
+void			fill_image_arr(void *mlx_ptr, t_texture **arr, int size);
 t_texture			*init_text_arr(void *mlx_ptr, t_texture **arr, int size);
 // void load_all_textures(t_data *data);
 void			draw_textured_wall(t_data *data, t_texture *texture,

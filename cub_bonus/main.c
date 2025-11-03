@@ -25,9 +25,9 @@ int main(int argc, char **argv)
 	{
 		return 0;
 	}// it creates the map array
+	data_init(data);
 	check_textures(); // this exits the program in case of faillure 
 	parse_map();
-	data_init(data);
 	init_first_person(data);
 	rendring_(data);
 	hook_init(data);

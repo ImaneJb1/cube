@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   initialisation.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nel-khad <nel-khad@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ijoubair <ijoubair@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/01 15:20:08 by ijoubair          #+#    #+#             */
-/*   Updated: 2025/11/03 16:35:45 by nel-khad         ###   ########.fr       */
+/*   Updated: 2025/11/03 22:00:38 by ijoubair         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,15 +88,14 @@ void	init_ray(t_data *data)
 void	data_init(t_data *data)
 {
 	static char	**map;
-
+	int size;
+	
 	map = *the_map();
 	data->mlx_ptr = mlx_init();
 	if (!data->mlx_ptr)
 		exit(1);
 	data->map = map;
 	get_door(data);
-	data->door_x = 0;
-	data->door_y = 0;
 	data->vertical_hit = 0;
 	data->width = get_width(data->map);
 	data->heigth = get_heigth(data->map);
@@ -108,5 +107,8 @@ void	data_init(t_data *data)
 	init_ray(data);
 	init_first_person(data);
 	data->shooting = 0;
-	data->arr = init_text_arr(data->mlx_ptr, &data->arr, 5);
+	size = 5;
+	if(!data->door_x && !data->door_y)
+		size = 4;
+	data->arr = init_text_arr(data->mlx_ptr, &data->arr, size);
 }

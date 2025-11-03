@@ -6,7 +6,7 @@
 /*   By: ijoubair <ijoubair@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/28 21:29:44 by ijoubair          #+#    #+#             */
-/*   Updated: 2025/10/31 21:56:56 by ijoubair         ###   ########.fr       */
+/*   Updated: 2025/11/03 22:09:52 by ijoubair         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,8 +35,8 @@ void	get_door(t_data *data)
 	}
 	if(flag == 0)
 	{
-		data->door_x = -1;
-		data->door_y = -1;
+		data->door_x = 0;
+		data->door_y = 0;
 	}
 }
 
