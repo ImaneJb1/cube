@@ -19,7 +19,7 @@ int is_player_wall(t_data *data, char *map[], double x, double y)
 	double dy;
 	double marge;
 
-	marge = 6;
+	marge = 1;
 	dx = -marge;
 	while(dx <= marge)
 	{
