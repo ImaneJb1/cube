@@ -6,7 +6,7 @@
 /*   By: ijoubair <ijoubair@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/02 15:51:00 by ijoubair          #+#    #+#             */
-/*   Updated: 2025/11/03 15:28:57 by ijoubair         ###   ########.fr       */
+/*   Updated: 2025/11/03 16:04:43 by ijoubair         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ void	destroy_textures(t_data *data)
 		return ;
 	}
 	i = 0;
-	while (i < 4)
+	while (i < 5)
 	{
 		if (data->arr[i].img_ptr)
 			mlx_destroy_image(data->mlx_ptr, data->arr[i].img_ptr);

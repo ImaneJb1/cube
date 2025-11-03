@@ -6,7 +6,7 @@
 /*   By: ijoubair <ijoubair@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/09 17:27:42 by ijoubair          #+#    #+#             */
-/*   Updated: 2025/11/01 15:11:03 by ijoubair         ###   ########.fr       */
+/*   Updated: 2025/11/03 16:00:41 by ijoubair         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,10 @@ void	collect_the_map(char *line, int fd)
 	while(line)
 	{
 		map = ft_strjoin(map, line);
+		free(line);
 		line = get_next_line(fd);
 	}
+	free(line);
+	get_next_line(-1);
 	create_map_arr(map);
 }

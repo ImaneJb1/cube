@@ -6,7 +6,7 @@
 /*   By: ijoubair <ijoubair@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/03 15:06:25 by ijoubair          #+#    #+#             */
-/*   Updated: 2025/11/03 15:14:37 by ijoubair         ###   ########.fr       */
+/*   Updated: 2025/11/03 15:59:44 by ijoubair         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,8 +21,11 @@ void	destroy_frames(t_frame *frames, t_data *data, int size)
 	i = 0;
 	while(i < size)
 	{
-		if(frames->img_ptr)
-			mlx_destroy_image(data->mlx_ptr, frames->img_ptr);
+		if(frames[i].img_ptr)
+		{
+			mlx_destroy_image(data->mlx_ptr, frames[i].img_ptr);
+			frames[i].img_ptr = NULL;
+		}
 		i++;
 	}
 }
