@@ -6,7 +6,7 @@
 /*   By: ijoubair <ijoubair@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/02 10:52:27 by ijoubair          #+#    #+#             */
-/*   Updated: 2025/11/04 16:18:54 by ijoubair         ###   ########.fr       */
+/*   Updated: 2025/11/04 22:06:00 by ijoubair         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ config	*init_dir_arr(textures *text)
 	config *arr;
 	int i;
 
-	arr = gc_malloc(sizeof(config) * 5);
+	arr = gc_calloc(5, sizeof(config) * 5);
 	if(!arr)
 	{
 		perror("");

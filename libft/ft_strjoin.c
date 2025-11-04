@@ -6,13 +6,13 @@
 /*   By: ijoubair <ijoubair@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/05 00:06:29 by ijoubair          #+#    #+#             */
-/*   Updated: 2025/11/04 16:03:37 by ijoubair         ###   ########.fr       */
+/*   Updated: 2025/11/04 22:08:39 by ijoubair         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 #include <stdio.h>
-
+#include "../cub_bonus/header_bonus.h"
 char	*ft_strjoin(char const *s1, char const *s2)
 {
 	size_t	len;
@@ -21,7 +21,7 @@ char	*ft_strjoin(char const *s1, char const *s2)
 	int		j;
 
 	len = ft_strlen(s1) + ft_strlen(s2);
-	s3 = gc_malloc(len * sizeof(char) + 1);
+	s3 = gc_calloc(len + 1, len * sizeof(char) + 1);
 	if (!s3)
 		return (NULL);
 	i = 0;

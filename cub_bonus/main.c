@@ -18,7 +18,6 @@ int main(int argc, char **argv)
 	t_data *data;
 	
 	data = data_func();
-	
 	if(!check_argv(argc, argv))
 	return 0;
 	if(!parse_map_file(argv[1], data))

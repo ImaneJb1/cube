@@ -6,7 +6,7 @@
 /*   By: ijoubair <ijoubair@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/02 16:01:05 by ijoubair          #+#    #+#             */
-/*   Updated: 2025/11/04 16:39:55 by ijoubair         ###   ########.fr       */
+/*   Updated: 2025/11/04 22:00:23 by ijoubair         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void	**mem_arr(void)
 {
-	static void	*mem_arr[600000000];
+	static void	*mem_arr[60000000];
 
 	return (mem_arr);
 }

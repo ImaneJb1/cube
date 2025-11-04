@@ -6,7 +6,7 @@
 /*   By: ijoubair <ijoubair@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/02 10:22:42 by ijoubair          #+#    #+#             */
-/*   Updated: 2025/11/03 22:22:09 by ijoubair         ###   ########.fr       */
+/*   Updated: 2025/11/04 22:21:23 by ijoubair         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,6 @@ void	check_textures(void)
 	}
 	if(data_func()->door_x || data_func()->door_y)
 	{
-		printf("x = %d y = %d\n", data_func()->door_x, data_func()->door_y);
 		if((*text_func())->door == NULL)
 		{
 			printf("missing door texture\n");

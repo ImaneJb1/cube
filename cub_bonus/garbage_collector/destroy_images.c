@@ -6,7 +6,7 @@
 /*   By: ijoubair <ijoubair@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/02 15:51:00 by ijoubair          #+#    #+#             */
-/*   Updated: 2025/11/04 16:17:27 by ijoubair         ###   ########.fr       */
+/*   Updated: 2025/11/04 22:29:07 by ijoubair         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,8 @@ void	destroy_textures(t_data *data)
 void	free_map(char **map)
 {
 	int	i;
+	if((*the_map()) == NULL)
+		return;
 	if(!map || !map[0])
 	{
 		// printf("nuuuuuull\n");
@@ -61,7 +63,7 @@ void	destroy_all(void)
 	data = data_func();
 	destroy_weapon(data);
 	destroy_textures(data);
-	free_map(data->map);
+	// free_map(data->map);
 	if(data->mlx_ptr && data->img.img_ptr)
 	mlx_destroy_image(data->mlx_ptr, data->img.img_ptr);
 	if(data->mlx_ptr && data->mlx_win)
