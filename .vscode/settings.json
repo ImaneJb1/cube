@@ -1,5 +1,6 @@
 {
     "files.associations": {
-        "header_bonus.h": "c"
+        "header_bonus.h": "c",
+        "get_next_line.h": "c"
     }
 }
