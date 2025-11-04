@@ -23,6 +23,7 @@ int main(int argc, char **argv)
 	return 0;
 	if(!parse_map_file(argv[1], data))
 	{
+		free_all();
 		return 0;
 	}// it creates the map array
 	data_init(data);

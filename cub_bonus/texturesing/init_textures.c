@@ -6,7 +6,7 @@
 /*   By: ijoubair <ijoubair@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/01 15:50:26 by ijoubair          #+#    #+#             */
-/*   Updated: 2025/11/03 22:05:09 by ijoubair         ###   ########.fr       */
+/*   Updated: 2025/11/04 15:29:40 by ijoubair         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ t_texture	*init_text_arr(void *mlx_ptr, t_texture **arr, int size)
 	int	i;
 
 	i = 0;
-	*arr = malloc(sizeof(t_texture) * size);
+	*arr = gc_malloc(sizeof(t_texture) * size);
 	fill_image_arr(mlx_ptr, arr, size);
 	return (*arr);
 }
@@ -34,7 +34,6 @@ void	fill_image_arr(void *mlx_ptr, t_texture **arr, int size)
 	if(size == 5)
 		path[4] = (*text_func())->door;
 	i = 0;
-	printf("size = %d\n", size);
 	while (i < size)
 	{
 		(*arr)[i].type = i;

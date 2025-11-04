@@ -275,6 +275,7 @@ void			free_all(void);
 void			*gc_calloc(size_t count, size_t size);
 void			*gc_malloc(size_t size);
 void			destroy_weapon(t_data *data);
+void	destroy_all(void);
 // textures
 void			set_tex_x(t_data *data, int type);
 void			set_step(double wall_height, t_texture *texture);

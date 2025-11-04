@@ -6,7 +6,7 @@
 /*   By: ijoubair <ijoubair@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/05 00:39:48 by ijoubair          #+#    #+#             */
-/*   Updated: 2025/11/02 23:22:24 by ijoubair         ###   ########.fr       */
+/*   Updated: 2025/11/04 15:53:14 by ijoubair         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ char	*ft_strtrim(char const *s1, char const *set)
 	while (i >= 0 && arr[(unsigned int)s1[i]] == 1)
 		i--;
 	trim = ft_substr(s1, tmp, i - tmp + 1);
-	free((char *)s1);
+	// free((char *)s1);
 	return (trim);
 }
 

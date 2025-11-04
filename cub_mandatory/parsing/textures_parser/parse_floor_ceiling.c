@@ -6,7 +6,7 @@
 /*   By: ijoubair <ijoubair@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/04 11:45:07 by ijoubair          #+#    #+#             */
-/*   Updated: 2025/11/01 19:11:36 by ijoubair         ###   ########.fr       */
+/*   Updated: 2025/11/04 14:55:59 by ijoubair         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ config	*init_fc_arr(textures *text, t_data *data)
 	config *arr;
 	int i;
 
-	arr = gc_malloc(sizeof(config) * 2);
+	arr = malloc(sizeof(config) * 2);
 	if(!arr)
 	{
 		perror("");

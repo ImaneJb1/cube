@@ -6,7 +6,7 @@
 /*   By: ijoubair <ijoubair@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/01 15:11:57 by ijoubair          #+#    #+#             */
-/*   Updated: 2025/11/03 15:25:42 by ijoubair         ###   ########.fr       */
+/*   Updated: 2025/11/04 15:53:46 by ijoubair         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,11 +77,9 @@ int	fill_textures_map(char *file_name, t_data *data, int fd, textures **text)
 		{
 			line = ft_strtrim(line, " \n\t");
 			parse_dir(line, arr_dir);
-			parse_floor_ceiling(line, arr_fc, data);
-			free(line);
 		}
 		line = get_next_line(fd);
 	}
-	return (free(line), 1);
+	return (1);
 }
 

@@ -6,7 +6,7 @@
 /*   By: ijoubair <ijoubair@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/02 10:08:40 by ijoubair          #+#    #+#             */
-/*   Updated: 2025/11/01 15:13:50 by ijoubair         ###   ########.fr       */
+/*   Updated: 2025/11/04 14:55:34 by ijoubair         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ textures *init_textures(void)
 {
 	textures **text;
 	text = global_tex();
-	*text = gc_calloc(1, sizeof(textures));
+	*text = calloc(1, sizeof(textures));
 	if(!*global_tex())
 	{
 		perror("");
