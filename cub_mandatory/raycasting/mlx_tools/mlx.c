@@ -10,6 +10,7 @@ void	hook_init(t_data *data)
 
 void img_pixel_put(t_data *data, t_img *img, int x, int y, int color)
 {
+	(void)data;
 	int offset;
 	if (x < 0 || y < 0 || x >= WIDTH|| y >= HEIGHT)
         return;

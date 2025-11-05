@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_textures.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ijoubair <ijoubair@student.42.fr>          +#+  +:+       +#+        */
+/*   By: nel-khad <nel-khad@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/01 19:15:58 by ijoubair          #+#    #+#             */
-/*   Updated: 2025/11/02 16:06:09 by ijoubair         ###   ########.fr       */
+/*   Updated: 2025/11/05 16:20:13 by nel-khad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ t_texture	*init_text_arr(void *mlx_ptr, t_texture **arr, int size)
 	int	i;
 
 	i = 0;
-	*arr = malloc(sizeof(t_texture) * size);
+	*arr = gc_malloc(sizeof(t_texture) * size);
 	fill_image_arr(mlx_ptr, arr);
 	return (*arr);
 }

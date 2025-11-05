@@ -2,6 +2,7 @@
 
 void	cast_ray(t_data *data, double rayangle)
 {
+	(void)rayangle;
 	my_img_pixel_put(data, data->ray.walhit_x, data->ray.walhit_y, 0x00ff00);
 }
 

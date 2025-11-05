@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   map_parser.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ijoubair <ijoubair@student.42.fr>          +#+  +:+       +#+        */
+/*   By: nel-khad <nel-khad@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/09 15:29:07 by ijoubair          #+#    #+#             */
-/*   Updated: 2025/11/04 15:50:05 by ijoubair         ###   ########.fr       */
+/*   Updated: 2025/11/05 16:36:47 by nel-khad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,11 +31,6 @@ int is_inside_the_map(int x, int y, char **map)
 	if(map[y + 1] == NULL)
 		return(0);
 	
-	if(map[y][x] == 'D')
-	{
-		if(map[y][x + 1] != '1' ||  map[y][x - 1] != '1')
-			return(0);
-	}
 	if((y == 0 && x == 0) || y == 0)
 		return (0);
 	if((map[y - 1][x] == 0 || map[y - 1][x] == ' '))
@@ -52,7 +47,7 @@ int is_inside_the_map(int x, int y, char **map)
 int	is_valid_char(char c)
 {
 	if(c != '1' && c != '0' && c != 'N' && c != ' ' && c != '\n'
-	&& c != 'E' && c != 'W' && c != 'S' && c != 'D') 
+	&& c != 'E' && c != 'W' && c != 'S') 
 		return(0);
 	return(1);
 }

@@ -3,29 +3,41 @@
 /*                                                        :::      ::::::::   */
 /*   gc_calloc.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ijoubair <ijoubair@student.42.fr>          +#+  +:+       +#+        */
+/*   By: nel-khad <nel-khad@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/02 16:01:05 by ijoubair          #+#    #+#             */
-/*   Updated: 2025/11/02 23:01:31 by ijoubair         ###   ########.fr       */
+/*   Updated: 2025/11/05 16:22:39 by nel-khad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../header.h"
 
-void	**mem_arr(void)
+typedef struct s_mem
 {
-	static void	*mem_arr[1024];
+	void			*ptr;
+	struct s_mem	*next;
+}	t_mem;
 
-	return (mem_arr);
+static t_mem	*g_mem_list = NULL;
+
+/* Add new allocated pointer to the linked list */
+static void	add_mem(void *ptr)
+{
+	t_mem	*new_node;
+
+	new_node = malloc(sizeof(t_mem));
+	if (!new_node)
+	{
+		printf("allocation failure (list node)\n");
+		free(ptr);
+		return;
+	}
+	new_node->ptr = ptr;
+	new_node->next = g_mem_list;
+	g_mem_list = new_node;
 }
 
-int	*mem_count(void)
-{
-	static int	count;
-
-	return (&count);
-}
-
+/* Replacement for malloc */
 void	*gc_malloc(size_t size)
 {
 	void	*mem;
@@ -33,13 +45,14 @@ void	*gc_malloc(size_t size)
 	mem = malloc(size);
 	if (!mem)
 	{
-		printf("allocation faillure\n");
+		printf("allocation failure\n");
 		return (NULL);
 	}
-	(mem_arr()[(*mem_count())++]) = mem;
+	add_mem(mem);
 	return (mem);
 }
 
+/* Replacement for calloc */
 void	*gc_calloc(size_t count, size_t size)
 {
 	void	*mem;
@@ -47,23 +60,25 @@ void	*gc_calloc(size_t count, size_t size)
 	mem = calloc(count, size);
 	if (!mem)
 	{
-		printf("allocation faillure\n");
+		printf("allocation failure\n");
 		return (NULL);
 	}
-	(mem_arr()[(*mem_count())++]) = mem;
+	add_mem(mem);
 	return (mem);
 }
 
+/* Free all tracked allocations */
 void	free_all(void)
 {
-	int	i;
+	t_mem	*tmp;
 
-	i = 0;
-	// while (i < *mem_count())
-	// {
-	// 	free(mem_arr()[i]);
-	// 	i++;
-	// }
-	*mem_count() = 0;
 	destroy_all();
+	while (g_mem_list)
+	{
+		tmp = g_mem_list;
+		g_mem_list = g_mem_list->next;
+		if (tmp->ptr)
+			free(tmp->ptr);
+		free(tmp);
+	}
 }

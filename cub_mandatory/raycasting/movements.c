@@ -4,7 +4,8 @@ void is_door(t_data *data, char *map[], double x, double y)
 {
 	int grid_x;
 	int grid_y;
-
+	(void)data;
+	
 	grid_x = floor(x  / SQUARESIZE);
 	grid_y = floor(y / SQUARESIZE);
 	if(map[grid_y][grid_x] == 'D')

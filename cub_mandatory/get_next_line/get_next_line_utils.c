@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line_utils.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ijoubair <ijoubair@student.42.fr>          +#+  +:+       +#+        */
+/*   By: nel-khad <nel-khad@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/28 11:17:47 by ijoubair          #+#    #+#             */
-/*   Updated: 2025/08/05 18:13:32 by ijoubair         ###   ########.fr       */
+/*   Updated: 2025/11/05 16:33:53 by nel-khad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ char	*gft_strjoin(char const *s1, char const *s2)
 	int		j;
 	
 	len = ft_strlen(s1) + ft_strlen(s2);
-	s3 = malloc(len * sizeof(char) + 1);
+	s3 = gc_malloc(len * sizeof(char) + 1);
 	if (!s3)
 		return (free((char *)s1), NULL);
 	i = 0;
@@ -58,8 +58,6 @@ char	*gft_strjoin(char const *s1, char const *s2)
 	while (s2 && s2[j])
 		s3[i++] = s2[j++];
 	s3[i] = '\0';
-
-	free((char *)s1);
 	return (s3);
 }
 

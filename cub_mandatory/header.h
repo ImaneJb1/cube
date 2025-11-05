@@ -228,7 +228,7 @@ typedef struct textures
 
 // *************** parsing ***************
 
-void			parse_floor_ceiling(char *line, config *arr, t_data *data);
+void			parse_floor_ceiling(char *line, config *arr);
 void			parse_dir(char *line, config *arr);
 textures		*init_textures(void);
 int	fill_textures_map(char *file_name, t_data *data, int fd, textures	**text);
