@@ -56,7 +56,6 @@ clean:
 
 fclean: clean
 	rm -f $(NAME)
-	
 	rm -f $(NAME_BONUS)
 	make -C libft fclean
 
