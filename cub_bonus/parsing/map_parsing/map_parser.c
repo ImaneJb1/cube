@@ -6,7 +6,7 @@
 /*   By: ijoubair <ijoubair@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/09 15:29:07 by ijoubair          #+#    #+#             */
-/*   Updated: 2025/11/04 15:48:39 by ijoubair         ###   ########.fr       */
+/*   Updated: 2025/11/05 12:56:06 by ijoubair         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,6 @@ void create_map_arr(char *string)
 		printf("map is NULL\n");
 		exit(1);
 	}
-	// free(string);
 }
 
 int is_inside_the_map(int x, int y, char **map)

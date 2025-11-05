@@ -6,7 +6,7 @@
 /*   By: ijoubair <ijoubair@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/02 10:22:42 by ijoubair          #+#    #+#             */
-/*   Updated: 2025/11/04 22:21:23 by ijoubair         ###   ########.fr       */
+/*   Updated: 2025/11/05 13:04:51 by ijoubair         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,6 +54,7 @@ void	parse_dir(char *line, config *arr)
 	i = 0;
 	while(i < 5)
 	{
+		printf("parse dir line = [%s] dir = [%s]\n", line, arr[i].direction);
 		if(ft_strncmp(line, arr[i].direction, 3) == 0)
 		{
 			if(arr[i].flag == 1) // duplicated
@@ -66,6 +67,7 @@ void	parse_dir(char *line, config *arr)
 			splited = ft_split(line, ' ');
 			is_path_valid(splited[0], arr[i].direction);
 			(*arr[i].texture) = splited[0];
+			printf("%s = %s\n",  arr[i].direction, (*arr[i].texture));
 		}
 		i++;
 	}

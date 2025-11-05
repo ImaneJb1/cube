@@ -6,7 +6,7 @@
 /*   By: ijoubair <ijoubair@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/01 15:11:57 by ijoubair          #+#    #+#             */
-/*   Updated: 2025/11/04 15:53:30 by ijoubair         ###   ########.fr       */
+/*   Updated: 2025/11/05 14:15:40 by ijoubair         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,7 @@ int	fill_textures_map(char *file_name, t_data *data, int fd, textures **text)
 	while (line)
 	{
 		if (map_reached(*line))
-			collect_the_map(line, fd);
+		collect_the_map(line, fd);
 		else
 		{
 			line = ft_strtrim(line, " \n\t");

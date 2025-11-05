@@ -24,9 +24,12 @@ int main(int argc, char **argv)
 	{
 		free_all();
 		return 0;
-	}// it creates the map array
+	}
+	printf("1\n");
 	data_init(data);
+	printf("1\n");
 	check_textures(); // this exits the program in case of faillure 
+	printf("1\n");
 	parse_map();
 	init_first_person(data);
 	rendring_(data);
