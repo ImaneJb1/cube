@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_floor_ceiling.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ijoubair <ijoubair@student.42.fr>          +#+  +:+       +#+        */
+/*   By: nel-khad <nel-khad@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/04 11:45:07 by ijoubair          #+#    #+#             */
-/*   Updated: 2025/11/04 22:05:43 by ijoubair         ###   ########.fr       */
+/*   Updated: 2025/11/05 16:11:31 by nel-khad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,7 +91,7 @@ char	*join_2d_arr(char **splited)
 	return(joined);
 }
 
-void	parse_floor_ceiling(char *line, config *arr, t_data *data)
+void	parse_floor_ceiling(char *line, config *arr)
 {
 	int i;
 	char **splited;

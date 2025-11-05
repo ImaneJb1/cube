@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   keys_monitoring.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ijoubair <ijoubair@student.42.fr>          +#+  +:+       +#+        */
+/*   By: nel-khad <nel-khad@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/31 21:42:13 by nel-khad          #+#    #+#             */
-/*   Updated: 2025/11/03 15:49:45 by ijoubair         ###   ########.fr       */
+/*   Updated: 2025/11/05 16:14:11 by nel-khad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,7 @@ static void	which_key(int keysem, t_data *data)
 
 int press_x(t_data *data)
 {
+	(void)data;
 	free_and_exit(0);
     return(0);
 }

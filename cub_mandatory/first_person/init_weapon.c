@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_weapon.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ijoubair <ijoubair@student.42.fr>          +#+  +:+       +#+        */
+/*   By: nel-khad <nel-khad@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/01 18:54:21 by ijoubair          #+#    #+#             */
-/*   Updated: 2025/11/02 15:32:46 by ijoubair         ###   ########.fr       */
+/*   Updated: 2025/11/05 16:08:55 by nel-khad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,7 @@ void	put_weapon(t_data *data, t_weapon *weapon)
 			if (img_x >= weapon->width || img_y >= weapon->height)
 				break ;
 			color = get_color(img_x, img_y, weapon);
-			if (color != 0xFF000000 && color != 0x00000000)
+			if ((unsigned int)color != 0xFF000000 && (unsigned int)color != 0x00000000)
 				// skip transparent (pure black)
 				my_img_pixel_put(data, x, y, color);
 			y++;

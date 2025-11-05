@@ -247,7 +247,7 @@ typedef struct textures
 
 // *************** parsing ***************
 
-void			parse_floor_ceiling(char *line, config *arr, t_data *data);
+void			parse_floor_ceiling(char *line, config *arr);
 void			parse_dir(char *line, config *arr);
 textures		*init_textures(void);
 int				fill_textures_map(char *file_name, t_data *data, int fd, textures **text);
@@ -297,7 +297,7 @@ void			init_first_person(t_data *data);
 void			draw_first_person_walking(t_data *data, t_frame *frames,
 					int size);
 void			put_frame(t_data *data, t_frame *frame);
-void			shooting(int button, int x, int y, void *param);
+int				shooting(int button, int x, int y, void *param);
 void			draw_shooting(t_data *data);
-
+int	get_textures_type(t_data *data);
 #endif

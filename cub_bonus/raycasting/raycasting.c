@@ -6,7 +6,7 @@
 /*   By: nel-khad <nel-khad@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/31 21:43:29 by nel-khad          #+#    #+#             */
-/*   Updated: 2025/11/04 10:24:35 by nel-khad         ###   ########.fr       */
+/*   Updated: 2025/11/05 16:15:18 by nel-khad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@ void	cast_ray(t_data *data, double rayangle)
 {
 	// draw_line(data,data->p.p_x, data->p.p_y, floor(data->ray.walhit_x),
 		// floor(data->ray.walhit_y), 0x000000);
+	(void)rayangle;
 	img_pixel_put(data, &data->img, data->ray.walhit_x, data->ray.walhit_y,
 		0x00ff00);
 }

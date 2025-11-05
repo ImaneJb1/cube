@@ -24,11 +24,10 @@ int main(int argc, char **argv)
 	{
 		free_all();
 		return 0;
-	}// it creates the map array
+	}
 	data_init(data);
 	check_textures(); // this exits the program in case of faillure 
 	parse_map();
-	init_first_person(data);
 	rendring_(data);
 	hook_init(data);
 	mlx_loop(data->mlx_ptr);

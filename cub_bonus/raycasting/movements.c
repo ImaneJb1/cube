@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   movements.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ijoubair <ijoubair@student.42.fr>          +#+  +:+       +#+        */
+/*   By: nel-khad <nel-khad@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/01 15:23:44 by ijoubair          #+#    #+#             */
-/*   Updated: 2025/11/01 20:47:09 by ijoubair         ###   ########.fr       */
+/*   Updated: 2025/11/05 16:14:59 by nel-khad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ void is_door(t_data *data, char *map[], double x, double y)
 {
 	int grid_x;
 	int grid_y;
-
+	(void)data;
 	grid_x = floor(x  / SQUARESIZE);
 	grid_y = floor(y / SQUARESIZE);
 	if(map[grid_y][grid_x] == 'D')

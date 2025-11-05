@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_dir.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ijoubair <ijoubair@student.42.fr>          +#+  +:+       +#+        */
+/*   By: nel-khad <nel-khad@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/02 10:22:42 by ijoubair          #+#    #+#             */
-/*   Updated: 2025/11/04 22:21:23 by ijoubair         ###   ########.fr       */
+/*   Updated: 2025/11/05 16:12:32 by nel-khad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,7 @@ void	check_textures(void)
 
 void	is_path_valid(char *path, char *conf)
 {
+	(void)conf;
 	if(access(path, F_OK) < 0)
 	{
 		printf("the path %s is inaccessible\n", path);

@@ -6,7 +6,7 @@
 /*   By: ijoubair <ijoubair@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/01 15:50:26 by ijoubair          #+#    #+#             */
-/*   Updated: 2025/11/04 22:04:31 by ijoubair         ###   ########.fr       */
+/*   Updated: 2025/11/05 13:01:45 by ijoubair         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ void	fill_image_arr(void *mlx_ptr, t_texture **arr, int size)
 		(*arr)[i].path = path[i];
 		if (access(path[i], O_RDONLY) < 0)
 		{
-			printf("ERROR %d is inaccessible\n", i);
+			printf("ERROR: %s is inaccessible\n", path[i]);// hna fin kat7bes
 			break ;
 		}
 		(*arr)[i].img_ptr = mlx_xpm_file_to_image(mlx_ptr, path[i],
