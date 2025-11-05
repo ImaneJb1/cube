@@ -11,8 +11,9 @@ int is_wall(t_data *data, double x, double y, char c)
 		x -= 1;
 	grid_x = floor(x  / SQUARESIZE);
 	grid_y = floor(y / SQUARESIZE);
-	if(grid_x < 0 || grid_y < 0 || grid_x >= data->width || grid_y >= data->heigth)
-		return(1);
+	if (grid_x < 0 || grid_y < 0 || data->map[grid_y] == NULL|| 
+		grid_x >= (int)ft_strlen(data->map[grid_y]))
+		return (0);
 	if(data->map[grid_y][grid_x] == '1' || data->map[grid_y][grid_x] == 'D')
 		return(1);
 	return(0);
@@ -51,7 +52,6 @@ static void calcul_inter_H(t_data *data, double xa, double ya, t_intrsc *inter)
 			data->ray.hit_horiz = 1;
 			data->ray.hor_walhit_x = inter->next_x;
 			data->ray.hor_walhit_y = inter->next_y;
-			data->ray.content = data->map[(int) inter->next_y / SQUARESIZE][(int) inter->next_x / SQUARESIZE];
 			break;
 		}
 		else

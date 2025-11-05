@@ -1,3 +1,14 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   rander_2d.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: nel-khad <nel-khad@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/11/05 22:14:04 by nel-khad          #+#    #+#             */
+/*   Updated: 2025/11/05 22:14:30 by nel-khad         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #include "../header.h"
 
@@ -19,7 +30,6 @@ void	draw_circle(t_data *data, int color)
 			dx = x - data->p.p_x;
 			dy = y - data->p.p_y;
 			if (dx * dx + dy * dy <= radius * radius)
-				// check if the point inside
 				my_img_pixel_put(data, x, y, color);
 			x++;
 		}
@@ -54,18 +64,6 @@ void	put_player(t_data *data)
 	draw_circle(data, 0xFF69B4);
 }
 
-int	inside_circle(int radius, double x, double y, t_data *data)
-{
-	double	dx;
-	double	dy;
-
-	dx = x - data->p.p_x;
-	dy = y - data->p.p_y;
-	if (dx * dx + dy * dy <= radius * radius) // check if the point inside
-		return (1);
-	return (0);
-}
-
 void	render_map(t_data *data)
 {
 	int	i;
@@ -96,10 +94,7 @@ void	render_map(t_data *data)
 
 void	rendring_(t_data *data)
 {
-	// render_map(data);
-	// put_player(data);
 	cast_allrays(data);
-
 	put_weapon(data, &data->weapon);
 	mlx_put_image_to_window(data->mlx_ptr, data->mlx_win, data->img.img_ptr, 0,
 		0);

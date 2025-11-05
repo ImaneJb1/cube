@@ -6,7 +6,7 @@
 /*   By: nel-khad <nel-khad@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/01 19:14:05 by ijoubair          #+#    #+#             */
-/*   Updated: 2025/11/05 16:29:04 by nel-khad         ###   ########.fr       */
+/*   Updated: 2025/11/05 22:16:49 by nel-khad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@ void	reset(t_data *data)
 	data->p.rot_dir = 0;
 	data->moving = 0;
 }
+
 static void	which_key(int keysem, t_data *data)
 {
 	if (keysem == XK_Right)
@@ -46,6 +47,7 @@ int	press_x(t_data *data)
 	free_and_exit(0);
 	return (0);
 }
+
 int	press_key(int keysem, t_data *data)
 {
 	if (keysem == XK_Escape)

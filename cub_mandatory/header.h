@@ -11,8 +11,6 @@
 # include <math.h>
 
 # define SQUARESIZE 32
-# define ROWS 10
-# define COLMS 10
 
 # define NORTH 0
 # define SOUTH 1
@@ -160,7 +158,7 @@ void			reset(t_data *data);
 int				press_x(t_data *data);
 int				press_key(int keysem, t_data *data);
 int				release_key(int keysem, t_data *data);
-// void img_pixel_put(t_data *data, t_img *img, int x, int y, int color);
+void			img_pixel_put(t_img *img, int x, int y, int color);
 void			hook_init(t_data *data);
 
 //**********randring******** */

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   struct_initializer.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ijoubair <ijoubair@student.42.fr>          +#+  +:+       +#+        */
+/*   By: nel-khad <nel-khad@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/02 10:08:40 by ijoubair          #+#    #+#             */
-/*   Updated: 2025/11/05 12:01:50 by ijoubair         ###   ########.fr       */
+/*   Updated: 2025/11/05 23:15:34 by nel-khad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ textures *init_textures(void)
 {
 	textures **text;
 	text = global_tex();
-	*text = calloc(1, sizeof(textures));
+	*text = gc_calloc(1, sizeof(textures));
 	if(!*global_tex())
 	{
 		perror("");

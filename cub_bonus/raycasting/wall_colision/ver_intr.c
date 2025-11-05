@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ver_intr.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ijoubair <ijoubair@student.42.fr>          +#+  +:+       +#+        */
+/*   By: nel-khad <nel-khad@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/31 21:43:00 by nel-khad          #+#    #+#             */
-/*   Updated: 2025/11/01 15:30:50 by ijoubair         ###   ########.fr       */
+/*   Updated: 2025/11/05 22:45:28 by nel-khad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ static void calcul_inter_V(t_data *data, double xa, double ya, t_intrsc *inter)
 			data->ray.hit_vertical = 1;
 			data->ray.ver_walhit_x = inter->next_x;
 			data->ray.ver_walhit_y = inter->next_y;
-			data->ray.content = data->map[(int) inter->next_y / SQUARESIZE][(int) inter->next_x / SQUARESIZE];
+			// data->ray.content = data->map[(int) inter->next_y / SQUARESIZE][(int) inter->next_x / SQUARESIZE];
 			break;
 		}
 		else

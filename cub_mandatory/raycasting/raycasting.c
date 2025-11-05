@@ -64,7 +64,6 @@ void	cast_allrays(t_data *data)
 		hor_distance = find_hor_inter(data, rayangle);
 		ver_distance = find_ver_inter(data, rayangle);
 		set_ray_val(hor_distance, ver_distance, data);
-		// cast_ray(data, rayangle);
 		render_3d(data);
 		init_ray(data);
 		rayangle += (double)FOV / (double)NUM_RAYS;

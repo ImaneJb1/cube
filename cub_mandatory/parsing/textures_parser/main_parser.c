@@ -6,7 +6,7 @@
 /*   By: nel-khad <nel-khad@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/01 15:11:57 by ijoubair          #+#    #+#             */
-/*   Updated: 2025/11/05 16:09:47 by nel-khad         ###   ########.fr       */
+/*   Updated: 2025/11/05 22:27:59 by nel-khad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,9 +78,11 @@ int	fill_textures_map(char *file_name, t_data *data, int fd, textures **text)
 		{
 			line = ft_strtrim(line, " \n\t");
 			parse_dir(line, arr_dir);
+			parse_floor_ceiling(line, arr_fc);
 		}
 		line = get_next_line(fd);
 	}
 	return (1);
 }
+
 
