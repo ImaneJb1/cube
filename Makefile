@@ -3,7 +3,7 @@ NAME_BONUS = cub3D_bonus
 CC      = cc
 CFLAGS  = # -Wall -Wextra Werror
 
-MLX     = -lmlx -lXext -lX11 -lm -g -fsanitize=address 
+MLX     = -lmlx -lXext -lX11 -lm -g #-fsanitize=address 
 
 OBJ_D   = obj
 OBJ_D_BONUS   = obj_bonus
@@ -56,6 +56,7 @@ clean:
 
 fclean: clean
 	rm -f $(NAME)
+	
 	rm -f $(NAME_BONUS)
 	make -C libft fclean
 

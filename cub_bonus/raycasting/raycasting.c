@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   raycasting.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ijoubair <ijoubair@student.42.fr>          +#+  +:+       +#+        */
+/*   By: nel-khad <nel-khad@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/31 21:43:29 by nel-khad          #+#    #+#             */
-/*   Updated: 2025/11/01 15:32:44 by ijoubair         ###   ########.fr       */
+/*   Updated: 2025/11/04 10:24:35 by nel-khad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,4 +84,6 @@ void cast_allrays(t_data *data)
 		rayangle += (double)FOV / (double)NUM_RAYS;
 		i++;
 	}
+	render_map(data);
+	put_player(data);
 }

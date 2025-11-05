@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   rander_2d.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ijoubair <ijoubair@student.42.fr>          +#+  +:+       +#+        */
+/*   By: nel-khad <nel-khad@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/31 21:41:29 by nel-khad          #+#    #+#             */
-/*   Updated: 2025/11/01 20:13:40 by ijoubair         ###   ########.fr       */
+/*   Updated: 2025/11/04 10:29:05 by nel-khad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -171,7 +171,7 @@ void	draw_circle(t_data *data)
 		while (dx <= radius)
 		{
 			if (dx * dx + dy * dy <= radius * radius)
-				img_pixel_put(data, &data->img, px + dx, py + dy, 0xFF69B4);
+				img_pixel_put(data, &data->img, px + dx, py + dy, 0xFF0000);
 			dx++;
 		}
 		dy++;
@@ -259,11 +259,11 @@ void	render_map(t_data *data)
 		while (data->map[i][j])
 		{
 			if (data->map[i][j] == '1')
-				color = 0xffffff;
+				color = 0x808080;
 			else if (data->map[i][j] == '0' || ft_strchr("SNWE",
 					data->map[i][j]))
 				color = -1;
-			if (color > 0)
+			if (color >= 0)
 				draw_square(data, j * SQUARESIZE * MINISCAL, i * SQUARESIZE
 					* MINISCAL, color);
 			color = -1;
