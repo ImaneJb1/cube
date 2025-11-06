@@ -6,7 +6,7 @@
 /*   By: nel-khad <nel-khad@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/27 14:21:28 by ijoubair          #+#    #+#             */
-/*   Updated: 2025/11/05 16:13:45 by nel-khad         ###   ########.fr       */
+/*   Updated: 2025/11/06 17:09:49 by nel-khad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,14 +32,14 @@ int	get_color(int x, int y, t_frame *frame)
 		free_and_exit(1);
 	}
 	return (*(int *)(frame->pxl_ptr + (y * frame->line_len) + (x * (frame->b_p_p
-					/ 8))));
+				/ 8))));
 }
 
 void	put_frame(t_data *data, t_frame *frame)
 {
-	int(x), (y);
-	int(img_x), (img_y);
-	int x_img_end, color;
+	int (x), (y);
+	int (img_x), (img_y);
+	int (x_img_end), (color);
 	x_img_end = WIDTH / 2 + frame->width / 2;
 	x = WIDTH / 2 - frame->width / 2;
 	img_x = 0;
@@ -52,8 +52,8 @@ void	put_frame(t_data *data, t_frame *frame)
 			if (img_x >= frame->width || img_y >= frame->height)
 				break ;
 			color = get_color(img_x, img_y, frame);
-			if ((unsigned int)color != 0xFF000000 && (unsigned int)color != 0x00000000)
-				// skip transparent (pure black)
+			if ((unsigned int)color != 0xFF000000
+				&& (unsigned int)color != 0x00000000)
 				my_img_pixel_put(data, x, y, color);
 			y++;
 			img_y++;

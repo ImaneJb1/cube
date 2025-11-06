@@ -14,17 +14,17 @@
 
 config	*init_dir_arr(textures *text)
 {
-	config *arr;
-	int i;
+	config	*arr;
+	int		i;
 
 	arr = gc_malloc(sizeof(config) * 5);
-	if(!arr)
+	if (!arr)
 	{
 		perror("");
-		return(NULL);
+		return (NULL);
 	}
 	i = 0;
-	while(i < 5)
+	while (i < 5)
 	{
 		arr[i].flag = 0;
 		i++;
@@ -39,22 +39,22 @@ config	*init_dir_arr(textures *text)
 	arr[3].texture = &text->ea;
 	arr[4].direction = "DO ";
 	arr[4].texture = &text->door;
-	return(arr);
+	return (arr);
 }
 
-config *init_c_f_arr(textures *text)
+config	*init_c_f_arr(textures *text)
 {
-	config *arr;
+	config	*arr;
 
 	arr = gc_malloc(sizeof(config) * 2);
-	if(!arr)
+	if (!arr)
 	{
 		perror("");
-		return(NULL);
+		return (NULL);
 	}
 	arr[0].direction = "F ";
 	arr[0].texture = &text->f;
 	arr[1].direction = "C ";
 	arr[1].texture = &text->c;
-	return(arr);
+	return (arr);
 }

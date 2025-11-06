@@ -12,21 +12,23 @@
 
 #include "../header.h"
 
-textures **global_tex(void)
+textures	**global_tex(void)
 {
-	static textures *text;
-	return(&text);
+	static textures	*text;
+
+	return (&text);
 }
 
-textures *init_textures(void)
+textures	*init_textures(void)
 {
-	textures **text;
+	textures	**text;
+
 	text = global_tex();
 	*text = gc_calloc(1, sizeof(textures));
-	if(!*global_tex())
+	if (!*global_tex())
 	{
 		perror("");
-		return(NULL);
+		return (NULL);
 	}
-	return(*text);
+	return (*text);
 }

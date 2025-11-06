@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   put_textures.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ijoubair <ijoubair@student.42.fr>          +#+  +:+       +#+        */
+/*   By: nel-khad <nel-khad@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/02 15:47:38 by ijoubair          #+#    #+#             */
-/*   Updated: 2025/11/02 15:59:42 by ijoubair         ###   ########.fr       */
+/*   Updated: 2025/11/06 17:20:29 by nel-khad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ void	render_3d(t_data *data)
 {
 	t_dim	wall;
 
-	int(type), (y);
+	int (type), (y);
 	wall = calculate_wall_dimensions(data);
 	type = get_textures_type(data);
 	set_tex_x(data, type);

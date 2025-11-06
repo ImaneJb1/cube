@@ -1,5 +1,17 @@
-#ifndef HEADER_H
-# define HEADER_H
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   header_bonus.h                                     :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: nel-khad <nel-khad@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/11/06 17:33:31 by nel-khad          #+#    #+#             */
+/*   Updated: 2025/11/06 17:42:54 by nel-khad         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#ifndef HEADER_BONUS_H
+# define HEADER_BONUS_H
 
 # include "../libft/libft.h"
 # include "get_next_line/get_next_line.h"
@@ -21,7 +33,7 @@
 
 # define WIDTH 1500
 # define HEIGHT 900
-# define FOV 60 * (M_PI / 180)
+# define FOV 1.0471975512 //60 * (M_PI / 180)
 
 # define RES 4
 # define NUM_RAYS WIDTH
@@ -99,7 +111,7 @@ typedef struct ray
 	int			wall_dir;
 	char		content;
 	double		top_wall;
-	int tex_x; // fin ghanbda nrsem textures dyal lwall
+	int			tex_x; // fin ghanbda nrsem textures dyal lwall
 }				t_ray;
 
 typedef struct t_texture
@@ -150,7 +162,7 @@ typedef struct data
 	int			heigth;
 	// textures
 	int			tex_x;
-	t_texture		*arr;
+	t_texture	*arr;
 	int			floor_color;
 	int			ceiling_color;
 	int			vertical_hit;
@@ -167,8 +179,7 @@ void			reset(t_data *data);
 int				press_x(t_data *data);
 int				press_key(int keysem, t_data *data);
 int				release_key(int keysem, t_data *data);
-void 			img_pixel_put(t_data *data, t_img *img, int x, int y,
-					 int color);
+void			img_pixel_put(t_img *img, int x, int y, int color);
 void			hook_init(t_data *data);
 
 //**********randring******** */
@@ -183,7 +194,7 @@ void			draw_wall(t_data *data, double top_wall, double bottom_wall);
 
 //**********colising***********/
 int				is_player_wall(t_data *data, char *map[], double x, double y);
-int				is_wall(t_data *data, char *map[], double x, double y, char c);
+int				is_wall(t_data *data, double x, double y, char c);
 double			find_hor_inter(t_data *data, double rayangle);
 double			find_ver_inter(t_data *data, double rayangle);
 
@@ -240,7 +251,8 @@ typedef struct textures
 void			parse_floor_ceiling(char *line, config *arr);
 void			parse_dir(char *line, config *arr);
 textures		*init_textures(void);
-int				fill_textures_map(char *file_name, t_data *data, int fd, textures **text);
+int				fill_textures_map(char *file_name, t_data *data, int fd,
+					textures **text);
 config			*init_dir_arr(textures *text);
 config			*init_fc_arr(textures *text, t_data *data);
 void			check_textures(void);
@@ -265,18 +277,18 @@ void			free_all(void);
 void			*gc_calloc(size_t count, size_t size);
 void			*gc_malloc(size_t size);
 void			destroy_weapon(t_data *data);
-void	destroy_all(void);
+void			destroy_all(void);
 // textures
 void			set_tex_x(t_data *data, int type);
 void			set_step(double wall_height, t_texture *texture);
 void			set_tex_pos(double top_wall, t_texture *texture);
 void			fill_image_arr(void *mlx_ptr, t_texture **arr, int size);
-t_texture			*init_text_arr(void *mlx_ptr, t_texture **arr, int size);
+t_texture		*init_text_arr(void *mlx_ptr, t_texture **arr, int size);
 // void load_all_textures(t_data *data);
 void			draw_textured_wall(t_data *data, t_texture *texture,
 					double top_wall, double bottom_wall);
 void			my_img_pixel_put(t_data *data, int x, int y, int color);
-t_texture			*init_text_arr(void *mlx_ptr, t_texture **arr, int size);
+t_texture		*init_text_arr(void *mlx_ptr, t_texture **arr, int size);
 // weapon
 void			draw_first_person_intro(t_data *data, t_frame *frames,
 					int size);
@@ -289,5 +301,5 @@ void			draw_first_person_walking(t_data *data, t_frame *frames,
 void			put_frame(t_data *data, t_frame *frame);
 int				shooting(int button, int x, int y, void *param);
 void			draw_shooting(t_data *data);
-int	get_textures_type(t_data *data);
+int				get_textures_type(t_data *data);
 #endif

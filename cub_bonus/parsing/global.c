@@ -12,21 +12,23 @@
 
 #include "../header_bonus.h"
 
-
-textures **text_func(void)
+textures	**text_func(void)
 {
-	static textures *text;
-	return(&text);
+	static textures	*text;
+
+	return (&text);
 }
 
-char ***the_map(void)
+char	***the_map(void)
 {
-	static char **map;
-	return(&map);
+	static char	**map;
+
+	return (&map);
 }
 
 t_data	*data_func(void)
 {
-	static t_data data;
-	return(&data);
+	static t_data	data;
+
+	return (&data);
 }

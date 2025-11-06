@@ -16,9 +16,9 @@ typedef struct s_mem
 {
 	void			*ptr;
 	struct s_mem	*next;
-}	t_mem;
+}					t_mem;
 
-static t_mem	*g_mem_list = NULL;
+static t_mem		*g_mem_list = NULL;
 
 /* Add new allocated pointer to the linked list */
 static void	add_mem(void *ptr)
@@ -30,7 +30,7 @@ static void	add_mem(void *ptr)
 	{
 		printf("allocation failure (list node)\n");
 		free(ptr);
-		return;
+		return ;
 	}
 	new_node->ptr = ptr;
 	new_node->next = g_mem_list;

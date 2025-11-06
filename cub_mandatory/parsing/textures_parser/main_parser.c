@@ -6,7 +6,7 @@
 /*   By: nel-khad <nel-khad@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/01 15:11:57 by ijoubair          #+#    #+#             */
-/*   Updated: 2025/11/05 22:27:59 by nel-khad         ###   ########.fr       */
+/*   Updated: 2025/11/06 15:33:44 by nel-khad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,7 @@ int	parse_map_file(char *file_name, t_data *data)
 int	fill_textures_map(char *file_name, t_data *data, int fd, textures **text)
 {
 	char	*line;
-	
+
 	(void)file_name;
 	config(*arr_dir), (*arr_fc);
 	init_arrays(text, &arr_dir, &arr_fc, data);
@@ -77,6 +77,7 @@ int	fill_textures_map(char *file_name, t_data *data, int fd, textures **text)
 		else
 		{
 			line = ft_strtrim(line, " \n\t");
+			printf("line = %s\n", line);
 			parse_dir(line, arr_dir);
 			parse_floor_ceiling(line, arr_fc);
 		}
@@ -84,5 +85,3 @@ int	fill_textures_map(char *file_name, t_data *data, int fd, textures **text)
 	}
 	return (1);
 }
-
-

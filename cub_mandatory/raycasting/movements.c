@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   movements.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: nel-khad <nel-khad@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/11/06 14:10:57 by nel-khad          #+#    #+#             */
+/*   Updated: 2025/11/06 14:57:02 by nel-khad         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../header.h"
 
 void	is_door(t_data *data, char *map[], double x, double y)
@@ -14,10 +26,10 @@ void	is_door(t_data *data, char *map[], double x, double y)
 
 int	is_player_wall(t_data *data, char *map[], double x, double y)
 {
-	int		(grid_x), (grid_y);
-	double	(dx), (dy), (marge);
+	int (grid_x), (grid_y);
+	double (dx), (dy), (marge);
 	(void)data;
-	marge = 1;
+	marge = 6;
 	dx = -marge;
 	while (dx <= marge)
 	{
@@ -26,8 +38,8 @@ int	is_player_wall(t_data *data, char *map[], double x, double y)
 		{
 			grid_x = floor((x + dx) / SQUARESIZE);
 			grid_y = floor((y + dy) / SQUARESIZE);
-			if (grid_x < 0 || grid_y < 0 || map[grid_y] == NULL|| 
-				grid_x >= (int)ft_strlen(map[grid_y]))
+			if (grid_x < 0 || grid_y < 0 || map[grid_y] == NULL
+				|| grid_x >= (int)ft_strlen(map[grid_y]))
 				return (1);
 			if (map[grid_y][grid_x] == '1')
 				return (1);
@@ -51,7 +63,7 @@ static void	update_player(t_data *data)
 			+ data->p.right_x) * data->p.move_speed;
 	next_y = data->p.p_y + (sin(data->p.view_angle) * data->p.move_dir
 			+ data->p.left_y) * data->p.move_speed;
-	if (!is_player_wall(data, data->map, next_x, next_y)) // next_x *1.5
+	if (!is_player_wall(data, data->map, next_x, next_y))
 	{
 		data->p.p_y = next_y;
 		data->p.p_x = next_x;

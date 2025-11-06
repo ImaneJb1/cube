@@ -1,41 +1,38 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   main_bonus.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nel-khad <nel-khad@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ijoubair <ijoubair@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/08/01 15:get_heigth(data->map):37 by ijoubair          #+#    #+#             */
-/*   Updated: 2025/08/12 12:09:19 by nel-khad         ###   ########.fr       */
+/*   Created: 2025/11/06 17:24:29 by nel-khad          #+#    #+#             */
+/*   Updated: 2025/11/06 21:53:52 by ijoubair         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "header_bonus.h"
 
-
-int main(int argc, char **argv)
+int	main(int argc, char **argv)
 {
-	t_data *data;
-	
+	t_data	*data;
+
 	data = data_func();
-	if(!check_argv(argc, argv))
-	return 0;
-	if(!parse_map_file(argv[1], data))
+	if (!check_argv(argc, argv))
+		return (0);
+	if (!parse_map_file(argv[1], data))
 	{
 		free_all();
-		return 0;
+		return (0);
 	}
+	check_textures();
 	data_init(data);
-	check_textures(); // this exits the program in case of faillure 
 	parse_map();
+	data->mlx_win = mlx_new_window(data->mlx_ptr, WIDTH, HEIGHT, "cub3d");
+	data->img.img_ptr = mlx_new_image(data->mlx_ptr, WIDTH, HEIGHT);
+	data->img.img_pxl_ptr = mlx_get_data_addr(data->img.img_ptr,
+			&data->img.b_p_p, &data->img.line_len, &data->img.endian);
 	rendring_(data);
 	hook_init(data);
 	mlx_loop(data->mlx_ptr);
-	mlx_destroy_window(data->mlx_ptr, data->mlx_win);
-	mlx_destroy_display(data->mlx_ptr);
-	free(data->mlx_ptr);
-	free_all();
-	get_next_line(-1);
-	return 0;
+	return (0);
 }
-// i should parse when there is no playeer

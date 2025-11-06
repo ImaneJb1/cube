@@ -6,7 +6,7 @@
 /*   By: nel-khad <nel-khad@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/31 21:41:29 by nel-khad          #+#    #+#             */
-/*   Updated: 2025/11/04 10:29:05 by nel-khad         ###   ########.fr       */
+/*   Updated: 2025/11/06 17:18:22 by nel-khad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ void	draw_circle(t_data *data)
 		while (dx <= radius)
 		{
 			if (dx * dx + dy * dy <= radius * radius)
-				img_pixel_put(data, &data->img, px + dx, py + dy, 0xFF0000);
+				img_pixel_put(&data->img, px + dx, py + dy, 0xFF0000);
 			dx++;
 		}
 		dy++;
@@ -51,9 +51,9 @@ void	draw_square(t_data *data, double x, double y, int color)
 		{
 			if (j == SQUARESIZE * MINISCAL - 1 || i == SQUARESIZE * MINISCAL - 1
 				|| i == 0 || j == 0)
-				img_pixel_put(data, &data->img, x + j, y + i, 0x000000);
+				img_pixel_put(&data->img, x + j, y + i, 0x000000);
 			else
-				img_pixel_put(data, &data->img, x + j, y + i, color);
+				img_pixel_put(&data->img, x + j, y + i, color);
 			j++;
 		}
 		i++;
@@ -65,24 +65,9 @@ void	put_player(t_data *data)
 	draw_circle(data);
 }
 
-int	inside_circle(int radius, double x, double y, t_data *data)
-{
-	double	dx;
-	double	dy;
-
-	dx = x - data->p.p_x;
-	dy = y - data->p.p_y;
-	if (dx * dx + dy * dy <= radius * radius) // check if the point inside
-		return (1);
-	return (0);
-}
-
 void	render_map(t_data *data)
 {
-	int	i;
-	int	j;
-	int	color;
-
+	int (i), (j), (color);
 	i = 0;
 	j = 0;
 	color = -1;
@@ -93,7 +78,7 @@ void	render_map(t_data *data)
 		{
 			if (data->map[i][j] == '1')
 				color = 0x808080;
-			else if(data->map[i][j] == 'D')
+			else if (data->map[i][j] == 'D')
 				color = 0x4f0e1a;
 			else if (data->map[i][j] == '0' || ft_strchr("SNWE",
 					data->map[i][j]))
@@ -108,12 +93,13 @@ void	render_map(t_data *data)
 	}
 }
 
-void rendring_(t_data *data)
+void	rendring_(t_data *data)
 {
 	cast_allrays(data);
-	if(data->shooting)
+	if (data->shooting)
 		draw_shooting(data);
-	else if((data->p.move_dir == 1 || data->p.move_dir == -1 || data->moving == 1))
+	else if ((data->p.move_dir == 1 || data->p.move_dir == -1
+			|| data->moving == 1))
 		draw_first_person_walking(data, data->weapon.walking, 20);
 	else
 		draw_first_person_intro(data, data->weapon.intro, 20);

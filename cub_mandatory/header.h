@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   header.h                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: nel-khad <nel-khad@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/11/06 15:40:55 by nel-khad          #+#    #+#             */
+/*   Updated: 2025/11/06 15:41:37 by nel-khad         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef HEADER_H
 # define HEADER_H
 
@@ -91,7 +103,7 @@ typedef struct ray
 	int			wall_dir;
 	char		content;
 	double		top_wall;
-	int tex_x; // fin ghanbda nrsem textures dyal lwall
+	int			tex_x; // fin ghanbda nrsem textures dyal lwall
 }				t_ray;
 
 typedef struct texture
@@ -142,7 +154,7 @@ typedef struct data
 	int			heigth;
 	// textures
 	int			tex_x;
-	t_texture		*arr;
+	t_texture	*arr;
 	int			floor_color;
 	int			ceiling_color;
 	int			vertical_hit;
@@ -229,7 +241,8 @@ typedef struct textures
 void			parse_floor_ceiling(char *line, config *arr);
 void			parse_dir(char *line, config *arr);
 textures		*init_textures(void);
-int	fill_textures_map(char *file_name, t_data *data, int fd, textures	**text);
+int				fill_textures_map(char *file_name, t_data *data, int fd,
+					textures **text);
 config			*init_dir_arr(textures *text);
 config			*init_fc_arr(textures *text, t_data *data);
 void			check_textures(void);
@@ -246,7 +259,6 @@ int				get_hex_color(char *rgb);
 void			get_door(t_data *data);
 int				parse_map_file(char *file_name, t_data *data);
 
-
 // global
 textures		**text_func(void);
 char			***the_map(void);
@@ -258,13 +270,13 @@ void			*gc_malloc(size_t size);
 void			destroy_all(void);
 // textures
 void			fill_image_arr(void *mlx_ptr, t_texture **arr);
-t_texture			*init_text_arr(void *mlx_ptr, t_texture **arr, int size);
+t_texture		*init_text_arr(void *mlx_ptr, t_texture **arr, int size);
 // void load_all_textures(t_data *data);
 void			draw_textured_wall(t_data *data, t_texture *texture,
 					double top_wall, double bottom_wall);
 int				get_textures_type(t_data *data);
 void			my_img_pixel_put(t_data *data, int x, int y, int color);
-t_texture			*init_text_arr(void *mlx_ptr, t_texture **arr, int size);
+t_texture		*init_text_arr(void *mlx_ptr, t_texture **arr, int size);
 void			set_tex_x(t_data *data, int type);
 void			set_step(double wall_height, t_texture *texture);
 void			set_tex_pos(double top_wall, t_texture *texture);

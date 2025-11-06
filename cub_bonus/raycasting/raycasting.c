@@ -6,17 +6,16 @@
 /*   By: nel-khad <nel-khad@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/31 21:43:29 by nel-khad          #+#    #+#             */
-/*   Updated: 2025/11/05 16:15:18 by nel-khad         ###   ########.fr       */
+/*   Updated: 2025/11/06 17:17:01 by nel-khad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
 
 #include "../header_bonus.h"
 
 void	cast_ray(t_data *data, double rayangle)
 {
 	(void)rayangle;
-	img_pixel_put(data, &data->img, data->ray.walhit_x, data->ray.walhit_y,
+	img_pixel_put(&data->img, data->ray.walhit_x, data->ray.walhit_y,
 		0x00ff00);
 }
 
@@ -61,16 +60,16 @@ static void	set_ray_val(double hor_distance, double ver_distance, t_data *data)
 	}
 }
 
-void cast_allrays(t_data *data)
+void	cast_allrays(t_data *data)
 {
-	double rayangle;
-	double hor_distance;
-	double ver_distance;
-	int i;
+	double	rayangle;
+	double	hor_distance;
+	double	ver_distance;
+	int		i;
 
 	i = 0;
 	rayangle = data->p.view_angle - (FOV / 2);
-	while(i < NUM_RAYS)
+	while (i < NUM_RAYS)
 	{
 		rayangle = normlizing(rayangle);
 		ray_direction(data, rayangle);

@@ -6,7 +6,7 @@
 /*   By: nel-khad <nel-khad@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/02 16:01:05 by ijoubair          #+#    #+#             */
-/*   Updated: 2025/11/05 16:22:39 by nel-khad         ###   ########.fr       */
+/*   Updated: 2025/11/06 15:55:35 by nel-khad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,9 +16,9 @@ typedef struct s_mem
 {
 	void			*ptr;
 	struct s_mem	*next;
-}	t_mem;
+}					t_mem;
 
-static t_mem	*g_mem_list = NULL;
+static t_mem		*g_mem_list = NULL;
 
 /* Add new allocated pointer to the linked list */
 static void	add_mem(void *ptr)
@@ -30,7 +30,7 @@ static void	add_mem(void *ptr)
 	{
 		printf("allocation failure (list node)\n");
 		free(ptr);
-		return;
+		return ;
 	}
 	new_node->ptr = ptr;
 	new_node->next = g_mem_list;

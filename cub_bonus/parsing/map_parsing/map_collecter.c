@@ -14,10 +14,10 @@
 
 void	collect_the_map(char *line, int fd)
 {
-	char *map;
+	char	*map;
 
 	map = NULL;
-	while(line)
+	while (line)
 	{
 		map = ft_strjoin(map, line);
 		line = get_next_line(fd);

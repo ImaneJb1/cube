@@ -3,16 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strjoin.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ijoubair <ijoubair@student.42.fr>          +#+  +:+       +#+        */
+/*   By: nel-khad <nel-khad@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/05 00:06:29 by ijoubair          #+#    #+#             */
-/*   Updated: 2025/11/04 22:08:39 by ijoubair         ###   ########.fr       */
+/*   Updated: 2025/11/06 17:52:54 by nel-khad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 #include <stdio.h>
 #include "../cub_bonus/header_bonus.h"
+
 char	*ft_strjoin(char const *s1, char const *s2)
 {
 	size_t	len;
@@ -26,7 +27,6 @@ char	*ft_strjoin(char const *s1, char const *s2)
 		return (NULL);
 	i = 0;
 	j = 0;
-	
 	while (s1 && s1[j])
 	{
 		s3[i++] = s1[j++];
@@ -37,13 +37,5 @@ char	*ft_strjoin(char const *s1, char const *s2)
 		s3[i++] = s2[j++];
 	}
 	s3[i] = '\0';
-	// free((char *)s1);
 	return (s3);
 }
-// #include <stdio.h>
-// int main()
-// {
-//     char *s = ft_strjoin("imane", " fatihhh");
-//     printf("%s\n", s);
-//     free(s);
-// }

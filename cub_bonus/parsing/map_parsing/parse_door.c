@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_door.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ijoubair <ijoubair@student.42.fr>          +#+  +:+       +#+        */
+/*   By: nel-khad <nel-khad@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/28 21:29:44 by ijoubair          #+#    #+#             */
-/*   Updated: 2025/11/03 22:09:52 by ijoubair         ###   ########.fr       */
+/*   Updated: 2025/11/06 16:08:15 by nel-khad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,15 +15,14 @@
 void	get_door(t_data *data)
 {
 	int (x), (y), (flag);
-
 	flag = 0;
 	y = 0;
-	while(data->map[y])
+	while (data->map[y])
 	{
 		x = 0;
-		while(data->map[y][x])
+		while (data->map[y][x])
 		{
-			if(data->map[y][x] == 'D')
+			if (data->map[y][x] == 'D')
 			{
 				flag = 1;
 				data->door_x = x * SQUARESIZE;
@@ -33,10 +32,9 @@ void	get_door(t_data *data)
 		}
 		y++;
 	}
-	if(flag == 0)
+	if (flag == 0)
 	{
 		data->door_x = 0;
 		data->door_y = 0;
 	}
 }
-
