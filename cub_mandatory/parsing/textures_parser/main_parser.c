@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main_parser.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nel-khad <nel-khad@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ijoubair <ijoubair@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/01 15:11:57 by ijoubair          #+#    #+#             */
-/*   Updated: 2025/11/06 15:33:44 by nel-khad         ###   ########.fr       */
+/*   Updated: 2025/11/06 22:57:02 by ijoubair         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,7 +77,6 @@ int	fill_textures_map(char *file_name, t_data *data, int fd, textures **text)
 		else
 		{
 			line = ft_strtrim(line, " \n\t");
-			printf("line = %s\n", line);
 			parse_dir(line, arr_dir);
 			parse_floor_ceiling(line, arr_fc);
 		}

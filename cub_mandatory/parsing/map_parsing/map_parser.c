@@ -6,7 +6,7 @@
 /*   By: ijoubair <ijoubair@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/09 15:29:07 by ijoubair          #+#    #+#             */
-/*   Updated: 2025/11/06 22:01:47 by ijoubair         ###   ########.fr       */
+/*   Updated: 2025/11/06 22:41:23 by ijoubair         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,13 +15,23 @@
 void	create_map_arr(char *string)
 {
 	char	***map;
-
+	int		i;
 	map = the_map();
 	*map = ft_split(string, '\n');
+	i = 0;
+	while((*map)[i])
+	{
+		if((*map)[i][0] != '1')
+		{
+			printf("Invalid map\n");
+			free_and_exit(1);
+		}
+		i++;
+	}
 	if (!the_map())
 	{
 		printf("map is NULL\n");
-		exit(1);
+		free_and_exit(1);
 	}
 }
 
