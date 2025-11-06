@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   horiz_inter.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nel-khad <nel-khad@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ijoubair <ijoubair@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/31 21:42:46 by nel-khad          #+#    #+#             */
-/*   Updated: 2025/11/05 23:05:10 by nel-khad         ###   ########.fr       */
+/*   Updated: 2025/11/06 13:20:34 by ijoubair         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ int	is_player_wall(t_data *data, char *map[], double x, double y)
 	double	dx;
 	double	dy;
 	double	marge;
-
+	(void)data;
 	marge = 6.0;
 	dx = -marge;
 	while (dx <= marge)
