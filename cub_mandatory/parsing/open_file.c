@@ -12,16 +12,15 @@
 
 #include "../header.h"
 
-
 int	open_file(char *file_name)
 {
 	int	fd;
 
 	fd = open(file_name, O_RDONLY);
-	if(fd < 0)
+	if (fd < 0)
 	{
 		perror("");
-		return(-1);
-	}  
-	return(fd);
+		return (-1);
+	}
+	return (fd);
 }
