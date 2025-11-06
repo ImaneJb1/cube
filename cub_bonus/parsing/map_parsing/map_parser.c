@@ -3,10 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   map_parser.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ijoubair <ijoubair@student.42.fr>          +#+  +:+       +#+        */
+/*   By: nel-khad <nel-khad@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/09 15:29:07 by ijoubair          #+#    #+#             */
+<<<<<<< HEAD
 /*   Updated: 2025/11/06 21:52:06 by ijoubair         ###   ########.fr       */
+=======
+/*   Updated: 2025/11/06 16:08:06 by nel-khad         ###   ########.fr       */
+>>>>>>> 39c9c13fbf660bed73384207651be6a3da09d4fc
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,6 +98,6 @@ void	parse_map(void)
 	if(data_func()->p.direction == 0)
 	{
 		printf("No player in the map\n");
-		exit(1);
+		free_and_exit(1);
 	}
 }

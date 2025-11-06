@@ -97,6 +97,13 @@ void	data_init(t_data *data)
 	data->vertical_hit = 0;
 	data->width = get_width(data->map);
 	data->heigth = get_heigth(data->map);
+<<<<<<< HEAD
+=======
+	data->mlx_win = mlx_new_window(data->mlx_ptr, WIDTH, HEIGHT, "cub3d");
+	data->img.img_ptr = mlx_new_image(data->mlx_ptr, WIDTH, HEIGHT);
+	data->img.img_pxl_ptr = mlx_get_data_addr(data->img.img_ptr,
+			&data->img.b_p_p, &data->img.line_len, &data->img.endian);
+>>>>>>> 39c9c13fbf660bed73384207651be6a3da09d4fc
 	init_player(data);
 	init_ray(data);
 	init_first_person(data);
