@@ -6,7 +6,7 @@
 /*   By: ijoubair <ijoubair@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/01 15:11:57 by ijoubair          #+#    #+#             */
-/*   Updated: 2025/11/06 22:57:02 by ijoubair         ###   ########.fr       */
+/*   Updated: 2025/11/06 23:06:55 by ijoubair         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ int	map_reached(char first_char)
 	return (0);
 }
 
-void	init_arrays(textures **text, config **arr_dir, config **arr_fc,
+void	init_arrays(t_textures **text, t_config **arr_dir, t_config **arr_fc,
 		t_data *data)
 {
 	*arr_dir = init_dir_arr(*text);
@@ -48,7 +48,7 @@ void	init_arrays(textures **text, config **arr_dir, config **arr_fc,
 int	parse_map_file(char *file_name, t_data *data)
 {
 	int			fd;
-	textures	**text;
+	t_textures	**text;
 
 	fd = open_file(file_name);
 	if (fd < 0)
@@ -60,12 +60,12 @@ int	parse_map_file(char *file_name, t_data *data)
 	return (1);
 }
 
-int	fill_textures_map(char *file_name, t_data *data, int fd, textures **text)
+int	fill_textures_map(char *file_name, t_data *data, int fd, t_textures **text)
 {
 	char	*line;
 
 	(void)file_name;
-	config(*arr_dir), (*arr_fc);
+	t_config(*arr_dir), (*arr_fc);
 	init_arrays(text, &arr_dir, &arr_fc, data);
 	line = get_next_line(fd);
 	if (!line)

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_dir.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nel-khad <nel-khad@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ijoubair <ijoubair@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/02 10:22:42 by ijoubair          #+#    #+#             */
-/*   Updated: 2025/11/06 15:35:16 by nel-khad         ###   ########.fr       */
+/*   Updated: 2025/11/06 23:00:49 by ijoubair         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ void	is_path_valid(char *path, char *conf)
 	}
 }
 
-void	parse_dir(char *line, config *arr)
+void	parse_dir(char *line, t_config *arr)
 {
 	int		i;
 	char	**splited;

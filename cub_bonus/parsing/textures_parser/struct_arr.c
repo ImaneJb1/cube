@@ -6,18 +6,18 @@
 /*   By: ijoubair <ijoubair@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/02 10:52:27 by ijoubair          #+#    #+#             */
-/*   Updated: 2025/11/04 22:06:00 by ijoubair         ###   ########.fr       */
+/*   Updated: 2025/11/06 23:04:35 by ijoubair         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../header_bonus.h"
 
-config	*init_dir_arr(textures *text)
+t_config	*init_dir_arr(t_textures *text)
 {
-	config	*arr;
+	t_config	*arr;
 	int		i;
 
-	arr = gc_calloc(5, sizeof(config) * 5);
+	arr = gc_calloc(5, sizeof(t_config) * 5);
 	if (!arr)
 	{
 		perror("");
@@ -42,11 +42,11 @@ config	*init_dir_arr(textures *text)
 	return (arr);
 }
 
-config	*init_c_f_arr(textures *text)
+t_config	*init_c_f_arr(t_textures *text)
 {
-	config	*arr;
+	t_config	*arr;
 
-	arr = gc_malloc(sizeof(config) * 2);
+	arr = gc_malloc(sizeof(t_config) * 2);
 	if (!arr)
 	{
 		perror("");

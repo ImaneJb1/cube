@@ -6,7 +6,7 @@
 /*   By: ijoubair <ijoubair@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/06 15:40:55 by nel-khad          #+#    #+#             */
-/*   Updated: 2025/11/06 22:55:32 by ijoubair         ###   ########.fr       */
+/*   Updated: 2025/11/06 23:05:56 by ijoubair         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -217,15 +217,15 @@ void			rendring_(t_data *data);
 // 	int c;
 // }dir_flags;
 
-typedef struct config
+typedef struct t_config
 {
 	char		*direction;
 	int			flag;
 	char		**texture;
 	int			*color;
-}				config;
+}				t_config;
 
-typedef struct textures
+typedef struct t_textures
 {
 	char		*no;
 	char		*so;
@@ -234,17 +234,17 @@ typedef struct textures
 	char		*f;
 	char		*c;
 	char		*door;
-}				textures;
+}				t_textures;
 
 // *************** parsing ***************
 
-void			parse_floor_ceiling(char *line, config *arr);
-void			parse_dir(char *line, config *arr);
-textures		*init_textures(void);
+void			parse_floor_ceiling(char *line, t_config *arr);
+void			parse_dir(char *line, t_config *arr);
+t_textures		*init_textures(void);
 int				fill_textures_map(char *file_name, t_data *data, int fd,
-					textures **text);
-config			*init_dir_arr(textures *text);
-config			*init_fc_arr(textures *text, t_data *data);
+					t_textures **text);
+t_config			*init_dir_arr(t_textures *text);
+t_config			*init_fc_arr(t_textures *text, t_data *data);
 void			check_textures(void);
 int				ft_strcmp(const char *s1, const char *s2);
 void			create_map_arr(char *string);
@@ -260,7 +260,7 @@ void			get_door(t_data *data);
 int				parse_map_file(char *file_name, t_data *data);
 
 // global
-textures		**text_func(void);
+t_textures		**text_func(void);
 char			***the_map(void);
 t_data			*data_func(void);
 // garbage collector

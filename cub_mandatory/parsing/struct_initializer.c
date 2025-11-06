@@ -3,28 +3,28 @@
 /*                                                        :::      ::::::::   */
 /*   struct_initializer.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nel-khad <nel-khad@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ijoubair <ijoubair@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/02 10:08:40 by ijoubair          #+#    #+#             */
-/*   Updated: 2025/11/05 23:15:34 by nel-khad         ###   ########.fr       */
+/*   Updated: 2025/11/06 23:06:43 by ijoubair         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../header.h"
 
-textures	**global_tex(void)
+t_textures	**global_tex(void)
 {
-	static textures	*text;
+	static t_textures	*text;
 
 	return (&text);
 }
 
-textures	*init_textures(void)
+t_textures	*init_textures(void)
 {
-	textures	**text;
+	t_textures	**text;
 
 	text = global_tex();
-	*text = gc_calloc(1, sizeof(textures));
+	*text = gc_calloc(1, sizeof(t_textures));
 	if (!*global_tex())
 	{
 		perror("");

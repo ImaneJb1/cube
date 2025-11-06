@@ -6,15 +6,15 @@
 /*   By: ijoubair <ijoubair@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/08 16:16:39 by ijoubair          #+#    #+#             */
-/*   Updated: 2025/11/01 15:13:30 by ijoubair         ###   ########.fr       */
+/*   Updated: 2025/11/06 23:02:54 by ijoubair         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../header_bonus.h"
 
-textures	**text_func(void)
+t_textures	**text_func(void)
 {
-	static textures	*text;
+	static t_textures	*text;
 
 	return (&text);
 }

@@ -3,21 +3,21 @@
 /*                                                        :::      ::::::::   */
 /*   parse_floor_ceiling.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nel-khad <nel-khad@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ijoubair <ijoubair@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/04 11:45:07 by ijoubair          #+#    #+#             */
-/*   Updated: 2025/11/06 15:37:02 by nel-khad         ###   ########.fr       */
+/*   Updated: 2025/11/06 23:07:04 by ijoubair         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../header.h"
 
-config	*init_fc_arr(textures *text, t_data *data)
+t_config	*init_fc_arr(t_textures *text, t_data *data)
 {
-	config	*arr;
+	t_config	*arr;
 	int		i;
 
-	arr = gc_malloc(sizeof(config) * 2);
+	arr = gc_malloc(sizeof(t_config) * 2);
 	if (!arr)
 	{
 		perror("");
@@ -91,7 +91,7 @@ char	*join_2d_arr(char **splited)
 	return (joined);
 }
 
-void	parse_floor_ceiling(char *line, config *arr)
+void	parse_floor_ceiling(char *line, t_config *arr)
 {
 	int		i;
 	char	**splited;

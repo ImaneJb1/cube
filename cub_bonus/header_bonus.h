@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   header_bonus.h                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nel-khad <nel-khad@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ijoubair <ijoubair@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/06 17:33:31 by nel-khad          #+#    #+#             */
-/*   Updated: 2025/11/06 17:42:54 by nel-khad         ###   ########.fr       */
+/*   Updated: 2025/11/06 23:09:26 by ijoubair         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -111,7 +111,7 @@ typedef struct ray
 	int			wall_dir;
 	char		content;
 	double		top_wall;
-	int			tex_x; // fin ghanbda nrsem textures dyal lwall
+	int			tex_x; // fin ghanbda nrsem t_textures dyal lwall
 }				t_ray;
 
 typedef struct t_texture
@@ -160,7 +160,7 @@ typedef struct data
 	char		**map;
 	int			width;
 	int			heigth;
-	// textures
+	// t_textures
 	int			tex_x;
 	t_texture	*arr;
 	int			floor_color;
@@ -227,15 +227,15 @@ void			rendring_(t_data *data);
 // 	int c;
 // }dir_flags;
 
-typedef struct config
+typedef struct t_config
 {
 	char		*direction;
 	int			flag;
 	char		**texture;
 	int			*color;
-}				config;
+}				t_config;
 
-typedef struct textures
+typedef struct t_textures
 {
 	char		*no;
 	char		*so;
@@ -244,17 +244,17 @@ typedef struct textures
 	char		*f;
 	char		*c;
 	char		*door;
-}				textures;
+}				t_textures;
 
 // *************** parsing ***************
 
-void			parse_floor_ceiling(char *line, config *arr);
-void			parse_dir(char *line, config *arr);
-textures		*init_textures(void);
+void			parse_floor_ceiling(char *line, t_config *arr);
+void			parse_dir(char *line, t_config *arr);
+t_textures		*init_textures(void);
 int				fill_textures_map(char *file_name, t_data *data, int fd,
-					textures **text);
-config			*init_dir_arr(textures *text);
-config			*init_fc_arr(textures *text, t_data *data);
+					t_textures **text);
+t_config		*init_dir_arr(t_textures *text);
+t_config		*init_fc_arr(t_textures *text, t_data *data);
 void			check_textures(void);
 int				ft_strcmp(const char *s1, const char *s2);
 void			create_map_arr(char *string);
@@ -269,7 +269,7 @@ int				get_hex_color(char *rgb);
 void			get_door(t_data *data);
 int				parse_map_file(char *file_name, t_data *data);
 // global
-textures		**text_func(void);
+t_textures		**text_func(void);
 char			***the_map(void);
 t_data			*data_func(void);
 // garbage collector
@@ -278,13 +278,13 @@ void			*gc_calloc(size_t count, size_t size);
 void			*gc_malloc(size_t size);
 void			destroy_weapon(t_data *data);
 void			destroy_all(void);
-// textures
+// t_textures
 void			set_tex_x(t_data *data, int type);
 void			set_step(double wall_height, t_texture *texture);
 void			set_tex_pos(double top_wall, t_texture *texture);
 void			fill_image_arr(void *mlx_ptr, t_texture **arr, int size);
 t_texture		*init_text_arr(void *mlx_ptr, t_texture **arr, int size);
-// void load_all_textures(t_data *data);
+// void load_all_t_textures(t_data *data);
 void			draw_textured_wall(t_data *data, t_texture *texture,
 					double top_wall, double bottom_wall);
 void			my_img_pixel_put(t_data *data, int x, int y, int color);
