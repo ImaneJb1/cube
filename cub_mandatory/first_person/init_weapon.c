@@ -6,7 +6,7 @@
 /*   By: nel-khad <nel-khad@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/01 18:54:21 by ijoubair          #+#    #+#             */
-/*   Updated: 2025/11/05 16:08:55 by nel-khad         ###   ########.fr       */
+/*   Updated: 2025/11/06 16:00:49 by nel-khad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,14 +40,14 @@ int	get_color(int x, int y, t_weapon *frame)
 		free_and_exit(1);
 	}
 	return (*(int *)(frame->pxl_ptr + (y * frame->line_len) + (x * (frame->b_p_p
-					/ 8))));
+				/ 8))));
 }
 
 void	put_weapon(t_data *data, t_weapon *weapon)
 {
-	int(x), (y);
-	int(img_x), (img_y);
-	int x_img_end, color;
+	int (x), (y);
+	int (img_x), (img_y);
+	int (x_img_end), (color);
 	x_img_end = WIDTH / 2 + weapon->width / 2;
 	x = WIDTH / 2 - weapon->width / 2;
 	img_x = 0;
@@ -60,8 +60,8 @@ void	put_weapon(t_data *data, t_weapon *weapon)
 			if (img_x >= weapon->width || img_y >= weapon->height)
 				break ;
 			color = get_color(img_x, img_y, weapon);
-			if ((unsigned int)color != 0xFF000000 && (unsigned int)color != 0x00000000)
-				// skip transparent (pure black)
+			if ((unsigned int)color != 0xFF000000
+				&& (unsigned int)color != 0x00000000)
 				my_img_pixel_put(data, x, y, color);
 			y++;
 			img_y++;

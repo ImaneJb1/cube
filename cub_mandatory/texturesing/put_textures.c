@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   put_textures.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ijoubair <ijoubair@student.42.fr>          +#+  +:+       +#+        */
+/*   By: nel-khad <nel-khad@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/02 14:34:10 by ijoubair          #+#    #+#             */
-/*   Updated: 2025/11/02 15:59:42 by ijoubair         ###   ########.fr       */
+/*   Updated: 2025/11/06 15:39:07 by nel-khad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ void	render_3d(t_data *data)
 {
 	t_dim	wall;
 
-	int(type), (y);
+	int (type), (y);
 	wall = calculate_wall_dimensions(data);
 	type = get_textures_type(data);
 	set_tex_x(data, type);
@@ -45,8 +45,7 @@ void	render_3d(t_data *data)
 	while (y < HEIGHT)
 	{
 		if (y < wall.top_wall)
-			my_img_pixel_put(data, data->ray.id, y,
-				data->ceiling_color);
+			my_img_pixel_put(data, data->ray.id, y, data->ceiling_color);
 		else if (y >= wall.top_wall && y <= wall.bottom_wall)
 		{
 			draw_textured_wall(data, &data->arr[type], data->ray.top_wall,
@@ -54,8 +53,7 @@ void	render_3d(t_data *data)
 			y = wall.bottom_wall + 1;
 		}
 		else if (y > wall.bottom_wall)
-			my_img_pixel_put(data, data->ray.id, y,
-				data->floor_color);
+			my_img_pixel_put(data, data->ray.id, y, data->floor_color);
 		y++;
 	}
 }

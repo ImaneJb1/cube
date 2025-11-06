@@ -6,13 +6,13 @@
 /*   By: nel-khad <nel-khad@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/31 21:42:46 by nel-khad          #+#    #+#             */
-/*   Updated: 2025/11/05 23:05:10 by nel-khad         ###   ########.fr       */
+/*   Updated: 2025/11/06 17:30:55 by nel-khad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../header_bonus.h"
 
-int	is_wall(t_data *data, char *map[], double x, double y, char c)
+int	is_wall(t_data *data, double x, double y, char c)
 {
 	int	grid_x;
 	int	grid_y;
@@ -23,44 +23,15 @@ int	is_wall(t_data *data, char *map[], double x, double y, char c)
 		x -= 1;
 	grid_x = floor(x / SQUARESIZE);
 	grid_y = floor(y / SQUARESIZE);
-	if (grid_x < 0 || grid_y < 0 || map[grid_y] == NULL|| 
-		grid_x >= (int)ft_strlen(map[grid_y]))
+	if (grid_x < 0 || grid_y < 0 || data->map[grid_y] == NULL
+		|| grid_x >= (int)ft_strlen(data->map[grid_y]))
 		return (0);
-	if (map[grid_y][grid_x] == '1' || map[grid_y][grid_x] == 'D')
-		return (1);			
+	if (data->map[grid_y][grid_x] == '1' || data->map[grid_y][grid_x] == 'D')
+		return (1);
 	return (0);
 }
 
-int	is_player_wall(t_data *data, char *map[], double x, double y)
-{
-	int		grid_x;
-	int		grid_y;
-	double	dx;
-	double	dy;
-	double	marge;
-
-	marge = 6.0;
-	dx = -marge;
-	while (dx <= marge)
-	{
-		dy = -marge;
-		while (dy <= marge)
-		{
-			grid_x = floor((x + dx) / SQUARESIZE);
-			grid_y = floor((y + dy) / SQUARESIZE);
-			if (grid_x < 0 || grid_y < 0 || map[grid_y] == NULL|| 
-				grid_x >= (int)ft_strlen(map[grid_y]))
-				return (1);
-			if (map[grid_y][grid_x] == '1')
-				return (1);
-			dy += marge;
-		}
-		dx += marge;
-	}
-	return (0);
-}
-
-static void	calcul_first_inter_H(t_intrsc *inter, t_data *data, double rayangle)
+static void	calcul_first_inter_h(t_intrsc *inter, t_data *data, double rayangle)
 {
 	if (data->ray.is_down)
 		inter->first_int_y = floor(data->p.p_y / SQUARESIZE) * SQUARESIZE
@@ -73,7 +44,7 @@ static void	calcul_first_inter_H(t_intrsc *inter, t_data *data, double rayangle)
 	inter->next_y = inter->first_int_y;
 }
 
-static void	calcul_step_H(t_data *data, double *xa, double *ya, double rayangle)
+static void	calcul_step_h(t_data *data, double *xa, double *ya, double rayangle)
 {
 	if (data->ray.is_down)
 		*ya = SQUARESIZE;
@@ -86,12 +57,12 @@ static void	calcul_step_H(t_data *data, double *xa, double *ya, double rayangle)
 		*xa *= -1;
 }
 
-static void	calcul_inter_H(t_data *data, double xa, double ya, t_intrsc *inter)
+static void	calcul_inter_h(t_data *data, double xa, double ya, t_intrsc *inter)
 {
 	while (inter->next_x < data->width * SQUARESIZE && inter->next_x >= 0
 		&& inter->next_y < data->heigth * SQUARESIZE && inter->next_y >= 0)
 	{
-		if (is_wall(data, data->map, inter->next_x, inter->next_y, 'h'))
+		if (is_wall(data, inter->next_x, inter->next_y, 'h'))
 		{
 			data->ray.hit_horiz = 1;
 			data->ray.hor_walhit_x = inter->next_x;
@@ -112,9 +83,9 @@ double	find_hor_inter(t_data *data, double rayangle)
 	double		ya;
 	double		xa;
 
-	calcul_first_inter_H(&inter, data, rayangle);
-	calcul_step_H(data, &xa, &ya, rayangle);
-	calcul_inter_H(data, xa, ya, &inter);
+	calcul_first_inter_h(&inter, data, rayangle);
+	calcul_step_h(data, &xa, &ya, rayangle);
+	calcul_inter_h(data, xa, ya, &inter);
 	if (data->ray.hit_horiz)
 		return (calculate_distance(data, data->ray.hor_walhit_x,
 				data->ray.hor_walhit_y));

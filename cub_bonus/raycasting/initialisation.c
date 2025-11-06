@@ -20,13 +20,13 @@ void	init_player(t_data *data)
 	data->p.right_x = 0;
 	data->p.left_y = 0;
 	data->p.rot_speed = 2 * (M_PI / 180);
-	if(data->p.direction == 'N')
+	if (data->p.direction == 'N')
 		data->p.view_angle = 270 * (M_PI / 180);
-	if(data->p.direction == 'E')
+	if (data->p.direction == 'E')
 		data->p.view_angle = 0;
-	if(data->p.direction == 'S')
+	if (data->p.direction == 'S')
 		data->p.view_angle = 90 * (M_PI / 180);
-	if(data->p.direction == 'W')
+	if (data->p.direction == 'W')
 		data->p.view_angle = 180 * (M_PI / 180);
 }
 
@@ -86,8 +86,8 @@ void	init_ray(t_data *data)
 void	data_init(t_data *data)
 {
 	static char	**map;
-	int size;
-	
+	int			size;
+
 	map = *the_map();
 	data->mlx_ptr = mlx_init();
 	if (!data->mlx_ptr)
@@ -100,13 +100,13 @@ void	data_init(t_data *data)
 	data->mlx_win = mlx_new_window(data->mlx_ptr, WIDTH, HEIGHT, "cub3d");
 	data->img.img_ptr = mlx_new_image(data->mlx_ptr, WIDTH, HEIGHT);
 	data->img.img_pxl_ptr = mlx_get_data_addr(data->img.img_ptr,
-		&data->img.b_p_p, &data->img.line_len, &data->img.endian);
+			&data->img.b_p_p, &data->img.line_len, &data->img.endian);
 	init_player(data);
 	init_ray(data);
 	init_first_person(data);
 	data->shooting = 0;
 	size = 5;
-	if(!data->door_x && !data->door_y)
+	if (!data->door_x && !data->door_y)
 		size = 4;
 	data->arr = init_text_arr(data->mlx_ptr, &data->arr, size);
 }

@@ -6,7 +6,7 @@
 /*   By: nel-khad <nel-khad@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/01 15:11:57 by ijoubair          #+#    #+#             */
-/*   Updated: 2025/11/05 16:12:20 by nel-khad         ###   ########.fr       */
+/*   Updated: 2025/11/06 16:09:05 by nel-khad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,8 @@ int	check_argv(int argc, char **argv)
 {
 	char	*ext;
 
-	if(argc != 2)
-		return(0);
+	if (argc != 2)
+		return (0);
 	ext = ft_strchr(argv[1], '.');
 	if (!ext || ft_strlen(argv[1]) <= 4)
 	{
@@ -31,17 +31,18 @@ int	check_argv(int argc, char **argv)
 	return (0);
 }
 
-int map_reached(char first_char)
+int	map_reached(char first_char)
 {
-	if(first_char == '0' || first_char == '1')
+	if (first_char == '0' || first_char == '1')
 		return (1);
-	return(0);
+	return (0);
 }
 
-void	init_arrays(textures **text, config **arr_dir, config **arr_fc, t_data *data)
-{	
+void	init_arrays(textures **text, config **arr_dir, config **arr_fc,
+		t_data *data)
+{
 	*arr_dir = init_dir_arr(*text);
-	*arr_fc = init_fc_arr(*text, data);	
+	*arr_fc = init_fc_arr(*text, data);
 }
 
 int	parse_map_file(char *file_name, t_data *data)
@@ -64,7 +65,7 @@ int	fill_textures_map(char *file_name, t_data *data, int fd, textures **text)
 	char	*line;
 
 	(void)file_name;
-	config(*arr_dir), (*arr_fc);
+	config (*arr_dir), (*arr_fc);
 	init_arrays(text, &arr_dir, &arr_fc, data);
 	line = get_next_line(fd);
 	if (!line)
@@ -72,17 +73,14 @@ int	fill_textures_map(char *file_name, t_data *data, int fd, textures **text)
 	while (line)
 	{
 		if (map_reached(*line))
-		collect_the_map(line, fd);
+			collect_the_map(line, fd);
 		else
 		{
 			line = ft_strtrim(line, " \n\t");
 			parse_dir(line, arr_dir);
 			parse_floor_ceiling(line, arr_fc);
-			// free(line);
 		}
 		line = get_next_line(fd);
 	}
 	return (1);
 }
-
-

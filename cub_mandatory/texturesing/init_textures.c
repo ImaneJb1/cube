@@ -49,7 +49,6 @@ void	fill_image_arr(void *mlx_ptr, t_texture **arr)
 	}
 }
 
-
 int	get_textures_type(t_data *data)
 {
 	if (data->vertical_hit)

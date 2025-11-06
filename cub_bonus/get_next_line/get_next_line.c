@@ -6,12 +6,13 @@
 /*   By: nel-khad <nel-khad@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/28 11:00:48 by ijoubair          #+#    #+#             */
-/*   Updated: 2025/11/05 16:12:42 by nel-khad         ###   ########.fr       */
+/*   Updated: 2025/11/06 16:06:00 by nel-khad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "get_next_line.h"
 #include "../header_bonus.h"
+#include "get_next_line.h"
+
 char	*get_leftover(char *buffer)
 {
 	char	*leftover;
@@ -38,11 +39,10 @@ char	*get_leftover(char *buffer)
 	return (leftover);
 }
 
-//get line with '\n'
 char	*extract_line(char *buffer)
 {
 	char	*line;
-	size_t		i;
+	size_t	i;
 
 	i = 0;
 	while (buffer[i] && buffer[i] != '\n')
@@ -62,19 +62,6 @@ char	*extract_line(char *buffer)
 	return (line);
 }
 
-//join the leftover with the new readed line
-// char	*join_free(char *buffer, char *buf)
-// {
-// 	char	*join;
-
-// 	join = ft_strjoin(buffer, buf);
-// 	if(!join)
-// 		return (NULL);
-// 	free(buffer);
-// 	return (join);
-// }
-
-// fill the buf
 char	*read_buff(int fd, char *buffer)
 {
 	char	*buf;
@@ -83,18 +70,14 @@ char	*read_buff(int fd, char *buffer)
 	buf = gc_malloc(BUFFER_SIZE * sizeof(char) + 1);
 	if (!buf)
 		return (NULL);
-	// if (!buffer)
-	// 	buffer = ft_calloc(1, 1);
-	// if(!buffer)
-	// 	return(free(buf), NULL);
 	readed = 1;
 	while (readed > 0)
 	{
 		readed = read(fd, buf, BUFFER_SIZE);
 		if (readed == -1)
-			return(NULL); 
+			return (NULL);
 		buf[readed] = 0;
-		buffer = gft_strjoin(buffer, buf);		
+		buffer = gft_strjoin(buffer, buf);
 		if (ft_strchr(buf, '\n'))
 			break ;
 	}
@@ -109,7 +92,8 @@ char	*get_next_line(int fd)
 	if (fd < 0 || BUFFER_SIZE < 0)
 		return (NULL);
 	buffer = read_buff(fd, buffer);
-	if (!buffer){
+	if (!buffer)
+	{
 		return (NULL);
 	}
 	if (*buffer == 0)
@@ -118,7 +102,7 @@ char	*get_next_line(int fd)
 		return (NULL);
 	}
 	line = extract_line(buffer);
-	if(!line)
+	if (!line)
 	{
 		buffer = NULL;
 		return (NULL);
@@ -126,4 +110,3 @@ char	*get_next_line(int fd)
 	buffer = get_leftover(buffer);
 	return (line);
 }
-

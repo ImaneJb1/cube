@@ -46,6 +46,7 @@ char	*gft_strjoin(char const *s1, char const *s2)
 	char	*s3;
 	int		i;
 	int		j;
+
 	len = ft_strlen(s1) + ft_strlen(s2);
 	s3 = gc_malloc(len * sizeof(char) + 1);
 	if (!s3)

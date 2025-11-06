@@ -16,13 +16,14 @@ int	shooting(int button, int x, int y, void *param)
 {
 	int		i;
 	t_data	*data;
+
 	(void)x;
 	(void)y;
 	data = (t_data *)param;
 	i = 0;
 	if (button == 1)
 		data->shooting = 1;
-	return(0);
+	return (0);
 }
 
 void	draw_shooting(t_data *data)

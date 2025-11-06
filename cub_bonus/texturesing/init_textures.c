@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_textures.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ijoubair <ijoubair@student.42.fr>          +#+  +:+       +#+        */
+/*   By: nel-khad <nel-khad@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/01 15:50:26 by ijoubair          #+#    #+#             */
-/*   Updated: 2025/11/05 13:01:45 by ijoubair         ###   ########.fr       */
+/*   Updated: 2025/11/06 17:19:51 by nel-khad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ void	fill_image_arr(void *mlx_ptr, t_texture **arr, int size)
 	path[1] = (*text_func())->so;
 	path[2] = (*text_func())->we;
 	path[3] = (*text_func())->ea;
-	if(size == 5)
+	if (size == 5)
 		path[4] = (*text_func())->door;
 	i = 0;
 	while (i < size)
@@ -40,7 +40,7 @@ void	fill_image_arr(void *mlx_ptr, t_texture **arr, int size)
 		(*arr)[i].path = path[i];
 		if (access(path[i], O_RDONLY) < 0)
 		{
-			printf("ERROR: %s is inaccessible\n", path[i]);// hna fin kat7bes
+			printf("ERROR: %s is inaccessible\n", path[i]);
 			break ;
 		}
 		(*arr)[i].img_ptr = mlx_xpm_file_to_image(mlx_ptr, path[i],
@@ -70,8 +70,6 @@ int	render_door(t_data *data, double x, double y, char c)
 			- 1] == 'D')
 			return (1);
 	}
-	// if(data->map[grid_y][grid_x] == 'P')
-	//     return(1);
 	return (0);
 }
 
@@ -96,6 +94,3 @@ int	get_textures_type(t_data *data)
 			return (SOUTH);
 	}
 }
-
-
-

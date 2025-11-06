@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_player.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ijoubair <ijoubair@student.42.fr>          +#+  +:+       +#+        */
+/*   By: nel-khad <nel-khad@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/17 13:18:02 by ijoubair          #+#    #+#             */
-/*   Updated: 2025/11/01 19:10:42 by ijoubair         ###   ########.fr       */
+/*   Updated: 2025/11/06 14:49:33 by nel-khad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,17 +14,17 @@
 
 void	parse_player(char char_map, int x, int y)
 {
-	static int flag;
-	static char *s;
-	int i;
+	static int	flag;
+	static char	*s;
+	int			i;
 
 	i = 0;
 	s = "NSWE";
-	while(s[i])
+	while (s[i])
 	{
-		if(char_map == s[i])
+		if (char_map == s[i])
 		{
-			if(flag == 0)
+			if (flag == 0)
 			{
 				data_func()->p.direction = s[i];
 				data_func()->p.p_x = x * SQUARESIZE + SQUARESIZE / 2;
@@ -33,9 +33,8 @@ void	parse_player(char char_map, int x, int y)
 			}
 			else
 			{
-				printf("unvalid map\n");
+				printf("Invalid map\n");
 				free_and_exit(1);
-
 			}
 		}
 		i++;

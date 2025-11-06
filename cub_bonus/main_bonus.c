@@ -1,32 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   main_bonus.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: nel-khad <nel-khad@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/08/01 15:get_heigth(data->map):37 by ijoubair          #+#    #+#             */
-/*   Updated: 2025/08/12 12:09:19 by nel-khad         ###   ########.fr       */
+/*   Created: 2025/11/06 17:24:29 by nel-khad          #+#    #+#             */
+/*   Updated: 2025/11/06 17:24:31 by nel-khad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "header_bonus.h"
 
-
-int main(int argc, char **argv)
+int	main(int argc, char **argv)
 {
-	t_data *data;
-	
+	t_data	*data;
+
 	data = data_func();
-	if(!check_argv(argc, argv))
-	return 0;
-	if(!parse_map_file(argv[1], data))
+	if (!check_argv(argc, argv))
+		return (0);
+	if (!parse_map_file(argv[1], data))
 	{
 		free_all();
-		return 0;
+		return (0);
 	}
+	check_textures();
 	data_init(data);
-	check_textures(); // this exits the program in case of faillure 
 	parse_map();
 	rendring_(data);
 	hook_init(data);
@@ -36,6 +35,5 @@ int main(int argc, char **argv)
 	free(data->mlx_ptr);
 	free_all();
 	get_next_line(-1);
-	return 0;
+	return (0);
 }
-// i should parse when there is no playeer

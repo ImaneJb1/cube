@@ -17,11 +17,11 @@
 #  define BUFFER_SIZE 1
 # endif
 
+# include <fcntl.h>
+# include <stdio.h>
 # include <stdlib.h>
 # include <string.h>
-# include <fcntl.h>
 # include <unistd.h>
-# include <stdio.h>
 char	*get_next_line(int fd);
 char	*gft_strjoin(char const *s1, char const *s2);
 size_t	ft_strlen(const char *str);

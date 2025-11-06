@@ -17,11 +17,11 @@ int	open_file(char *file_name)
 	int	fd;
 
 	fd = open(file_name, O_RDONLY);
-	if(fd < 0)
+	if (fd < 0)
 	{
 		perror("");
 		free_and_exit(1);
-		return(0);
-	}  
-	return(fd);
+		return (0);
+	}
+	return (fd);
 }
