@@ -6,7 +6,7 @@
 /*   By: ijoubair <ijoubair@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/02 10:52:27 by ijoubair          #+#    #+#             */
-/*   Updated: 2025/11/06 23:07:10 by ijoubair         ###   ########.fr       */
+/*   Updated: 2025/11/07 18:24:49 by ijoubair         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,16 +15,16 @@
 t_config	*init_dir_arr(t_textures *text)
 {
 	t_config	*arr;
-	int		i;
+	int			i;
 
-	arr = gc_malloc(sizeof(t_config) * 5);
+	arr = gc_malloc(sizeof(t_config) * 4);
 	if (!arr)
 	{
 		perror("");
 		return (NULL);
 	}
 	i = 0;
-	while (i < 5)
+	while (i < 4)
 	{
 		arr[i].flag = 0;
 		i++;
@@ -37,8 +37,6 @@ t_config	*init_dir_arr(t_textures *text)
 	arr[2].texture = &text->we;
 	arr[3].direction = "EA ";
 	arr[3].texture = &text->ea;
-	arr[4].direction = "DO ";
-	arr[4].texture = &text->door;
 	return (arr);
 }
 

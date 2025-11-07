@@ -6,7 +6,7 @@
 /*   By: ijoubair <ijoubair@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/09 15:29:07 by ijoubair          #+#    #+#             */
-/*   Updated: 2025/11/07 15:18:27 by ijoubair         ###   ########.fr       */
+/*   Updated: 2025/11/07 18:17:49 by ijoubair         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,12 +16,13 @@ void	create_map_arr(char *string)
 {
 	char	***map;
 	int		i;
+
 	map = the_map();
 	*map = ft_split(string, '\n');
 	i = 0;
-	while((*map)[i])
+	while ((*map)[i])
 	{
-		if((*map)[i][0] == '\n')
+		if ((*map)[i][0] == '\n')
 		{
 			printf("Invalid map\n");
 			free_and_exit(1);
@@ -76,7 +77,8 @@ int	is_map_valid(char **map)
 				|| map[y][x] == 'E' || map[y][x] == 'W' || map[y][x] == 'S')
 			{
 				if (!is_inside_the_map(x, y, map))
-					return (printf("Invalid map x=%d y=%d char=%c str=%s\n ", x, y, map[y][x], map[y]), 0);
+					return (printf("Invalid map x=%d y=%d char=%c str=%s\n ", x,
+							y, map[y][x], map[y]), 0);
 				parse_player(map[y][x], x, y);
 			}
 			x++;
@@ -96,7 +98,7 @@ void	parse_map(void)
 		free_all();
 		exit(1);
 	}
-	if(data_func()->p.direction == 0)
+	if (data_func()->p.direction == 0)
 	{
 		printf("No player in the map\n");
 		free_and_exit(1);

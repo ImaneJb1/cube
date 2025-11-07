@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line.h                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nel-khad <nel-khad@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ijoubair <ijoubair@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/07 11:27:31 by ijoubair          #+#    #+#             */
-/*   Updated: 2025/11/05 16:28:00 by nel-khad         ###   ########.fr       */
+/*   Updated: 2025/11/07 18:23:18 by ijoubair         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@
 # include <stdlib.h>
 # include <string.h>
 # include <unistd.h>
+
 char	*get_next_line(int fd);
 char	*gft_strjoin(char const *s1, char const *s2);
 size_t	ft_strlen(const char *str);

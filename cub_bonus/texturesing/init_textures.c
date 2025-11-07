@@ -6,7 +6,7 @@
 /*   By: ijoubair <ijoubair@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/01 15:50:26 by ijoubair          #+#    #+#             */
-/*   Updated: 2025/11/07 18:09:11 by ijoubair         ###   ########.fr       */
+/*   Updated: 2025/11/07 18:09:57 by ijoubair         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ t_texture	*init_text_arr(void *mlx_ptr, t_texture **arr, int size)
 void	fill_image_arr(void *mlx_ptr, t_texture **arr, int size)
 {
 	int		i;
-	char	*path[size];
+	char	*path[5];
 
 	path[0] = (*text_func())->no;
 	path[1] = (*text_func())->so;
