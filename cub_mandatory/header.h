@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   header.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ijoubair <ijoubair@student.42.fr>          +#+  +:+       +#+        */
+/*   By: nel-khad <nel-khad@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/06 15:40:55 by nel-khad          #+#    #+#             */
-/*   Updated: 2025/11/07 18:15:24 by ijoubair         ###   ########.fr       */
+/*   Updated: 2025/11/07 20:11:57 by nel-khad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@
 
 # define WIDTH 1500
 # define HEIGHT 900
-# define FOV 60 * (M_PI / 180)
+# define FOV 1.0471975512 //60 * (M_PI / 180)
 
 # define RES 4
 # define NUM_RAYS WIDTH
