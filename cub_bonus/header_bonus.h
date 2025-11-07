@@ -6,7 +6,7 @@
 /*   By: ijoubair <ijoubair@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/06 17:33:31 by nel-khad          #+#    #+#             */
-/*   Updated: 2025/11/06 23:09:26 by ijoubair         ###   ########.fr       */
+/*   Updated: 2025/11/07 18:07:23 by ijoubair         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,14 @@
 # define RES 4
 # define NUM_RAYS WIDTH
 # define COLISION_MARG 2
+//garbage collector
+typedef struct s_mem
+{
+	void			*ptr;
+	struct s_mem	*next;
+}					t_mem;
 
+static t_mem		*g_mem_list = NULL;
 typedef struct wall_dim
 {
 	double		wall_height;

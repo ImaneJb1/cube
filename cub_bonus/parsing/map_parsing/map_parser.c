@@ -6,7 +6,7 @@
 /*   By: ijoubair <ijoubair@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/09 15:29:07 by ijoubair          #+#    #+#             */
-/*   Updated: 2025/11/06 22:46:06 by ijoubair         ###   ########.fr       */
+/*   Updated: 2025/11/07 15:49:53 by ijoubair         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,7 +91,7 @@ void	parse_map(void)
 		free_all();
 		exit(1);
 	}
-	if(data_func()->p.direction == 0)
+	if (data_func()->p.direction == 0)
 	{
 		printf("No player in the map\n");
 		free_and_exit(1);

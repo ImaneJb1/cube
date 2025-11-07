@@ -6,7 +6,7 @@
 /*   By: ijoubair <ijoubair@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/06 15:40:55 by nel-khad          #+#    #+#             */
-/*   Updated: 2025/11/06 23:05:56 by ijoubair         ###   ########.fr       */
+/*   Updated: 2025/11/07 15:37:53 by ijoubair         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,15 @@
 # define NUM_RAYS WIDTH
 # define COLISION_MARG 2
 
+// garbage collector
+
+typedef struct s_mem
+{
+	void			*ptr;
+	struct s_mem	*next;
+}					t_mem;
+
+static t_mem		*g_mem_list = NULL;
 typedef struct s_line
 {
 	double		dx;

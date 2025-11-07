@@ -6,7 +6,7 @@
 /*   By: ijoubair <ijoubair@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/01 15:11:57 by ijoubair          #+#    #+#             */
-/*   Updated: 2025/11/06 23:04:22 by ijoubair         ###   ########.fr       */
+/*   Updated: 2025/11/07 15:57:19 by ijoubair         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ int	check_argv(int argc, char **argv)
 
 int	map_reached(char first_char)
 {
-	if (first_char == '0' || first_char == '1')
+	if (first_char == '0' || first_char == '1' || first_char == ' ')
 		return (1);
 	return (0);
 }
@@ -62,10 +62,11 @@ int	parse_map_file(char *file_name, t_data *data)
 
 int	fill_textures_map(char *file_name, t_data *data, int fd, t_textures **text)
 {
-	char	*line;
+	char		*line;
+	t_config	*arr_dir;
+	t_config	*arr_fc;
 
 	(void)file_name;
-	t_config (*arr_dir), (*arr_fc);
 	init_arrays(text, &arr_dir, &arr_fc, data);
 	line = get_next_line(fd);
 	if (!line)

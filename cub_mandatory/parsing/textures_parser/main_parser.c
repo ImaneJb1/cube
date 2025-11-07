@@ -6,7 +6,7 @@
 /*   By: ijoubair <ijoubair@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/01 15:11:57 by ijoubair          #+#    #+#             */
-/*   Updated: 2025/11/06 23:06:55 by ijoubair         ###   ########.fr       */
+/*   Updated: 2025/11/07 15:12:31 by ijoubair         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ int	check_argv(int argc, char **argv)
 
 int	map_reached(char first_char)
 {
-	if (first_char == '0' || first_char == '1')
+	if (first_char == '0' || first_char == '1' || first_char == ' ')
 		return (1);
 	return (0);
 }

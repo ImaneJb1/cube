@@ -6,7 +6,7 @@
 /*   By: ijoubair <ijoubair@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/04 11:45:07 by ijoubair          #+#    #+#             */
-/*   Updated: 2025/11/06 23:04:30 by ijoubair         ###   ########.fr       */
+/*   Updated: 2025/11/07 16:02:26 by ijoubair         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 t_config	*init_fc_arr(t_textures *text, t_data *data)
 {
 	t_config	*arr;
-	int		i;
+	int			i;
 
 	arr = gc_calloc(2, sizeof(t_config) * 2);
 	if (!arr)
@@ -69,7 +69,8 @@ void	is_valid_format(char *format)
 		num = ft_atoi(splited[i]);
 		if (!(num >= 0 && num <= 255))
 		{
-			printf("Error: Invalid color value in F/C element (must be in range 0-255)\n");
+			printf("Error: Invalid color value in F/C element"
+				"(must be in range 0-255)\n");
 			free_and_exit(1);
 		}
 		i++;

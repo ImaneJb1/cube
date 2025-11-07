@@ -6,7 +6,7 @@
 /*   By: ijoubair <ijoubair@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/06 17:24:29 by nel-khad          #+#    #+#             */
-/*   Updated: 2025/11/06 22:00:40 by ijoubair         ###   ########.fr       */
+/*   Updated: 2025/11/07 18:07:07 by ijoubair         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,8 +24,8 @@ int	main(int argc, char **argv)
 		free_all();
 		return (0);
 	}
-	check_textures();
 	data_init(data);
+	check_textures();
 	parse_map();
 	data->mlx_win = mlx_new_window(data->mlx_ptr, WIDTH, HEIGHT, "cub3d");
 	data->img.img_ptr = mlx_new_image(data->mlx_ptr, WIDTH, HEIGHT);

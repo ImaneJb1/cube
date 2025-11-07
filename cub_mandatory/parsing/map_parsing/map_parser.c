@@ -6,7 +6,7 @@
 /*   By: ijoubair <ijoubair@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/09 15:29:07 by ijoubair          #+#    #+#             */
-/*   Updated: 2025/11/06 22:41:23 by ijoubair         ###   ########.fr       */
+/*   Updated: 2025/11/07 15:18:27 by ijoubair         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ void	create_map_arr(char *string)
 	i = 0;
 	while((*map)[i])
 	{
-		if((*map)[i][0] != '1')
+		if((*map)[i][0] == '\n')
 		{
 			printf("Invalid map\n");
 			free_and_exit(1);
@@ -76,7 +76,7 @@ int	is_map_valid(char **map)
 				|| map[y][x] == 'E' || map[y][x] == 'W' || map[y][x] == 'S')
 			{
 				if (!is_inside_the_map(x, y, map))
-					return (printf("Invalid map\n"), 0);
+					return (printf("Invalid map x=%d y=%d char=%c str=%s\n ", x, y, map[y][x], map[y]), 0);
 				parse_player(map[y][x], x, y);
 			}
 			x++;

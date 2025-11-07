@@ -6,7 +6,7 @@
 /*   By: ijoubair <ijoubair@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/02 10:52:27 by ijoubair          #+#    #+#             */
-/*   Updated: 2025/11/06 23:04:35 by ijoubair         ###   ########.fr       */
+/*   Updated: 2025/11/07 17:56:37 by ijoubair         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,14 +15,11 @@
 t_config	*init_dir_arr(t_textures *text)
 {
 	t_config	*arr;
-	int		i;
+	int			i;
 
 	arr = gc_calloc(5, sizeof(t_config) * 5);
 	if (!arr)
-	{
-		perror("");
-		return (NULL);
-	}
+		return (perror(""), NULL);
 	i = 0;
 	while (i < 5)
 	{
