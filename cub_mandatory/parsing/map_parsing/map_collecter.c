@@ -6,7 +6,7 @@
 /*   By: ijoubair <ijoubair@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/09 17:27:42 by ijoubair          #+#    #+#             */
-/*   Updated: 2025/11/07 15:59:41 by ijoubair         ###   ########.fr       */
+/*   Updated: 2025/11/07 18:35:17 by ijoubair         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ void	collect_the_map(char *line, int fd)
 		line = get_next_line(fd);
 		if (!line)
 			break ;
-		if (line[0] != '1' && line[0] != ' ')
+		if (line[0] != '1')
 		{
 			printf("ERROR: the map is Invalid in line [%s]\n", line);
 			free_and_exit(1);

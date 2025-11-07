@@ -6,7 +6,7 @@
 /*   By: ijoubair <ijoubair@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/01 15:11:57 by ijoubair          #+#    #+#             */
-/*   Updated: 2025/11/07 15:57:19 by ijoubair         ###   ########.fr       */
+/*   Updated: 2025/11/07 18:34:07 by ijoubair         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ int	check_argv(int argc, char **argv)
 
 int	map_reached(char first_char)
 {
-	if (first_char == '0' || first_char == '1' || first_char == ' ')
+	if (first_char == '0' || first_char == '1')
 		return (1);
 	return (0);
 }
@@ -73,6 +73,7 @@ int	fill_textures_map(char *file_name, t_data *data, int fd, t_textures **text)
 		return (printf("The file is empty\n"), 0);
 	while (line)
 	{
+		line = ft_strtrim(line, " ");
 		if (map_reached(*line))
 			collect_the_map(line, fd);
 		else
