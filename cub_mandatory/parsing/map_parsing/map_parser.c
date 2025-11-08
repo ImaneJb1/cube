@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   map_parser.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ijoubair <ijoubair@student.42.fr>          +#+  +:+       +#+        */
+/*   By: nel-khad <nel-khad@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/09 15:29:07 by ijoubair          #+#    #+#             */
-/*   Updated: 2025/11/07 18:17:49 by ijoubair         ###   ########.fr       */
+/*   Updated: 2025/11/08 11:29:14 by nel-khad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,8 +77,7 @@ int	is_map_valid(char **map)
 				|| map[y][x] == 'E' || map[y][x] == 'W' || map[y][x] == 'S')
 			{
 				if (!is_inside_the_map(x, y, map))
-					return (printf("Invalid map x=%d y=%d char=%c str=%s\n ", x,
-							y, map[y][x], map[y]), 0);
+					return (printf("Invalid map\n"), 0);
 				parse_player(map[y][x], x, y);
 			}
 			x++;

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main_bonus.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ijoubair <ijoubair@student.42.fr>          +#+  +:+       +#+        */
+/*   By: nel-khad <nel-khad@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/06 17:24:29 by nel-khad          #+#    #+#             */
-/*   Updated: 2025/11/07 18:07:07 by ijoubair         ###   ########.fr       */
+/*   Updated: 2025/11/08 11:49:59 by nel-khad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,9 +24,9 @@ int	main(int argc, char **argv)
 		free_all();
 		return (0);
 	}
+	parse_map();
 	data_init(data);
 	check_textures();
-	parse_map();
 	data->mlx_win = mlx_new_window(data->mlx_ptr, WIDTH, HEIGHT, "cub3d");
 	data->img.img_ptr = mlx_new_image(data->mlx_ptr, WIDTH, HEIGHT);
 	data->img.img_pxl_ptr = mlx_get_data_addr(data->img.img_ptr,
