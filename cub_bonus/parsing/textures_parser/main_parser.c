@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main_parser.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ijoubair <ijoubair@student.42.fr>          +#+  +:+       +#+        */
+/*   By: nel-khad <nel-khad@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/01 15:11:57 by ijoubair          #+#    #+#             */
-/*   Updated: 2025/11/07 18:34:07 by ijoubair         ###   ########.fr       */
+/*   Updated: 2025/11/08 12:17:14 by nel-khad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,6 +74,7 @@ int	fill_textures_map(char *file_name, t_data *data, int fd, t_textures **text)
 	while (line)
 	{
 		line = ft_strtrim(line, " ");
+		line = ft_strtrim(line, "\t");
 		if (map_reached(*line))
 			collect_the_map(line, fd);
 		else

@@ -6,7 +6,7 @@
 /*   By: nel-khad <nel-khad@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/01 15:20:08 by ijoubair          #+#    #+#             */
-/*   Updated: 2025/11/08 11:44:46 by nel-khad         ###   ########.fr       */
+/*   Updated: 2025/11/08 13:41:54 by nel-khad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,7 +93,6 @@ void	data_init(t_data *data)
 	if (!data->mlx_ptr)
 		exit(1);
 	data->map = map;
-	get_door(data);
 	data->vertical_hit = 0;
 	data->width = get_width(data->map);
 	data->heigth = get_heigth(data->map);
@@ -104,5 +103,4 @@ void	data_init(t_data *data)
 	size = 5;
 	if (!data->door_x && !data->door_y)
 		size = 4;
-	data->arr = init_text_arr(data->mlx_ptr, &data->arr, size);
 }
