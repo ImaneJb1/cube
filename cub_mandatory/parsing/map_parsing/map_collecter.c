@@ -6,7 +6,7 @@
 /*   By: nel-khad <nel-khad@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/09 17:27:42 by ijoubair          #+#    #+#             */
-/*   Updated: 2025/11/08 12:19:23 by nel-khad         ###   ########.fr       */
+/*   Updated: 2025/11/08 13:50:08 by nel-khad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@ void	collect_the_map(char *line, int fd)
 	char	*map;
 
 	map = NULL;
+	line = ft_strtrim(line, " \t");
 	while (line)
 	{
 		map = ft_strjoin(map, line);
