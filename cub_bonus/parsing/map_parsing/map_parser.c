@@ -6,7 +6,7 @@
 /*   By: nel-khad <nel-khad@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/09 15:29:07 by ijoubair          #+#    #+#             */
-/*   Updated: 2025/11/08 11:40:14 by nel-khad         ###   ########.fr       */
+/*   Updated: 2025/11/09 20:48:02 by nel-khad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,7 +84,6 @@ int	is_map_valid(char **map)
 void	parse_map(void)
 {
 	char	**map;
-
 	map = *the_map();
 	if (!is_map_valid(map))
 	{

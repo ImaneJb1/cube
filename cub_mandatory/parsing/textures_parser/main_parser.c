@@ -6,7 +6,7 @@
 /*   By: nel-khad <nel-khad@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/01 15:11:57 by ijoubair          #+#    #+#             */
-/*   Updated: 2025/11/09 13:12:22 by nel-khad         ###   ########.fr       */
+/*   Updated: 2025/11/09 20:29:20 by nel-khad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,10 +31,11 @@ int	check_argv(int argc, char **argv)
 	return (0);
 }
 
-int	map_reached(char first_char, char *line)
+int	map_reached( char *line)
 {
-	line = ft_strtrim(line, " \t");
-	if (first_char == '0' || first_char == '1')
+	char *tmp;
+	tmp = ft_strtrim(line, " \t");
+	if (tmp[0] == '0' || tmp[0] == '1')
 		return (1);
 	return (0);
 }
@@ -74,7 +75,7 @@ int	fill_textures_map(char *file_name, t_data *data, int fd, t_textures **text)
 		return (printf("The file is empty\n"), 0);
 	while (line)
 	{
-		if (map_reached(*line, line))
+		if (map_reached(line))
 			collect_the_map(line, fd);
 		else
 		{
