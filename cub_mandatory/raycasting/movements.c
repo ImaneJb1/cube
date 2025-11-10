@@ -3,26 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   movements.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nel-khad <nel-khad@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ijoubair <ijoubair@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/06 14:10:57 by nel-khad          #+#    #+#             */
-/*   Updated: 2025/11/06 14:57:02 by nel-khad         ###   ########.fr       */
+/*   Updated: 2025/11/10 14:59:21 by ijoubair         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../header.h"
-
-void	is_door(t_data *data, char *map[], double x, double y)
-{
-	int	grid_x;
-	int	grid_y;
-
-	(void)data;
-	grid_x = floor(x / SQUARESIZE);
-	grid_y = floor(y / SQUARESIZE);
-	if (map[grid_y][grid_x] == 'D')
-		map[grid_y][grid_x] = 'P';
-}
 
 int	is_player_wall(t_data *data, char *map[], double x, double y)
 {
