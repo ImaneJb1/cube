@@ -44,12 +44,12 @@ $(NAME_BONUS): $(OBJ_BONUS) $(LIB) $(HEADER_BONUS)
 
 clean:
 	@rm -rf $(OBJ_D) $(OBJ_D_BONUS)
-	@make -C libft clean >/dev/null
+	@make -C libft clean
 	@echo "🧹 Objects cleaned!"
 
 fclean: clean
 	@rm -f $(NAME) $(NAME_BONUS)
-	@make -C libft fclean >/dev/null
+	@make -C libft fclean
 	@echo "🗑️  Binaries removed!"
 
 re: fclean all
