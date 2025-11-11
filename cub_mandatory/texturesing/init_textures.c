@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_textures.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nel-khad <nel-khad@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ijoubair <ijoubair@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/01 19:15:58 by ijoubair          #+#    #+#             */
-/*   Updated: 2025/11/05 16:20:13 by nel-khad         ###   ########.fr       */
+/*   Updated: 2025/11/11 14:06:16 by ijoubair         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ void	fill_image_arr(void *mlx_ptr, t_texture **arr)
 		(*arr)[i].path = path[i];
 		if (access(path[i], O_RDONLY) < 0)
 		{
-			printf("ERROR: %s is inaccessible\n", path[i]);
+			printf("Error\n%s is inaccessible\n", path[i]);
 			break ;
 		}
 		(*arr)[i].img_ptr = mlx_xpm_file_to_image(mlx_ptr, path[i],

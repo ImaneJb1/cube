@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_weapon.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nel-khad <nel-khad@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ijoubair <ijoubair@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/01 18:54:21 by ijoubair          #+#    #+#             */
-/*   Updated: 2025/11/06 16:00:49 by nel-khad         ###   ########.fr       */
+/*   Updated: 2025/11/11 13:58:25 by ijoubair         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ void	init_weapon(t_data *data)
 			&data->weapon.height);
 	if (!data->weapon.img_ptr)
 	{
-		printf("Gun texture failed\n");
+		printf("Error\nGun texture failed\n");
 		free_all();
 		exit(1);
 	}

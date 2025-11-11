@@ -6,7 +6,7 @@
 /*   By: ijoubair <ijoubair@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/04 11:45:07 by ijoubair          #+#    #+#             */
-/*   Updated: 2025/11/07 16:02:26 by ijoubair         ###   ########.fr       */
+/*   Updated: 2025/11/11 13:55:40 by ijoubair         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,7 @@ void	is_valid_format(char *format)
 	splited = ft_split(format, ',');
 	if (strlen_2d(splited) != 3)
 	{
-		printf("Error: Invalid color format in F/C "
+		printf("Error\nInvalid color format in F/C "
 			"element (expected R,G,B)\n");
 		free_and_exit(1);
 	}
@@ -69,7 +69,7 @@ void	is_valid_format(char *format)
 		num = ft_atoi(splited[i]);
 		if (!(num >= 0 && num <= 255))
 		{
-			printf("Error: Invalid color value in F/C element"
+			printf("Error\nInvalid color value in F/C element"
 				"(must be in range 0-255)\n");
 			free_and_exit(1);
 		}
@@ -106,7 +106,7 @@ void	parse_floor_ceiling(char *line, t_config *arr)
 		{
 			if (arr[i].flag == 1)
 			{
-				printf("Error: Invalid map, F or C is duplicated\n");
+				printf("Error\nInvalid map, F or C is duplicated\n");
 				free_and_exit(1);
 			}
 			arr[i].flag = 1;

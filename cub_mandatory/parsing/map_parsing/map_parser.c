@@ -6,7 +6,7 @@
 /*   By: ijoubair <ijoubair@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/09 15:29:07 by ijoubair          #+#    #+#             */
-/*   Updated: 2025/11/10 14:16:36 by ijoubair         ###   ########.fr       */
+/*   Updated: 2025/11/11 13:51:16 by ijoubair         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,20 +19,20 @@ void	create_map_arr(char *string)
 
 	map = the_map();
 	*map = ft_split(string, '\n');
+	if (!*the_map())
+	{
+		printf("Error\nThe map is NULL\n");
+		free_and_exit(1);
+	}
 	i = 0;
 	while ((*map)[i])
 	{
 		if ((*map)[i][0] == '\n')
 		{
-			printf("Invalid map\n");
+			printf("Error\nInvalid map\n");
 			free_and_exit(1);
 		}
 		i++;
-	}
-	if (!the_map())
-	{
-		printf("map is NULL\n");
-		free_and_exit(1);
 	}
 }
 
@@ -71,13 +71,13 @@ int	is_map_valid(char **map)
 		while (map[y][x])
 		{
 			if (map[y][x] && !is_valid_char(map[y][x]))
-				return (printf("Invalid character in the map %c\n", map[y][x]),
+				return (printf("Error\nInvalid character in the map %c\n", map[y][x]),
 					0);
 			if (map[y][x] == '0' || map[y][x] == 'N' || map[y][x] == 'D'
 				|| map[y][x] == 'E' || map[y][x] == 'W' || map[y][x] == 'S')
 			{
 				if (!is_inside_the_map(x, y, map))
-					return (printf("Invalid map\n"), 0);
+					return (printf("Error\nInvalid map\n"), 0);
 				parse_player(map[y][x], x, y);
 			}
 			x++;
@@ -92,6 +92,11 @@ void	parse_map(void)
 	char	**map;
 
 	map = *the_map();
+	if(!map)
+	{
+		printf("Error\nNo map detected\n");
+		free_and_exit(1);
+	}
 	if (!is_map_valid(map))
 	{
 		free_all();
@@ -99,7 +104,7 @@ void	parse_map(void)
 	}
 	if (data_func()->p.direction == 0)
 	{
-		printf("No player in the map\n");
+		printf("Error\nNo player in the map\n");
 		free_and_exit(1);
 	}
 }

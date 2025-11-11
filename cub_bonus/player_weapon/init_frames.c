@@ -6,7 +6,7 @@
 /*   By: ijoubair <ijoubair@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/24 16:25:43 by ijoubair          #+#    #+#             */
-/*   Updated: 2025/11/06 23:04:45 by ijoubair         ###   ########.fr       */
+/*   Updated: 2025/11/11 13:58:08 by ijoubair         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ void	init_frames(char *textures[], int size, t_frame *frame, t_data *data)
 				&frame[i].width, &frame[i].height);
 		if (!frame[i].img_ptr)
 		{
-			printf("loading texture %s failed\n", textures[i]);
+			printf("Error\nLoading texture %s failed\n", textures[i]);
 			free_all();
 			exit(1);
 		}
@@ -103,7 +103,7 @@ void	init_weapon_shooting(t_data *data)
 				textures[i], &data->weapon.shooting[i].width,
 				&data->weapon.shooting[i].height);
 		if (data->weapon.shooting[i].img_ptr == NULL)
-			printf("shooting frame %d img_ptr failed\n", i);
+			printf("Error\nShooting frame %d img_ptr failed\n", i);
 		data->weapon.shooting[i].pxl_ptr = mlx_get_data_addr(
 				data->weapon.shooting[i].img_ptr,
 				&data->weapon.shooting[i].b_p_p,

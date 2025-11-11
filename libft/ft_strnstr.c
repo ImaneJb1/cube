@@ -6,7 +6,7 @@
 /*   By: ijoubair <ijoubair@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/02 16:23:58 by ijoubair          #+#    #+#             */
-/*   Updated: 2025/08/01 15:33:33 by ijoubair         ###   ########.fr       */
+/*   Updated: 2025/11/11 14:07:14 by ijoubair         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,18 +32,3 @@ char	*ft_strnstr(const char *haystack, const char *needle, size_t len)
 	}
 	return (NULL);
 }
-
-// #include <stdio.h>
-
-// int	main(void)
-// {
-// 	char haystack[30] = "aaxx";
-// 	char needle[10] = "xx";
-// 	char		*ptr1;
-// 	char		*ptr2;
-
-// 	ptr1 = ft_strnstr(haystack, needle,	4);
-// 	// ptr2 = strnstr(haystack, needle, 4);
-// 	printf("Got: %s\n", ptr1);
-// 	// printf("Expected: %s\n", ptr2);
-// }
