@@ -6,7 +6,7 @@
 /*   By: nel-khad <nel-khad@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/01 15:23:44 by ijoubair          #+#    #+#             */
-/*   Updated: 2025/11/06 17:31:11 by nel-khad         ###   ########.fr       */
+/*   Updated: 2025/11/13 23:46:52 by nel-khad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ void	is_door(t_data *data, char *map[], double x, double y)
 	grid_x = floor(x / SQUARESIZE);
 	grid_y = floor(y / SQUARESIZE);
 	if (map[grid_y][grid_x] == 'D')
-		map[grid_y][grid_x] = 'P';
+		map[grid_y][grid_x] = '0';
 }
 
 int	is_player_wall(t_data *data, char *map[], double x, double y)

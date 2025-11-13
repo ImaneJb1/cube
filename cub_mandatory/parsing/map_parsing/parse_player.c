@@ -6,7 +6,7 @@
 /*   By: ijoubair <ijoubair@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/17 13:18:02 by ijoubair          #+#    #+#             */
-/*   Updated: 2025/11/07 15:14:18 by ijoubair         ###   ########.fr       */
+/*   Updated: 2025/11/11 13:56:00 by ijoubair         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ void	parse_player(char char_map, int x, int y)
 			}
 			else
 			{
-				printf("Invalid map, no player found\n");
+				printf("Error\nInvalid map, no player found\n");
 				free_and_exit(1);
 			}
 		}

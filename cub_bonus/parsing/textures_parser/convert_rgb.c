@@ -6,7 +6,7 @@
 /*   By: nel-khad <nel-khad@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/22 15:50:41 by ijoubair          #+#    #+#             */
-/*   Updated: 2025/11/06 16:08:42 by nel-khad         ###   ########.fr       */
+/*   Updated: 2025/11/13 23:39:43 by nel-khad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ int	is_numb(char *str)
 	i = 0;
 	while (str[i])
 	{
-		if (!ft_isdigit(str[i]))
+		if (!ft_isdigit(str[i]) && str[i] != ' ')
 			return (0);
 		i++;
 	}
@@ -43,7 +43,7 @@ int	get_hex_color(char *rgb)
 	b = (ft_split(rgb, ','))[2];
 	if (!is_numb(r) || !is_numb(g) || !is_numb(b))
 	{
-		printf("Invalid RGB color\n");
+		printf("Error\nInvalid RGB color\n");
 		free_and_exit(1);
 	}
 	hex_color = rgb_to_hex(ft_atoi(r), ft_atoi(g), ft_atoi(b));

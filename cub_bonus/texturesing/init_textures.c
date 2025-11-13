@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_textures.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ijoubair <ijoubair@student.42.fr>          +#+  +:+       +#+        */
+/*   By: nel-khad <nel-khad@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/01 15:50:26 by ijoubair          #+#    #+#             */
-/*   Updated: 2025/11/07 18:09:57 by ijoubair         ###   ########.fr       */
+/*   Updated: 2025/11/13 23:45:20 by nel-khad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,13 +60,17 @@ int	render_door(t_data *data, double x, double y, char c)
 	grid_y = floor(y / SQUARESIZE);
 	if (c == 'h')
 	{
-		if (data->map[grid_y][grid_x] == 'D' || data->map[grid_y
-			- 1][grid_x] == 'D')
+		if (data->ray.is_down && data->map[grid_y][grid_x] == 'D')
+			return (1);
+		else if (!data->ray.is_down && grid_y > 0 && data->map[grid_y
+				- 1][grid_x] == 'D')
 			return (1);
 	}
 	else if (c == 'v')
 	{
-		if (data->map[grid_y][grid_x] == 'D' || data->map[grid_y][grid_x
+		if (data->ray.is_right && data->map[grid_y][grid_x] == 'D')
+			return (1);
+		else if (!data->ray.is_right && grid_x > 0 && data->map[grid_y][grid_x
 			- 1] == 'D')
 			return (1);
 	}

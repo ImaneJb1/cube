@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_floor_ceiling.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ijoubair <ijoubair@student.42.fr>          +#+  +:+       +#+        */
+/*   By: nel-khad <nel-khad@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/04 11:45:07 by ijoubair          #+#    #+#             */
-/*   Updated: 2025/11/07 18:19:49 by ijoubair         ###   ########.fr       */
+/*   Updated: 2025/11/13 23:49:59 by nel-khad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,7 @@ void	is_valid_format(char *format)
 	splited = ft_split(format, ',');
 	if (strlen_2d(splited) != 3)
 	{
-		printf("Error: Invalid color format in F/C element (expected R,G,B)\n");
+		printf("Error\ncolor format in F/C element (expected R,G,B)\n");
 		free_and_exit(1);
 	}
 	while (splited[i])
@@ -68,7 +68,7 @@ void	is_valid_format(char *format)
 		num = ft_atoi(splited[i]);
 		if (!(num >= 0 && num <= 255))
 		{
-			printf("Error: Invalid color value in F/C "
+			printf("Error\ncolor value in F/C "
 				"element (must be in range 0-255)\n");
 			free_and_exit(1);
 		}
@@ -91,31 +91,31 @@ char	*join_2d_arr(char **splited)
 	return (joined);
 }
 
-void	parse_floor_ceiling(char *line, t_config *arr)
+int	parse_floor_ceiling(char *line, t_config *arr)
 {
 	int		i;
-	char	**splited;
 
 	i = 0;
 	if (arr == NULL)
-		return ;
+		return (0);
 	while (i < 2)
 	{
 		if (ft_strncmp(line, arr[i].direction, 2) == 0)
 		{
 			if (arr[i].flag == 1)
 			{
-				printf("Error: Invalid map, F or C is duplicated\n");
+				printf("Error\nInvalid map, F or C is duplicated\n");
 				free_and_exit(1);
 			}
 			arr[i].flag = 1;
 			line = ft_substr(line, 2, ft_strlen(line) - 2);
-			splited = ft_split(line, ' ');
-			line = join_2d_arr(splited);
+			is_rgb_valid(line);
 			is_valid_format(line);
 			(*arr[i].texture) = line;
 			(*arr[i].color) = get_hex_color(line);
+			return (1);
 		}
 		i++;
 	}
+	return (0);
 }

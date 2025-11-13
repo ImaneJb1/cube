@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_dir.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ijoubair <ijoubair@student.42.fr>          +#+  +:+       +#+        */
+/*   By: nel-khad <nel-khad@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/02 10:22:42 by ijoubair          #+#    #+#             */
-/*   Updated: 2025/11/07 18:07:50 by ijoubair         ###   ########.fr       */
+/*   Updated: 2025/11/13 23:40:48 by nel-khad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,21 +16,21 @@ void	check_textures(void)
 {
 	if (text_func() == NULL)
 	{
-		printf("Invalid textures\n");
+		printf("Error\nInvalid textures\n");
 		free_and_exit(1);
 	}
 	if ((*text_func())->no == NULL || (*text_func())->so == NULL
 		|| (*text_func())->ea == NULL || (*text_func())->we == NULL
 		|| !(*text_func())->c || !(*text_func())->f)
 	{
-		printf("Missing RGB color or textures\n");
+		printf("Error\nMissing RGB color or textures\n");
 		free_and_exit(1);
 	}
 	if (data_func()->door_x || data_func()->door_y)
 	{
 		if ((*text_func())->door == NULL)
 		{
-			printf("Missing door texture\n");
+			printf("Error\nMissing door texture\n");
 			data_func()->door_y = 0;
 			data_func()->door_x = 0;
 			exit(1);
@@ -41,14 +41,24 @@ void	check_textures(void)
 void	is_path_valid(char *path, char *conf)
 {
 	(void)conf;
-	if (access(path, F_OK) < 0)
+	if (ft_strchr(path, '.') && ft_strcmp(ft_strchr(path, '.'), ".xpm") != 0)
 	{
-		printf("the path %s is inaccessible\n", path);
+		printf("Error\nPlease use [%s] \'.xpm\' textures files\n", path);
+		free_and_exit(1);
+	}
+	else if (ft_strchr(path, '.') == NULL)
+	{
+		printf("Error\nPlease use \'.xpm\' textures files\n");
+		free_and_exit(1);
+	}
+	else if (access(path, F_OK) < 0)
+	{
+		printf("Error\nThe path %s is inaccessible\n", path);
 		free_and_exit(1);
 	}
 }
 
-void	parse_dir(char *line, t_config *arr)
+int	parse_dir(char *line, t_config *arr)
 {
 	int		i;
 	char	**splited;
@@ -60,7 +70,7 @@ void	parse_dir(char *line, t_config *arr)
 		{
 			if (arr[i].flag == 1)
 			{
-				printf("textures are duplicated\n");
+				printf("Error\nTextures are duplicated\n");
 				free_and_exit(1);
 			}
 			arr[i].flag = 1;
@@ -68,7 +78,9 @@ void	parse_dir(char *line, t_config *arr)
 			splited = ft_split(line, ' ');
 			is_path_valid(splited[0], arr[i].direction);
 			(*arr[i].texture) = splited[0];
+			return (1);
 		}
 		i++;
 	}
+	return (0);
 }

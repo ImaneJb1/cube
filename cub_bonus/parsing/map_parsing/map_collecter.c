@@ -6,7 +6,7 @@
 /*   By: nel-khad <nel-khad@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/09 17:27:42 by ijoubair          #+#    #+#             */
-/*   Updated: 2025/11/09 20:45:44 by nel-khad         ###   ########.fr       */
+/*   Updated: 2025/11/13 23:19:28 by nel-khad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@ void	collect_the_map(char *line, int fd)
 {
 	char	*map;
 	char	*tmp;
+
 	map = NULL;
 	while (line)
 	{
@@ -26,7 +27,7 @@ void	collect_the_map(char *line, int fd)
 			break ;
 		if (tmp[0] != '1')
 		{
-			printf("ERROR: the map is Invalid in line [%s]\n", line);
+			printf("Error\nthe map is Invalid in line [%s]\n", line);
 			free_and_exit(1);
 		}
 	}

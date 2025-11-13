@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   destroy_images.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nel-khad <nel-khad@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ijoubair <ijoubair@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/02 15:51:00 by ijoubair          #+#    #+#             */
-/*   Updated: 2025/11/06 15:55:04 by nel-khad         ###   ########.fr       */
+/*   Updated: 2025/11/11 13:58:47 by ijoubair         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ void	destroy_weapon(t_data *data)
 {
 	if (!data)
 	{
-		printf("destroy weapon: data is null\n");
+		printf("Error\ndestroy weapon: data is null\n");
 		return ;
 	}
 	if (data->mlx_ptr && data->weapon.img_ptr)

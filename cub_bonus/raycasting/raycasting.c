@@ -15,8 +15,7 @@
 void	cast_ray(t_data *data, double rayangle)
 {
 	(void)rayangle;
-	img_pixel_put(&data->img, data->ray.walhit_x, data->ray.walhit_y,
-		0x00ff00);
+	img_pixel_put(&data->img, data->ray.walhit_x, data->ray.walhit_y, 0x00ff00);
 }
 
 double	calculate_distance(t_data *data, double x_d, double y_d)

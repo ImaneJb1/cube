@@ -6,7 +6,7 @@
 /*   By: ijoubair <ijoubair@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/02 16:01:05 by ijoubair          #+#    #+#             */
-/*   Updated: 2025/11/07 15:34:12 by ijoubair         ###   ########.fr       */
+/*   Updated: 2025/11/11 13:57:12 by ijoubair         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ static void	add_mem(void *ptr)
 	new_node = malloc(sizeof(t_mem));
 	if (!new_node)
 	{
-		printf("allocation failure (list node)\n");
+		printf("Error\nallocation failure (list node)\n");
 		free(ptr);
 		return ;
 	}
@@ -37,7 +37,7 @@ void	*gc_malloc(size_t size)
 	mem = malloc(size);
 	if (!mem)
 	{
-		printf("allocation failure\n");
+		printf("Error\nallocation failure\n");
 		return (NULL);
 	}
 	add_mem(mem);
@@ -52,7 +52,7 @@ void	*gc_calloc(size_t count, size_t size)
 	mem = calloc(count, size);
 	if (!mem)
 	{
-		printf("allocation failure\n");
+		printf("Error\nallocation failure\n");
 		return (NULL);
 	}
 	add_mem(mem);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_dir.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ijoubair <ijoubair@student.42.fr>          +#+  +:+       +#+        */
+/*   By: nel-khad <nel-khad@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/02 10:22:42 by ijoubair          #+#    #+#             */
-/*   Updated: 2025/11/06 23:00:49 by ijoubair         ###   ########.fr       */
+/*   Updated: 2025/11/13 23:35:57 by nel-khad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,18 +16,18 @@ void	check_textures(void)
 {
 	if (text_func() == NULL)
 	{
-		printf("Missing textures\n");
+		printf("Error\nMissing textures\n");
 		free_and_exit(1);
 	}
 	if ((*text_func())->no == NULL || (*text_func())->so == NULL
 		|| (*text_func())->ea == NULL || (*text_func())->we == NULL)
 	{
-		printf("Missing textures\n");
+		printf("Error\nMissing textures\n");
 		free_and_exit(1);
 	}
 	if (!(*text_func())->c || !(*text_func())->f)
 	{
-		printf("Missing RGB color\n");
+		printf("Error\nMissing RGB color\n");
 		free_and_exit(1);
 	}
 }
@@ -35,14 +35,24 @@ void	check_textures(void)
 void	is_path_valid(char *path, char *conf)
 {
 	(void)conf;
-	if (access(path, F_OK) < 0)
+	if (ft_strchr(path, '.') && ft_strcmp(ft_strchr(path, '.'), ".xpm") != 0)
 	{
-		printf("the path %s is inaccessible\n", path);
+		printf("Error\nPlease use [%s] \'.xpm\' textures files\n", path);
+		free_and_exit(1);
+	}
+	else if (ft_strchr(path, '.') == NULL)
+	{
+		printf("Error\nPlease use \'.xpm\' textures files\n");
+		free_and_exit(1);
+	}
+	else if (access(path, F_OK) < 0)
+	{
+		printf("Error\nThe path %s is inaccessible\n", path);
 		free_and_exit(1);
 	}
 }
 
-void	parse_dir(char *line, t_config *arr)
+int	parse_dir(char *line, t_config *arr)
 {
 	int		i;
 	char	**splited;
@@ -54,7 +64,7 @@ void	parse_dir(char *line, t_config *arr)
 		{
 			if (arr[i].flag == 1)
 			{
-				printf("textures are duplicated\n");
+				printf("Error\nTextures are duplicated\n");
 				free_and_exit(1);
 			}
 			arr[i].flag = 1;
@@ -62,7 +72,9 @@ void	parse_dir(char *line, t_config *arr)
 			splited = ft_split(line, ' ');
 			is_path_valid(splited[0], arr[i].direction);
 			(*arr[i].texture) = splited[0];
+			return (1);
 		}
 		i++;
 	}
+	return (0);
 }

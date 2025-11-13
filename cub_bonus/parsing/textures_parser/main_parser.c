@@ -6,7 +6,7 @@
 /*   By: nel-khad <nel-khad@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/01 15:11:57 by ijoubair          #+#    #+#             */
-/*   Updated: 2025/11/09 20:39:00 by nel-khad         ###   ########.fr       */
+/*   Updated: 2025/11/13 23:38:52 by nel-khad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,19 +21,20 @@ int	check_argv(int argc, char **argv)
 	ext = ft_strchr(argv[1], '.');
 	if (!ext || ft_strlen(argv[1]) <= 4)
 	{
-		ft_putstr_fd("Error: No extension detected. Please use a .cub file.\n",
+		ft_putstr_fd("Error\nNo extension detected. Please use a .cub file.\n",
 			2);
 		return (0);
 	}
 	if (ft_strcmp(ext, ".cub") == 0)
 		return (1);
-	ft_putstr_fd("Error: Invalid file type. Expected a .cub file.\n", 2);
+	ft_putstr_fd("Error\nInvalid file type. Expected a .cub file.\n", 2);
 	return (0);
 }
 
 int	map_reached( char *line)
 {
-	char *tmp;
+	char	*tmp;
+
 	tmp = ft_strtrim(line, " \t");
 	if (tmp[0] == '0' || tmp[0] == '1')
 		return (1);
@@ -58,7 +59,7 @@ int	parse_map_file(char *file_name, t_data *data)
 	text = text_func();
 	*text = init_textures();
 	if (!fill_textures_map(file_name, data, fd, text))
-		return (0);
+		return (printf("Error\nInvalid elements in .cub file\n"), 0);
 	return (1);
 }
 
@@ -72,18 +73,17 @@ int	fill_textures_map(char *file_name, t_data *data, int fd, t_textures **text)
 	init_arrays(text, &arr_dir, &arr_fc, data);
 	line = get_next_line(fd);
 	if (!line)
-		return (printf("The file is empty\n"), 0);
+		return (printf("Error\nThe file is empty\n"), 0);
 	while (line)
 	{
 		if (map_reached(line))
-		collect_the_map(line, fd);
+			collect_the_map(line, fd);
 		else
 		{
-			line = ft_strtrim(line, " ");
-			line = ft_strtrim(line, "\t");
 			line = ft_strtrim(line, " \n\t");
-			parse_dir(line, arr_dir);
-			parse_floor_ceiling(line, arr_fc);
+			if (*line && (!parse_dir(line, arr_dir)
+					&& !parse_floor_ceiling(line, arr_fc)))
+				return (0);
 		}
 		line = get_next_line(fd);
 	}

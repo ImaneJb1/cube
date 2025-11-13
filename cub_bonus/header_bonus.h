@@ -6,7 +6,7 @@
 /*   By: nel-khad <nel-khad@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/06 17:33:31 by nel-khad          #+#    #+#             */
-/*   Updated: 2025/11/07 20:09:56 by nel-khad         ###   ########.fr       */
+/*   Updated: 2025/11/13 22:58:52 by nel-khad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -255,8 +255,11 @@ typedef struct t_textures
 
 // *************** parsing ***************
 
-void			parse_floor_ceiling(char *line, t_config *arr);
-void			parse_dir(char *line, t_config *arr);
+int				check_arr_flags(t_config *arr, int size);
+void			is_rgb_valid(char *line);
+int				is_numb(char *str);
+int				parse_floor_ceiling(char *line, t_config *arr);
+int				parse_dir(char *line, t_config *arr);
 t_textures		*init_textures(void);
 int				fill_textures_map(char *file_name, t_data *data, int fd,
 					t_textures **text);

@@ -10,9 +10,9 @@
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "../cub_bonus/header_bonus.h"
 #include "libft.h"
 #include <stdio.h>
-#include "../cub_bonus/header_bonus.h"
 
 char	*ft_strjoin(char const *s1, char const *s2)
 {

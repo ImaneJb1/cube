@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_player.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nel-khad <nel-khad@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ijoubair <ijoubair@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/17 13:18:02 by ijoubair          #+#    #+#             */
-/*   Updated: 2025/11/06 14:52:48 by nel-khad         ###   ########.fr       */
+/*   Updated: 2025/11/11 13:54:32 by ijoubair         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ void	parse_player(char char_map, int x, int y)
 			}
 			else
 			{
-				printf("Invalid map\n");
+				printf("Error\nInvalid map\n");
 				free_and_exit(1);
 			}
 		}

@@ -6,7 +6,7 @@
 /*   By: nel-khad <nel-khad@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/31 21:42:29 by nel-khad          #+#    #+#             */
-/*   Updated: 2025/11/06 17:14:57 by nel-khad         ###   ########.fr       */
+/*   Updated: 2025/11/13 23:25:37 by nel-khad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,8 +31,8 @@ void	hook_init(t_data *data)
 	mlx_hook(data->mlx_win, DestroyNotify, 0, press_x, data);
 	mlx_hook(data->mlx_win, MotionNotify, PointerMotionMask, mouse_move, data);
 	mlx_hook(data->mlx_win, KeyRelease, KeyReleaseMask, release_key, data);
-	mlx_mouse_hide(data->mlx_ptr, data->mlx_win);
 	mlx_loop_hook(data->mlx_ptr, moves_loop, data);
+	mlx_mouse_hide(data->mlx_ptr, data->mlx_win);
 }
 
 void	img_pixel_put(t_img *img, int x, int y, int color)
